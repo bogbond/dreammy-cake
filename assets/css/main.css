@@ -844,6 +844,14 @@ section,
   color: #edb86e;
 }
 
+.features .feature-box.orange_new {
+  background-color: #facc8bad;
+}
+
+.features .feature-box.orange_new i {
+  color: #ec9e30;
+}
+
 .features .feature-box.blue {
   background-color: #deedfd;
 }
