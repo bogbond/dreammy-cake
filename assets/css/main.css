@@ -1242,3 +1242,17 @@ section,
 .faq .faq-container .faq-active .faq-toggle {
   transform: rotate(90deg);
 }
+
+.images-row {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px; /* Расстояние между картинками */
+}
+
+.small-image {
+
+  height: 50px; /* Укажите размер изображения */
+  object-fit: cover; /* Чтобы изображения не искажались */
+  border-radius: 5px; /* Радиус углов (если нужно) */
+}
