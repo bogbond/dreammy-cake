@@ -734,22 +734,21 @@ section,
   background: var(--accent-color);
 }
 
-@media (max-width: 768px) {
-  .hero h2 {
-    font-size: 32px;
-  }
-
-  .hero p {
-    font-size: 20px;
-  }
-}
-
 .hero h1 {
   margin: 0;
   font-size: 64px;
   font-weight: 700;
 }
 
+@media (max-width: 768px) {
+  .hero h1 {
+    font-size: 44px;
+  }
+
+  .hero p {
+    font-size: 20px;
+  }
+}
 
 
 /*--------------------------------------------------------------
