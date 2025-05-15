@@ -37,7 +37,6 @@
         mobileNavToogle();
       }
     });
-
   });
 
   /**
@@ -128,6 +127,34 @@
     let sort = isotopeItem.getAttribute('data-sort') ?? 'original-order';
 
     let initIsotope;
+    const showMoreBtn = document.querySelector('#show-more-btn');
+
+    // Function to toggle show more button and hidden items
+    function toggleShowMore(filterValue) {
+      if (filterValue === '*') {
+        // For "All" filter, restore hidden items for elements 13–31
+        isotopeItem.querySelectorAll('.portfolio-item').forEach((item, index) => {
+          if (index >= 12) { // Elements 13–31 (0-based index)
+            item.classList.add('hidden-portfolio-item');
+          }
+        });
+        if (showMoreBtn) {
+          showMoreBtn.style.display = 'block';
+        }
+      } else {
+        // For other filters, show all items and hide button
+        isotopeItem.querySelectorAll('.hidden-portfolio-item').forEach(item => {
+          item.classList.remove('hidden-portfolio-item');
+        });
+        if (showMoreBtn) {
+          showMoreBtn.style.display = 'none';
+        }
+      }
+      initIsotope.arrange();
+      glightbox.reload();
+    }
+
+    // Initialize Isotope
     imagesLoaded(isotopeItem.querySelector('.isotope-container'), function() {
       initIsotope = new Isotope(isotopeItem.querySelector('.isotope-container'), {
         itemSelector: '.isotope-item',
@@ -135,21 +162,34 @@
         filter: filter,
         sortBy: sort
       });
+      // Apply initial filter state
+      toggleShowMore(filter);
     });
 
+    // Filter click handler
     isotopeItem.querySelectorAll('.isotope-filters li').forEach(function(filters) {
       filters.addEventListener('click', function() {
         isotopeItem.querySelector('.isotope-filters .filter-active').classList.remove('filter-active');
         this.classList.add('filter-active');
+        const filterValue = this.getAttribute('data-filter');
         initIsotope.arrange({
-          filter: this.getAttribute('data-filter')
+          filter: filterValue
         });
-        if (typeof aosInit === 'function') {
-          aosInit();
-        }
+        toggleShowMore(filterValue);
       }, false);
     });
 
+    // Portfolio Show More Button
+    if (showMoreBtn) {
+      showMoreBtn.addEventListener('click', () => {
+        isotopeItem.querySelectorAll('.hidden-portfolio-item').forEach(item => {
+          item.classList.remove('hidden-portfolio-item');
+        });
+        initIsotope.arrange();
+        glightbox.reload();
+        showMoreBtn.style.display = 'none';
+      });
+    }
   });
 
   /**
@@ -198,7 +238,6 @@
     });
   });
 
-
   /**
    * Navmenu Scrollspy
    */
@@ -216,9 +255,8 @@
       } else {
         navmenulink.classList.remove('active');
       }
-    })
+    });
   }
   window.addEventListener('load', navmenuScrollspy);
   document.addEventListener('scroll', navmenuScrollspy);
-
-  })();
+})();

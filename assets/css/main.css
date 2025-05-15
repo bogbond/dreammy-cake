@@ -673,7 +673,7 @@ section,
 
 .hero:before {
   content: "";
-  background: color-mix(in srgb, var(--background-color), transparent 40%);
+  background: color-mix(in srgb, var(--background-color), transparent 25%);
   position: absolute;
   inset: 0;
   z-index: 2;
@@ -743,6 +743,14 @@ section,
     font-size: 20px;
   }
 }
+
+.hero h1 {
+  margin: 0;
+  font-size: 64px;
+  font-weight: 700;
+}
+
+
 
 /*--------------------------------------------------------------
 # About Section
@@ -1263,4 +1271,13 @@ section,
   height: 50px; /* Укажите размер изображения */
   object-fit: cover; /* Чтобы изображения не искажались */
   border-radius: 5px; /* Радиус углов (если нужно) */
+}
+
+#show-more-btn {
+  background-color: #f7bd00;
+  border-color: #f7bd00;
+}
+#show-more-btn:hover {
+  background-color: #d4a700;
+  border-color: #d4a700;
 }
