@@ -1,0 +1,788 @@
+<!-- DC:GA4_CONSENT_HEAD_START -->
+<!-- Google Analytics 4 + Consent Mode v2 (UK/EU) -->
+<!-- TODO: Replace GA4 ID once you have it by setting window.GA_MEASUREMENT_ID below -->
+<script>
+  // Set your GA4 Measurement ID here once ready, e.g. 'G-ABCD123456'
+  window.GA_MEASUREMENT_ID = window.GA_MEASUREMENT_ID || 'G-CC2NRDSRQ9';
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  // Load saved consent (default: only essential storage granted)
+  (function() {
+    try {
+      const saved = JSON.parse(localStorage.getItem('dc_consent') || '{}');
+      const base = {
+        ad_user_data: 'denied',
+        ad_personalization: 'denied',
+        ad_storage: 'denied',
+        analytics_storage: 'denied',
+        functionality_storage: 'granted',
+        security_storage: 'granted'
+      };
+      const consent = Object.assign({}, base, (saved && saved.choice === 'accept') ? {
+        analytics_storage: 'granted',
+        ad_storage: 'granted',
+        ad_user_data: 'granted',
+        ad_personalization: 'granted'
+      } : {});
+      gtag('consent', 'default', consent);
+    } catch(e) { console.warn('Consent read failed', e); }
+  })();
+  // Load GA only when an ID is provided
+  (function(id) {
+    if(!id || id === 'G-XXXXXXXXXX') {
+      console.warn('GA4 ID is placeholder. Set window.GA_MEASUREMENT_ID to your real GA4 ID.');
+      return;
+    }
+    var s=document.createElement('script'); s.async=1; s.src='https://www.googletagmanager.com/gtag/js?id='+id;
+    document.head.appendChild(s);
+    gtag('js', new Date());
+    gtag('config', id, { 'anonymize_ip': true });
+  })(window.GA_MEASUREMENT_ID);
+</script>
+<!-- DC:GA4_CONSENT_HEAD_END -->
+<!DOCTYPE html>
+
+<html lang="en-GB">
+<head>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Themed Cake | Dreamy Cake Studio — Huntingdon &amp; Cambridgeshire</title>
+<meta content="Custom themed cakes — characters, hobbies and on‑theme designs. Priced by complexity. Serving Cambridgeshire &amp; London." name="description"/>
+
+<link href="../../assets/img/site.webmanifest" rel="manifest"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&amp;family=Raleway:wght@600;700;800&amp;family=Open+Sans:wght@400;600&amp;display=swap" rel="stylesheet"/>
+<link href="../../assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet"/>
+<link href="../../assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet"/>
+<link href="../../assets/vendor/aos/aos.css" rel="stylesheet"/>
+<link href="../../assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet"/>
+<link href="../../assets/css/main.css" rel="stylesheet"/><link href="../../assets/css/product.css" rel="stylesheet"/>
+<meta content="product" property="og:type"/>
+<meta content="Themed Cake · Dreamy Cake Studio" property="og:title"/>
+<meta content="Custom themed cakes — characters, hobbies and on‑theme designs. Priced by complexity. Serving Cambridgeshire &amp; London." property="og:description"/>
+<meta content="https://dreamycake.co.uk/../../assets/img/items/themed-cake-main.webp" property="og:image"/>
+<meta content="https://dreamycake.co.uk/Products/themed-cake/" property="og:url"/>
+<meta content="summary_large_image" name="twitter:card"/>
+<meta content="Themed Cake · Dreamy Cake Studio" name="twitter:title"/>
+<meta content="Custom themed cakes — characters, hobbies and on‑theme designs. Priced by complexity. Serving Cambridgeshire &amp; London." name="twitter:description"/>
+<meta content="https://dreamycake.co.uk/../../assets/img/items/themed-cake-main.webp" name="twitter:image"/>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "Do you deliver?", "acceptedAnswer": {"@type": "Answer", "text": "Yes \u2014 I deliver across Cambridgeshire, including Huntingdon, Cambridge and Peterborough. Pickup is also available by arrangement."}}, {"@type": "Question", "name": "How far in advance should I book?", "acceptedAnswer": {"@type": "Answer", "text": "On weekdays I can often book 3\u20135 days ahead; for weekends and busier dates, please reserve as early as possible to secure your slot."}}, {"@type": "Question", "name": "Can you accommodate allergens?", "acceptedAnswer": {"@type": "Answer", "text": "I handle allergens carefully and can often suggest alternatives; however, cakes are prepared in a kitchen that handles common allergens, so I cannot guarantee trace\u2011free bakes."}}]}</script><script type="application/ld+json">{"@context":"https://schema.org","@type":"Product","name":"Themed Cake","description":"Custom themed cakes — characters, hobbies and on‑theme designs. Priced by complexity. Serving Cambridgeshire & London.","image":["https://dreamycake.co.uk/../../assets/img/items/themed-cake-main.webp","https://dreamycake.co.uk/../../assets/img/items/themed-cake-02.webp","https://dreamycake.co.uk/../../assets/img/items/themed-cake-03.webp","https://dreamycake.co.uk/../../assets/img/items/celebration-cake-main.webp"],"sku":"themed-cake","category":"Cakes","url":"https://dreamycake.co.uk/Products/themed-cake/","brand":{"@type":"Brand","name":"Dreamy Cake Studio"},"areaServed":["Huntingdon","Cambridge","Peterborough","St Ives","Ely","St Neots","London",{"@type":"GeoCircle","geoMidpoint":{"@type":"GeoCoordinates","addressLocality":"Huntingdon","addressCountry":"GB"},"geoRadius":70000}],"offers":{"@type":"AggregateOffer","priceCurrency":"GBP","lowPrice":"75","offerCount":1,"offers":[{"@type":"Offer","priceCurrency":"GBP","price":"75","availability":"https://schema.org/PreOrder","url":"https://dreamycake.co.uk/Products/themed-cake/"}]},"additionalProperty":[{"@type":"PropertyValue","name":"Made to order","value":"Yes"},{"@type":"PropertyValue","name":"Service area","value":"Cambridgeshire + nearby (50–70km radius)"}]}</script>
+<meta content="Themed Cake | Dreamy Cake Studio — Huntingdon &amp; Cambridgeshire. Bespoke cakes, cupcakes and fondant cookies in Huntingdonshire. Modern design, fresh bake…" name="description"/>
+<link href="/assets/img/favicon.svg" rel="icon" type="image/svg+xml"/>
+<link href="/assets/img/favicon.ico" rel="icon" sizes="any"/>
+<link href="/apple-touch-icon.png" rel="apple-touch-icon"/>
+<link color="#F9F6EC" href="/safari-pinned-tab.svg" rel="mask-icon"/>
+<meta content="#F9F6EC" name="theme-color"/>
+<style>
+/* dc-consent mobile refined */
+@media (max-width: 576px){
+  .dc-consent-banner{
+    position: fixed !important;
+    top: auto !important;
+    left: 10px !important;
+    right: 10px !important;
+    bottom: 10px !important;
+    width: auto !important;
+    max-width: none !important;
+    max-height: 44vh !important;
+    overflow: auto !important;
+    padding: 12px 12px 14px !important;
+    border-radius: 16px !important;
+    box-shadow: 0 8px 24px rgba(0,0,0,.18) !important;
+    background: #fff !important;
+    display: block !important;
+  }
+  .dc-consent-banner__text{
+    width: 100% !important;
+    font-size: 12.5px !important;
+    line-height: 1.5 !important;
+    margin: 0 0 12px 0 !important;
+  }
+  .dc-consent-banner__btns{
+    display: flex !important;
+    width: 100% !important;
+    gap: 8px !important;
+    justify-content: space-between !important;
+  }
+  /* Make reject smaller than accept */
+  .dc-consent-banner__btns .dc-btn[data-choice="reject"]{
+    flex: 0 0 46% !important;
+    font-size: 12px !important;
+    padding: 9px 10px !important;
+  }
+  .dc-consent-banner__btns .dc-btn[data-choice="accept"],
+  .dc-consent-banner__btns .dc-btn.dc-btn--primary{
+    flex: 1 1 auto !important;
+    font-size: 13.5px !important;
+    padding: 11px 12px !important;
+  }
+}
+</style>
+<link href="https://dreamycake.co.uk/Products/themed-cake/" rel="canonical"/></head>
+<body class="index-page">
+<header class="header d-flex align-items-center fixed-top" id="header">
+<div class="container-fluid container-xl position-relative d-flex align-items-center justify-content-between">
+<a class="logo d-flex align-items-center" href="/">
+<!-- Uncomment the line below if you also wish to use an image logo -->
+<!-- <img src="/assets/img/logo.png" alt="Dreamy Cake Bakery" width="32" height="32" decoding="async" fetchpriority="high"> -->
+<p class="sitename">
+      Dreamy Cake Bakery
+     </p>
+</a>
+<nav class="navmenu" id="navmenu">
+<ul>
+<li>
+<a aria-current="page" class="active" href="/#hero">
+        Home
+       </a>
+</li>
+<li><a href="/#pricing">Pricing</a></li>
+<li>
+<a aria-label="Go to Portfolio section" href="/#portfolio">
+        Portfolio
+       </a>
+</li>
+<li>
+<a href="/#contact">
+        Contact
+       </a>
+</li><li>
+<a href="/About">
+        About
+       </a>
+</li>
+<li class="dropdown">
+<button aria-controls="order-submenu" aria-expanded="false" aria-label="Toggle order submenu" class="nav-toggle" type="button"><span>Order</span> <i aria-hidden="true" class="bi bi-chevron-down chev"></i></button>
+<ul id="order-submenu"><li><a href="/Products/celebration-cake/#order">Order Celebration Cake</a></li><li><a href="/Products/themed-cake/#order">Order Themed Cake</a></li><li><a href="/Products/mini-bento-cake/#order">Order Mini / Bento Cake</a></li><li><a href="/Products/cupcakes/#order">Order Cupcakes</a></li><li><a href="/Products/postage-cookie/#order">Order Postage Cookie</a></li><li><a href="/#contact">Bespoke Request</a></li></ul>
+</li>
+<!-- <li><a href="/#how-it-works">Services</a></li> -->
+<li class="dropdown">
+<button aria-controls="info-submenu" aria-expanded="false" aria-label="Toggle info submenu" class="nav-toggle" type="button"><span>Info</span> <i aria-hidden="true" class="bi bi-chevron-down chev"></i></button>
+<ul id="info-submenu">
+<li><a href="/Delivery">Delivery</a></li>
+<li><a href="/Allergens">Allergens</a></li>
+<li><a href="/How-it-works">How it works</a></li>
+<li></li>
+</ul>
+</li>
+<li>
+<a href="https://shop.dreamycake.co.uk">Shop</a>
+</li></ul>
+<i class="mobile-nav-toggle d-xl-none bi bi-list">
+</i>
+</nav>
+</div>
+</header>
+<main class="main product">
+<!-- Hero -->
+<div class="page-title product-hero" style="--hero-img:url('../../assets/img/items/themed-cake-main.webp')">
+<div class="container position-relative">
+<h1>Themed Cake</h1>
+<p>Modern, made-to-order themed cakes</p><p class="promise">Clean, modern, made to order — delivered across Cambridgeshire.</p>
+<div class="chipbar">
+<a class="chip" href="/Delivery"><i class="bi bi-truck"></i> Delivery</a>
+<a class="chip" href="/Allergens"><i class="bi bi-exclamation-triangle"></i> Allergens</a>
+<a class="chip" href="/How-it-works/"><i class="bi bi-calendar-event"></i> How it works</a>
+</div>
+</div>
+</div>
+<section class="product-trust section alt-white">
+<div class="container">
+<div class="trust-grid">
+<div class="trust-item"><i class="bi bi-shield-check"></i> Level 2 Hygiene</div>
+<div class="trust-item"><i class="bi bi-heart"></i> Allergen‑aware handling</div>
+<div class="trust-item"><i class="bi bi-truck"></i> Local delivery</div>
+</div>
+</div>
+</section>
+<!-- Gallery & About -->
+<section class="section alt-white">
+<div class="container">
+<div class="row gy-4">
+<div class="col-12 col-lg-5 gallery" data-aos="fade-up"><div class="swiper product-swiper">
+<div class="swiper-wrapper">
+<div class="swiper-slide">
+<a class="glightbox" data-gallery="product" href="/assets/img/items/themed-cake-02.webp">
+<img alt="Themed cake — Dreamy Cake" loading="lazy" src="/assets/img/items/themed-cake-02.webp" width="800"/>
+</a>
+</div><div class="swiper-slide">
+<a class="glightbox" data-gallery="product" href="/assets/img/items/themed-cake-03.webp">
+<img alt="Themed cake — Dreamy Cake" loading="lazy" src="/assets/img/items/themed-cake-03.webp" width="800"/>
+</a>
+</div><div class="swiper-slide">
+<a class="glightbox" data-gallery="product" href="/assets/img/items/themed-cake-main.webp">
+<img alt="Themed cake — Dreamy Cake" loading="lazy" src="/assets/img/items/themed-cake-main.webp" width="800"/>
+</a>
+</div>
+</div>
+<div class="swiper-pagination"></div>
+<div class="swiper-button-prev"></div>
+<div class="swiper-button-next"></div>
+</div></div>
+<div class="col-12 col-lg-7" data-aos="fade-up" data-aos-delay="100">
+<h2 class="h4">About this cake</h2>
+<p>Bring your idea to life with a bespoke themed cake handcrafted in Huntingdonshire. From Bluey &amp; Bingo to superheroes, football clubs, gaming, florals and minimalist styles.</p>
+<ul class="bullets">
+<li><i class="bi bi-check2-circle"></i> Designed for your occasion — no ready-made stock</li><li><i class="bi bi-check2-circle"></i> Fresh bakes, Level 2 hygiene, allergen‑aware handling</li><li><i class="bi bi-check2-circle"></i> Delivery across Huntingdon, Cambridge &amp; Peterborough</li></ul>
+<div class="mt-3">
+<h3 class="h6 mb-1">Popular finishes</h3>
+<p class="small mb-2">Smooth buttercream · palette knife texture · gentle drizzle · simple toppers/flowers.</p>
+<h3 class="h6 mb-1">Design directions</h3>
+<p class="small mb-2">Clean &amp; minimal · soft pastels · gold accents · theme hints (not full character cakes).</p>
+<h3 class="h6 mb-1">Lead time</h3>
+<p class="small mb-2">Weekdays: usually 7–14 days. Weekends &amp; busy dates — book earlier to secure your slot.</p>
+<h3 class="h6 mb-1">Care &amp; transport</h3>
+<p class="small">Carry flat; keep cool (not hot car). Best the same day/next day. I’ll provide storage tips on delivery.</p>
+</div>
+</div>
+</div>
+</div>
+</section><div class="container"></div>
+<!-- Sizes & Servings + Flavours -->
+<section class="section alt-white" id="sizes-section">
+<div class="container">
+<div class="row g-4">
+<div class="col-12 col-lg-7" data-aos="fade-up" id="sizes-guide">
+<h3 class="h5">Sizes &amp; servings (guideline)</h3>
+<div class="table-responsive">
+<table class="table table-sm align-middle">
+<thead><tr><th>Size</th><th>Servings</th><th>Notes</th></tr></thead>
+<tbody>
+<tr><td>6”</td><td>8–12</td><td>Small gathering</td></tr>
+<tr><td>8”</td><td>14–20</td><td>Most popular</td></tr>
+<tr><td>10”</td><td>24–30</td><td>Large party</td></tr>
+<tr><td>2 tiers</td><td>30–45</td><td>Statement look</td></tr>
+</tbody>
+</table>
+<div class="mt-4" id="cake-types">
+<div class="product-subtitle">
+<h2 class="h4">Cake types</h2>
+<p class="text-muted small m-0">pick a recipe — descriptions below</p>
+</div>
+<div class="row g-3 g-md-4">
+<!-- Classic Buttercream (configurable) -->
+<div class="col-12 col-md-6" data-aos="fade-up">
+<div class="card h-100 shadow-sm rounded-3">
+<div class="card-body">
+<h3 class="h6 mb-1">🍰 Classic Buttercream</h3>
+<p class="small mb-2">Simple, customisable cake/cupcakes with your choice of sponge, buttercream and filling.</p>
+<div class="small">
+<div class="mb-1"><strong>Sponge</strong>: Vanilla, Chocolate, Red Velvet, Carrot, Lemon</div>
+<div class="mb-1"><strong>Buttercream</strong>: Vanilla, Chocolate, Salted Caramel, Lotus, Nutella</div>
+<div class="mb-0"><strong>Fillings</strong>: Raspberry Jam, Strawberry Jam, Chocolate Ganache (Milk/Dark/White), Lemon Curd, Biscoff Spread</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Cherry-Chocolate -->
+<div class="col-12 col-md-6" data-aos="fade-up" data-aos-delay="50">
+<div class="card h-100 shadow-sm rounded-3">
+<div class="card-body">
+<h3 class="h6 mb-1">🍒 Cherry‑Chocolate</h3>
+<p class="small mb-2">Moist chocolate sponge with a brownie‑like texture.</p>
+<p class="small m-0">Cream‑cheese frosting with milk chocolate, cherry berry confit, milk‑chocolate mousse.</p>
+</div>
+</div>
+</div>
+<!-- Total Chocolate -->
+<div class="col-12 col-md-6" data-aos="fade-up" data-aos-delay="100">
+<div class="card h-100 shadow-sm rounded-3">
+<div class="card-body">
+<h3 class="h6 mb-1">🍫 Total Chocolate</h3>
+<p class="small mb-2">Rich chocolate sponge. Ganache cream made with milk chocolate and cream.</p>
+<p class="small m-0">Creamy mousse with milk and dark chocolate.</p>
+</div>
+</div>
+</div>
+<!-- Snickers -->
+<div class="col-12 col-md-6" data-aos="fade-up">
+<div class="card h-100 shadow-sm rounded-3">
+<div class="card-body">
+<h3 class="h6 mb-1">🥜 Snickers</h3>
+<p class="small mb-2">Moist chocolate sponge with cream‑cheese frosting and milk‑chocolate mousse.</p>
+<p class="small m-0">Salted caramel with peanuts.</p>
+</div>
+</div>
+</div>
+<!-- Strawberry Ice Cream -->
+<div class="col-12 col-md-6" data-aos="fade-up" data-aos-delay="50">
+<div class="card h-100 shadow-sm rounded-3">
+<div class="card-body">
+<h3 class="h6 mb-1">🍓 Strawberry Ice Cream</h3>
+<p class="small mb-2">Vanilla sponge with creamy strawberry mousse and strawberry berry confit.</p>
+<p class="small m-0">Finished with white‑chocolate ganache cream.</p>
+</div>
+</div>
+</div>
+<!-- Red Velvet -->
+<div class="col-12 col-md-6" data-aos="fade-up" data-aos-delay="100">
+<div class="card h-100 shadow-sm rounded-3">
+<div class="card-body">
+<h3 class="h6 mb-1">🎂 Red Velvet</h3>
+<p class="small mb-2">Moist red‑velvet sponge with cream‑cheese frosting.</p>
+<p class="small m-0">Cherry berry confit and creamy cherry mousse.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="row mt-3">
+<div class="col-12 col-lg-8">
+<div class="alert alert-light border rounded-3 small mb-0">
+          Prefer a different twist? You can request swaps (e.g. dark vs milk chocolate) — add this to the form and I’ll confirm.
+        </div>
+</div>
+</div><div class="mt-3" id="quick-questions-desktop"><section class="section alt-cream" id="mini-faq"><div class="container"><div class="product-subtitle"><h2 class="h4 m-0">Quick questions</h2><p class="text-muted small m-0">before you order</p><div class="overflow-hidden faq-accordion mt-2"><details>
+<summary><span>Do you deliver?</span><i class="bi bi-chevron-down chev"></i></summary>
+<div class="answer">Yes — I deliver across Cambridgeshire (Huntingdon, Cambridge, Peterborough). Pickup is also available.</div>
+</details><details>
+<summary><span>How far in advance?</span><i class="bi bi-chevron-down chev"></i></summary>
+<div class="answer">Weekdays: usually 7–14 days. For weekends and busy dates, please book as early as possible to secure your slot.</div>
+</details><details>
+<summary><span>Allergens</span><i class="bi bi-chevron-down chev"></i></summary>
+<div class="answer">I handle allergens carefully and can often suggest alternatives. Cakes are prepared in a kitchen that handles common allergens.</div>
+</details><details>
+<summary><span>Storage</span><i class="bi bi-chevron-down chev"></i></summary>
+<div class="answer">Carry flat; keep cool (not a hot car). Best the same day or next morning. I provide storage tips upon delivery.</div>
+</details></div><a class="btn btn-accent btn-quote mt-3" href="/QA/" role="button">See full Q&amp;A →</a></div></div></section>
+</div>
+</div>
+</div>
+</div>
+<div class="col-12 col-lg-5"><div class="order-card" id="order-desktop">
+<h3 class="h5">Start an order</h3>
+<form action="https://formsubmit.co/ab0c0409fa937bd163077d308f7ca38f" autocomplete="on" class="product-form" data-form="f1" id="order" method="POST">
+<!-- Hidden / meta -->
+<input name="subject" type="hidden" value="New Cake Order Request — Celebration Cake"/>
+<input name="_honey" type="hidden" value=""/>
+<input name="_captcha" type="hidden" value="false"/>
+<input name="_template" type="hidden" value="table"/>
+<input name="_next" type="hidden" value="https://www.dreamycake.co.uk/Thank-You/"/>
+<input name="product_name" type="hidden" value="Celebration Cake"/>
+<input name="page_url" type="hidden" value="/Products/celebration-cake/"/>
+<div class="row g-2">
+<div class="col-12">
+<label class="form-label" for="products-celebration-cake-index-f1-name">Your name</label>
+<input autocomplete="name" class="form-control" id="products-celebration-cake-index-f1-name" name="name" placeholder="Your name" required="" type="text"/>
+</div>
+<div class="col-12 col-md-6">
+<label class="form-label" for="products-celebration-cake-index-f1-email">Email</label>
+<input autocomplete="email" class="form-control" id="products-celebration-cake-index-f1-email" name="email" placeholder="you@example.com" required="" type="email"/>
+</div>
+<div class="col-12 col-md-6">
+<label class="form-label" for="products-celebration-cake-index-f1-phone">Phone</label>
+<input autocomplete="tel" class="form-control" id="products-celebration-cake-index-f1-phone" name="phone" placeholder="+44 ..." type="tel"/>
+</div>
+<div class="col-6">
+<label class="form-label" for="products-celebration-cake-index-f1-date">Event date</label>
+<input autocomplete="off" class="form-control" id="products-celebration-cake-index-f1-date" name="date" required="" type="date"/>
+</div>
+<div class="col-6">
+<label class="form-label" for="products-celebration-cake-index-f1-time">Time</label>
+<input autocomplete="off" class="form-control" id="products-celebration-cake-index-f1-time" name="time" type="time"/>
+</div>
+<div class="col-12">
+<label class="form-label" for="products-celebration-cake-index-f1-event_type">Event type (optional)</label>
+<select autocomplete="off" class="form-control" id="products-celebration-cake-index-f1-event_type" name="event_type">
+<option disabled="" selected="" value="">Select event</option>
+<option>Birthday</option>
+<option>Anniversary</option>
+<option>Baby shower</option>
+<option>Engagement</option>
+<option>Corporate</option>
+<option>Other</option>
+</select>
+</div>
+<div class="col-12">
+<fieldset class="form-fieldset"><legend class="form-label form-legend">Servings / Size <span class="servings-helper">· <a href="#sizes-guide" id="products-celebration-cake-index-f1-link-sizes-guide">view servings guide</a></span> </legend><div class="d-grid gap-1">
+<label class="form-check">
+<input class="form-check-input" name="cake_size" type="radio" value="6in"/> 6” (8–12)
+                    </label>
+<label class="form-check">
+<input class="form-check-input" name="cake_size" type="radio" value="8in"/> 8” (14–20)
+                    </label>
+<label class="form-check">
+<input class="form-check-input" name="cake_size" type="radio" value="10in"/> 10” (24–30)
+                    </label>
+<label class="form-check">
+<input class="form-check-input" name="cake_size" type="radio" value="2tiers"/> 2 tiers (30–45)
+                    </label>
+</div></fieldset>
+</div>
+<div class="col-12">
+<fieldset class="form-fieldset">
+<legend class="form-label form-legend">Cake type</legend>
+<div class="d-grid gap-1">
+<label class="form-check"><input class="form-check-input" name="cake_type" required="" type="radio" value="Classic Buttercream"/> Classic Buttercream</label>
+<label class="form-check"><input class="form-check-input" name="cake_type" required="" type="radio" value="Cherry-Chocolate"/> Cherry‑Chocolate</label>
+<label class="form-check"><input class="form-check-input" name="cake_type" required="" type="radio" value="Total Chocolate"/> Total Chocolate</label>
+<label class="form-check"><input class="form-check-input" name="cake_type" required="" type="radio" value="Snickers"/> Snickers</label>
+<label class="form-check"><input class="form-check-input" name="cake_type" required="" type="radio" value="Strawberry Ice Cream"/> Strawberry Ice Cream</label>
+<label class="form-check"><input class="form-check-input" name="cake_type" required="" type="radio" value="Red Velvet"/> Red Velvet</label>
+</div>
+</fieldset>
+<!-- Classic Buttercream options (shown only when Cake type = Classic Buttercream) -->
+<div class="classic-options mt-2">
+<fieldset class="form-fieldset mb-2">
+<legend class="form-label form-legend">Sponge</legend>
+<div class="d-grid gap-1">
+<label class="form-check"><input class="form-check-input" disabled="" name="cake_sponge" type="radio" value="Vanilla"/> Vanilla</label>
+<label class="form-check"><input class="form-check-input" disabled="" name="cake_sponge" type="radio" value="Chocolate"/> Chocolate</label>
+<label class="form-check"><input class="form-check-input" disabled="" name="cake_sponge" type="radio" value="Red Velvet"/> Red Velvet</label>
+<label class="form-check"><input class="form-check-input" disabled="" name="cake_sponge" type="radio" value="Carrot"/> Carrot</label>
+<label class="form-check"><input class="form-check-input" disabled="" name="cake_sponge" type="radio" value="Lemon"/> Lemon</label>
+</div>
+</fieldset>
+<fieldset class="form-fieldset mb-2">
+<legend class="form-label form-legend">Buttercream</legend>
+<div class="d-grid gap-1">
+<label class="form-check"><input class="form-check-input" disabled="" name="cake_buttercream" type="radio" value="Vanilla"/> Vanilla</label>
+<label class="form-check"><input class="form-check-input" disabled="" name="cake_buttercream" type="radio" value="Chocolate"/> Chocolate</label>
+<label class="form-check"><input class="form-check-input" disabled="" name="cake_buttercream" type="radio" value="Salted Caramel"/> Salted Caramel</label>
+<label class="form-check"><input class="form-check-input" disabled="" name="cake_buttercream" type="radio" value="Lotus"/> Lotus</label>
+<label class="form-check"><input class="form-check-input" disabled="" name="cake_buttercream" type="radio" value="Nutella"/> Nutella</label>
+</div>
+</fieldset>
+<fieldset class="form-fieldset">
+<legend class="form-label form-legend">Fillings</legend>
+<div class="d-grid gap-1">
+<label class="form-check"><input class="form-check-input" disabled="" name="cake_filling" type="radio" value="Raspberry Jam"/> Raspberry Jam</label>
+<label class="form-check"><input class="form-check-input" disabled="" name="cake_filling" type="radio" value="Strawberry Jam"/> Strawberry Jam</label>
+<label class="form-check"><input class="form-check-input" disabled="" name="cake_filling" type="radio" value="Chocolate Ganache (Milk)"/> Chocolate Ganache (Milk)</label>
+<label class="form-check"><input class="form-check-input" disabled="" name="cake_filling" type="radio" value="Chocolate Ganache (Dark)"/> Chocolate Ganache (Dark)</label>
+<label class="form-check"><input class="form-check-input" disabled="" name="cake_filling" type="radio" value="Chocolate Ganache (White)"/> Chocolate Ganache (White)</label>
+<label class="form-check"><input class="form-check-input" disabled="" name="cake_filling" type="radio" value="Lemon Curd"/> Lemon Curd</label>
+<label class="form-check"><input class="form-check-input" disabled="" name="cake_filling" type="radio" value="Biscoff Spread"/> Biscoff Spread</label>
+</div>
+</fieldset>
+</div>
+</div>
+<div class="col-12">
+<label class="form-label" for="products-celebration-cake-index-f1-refs">Reference links (optional)</label>
+<input autocomplete="off" class="form-control" id="products-celebration-cake-index-f1-refs" name="reference_links" placeholder="Link to Pinterest/Instagram idea" type="url"/>
+</div>
+<div class="col-12">
+<label class="form-label" for="products-celebration-cake-index-f1-message">Notes / design ideas</label>
+<textarea autocomplete="off" class="form-control" id="products-celebration-cake-index-f1-message" name="message" placeholder="Tell me about style, colours, references..." rows="3"></textarea>
+</div>
+<div class="col-12">
+<label class="form-label" for="products-celebration-cake-index-html-delivery-option">Delivery or pickup?</label>
+<select autocomplete="off" class="form-control" id="products-celebration-cake-index-html-delivery-option" name="delivery_option">
+<option disabled="" selected="" value="">Choose option</option>
+<option value="delivery">Delivery</option>
+<option value="pickup">Pickup</option>
+</select>
+</div>
+<div class="col-12">
+<label class="form-label" for="products-celebration-cake-index-f1-postcode">Postcode / area</label>
+<input autocomplete="postal-code" class="form-control" id="products-celebration-cake-index-f1-postcode" name="postcode" placeholder="e.g., CB1 / PE28" type="text"/>
+</div>
+<div class="col-12 col-md-6">
+<label class="form-label" for="products-celebration-cake-index-f1-budget">Budget from (optional)</label>
+<input autocomplete="off" class="form-control" id="products-celebration-cake-index-f1-budget" min="0" name="budget_from" placeholder="e.g., 60" step="5" type="number"/>
+</div>
+<div class="col-12 small text-muted">
+                  By clicking the button, I agree with the <a href="/Privacy-Policy">Privacy Policy</a>.
+                </div>
+<div class="col-12">
+<fieldset class="form-fieldset"><legend class="form-label form-legend">Design style (optional)</legend><div class="d-flex flex-wrap gap-1">
+<label class="form-check m-0"><input class="form-check-input" name="design_style" type="checkbox" value="Minimal"/> Minimal</label>
+<label class="form-check m-0"><input class="form-check-input" name="design_style" type="checkbox" value="Pastel"/> Pastel</label>
+<label class="form-check m-0"><input class="form-check-input" name="design_style" type="checkbox" value="Gold accents"/> Gold accents</label>
+<label class="form-check m-0"><input class="form-check-input" name="design_style" type="checkbox" value="Theme hint"/> Theme hint</label>
+</div></fieldset>
+</div><div class="col-12 text-end mt-2">
+<button class="btn btn-primary" type="submit">Get a quote</button>
+</div>
+</div></form></div></div></div>
+</div>
+</section><!-- Related -->
+<section class="alt-1 section alt-white product-help" id="help">
+<div class="container">
+<div class="help-band d-flex flex-column flex-md-row align-items-start align-items-md-center justify-content-between gap-2">
+<div><strong>Questions?</strong> I reply quickly on WhatsApp and email.</div>
+<div class="d-flex gap-2 flex-wrap">
+<a class="btn btn-outline" href="https://wa.me/447510837225"><i class="bi bi-whatsapp"></i> WhatsApp</a>
+<a class="btn btn-outline" href="mailto:dreamycake.info@gmail.com"><i class="bi bi-envelope"></i> Email</a>
+</div>
+</div>
+</div>
+</section>
+<section class="section related alt-cream" id="related-section">
+<div class="container">
+<h3 class="h5 mb-3">You may also like</h3>
+<div class="row g-3 row-cols-2 row-cols-md-3 row-cols-xl-4">
+<div class="col-6 col-md-3"><a class="card text-decoration-none h-100 overflow-hidden rounded-3" href="/Products/celebration-cake/"><img alt="Celebration Cake" decoding="async" loading="lazy" src="../../assets/img/items/celebration-cake-main.webp"/><div class="p-2 text-center"><strong>Celebration Cake</strong></div></a></div><div class="col-6 col-md-3"><a class="card text-decoration-none h-100 overflow-hidden rounded-3" href="/Products/mini-bento-cake/"><img alt="Mini / Bento Cake" decoding="async" loading="lazy" src="../../assets/img/items/mini-bento-cake-main.webp"/><div class="p-2 text-center"><strong>Mini / Bento Cake</strong></div></a></div><div class="col-6 col-md-3"><a class="card text-decoration-none h-100 overflow-hidden rounded-3" href="/Products/cupcakes/"><img alt="Cupcakes" decoding="async" loading="lazy" src="../../assets/img/items/cupcakes-main.webp"/><div class="p-2 text-center"><strong>Cupcakes</strong></div></a></div><div class="col-6 col-md-3"><a class="card text-decoration-none h-100 overflow-hidden rounded-3" href="/Products/postage-cookie/"><img alt="Postage Cookie" decoding="async" loading="lazy" src="../../assets/img/items/postage-cookie-main.webp"/><div class="p-2 text-center"><strong>Postage Cookie</strong></div></a></div></div>
+</div>
+</section>
+</main>
+<div aria-hidden="false" class="mobile-sticky-bar">
+<div class="bar">
+<a class="btn btn-primary" href="#order-desktop" id="btn-order-sticky">Order this cake</a>
+<a class="btn btn-outline" href="/#contact" id="btn-help-sticky">Ask a question</a>
+</div>
+</div>
+<footer class="footer dark-background" id="footer">
+<div class="container">
+<div class="row gy-3">
+<div class="col-lg-3 col-md-6 d-flex">
+<i class="bi bi-geo-alt icon">
+</i>
+<div class="address">
+<h4>
+        Address
+       </h4>
+<p>
+        Brampton
+       </p>
+<p>
+        Huntingdon, PE28
+       </p>
+<p>
+</p>
+</div>
+</div>
+<div class="col-lg-3 col-md-6 d-flex">
+<i class="bi bi-telephone icon">
+</i>
+<div>
+<h4>
+        Contact
+       </h4>
+<p>
+<strong>
+         Phone:
+        </strong>
+<span><a class="link" href="tel:+447510837225">+44 7510 837225</a></span>
+<br/>
+<strong>
+          Email:
+         </strong>
+<span><a class="link" href="mailto:dreamycake.info@gmail.com"><a href="mailto:dreamycake.info@gmail.com">dreamycake.info@gmail.com</a></a></span>
+<br/>
+</p>
+</div>
+</div>
+<div class="col-lg-3 col-md-6 d-flex">
+<i class="bi bi-clock icon">
+</i>
+<div>
+<h4>
+        Opening Hours
+       </h4>
+<p>
+<strong>
+         Mon-Sat:
+        </strong>
+<span>
+         9AM - 8PM
+        </span>
+<br/>
+<strong>
+         Sunday
+        </strong>
+        :
+        <span>
+         10AM - 5PM
+        </span>
+</p>
+</div>
+</div>
+<div class="col-lg-3 col-md-6">
+<h4>
+       Follow Us
+      </h4>
+<div class="social-links d-flex">
+<a aria-label="Follow Dreamy Cake on Facebook" class="facebook" href="https://www.facebook.com/DreamyCakeStudioLTD/">
+<i class="bi bi-facebook">
+</i>
+</a>
+<a aria-label="Follow Dreamy Cake on Instagram" class="instagram" href="https://www.instagram.com/dreamycake.bakery/">
+<i class="bi bi-instagram">
+</i>
+</a>
+</div>
+</div>
+</div>
+</div>
+<div class="container copyright text-center mt-4">
+<a href="/Terms-and-Conditions">
+     Terms &amp; Conditions
+    </a>
+<a href="/Privacy-Policy">
+     Privacy Policy
+    </a>
+<br/>
+<p>
+     ©
+     <span>
+      Copyright
+     </span>
+<strong class="px-1 sitename">
+      Dreamy Cake Studio LTD
+     </strong>
+<span>
+      All Rights Reserved
+     </span>
+</p>
+<div class="credits">
+     Designed by
+     <a href="mailto:bogbond@gmail.com" onclick="if(window.gtag){gtag('event','email_click',{label:'contact'});}">
+      Bond
+     </a>
+</div>
+</div>
+</footer>
+<a class="scroll-top d-flex align-items-center justify-content-center" href="#" id="scroll-top">
+<i class="bi bi-arrow-up-short">
+</i>
+</a>
+<div id="preloader">
+</div>
+<!-- Vendor JS -->
+<script src="../../assets/vendor/aos/aos.js"></script>
+<script src="../../assets/vendor/swiper/swiper-bundle.min.js"></script>
+<script src="../../assets/js/main.js"></script><script src="../../assets/js/product.js"></script>
+<script src="/assets/js/navfix.js"></script>
+</body>
+</html>
+<!-- DC:CONSENT_BANNER_START -->
+<style>
+  .dc-consent-banner{
+    position:fixed; left:0; right:0; bottom:0;
+    z-index:2147483647;
+    background: rgba(255,255,255,0.98);
+    border-top: 1px solid rgba(0,0,0,.1);
+    box-shadow: 0 -8px 24px rgba(0,0,0,.08);
+    padding: 16px; display:flex; gap:16px; align-items: flex-start;
+    font-family: system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
+  }
+  .dc-consent-banner__text{ flex:1; font-size:14px; line-height:1.45; color:#222; }
+  .dc-consent-banner__btns{ display:flex; gap:8px; flex-wrap:wrap; }
+  .dc-btn{ border:1px solid #222; padding:8px 12px; border-radius:999px; background:#fff; cursor:pointer; font-size:14px; }
+  .dc-btn--primary{ background:#222; color:#fff; }
+  .dc-consent-manage{
+    left: 12px !important;
+    position:fixed;
+    right:auto !important; bottom: 6px;
+    z-index:2147483647;
+    border:1px solid #222; background:#fff; padding:6px 10px; border-radius:999px; font-size:12px; cursor:pointer; opacity:.85;
+    line-height:1; white-space:nowrap;
+    transition: bottom .2s ease, right .2s ease, left .2s ease, opacity .2s;
+  }
+  /* When we need to lift above another fixed button (e.g., back-to-top) */
+  /* Put it bottom-left on very small screens to avoid crowding */
+  @media (max-width: 480px) {
+    .dc-consent-manage{ left:16px; right:auto; }
+  }
+  .dc-consent-manage:hover{ opacity:1; }
+</style>
+<script>
+(function(){
+  try {
+    // Create "Manage cookies" floating button
+    var manage = document.createElement('button');
+    manage.className = 'dc-consent-manage';
+    manage.type = 'button';
+    manage.textContent = 'Cookies';
+    manage.setAttribute('aria-label','Manage cookies');
+    manage.addEventListener('click', function(){ showBanner(true); });
+
+    // Build banner
+    function showBanner(force) {
+      var saved = null;
+      try { saved = JSON.parse(localStorage.getItem('dc_consent') || '{}'); } catch(e){}
+      if(!force && saved && (saved.choice === 'accept' || saved.choice === 'reject')) return;
+      var wrap = document.createElement('div');
+      wrap.className = 'dc-consent-banner';
+      wrap.setAttribute('role','dialog');
+      wrap.setAttribute('aria-live','polite');
+      wrap.innerHTML = ''
+        + '<div class="dc-consent-banner__text">To keep things simple, we use essential cookies. If you’re happy, we’ll also use analytics to learn what’s working. You can update your choice anytime in “Cookies”.</div>'
+        + '<div class="dc-consent-banner__btns">'
+        +   '<button type="button" class="dc-btn" data-choice="reject">Reject non-essential</button>'
+        +   '<button type="button" class="dc-btn dc-btn--primary" data-choice="accept">Accept all</button>'
+        + '</div>';
+      document.body.appendChild(wrap);
+      wrap.querySelectorAll('button[data-choice]').forEach(function(btn){
+        btn.addEventListener('click', function(){ setChoice(this.getAttribute('data-choice')); });
+      });
+    }
+
+    function setChoice(choice) {
+      try { localStorage.setItem('dc_consent', JSON.stringify({choice})); } catch(e){}
+      // Update Consent Mode in real-time
+      if (typeof gtag === 'function') {
+        if(choice === 'accept') {
+          gtag('consent', 'update', {
+            analytics_storage: 'granted',
+            ad_storage: 'granted',
+            ad_user_data: 'granted',
+            ad_personalization: 'granted'
+          });
+          // Attempt GA load if ID present
+          if (window.GA_MEASUREMENT_ID && window.GA_MEASUREMENT_ID !== 'G-XXXXXXXXXX' && !window.__ga_loaded) {
+            var s=document.createElement('script'); s.async=1; s.src='https://www.googletagmanager.com/gtag/js?id='+window.GA_MEASUREMENT_ID;
+            document.head.appendChild(s);
+            gtag('js', new Date());
+            gtag('config', window.GA_MEASUREMENT_ID, { 'anonymize_ip': true });
+            window.__ga_loaded = true;
+          }
+        } else {
+          gtag('consent', 'update', {
+            analytics_storage: 'denied',
+            ad_storage: 'denied',
+            ad_user_data: 'denied',
+            ad_personalization: 'denied'
+          });
+        }
+      }
+      var b = document.querySelector('.dc-consent-banner'); if(b) b.remove();
+    }
+
+    // Try to avoid overlap with existing fixed "back to top" buttons
+    function avoidOverlap() {
+      try {
+        var candidates = [
+          '.back-to-top', '.scroll-to-top', '.scroll-top', '.to-top', '.btn-to-top',
+          '#backToTop', '#toTop', '#totop', '[data-backtotop]', '[data-scroll-top]'
+        ];
+        var el = null;
+        for (var i=0; i<candidates.length; i++) {
+          var found = document.querySelector(candidates[i]);
+          if(found) { el = found; break; }
+        }
+        // Reset
+        manage.classList.remove('dc-lift');
+        manage.style.right = ''; manage.style.left = ''; manage.style.bottom = '';
+        // On small screens we already push left via CSS, skip overlap logic
+        if (window.matchMedia('(max-width: 480px)').matches) return;
+        if (!el) return;
+        var r = el.getBoundingClientRect();
+        // Heuristic: if the element sits bottom-right within 120px from the viewport edge, lift our button
+        var nearBottom = (window.innerHeight - r.bottom) <= 120;
+        var nearRight  = (window.innerWidth  - r.right)  <= 120;
+        var visible = r.width>0 && r.height>0;
+        if (visible && nearBottom && nearRight) {
+          // // manage.classList.add('dc-lift'); // disabled // disabled
+        }
+      } catch(e){}
+    }
+
+    document.addEventListener('DOMContentLoaded', function(){
+      document.body.appendChild(manage);
+      showBanner(false);
+      avoidOverlap();
+    });
+    window.addEventListener('scroll', avoidOverlap, {passive:true});
+    window.addEventListener('resize', avoidOverlap);
+
+    // Run a few times shortly after load to catch late-mounted widgets
+    setTimeout(avoidOverlap, 300);
+    setTimeout(avoidOverlap, 1000);
+  } catch(e){ console.error('Consent banner error', e); }
+})();
+</script>
+<!-- DC:CONSENT_BANNER_END -->

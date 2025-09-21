@@ -1,0 +1,7 @@
+/* Quick FAQ styles (v32) */
+.mini-faq .faq-list{display:flex;flex-direction:column;gap:.5rem}
+.mini-faq details{border:1px solid rgba(0,0,0,.08);border-radius:16px;padding:.75rem 1rem;background:#fff}
+.mini-faq summary{cursor:pointer;list-style:none;display:flex;align-items:center;gap:.5rem;font-weight:600}
+.mini-faq summary::-webkit-details-marker{display:none}
+.mini-faq .faq-a{margin-top:.5rem;line-height:1.6}
+@media (prefers-color-scheme: dark){.mini-faq details{background:rgba(255,255,255,.04);border-color:rgba(255,255,255,.12)}}

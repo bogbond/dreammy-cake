@@ -1,42 +1,51 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<urlset
-      xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
-      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-      xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
-            http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
-<!-- created with Free Online Sitemap Generator www.xml-sitemaps.com -->
+<?xml version='1.0' encoding='utf-8'?>
+<ns0:urlset xmlns:ns0="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9             http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
 
 
-<url>
-  <loc>https://dreamycake.co.uk/</loc>
-  <lastmod>2024-12-03T20:06:13+00:00</lastmod>
-  <priority>1.00</priority>
-</url>
-<url>
-  <loc>https://dreamycake.co.uk/QA/</loc>
-  <lastmod>2024-12-03T20:06:13+00:00</lastmod>
-  <priority>0.80</priority>
-</url>
-<url>
-  <loc>https://dreamycake.co.uk/About/</loc>
-  <lastmod>2024-12-03T20:06:13+00:00</lastmod>
-  <priority>0.80</priority>
-</url>
-<url>
-  <loc>https://dreamycake.co.uk/Order/</loc>
-  <lastmod>2024-12-03T20:06:13+00:00</lastmod>
-  <priority>0.80</priority>
-</url>
-<url>
-  <loc>https://dreamycake.co.uk/Privacy_Policy/</loc>
-  <lastmod>2024-12-03T20:06:13+00:00</lastmod>
-  <priority>0.80</priority>
-</url>
-<url>
-  <loc>https://dreamycake.co.uk/Terms_and_Conditions/</loc>
-  <lastmod>2024-12-03T20:06:13+00:00</lastmod>
-  <priority>0.80</priority>
-</url>
+
+<ns0:url>
+  <ns0:loc>https://dreamycake.co.uk/</ns0:loc>
+  <ns0:lastmod>2025-09-20</ns0:lastmod>
+  <ns0:priority>1.00</ns0:priority>
+</ns0:url>
+<ns0:url>
+  <ns0:loc>https://dreamycake.co.uk/QA/</ns0:loc>
+  <ns0:lastmod>2025-09-20</ns0:lastmod>
+  <ns0:priority>0.80</ns0:priority>
+</ns0:url>
+<ns0:url>
+  <ns0:loc>https://dreamycake.co.uk/About/</ns0:loc>
+  <ns0:lastmod>2025-09-20</ns0:lastmod>
+  <ns0:priority>0.80</ns0:priority>
+</ns0:url>
+<ns0:url>
+  <ns0:loc>https://dreamycake.co.uk/Privacy-Policy/</ns0:loc>
+  <ns0:lastmod>2025-09-20</ns0:lastmod>
+  <ns0:priority>0.80</ns0:priority>
+</ns0:url>
+<ns0:url>
+  <ns0:loc>https://dreamycake.co.uk/Terms-and-Conditions/</ns0:loc>
+  <ns0:lastmod>2025-09-20</ns0:lastmod>
+  <ns0:priority>0.80</ns0:priority>
+</ns0:url>
 
 
-</urlset>
+
+  <ns0:url>
+    <ns0:loc>https://dreamycake.co.uk/Thank-You/</ns0:loc>
+    <ns0:changefreq>monthly</ns0:changefreq>
+    <ns0:priority>0.30</ns0:priority>
+  <lastmod>2025-09-20</lastmod></ns0:url>
+  <ns0:url>
+    <ns0:loc>https://dreamycake.co.uk/Allergens/</ns0:loc>
+    <ns0:lastmod>2025-09-20</ns0:lastmod>
+    <ns0:changefreq>monthly</ns0:changefreq>
+    <ns0:priority>0.70</ns0:priority>
+  </ns0:url>
+  <ns0:url>
+    <ns0:loc>https://dreamycake.co.uk/How-it-works/</ns0:loc>
+    <ns0:lastmod>2025-09-20</ns0:lastmod>
+    <ns0:changefreq>monthly</ns0:changefreq>
+    <ns0:priority>0.64</ns0:priority>
+  </ns0:url>
+</ns0:urlset>

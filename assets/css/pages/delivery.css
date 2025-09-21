@@ -1,0 +1,198 @@
+
+/* === Local override: darker header background for white nav text === */
+#header{
+  background: #3b2f2a ; /* rich cocoa */
+  box-shadow: 0 6px 24px rgba(0,0,0,.08) ;
+}
+#header::before{ content:none ; }
+#header .navmenu a,
+#header .logo h1, #header .logo .sitename,
+#header .sitename{ color:#fff ; text-shadow:none ; }
+#header .navmenu a:hover,
+#header .navmenu .active{ color:#ffe2c7 ; }
+
+
+/* ====== Page-level hardening to prevent 'foggy' header/top ====== */
+/* 1) Make sure header sits above any overlays and is readable */
+#header{ z-index: 10000 ; /* removed white bg */ box-shadow: 0 6px 24px rgba(0,0,0,.06) ; }
+#header .navmenu a, #header .logo h1, #header .logo .sitename, #header .sitename{ color: var(--heading-color, #222) ; }
+#header .navmenu a:hover, #header .navmenu li:hover > a, #header .navmenu .active{ color: var(--accent-color, #b48c78) ; }
+
+/* 2) Neutralise global hero overlays that might sit on top and wash out content */
+.hero::before, .page-title::before, .section::before, .dc-hero::before{
+  content: none ;
+  display: none ;
+  opacity: 0 ;
+}
+
+/* 3) Prevent any accidental inherited opacity/filters on top blocks */
+.hero, .dc-hero, main > section:first-of-type{
+  opacity: 1 ;
+  filter: none ;
+  isolation: isolate; /* new stacking context so overlays from parents won't cover children */
+}
+
+/* 4) Ensure AOS (if present) doesn't leave elements semi-transparent before scroll */
+[data-aos]{ opacity: 1 ; transform: none ; }
+
+
+/* --- Header/foot stability for light inner pages --- */
+#header{ 
+  /* removed white bg */ 
+  box-shadow: 0 6px 24px rgba(0,0,0,.06) ;
+}
+#header .sitename, 
+#header .logo, 
+#header .logo a, 
+#header .logo h1, #header .logo .sitename, 
+#header .navmenu a{
+  color: var(--heading-color, #222) ;
+  text-shadow: none ;
+}
+/* preserve active/hover states from theme while ensuring contrast */
+#header .navmenu a:hover, 
+#header .navmenu li:hover > a{
+  color: var(--accent-color, #b48c78) ;
+}
+/* Footer minor hardening (keeps layout readable even if theme grid fails) */
+#footer{ background: var(--surface-color, #fff); }
+
+
+:root{
+  --dc-bg:#FFF7F1;
+  --dc-surface:#FFFFFF;
+  --dc-ink:#2b2b2b;
+  --dc-muted:#6b6b6b;
+  --dc-accent: var(--accent-color, #C8A28F);
+  --dc-accent-2:#EBD9CF;
+  --dc-border: rgba(0,0,0,.08);
+}
+
+body{font-family: Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif; color:var(--dc-ink); background: var(--dc-bg);}
+main{padding-top: 96px;}
+.dc-container{max-width:1100px;margin:0 auto;padding:24px;}
+
+.hero{background: linear-gradient(180deg, var(--dc-accent-2), rgba(255,255,255,0) 60%); border-bottom:1px solid var(--dc-border);}
+.hero .wrap{display:grid;gap:20px;grid-template-columns:1.1fr .9fr;align-items:center;}
+.hero h1{font-size: clamp(28px, 4vw, 44px); margin:0 0 8px;}
+.hero p.lead{font-size: clamp(16px, 2vw, 18px); color:var(--dc-muted);}
+.hero .card{background:var(--dc-surface); border:1px solid var(--dc-border); border-radius:20px; padding:18px; box-shadow:0 10px 30px rgba(0,0,0,.04);}
+
+.badges{display:flex;flex-wrap:wrap;gap:10px;margin-top:6px}
+.badge{background:var(--dc-surface); border:1px solid var(--dc-border); padding:8px 12px; border-radius:999px; font-size:14px}
+
+.section{padding:48px 0}
+.section h2{font-size:28px;margin:0 0 12px}
+.section p{color:var(--dc-muted)}
+
+.grid{display:grid; gap:18px}
+.grid.cols-3{grid-template-columns:repeat(3,1fr)}
+.grid.cols-2{grid-template-columns:repeat(2,1fr)}
+@media (max-width: 900px){ .hero .wrap{grid-template-columns:1fr} .grid.cols-3{grid-template-columns:1fr} .grid.cols-2{grid-template-columns:1fr} }
+
+.card{background:var(--dc-surface); border:1px solid var(--dc-border); border-radius:18px; padding:18px}
+.card h3{margin:0 0 6px;font-size:18px}
+.card p{margin:0;color:var(--dc-muted)}
+.card .stat{font-size:32px;font-weight:700}
+
+.estimator{display:flex;gap:16px;align-items:center;margin-top:12px}
+.estimator input[type="range"]{width:100%}
+
+.cta{display:flex;flex-wrap:wrap;gap:12px;margin-top:18px}
+.cta .btn{display:inline-flex;align-items:center;gap:8px;border-radius:999px;border:1px solid var(--dc-border);padding:10px 16px;text-decoration:none}
+.btn.primary{background:var(--dc-accent);color:#fff;border-color:transparent}
+
+.note{font-size:13px;color:var(--dc-muted)}
+
+.list{display:flex;flex-wrap:wrap;gap:10px}
+.list .pill{border:1px dashed var(--dc-border); padding:8px 12px; border-radius:999px; background: #fff}
+
+.policy{font-size:12px;color:var(--dc-muted)}
+
+footer.footer{background:#111;color:#eee;margin-top:48px;padding:28px 0}
+.footer a{color:#eee;text-decoration:none;opacity:.9}
+.footer a:hover{opacity:1}
+.footer-links{list-style:none;margin:0;padding:0}
+.footer-links li{margin:.35rem 0}
+
+
+
+/* === Final local override for info pages only === */
+.dc-dark-header #header{
+  background:#3b2f2a ;
+  box-shadow:0 6px 24px rgba(0,0,0,.08) ;
+}
+.dc-dark-header #header .navmenu a,
+.dc-dark-header #header .logo h1, #header .logo .sitename,
+.dc-dark-header #header .sitename{ color:#fff ; text-shadow:none ; }
+.dc-dark-header #header .navmenu a:hover,
+.dc-dark-header #header .navmenu .active{ color:#ffe2c7 ; }
+
+
+/* === Mobile nav fix for info pages only === */
+@media (max-width:1199px){
+  .dc-dark-header #header{ background:#3b2f2a ; }
+  .dc-dark-header .navmenu .mobile-nav-toggle{ color:#fff ; }
+  .dc-dark-header .navmenu ul{
+    background: #1E1714 ; /* was white */
+    box-shadow: 0 20px 40px rgba(0,0,0,.2);
+    border: 1px solid rgba(255,255,255,.08);
+  }
+  .dc-dark-header .navmenu a{
+    color:#fff ;
+  }
+  .dc-dark-header .navmenu a:hover,
+  .dc-dark-header .navmenu .active{
+    color:#ffe2c7 ;
+  }
+  /* if theme uses separators */
+  .dc-dark-header .navmenu ul li{ border-color: rgba(255,255,255,.06) ; }
+}
+
+
+
+/* === Normalised spacing for info pages === */
+main{ padding-top: 96px; }
+.hero{ padding: 32px 0 24px; }
+.section{ padding: 56px 0; }
+.hero h1{ margin: 0 0 10px; }
+.hero p.lead{ margin: 0 0 8px; }
+@media (max-width: 700px){
+  .section{ padding: 40px 0; }
+  .hero{ padding: 28px 0 18px; }
+}
+/* CTA bottom alignment */
+.section.cta-bottom .cta{ gap: 12px; }
+.section.cta-bottom{ padding-top: 32px; padding-bottom: 64px; }
+
+
+
+/* header logo spacing & dim helper */
+#header .logo img{ margin-right:10px; display:inline-block; vertical-align:middle; }
+.dim{ opacity:.7 }
+
+
+
+/* Fix: ensure badges are visible (no white-on-white) */
+.badges .badge{
+  background:#ffffff ;
+  color:#2b2b2b ;
+  border-color: var(--dc-border) ;
+}
+.badges .badge i{ margin-right:6px; }
+
+
+/* breadcrumbs */
+.breadcrumbs{ font-size:13px; color:var(--dc-muted,#666); padding:10px 0 0 }
+.breadcrumbs a{ color:inherit; text-decoration:none; border-bottom:1px dotted rgba(0,0,0,.25) }
+.breadcrumbs a:hover{ color:var(--dc-ink,#222); border-bottom-color:transparent }
+
+
+
+/* === Remove stray horizontal strip: hide empty breadcrumbs + zero padding === */
+.breadcrumbs{ padding: 0 ; margin: 0 ; }
+.breadcrumbs:empty{ display: none ; }
+
+/* === DC: ensure active link color visible on info pages === */
+#header .navmenu a.active,
+#header .navmenu li.active > a{ color:#F0B400 ; }

@@ -1,0 +1,245 @@
+
+/* --- Product Page Styles (shared) --- */
+.page-title.product-hero{position:relative; overflow:hidden; padding:72px 0 40px; background:linear-gradient(180deg, rgba(0,0,0,.45) 0%, rgba(0,0,0,.65) 100%), var(--hero-img) center/cover no-repeat}
+.page-title.product-hero h1{color:#fff;margin:0 0 .25rem;font-size:clamp(1.5rem,3.4vw,2.2rem)}
+.page-title.product-hero p{color:rgba(255,255,255,.97);margin:0}
+.page-title.product-hero::before{content:"";position:absolute;inset:0;background:linear-gradient(180deg, rgba(0,0,0,.55) 0%, rgba(0,0,0,.72) 100%) ;pointer-events:none}
+.page-title.product-hero>.container{position:relative; z-index:1}
+@media (min-width: 992px){ .page-title.product-hero{padding:100px 0 48px} }
+
+.product .chipbar{display:flex;flex-wrap:wrap;gap:.5rem;margin-top:34px}
+.product .chip{display:inline-flex;align-items:center;gap:.35rem;padding:.45rem .75rem;border:1px solid #e8e8e8;border-radius:999px;background:#fff;color:#111;text-decoration:none;font-size:.95rem}
+.product .chip i{font-size:1rem}
+
+.section{padding-top:28px;padding-bottom:28px}
+@media (min-width:1200px){ .product .container{max-width:980px} }
+@media (min-width:1400px){ .product .container{max-width:1000px} }
+
+/* Trust row */
+.product-trust .trust-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px}
+.product-trust .trust-item{display:flex;align-items:center;gap:.5rem;background:#fff;border:1px solid #eee;border-radius:12px;padding:10px}
+.product-trust .trust-item i{font-size:1.1rem}
+
+/* Gallery */
+.product .gallery{--rad:16px}
+.product .gallery .swiper{border-radius:var(--rad);box-shadow:0 10px 30px rgba(0,0,0,.06);max-width:520px;margin:0 auto}
+@media (min-width:1200px){ .product .gallery .swiper{max-width:460px} }
+.product .gallery img{display:block;width:100%;height:auto}
+
+/* Bullets */
+.product .bullets{list-style:none;margin:0;padding-left:0;display:grid;gap:.5rem}
+.product .bullets li{display:flex;gap:.55rem;align-items:flex-start}
+.product .bullets i{font-size:1.1rem;line-height:1.2;flex:0 0 auto}
+
+/* Order card */
+.product .order-card{background:#fff;border:1px solid #eee;border-radius:16px;padding:16px;box-shadow:0 8px 24px rgba(0,0,0,.05)}
+.product .order-card h3{margin-bottom:.75rem}
+@keyframes orderPulse{0%{box-shadow:0 0 0 0 rgba(247,189,0,.0)}50%{box-shadow:0 0 0 10px rgba(247,189,0,.25)}100%{box-shadow:0 0 0 0 rgba(247,189,0,.0)}}
+.order-card.order-highlight{animation:orderPulse 1.6s ease 2; border-color: var(--accent-color)}
+
+/* Related */
+.product .related .card{border:1px solid #eee;border-radius:14px;overflow:hidden;text-decoration:none;color:inherit}
+.product .related .card img{width:100%;display:block;aspect-ratio:4/3;object-fit:cover}
+.product .related .card .p{padding:10px 12px}
+
+/* Help band */
+.product-help .help-band{background:#fff;border:1px solid #eee;border-radius:16px;padding:12px 14px}
+
+/* Sticky CTA */
+.mobile-sticky-bar{position:fixed;left:0;right:0;bottom:14px;z-index:9999;display:flex;justify-content:center;pointer-events:none}
+.mobile-sticky-bar .bar{display:flex;gap:10px;background:rgba(255,255,255,.94);backdrop-filter:blur(8px);border:1px solid #eee;border-radius:16px;padding:10px 12px;box-shadow:0 8px 24px rgba(0,0,0,.08);pointer-events:auto;transition:transform .25s ease, opacity .25s ease}
+.mobile-sticky-bar.hidden .bar{transform:translateY(18px);opacity:0;pointer-events:none}
+#scroll-top{bottom:92px ; right: 16px;}
+
+/* Mobile zebra backgrounds */
+@media (max-width:768px){
+  .product .section.alt-white{background:#ffffff }
+  .product .section.alt-cream{background:#fff8ef }
+}
+
+/* Accordion (micro-FAQ) */
+.faq-accordion details{border:1px solid #eee;border-radius:12px;background:#fff;padding:10px 12px}
+.faq-accordion details+details{margin-top:8px}
+.faq-accordion summary{cursor:pointer;list-style:none;display:flex;align-items:center;gap:.5rem;font-weight:600}
+.faq-accordion summary::marker{display:none}
+.faq-accordion summary .chev{margin-left:auto;transition:transform .2s ease}
+.faq-accordion details[open] summary .chev{transform:rotate(180deg)}
+.faq-accordion .answer{margin-top:6px;color:#333;font-size:.95rem}
+
+/* Utility */
+.mt-1{margin-top:.25rem}.mt-2{margin-top:.5rem}.mt-3{margin-top:1rem}
+
+@media (max-width:768px){
+  .product #mini-faq.alt-cream{background:#fff8ef }
+}
+
+@media (max-width:768px){
+  .product .gallery .swiper{max-width: 100%;}
+  .product .gallery .swiper-button-prev,
+  .product .gallery .swiper-button-next{display:none}
+}
+
+/* FAQ spacing & CTA balance */
+.faq-accordion{margin-top:6px}
+.section-title + .faq-accordion{margin-top:10px}
+.faq-accordion .btn{margin-top:10px}
+
+
+/* Product section subtitle (consistent with 'About this cake' / 'You may also like') */
+.product-subtitle{margin-bottom:8px}
+.product-subtitle h3{margin:0}
+.product-subtitle p{margin:0}
+
+/* Micro-FAQ spacing and button comfort on mobile */
+@media (max-width: 768px){
+  #mini-faq.section{padding-top:18px;padding-bottom:22px}
+  #mini-faq .faq-accordion details{margin:0}
+  #mini-faq .faq-accordion details + details{margin-top:8px}
+  #mini-faq .faq-cta{margin-top:12px}
+  #mini-faq .faq-cta .btn{padding:.5rem .9rem;border-radius:10px}
+}
+
+/* Keep zebra backgrounds consistent on mobile */
+@media (max-width: 768px){
+  .product .section.alt-cream{background:#fff8ef }
+  .product .section.alt-white{background:#ffffff }
+}
+
+/* Ensure last FAQ item has breathing room above CTA */
+.faq-accordion details:last-of-type{margin-bottom:8px}
+
+
+/* Soft highlight for order form / sizes guide targets */
+@keyframes softPulse {
+  0% { box-shadow: 0 0 0 rgba(0,0,0,0.0); }
+  20% { box-shadow: 0 8px 28px rgba(0,0,0,0.18); }
+  60% { box-shadow: 0 8px 28px rgba(0,0,0,0.08); }
+  100% { box-shadow: 0 0 0 rgba(0,0,0,0.0); }
+}
+.highlight-pulse {
+  animation: softPulse 2.2s ease-in-out;
+  transition: box-shadow .3s ease;
+  border-radius: 14px;
+}
+
+/* Make anchored sections land below fixed header */
+#sizes-guide, #order-desktop, #order-mobile { scroll-margin-top: 96px; }
+
+
+/* Extra space between sizes table and 'Popular flavours' */
+#sizes-guide .table-responsive + h3 { margin-top: 22px ; }
+
+
+/* Tidy inner spacing for flavours/design/booking/allergens list (desktop) */
+#sizes-guide > .d-none.d-lg-block h3.h6 { margin-top: 16px; margin-bottom: 6px; }
+#sizes-guide > .d-none.d-lg-block p.small { margin-bottom: 10px; }
+#sizes-guide > .d-none.d-lg-block p.small:last-child { margin-bottom: 0; }
+
+
+/* More breathing room before Quick questions */
+#quick-questions-desktop { margin-top: 24px; }
+#mini-faq.section { margin-top: 18px; }
+
+
+/* Beautify 'before you order' subtitle and adjust spacing */
+.product-subtitle { margin-bottom: 10px; }
+.product-subtitle h2.h4 { margin: 0; }
+.product-subtitle p {
+  margin: 4px 0 0 0;
+  font-size: .85rem;
+  text-transform: uppercase;
+  letter-spacing: .04em;
+  opacity: .85;
+}
+
+
+/* Unify Q&A button style across viewports */
+.product .faq-cta .btn { padding: .6rem 1rem; border-radius: 12px; }
+
+
+/* === R19 Mobile trust badges fix === */
+.product .trust-grid,
+.trust-grid{
+  display:grid;
+  grid-template-columns:repeat(3, minmax(0, 1fr)); /* let columns shrink evenly */
+  gap: clamp(8px, 2.4vw, 12px);
+}
+
+.product-trust .trust-item,
+.trust-item{
+  min-width:0;                 /* allow shrinking inside grid */
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:.55rem;
+  text-align:center;
+  padding: clamp(8px, 2.2vw, 14px) clamp(10px, 2.8vw, 16px);
+  line-height:1.15;
+  font-size: clamp(13px, 3.3vw, 16px);
+}
+
+.product-trust .trust-item i,
+.trust-item i{
+  flex:0 0 auto;
+  font-size:1.05em;
+}
+
+/* Permit text wrap only on ultra-narrow screens, keep one-row layout */
+@media (max-width: 360px){
+  .product-trust .trust-item,
+  .trust-item{
+    white-space: normal;
+    text-wrap: balance;
+  }
+}
+/* === end R19 fix === */
+
+
+/* === R19.1: Product page polish === */
+
+/* 1) Unify 'Quick questions' subtitle styling to match other section headers */
+.product-subtitle{margin-bottom:6px}
+.product-subtitle h2.h4{margin:0; font-weight:700;}
+.product-subtitle p.small{margin-top:2px; opacity:.85}
+
+/* 2) Micro-FAQ spacing and more comfortable CTA button */
+#mini-faq.section{padding-top:16px; padding-bottom:22px}
+#mini-faq .faq-accordion details{margin:0}
+#mini-faq .faq-accordion details + details{margin-top:8px}
+#mini-faq .faq-cta{margin-top:16px}
+#mini-faq .faq-cta .btn{padding:.6rem 1rem; border-radius:12px}
+
+/* 3) Top chips (Delivery / Allergens / How it works): avoid sticking on ultra-narrow widths */
+.chipbar{display:flex; flex-wrap:wrap; gap:clamp(8px, 2.6vw, 12px); margin-top:clamp(16px, 4vw, 34px)}
+.product .chip{display:inline-flex; align-items:center; justify-content:center; gap:.4rem; 
+  padding:clamp(8px, 2.2vw, 12px) clamp(12px, 3vw, 16px); border-radius:999px; line-height:1.2;
+  white-space:nowrap; min-width:0}
+.product .chip i{font-size:1.05em}
+@media (max-width:360px){
+  .product .chip{font-size:.95rem}
+}
+/* === end R19.1 === */
+
+
+/* r55.15: prevent horizontal scrollbar in left column */
+@media (min-width: 992px){
+  #sizes-guide .table-responsive{ overflow-x: hidden; }
+}
+
+
+
+/* r55.44 – fix mobile horizontal slider under Quick questions and left column */
+@media (max-width: 991.98px){
+  #quick-questions-desktop .row,
+  #quick-questions-desktop .accordion,
+  #sizes-section #sizes-guide .row{ margin-left:0!important; margin-right:0!important; }
+  #quick-questions-desktop, #sizes-section #sizes-guide{ overflow-x:hidden!important; max-width:100%!important; }
+  .section .container{ max-width:100%!important; }
+}
+
+
+
+/* === R55.111: Show Quick Questions on mobile (CSS-only, no HTML dupes) === */
+@media (max-width: 991.98px){
+  #quick-questions-desktop{display:block !important;}
+}

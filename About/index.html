@@ -1,53 +1,80 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-  <!-- Google tag (gtag.js) -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-CC2NRDSRQ9"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
+<!-- DC:GA4_CONSENT_HEAD_START -->
+<!-- Google Analytics 4 + Consent Mode v2 (UK/EU) -->
+<!-- TODO: Replace GA4 ID once you have it by setting window.GA_MEASUREMENT_ID below -->
+<script>
+  // Set your GA4 Measurement ID here once ready, e.g. 'G-ABCD123456'
+  window.GA_MEASUREMENT_ID = window.GA_MEASUREMENT_ID || 'G-CC2NRDSRQ9';
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  // Load saved consent (default: only essential storage granted)
+  (function() {
+    try {
+      const saved = JSON.parse(localStorage.getItem('dc_consent') || '{}');
+      const base = {
+        ad_user_data: 'denied',
+        ad_personalization: 'denied',
+        ad_storage: 'denied',
+        analytics_storage: 'denied',
+        functionality_storage: 'granted',
+        security_storage: 'granted'
+      };
+      const consent = Object.assign({}, base, (saved && saved.choice === 'accept') ? {
+        analytics_storage: 'granted',
+        ad_storage: 'granted',
+        ad_user_data: 'granted',
+        ad_personalization: 'granted'
+      } : {});
+      gtag('consent', 'default', consent);
+    } catch(e) { console.warn('Consent read failed', e); }
+  })();
+  // Load GA only when an ID is provided
+  (function(id) {
+    if(!id || id === 'G-XXXXXXXXXX') {
+      console.warn('GA4 ID is placeholder. Set window.GA_MEASUREMENT_ID to your real GA4 ID.');
+      return;
+    }
+    var s=document.createElement('script'); s.async=1; s.src='https://www.googletagmanager.com/gtag/js?id='+id;
+    document.head.appendChild(s);
     gtag('js', new Date());
+    gtag('config', id, { 'anonymize_ip': true });
+  })(window.GA_MEASUREMENT_ID);
+</script>
+<!-- DC:GA4_CONSENT_HEAD_END -->
+<!DOCTYPE html>
 
-    gtag('config', 'G-CC2NRDSRQ9');
-  </script>
-  <meta charset="utf-8" />
-  <meta content="width=device-width, initial-scale=1.0" name="viewport" />
-  <title>About Margo | Dreamy Cake - Cakes & Cupcakes in Cambridgeshire</title>
+<html lang="en-GB">
+<head>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<!-- Google tag (gtag.js) -->
+<script async="" src="https://www.googletagmanager.com/gtag/js?id=G-CC2NRDSRQ9"></script>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>About Margo | Custom Cakes in Cambridgeshire | Dreamy Cake</title>
+<link href="/assets/img/site.webmanifest" rel="manifest"/>
+<!-- Meta Description -->
+<meta content="Meet Margo, the baker behind Dreamy Cake in Cambridgeshire. Bespoke wedding &amp; birthday cakes with delivery across Huntingdon, Cambridge &amp; Peterborough." name="description"/>
+<!-- Meta Keywords -->
+<meta content="Dreamy Cake, Margo baker, custom cakes Cambridgeshire, wedding cakes Huntingdon, cupcakes Cambridge, bespoke desserts Peterborough, artisan cupcakes, cake delivery" name="keywords"/>
+<!-- Open Graph Meta Tags for Social Media -->
+<meta content="About Margo — Dreamy Cake" property="og:title"/>
+<meta content="Bespoke wedding &amp; birthday cakes handcrafted in Cambridgeshire. Meet the baker behind Dreamy Cake." property="og:description"/>
+<meta content="https://dreamycake.co.uk/assets/img/about-og-1200x630.jpg" property="og:image"/>
+<meta content="1200" property="og:image:width"/>
+<meta content="630" property="og:image:height"/>
+<meta content="https://dreamycake.co.uk/about/" property="og:url"/>
+<meta content="profile" property="og:type"/>
+<!-- Twitter Card Meta Tags -->
+<meta content="summary_large_image" name="twitter:card"/>
+<meta content="About Margo | Dreamy Cake - Cakes &amp; Cupcakes in Cambridgeshire" name="twitter:title"/>
+<meta content="Meet Margo, the passionate baker behind Dreamy Cake. Discover her story and bespoke cakes, cupcakes, and desserts with delivery in Huntingdon, Cambridge, Peterborough, and Cambridgeshire." name="twitter:description"/>
+<meta content="https://dreamycake.co.uk/assets/img/about.webp" name="twitter:image"/>
+<meta content="https://dreamycake.co.uk/About" name="twitter:url"/>
+<meta content="@dreamy_cakess" name="twitter:site"/>
 
-  <!-- Meta Description -->
-  <meta name="description" content="Meet Margo, the passionate baker behind Dreamy Cake. Discover her story and bespoke cakes, cupcakes, and desserts with delivery in Huntingdon, Cambridge, Peterborough, and Cambridgeshire." />
-
-  <!-- Meta Keywords -->
-  <meta name="keywords" content="Dreamy Cake, Margo baker, custom cakes Cambridgeshire, wedding cakes Huntingdon, cupcakes Cambridge, bespoke desserts Peterborough, artisan cupcakes, cake delivery" />
-
-  <!-- Open Graph Meta Tags for Social Media -->
-  <meta property="og:title" content="About Margo | Dreamy Cake - Cakes & Cupcakes in Cambridgeshire" />
-  <meta property="og:description" content="Meet Margo, the passionate baker behind Dreamy Cake. Discover her story and bespoke cakes, cupcakes, and desserts with delivery in Huntingdon, Cambridge, Peterborough, and Cambridgeshire." />
-  <meta property="og:image" content="https://dreamycake.co.uk/assets/img/about.webp" />
-  <meta property="og:image:width" content="1200" />
-  <meta property="og:image:height" content="630" />
-  <meta property="og:url" content="https://dreamycake.co.uk/About" />
-  <meta property="og:type" content="website" />
-
-  <!-- Twitter Card Meta Tags -->
-  <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="About Margo | Dreamy Cake - Cakes & Cupcakes in Cambridgeshire" />
-  <meta name="twitter:description" content="Meet Margo, the passionate baker behind Dreamy Cake. Discover her story and bespoke cakes, cupcakes, and desserts with delivery in Huntingdon, Cambridge, Peterborough, and Cambridgeshire." />
-  <meta name="twitter:image" content="https://dreamycake.co.uk/assets/img/about.webp" />
-  <meta name="twitter:url" content="https://dreamycake.co.uk/About" />
-  <meta name="twitter:site" content="@dreamy_cakess" />
-
-  <link rel="canonical" href="https://dreamycake.co.uk/About" />
-
-  <!-- Favicons -->
-  <link rel="icon" type="image/png" href="../assets/img/favicon-96x96.png" sizes="96x96" />
-  <link rel="icon" type="image/svg+xml" href="../assets/img/favicon.svg" />
-  <link rel="shortcut icon" href="../assets/img/favicon.ico" />
-  <link rel="apple-touch-icon" sizes="180x180" href="../assets/img/apple-touch-icon.png" />
-  <meta name="apple-mobile-web-app-title" content="DreamyCake" />
-  <link rel="manifest" href="../assets/img/site.webmanifest" />
-
-  <script type="application/ld+json">
+<!-- Favicons -->
+<meta content="DreamyCake" name="apple-mobile-web-app-title"/>
+<script type="application/ld+json">
     {
       "@context": "https://schema.org",
       "@type": "Person",
@@ -83,155 +110,224 @@
       "description": "Margo is a passionate baker at Dreamy Cake, specializing in bespoke cakes, cupcakes, and desserts for weddings, birthdays, and special events in Cambridgeshire."
     }
   </script>
-
-  <!-- Fonts -->
-  <link href="https://fonts.googleapis.com" rel="preconnect" />
-  <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Open+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,300;1,400;1,500;1,600;1,700;1,800&family=Raleway:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet" />
-
-  <!-- Vendor CSS Files -->
-  <link href="../assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
-  <link href="../assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet" />
-  <link href="../assets/vendor/aos/aos.css" rel="stylesheet" />
-  <link href="../assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet" />
-  <link href="../assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet" />
-
-  <!-- Main CSS File -->
-  <link href="../assets/css/main.css" rel="stylesheet" />
-</head>
-
-  <body class="index-page">
-    <header id="header" class="header d-flex align-items-center fixed-top">
-      <div
-        class="container-fluid container-xl position-relative d-flex align-items-center justify-content-between"
-      >
-        <a href="/" class="logo d-flex align-items-center">
-          <!-- Uncomment the line below if you also wish to use an image logo -->
-          <!-- <img src="assets/img/logo-2.png" alt=""> -->
-          <h1 class="sitename">Dreamy Cake</h1>
-        </a>
-
-        <nav id="navmenu" class="navmenu">
-          <ul>
-            <li><a href="/">Home</a></li>
-            <li><a href="/#portfolio">Portfolio</a></li>
-            <li><a href="/#contact">Contact</a></li>
-            <li><a href="/QA">Q&A</a></li>
-            <li><a href="/About" class="active">About</a></li>
-            <li><a href="/Order">Order</a></li>
-            <li><a href="https://shop.dreamycake.co.uk">MyShop</a></li>
-            <!-- <li><a href="#services">Services</a></li> -->
-          </ul>
-          <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
-        </nav>
-      </div>
-    </header>
-
-    <main class="main">
-      <!-- Page Title -->
-      <div class="page-title dark-background">
-        <div class="container position-relative">
-          <h1>About</h1>
-          <!-- <p>
-        text
-          </p> -->
-          <nav class="breadcrumbs">
-            <ol>
-              <li><a href="/">Home</a></li>
-              <li class="current">About</li>
-            </ol>
-          </nav>
-        </div>
-      </div>
-      <!-- End Page Title -->
-      <!-- About Section -->
-      <section id="about" class="about section">
-        <!-- Section Title -->
-        <div class="container section-title" data-aos="fade-up">
-          <h2>About</h2>
-          <!-- <p>text</p> -->
-        </div>
-        <!-- End Section Title -->
-
-        <div class="container">
-          <div class="row gy-4 d-flex align-items-center" style="display: flex">
-            <!-- Text Section -->
-            <div
-              class="col-lg-6 order-1 order-lg-1 content"
-              data-aos="fade-up"
-              data-aos-delay="200"
-              style="flex: 1"
-            >
-              <h5 class="fst-italic">
-                Hello! My name is Margo, and I’m a baker with a deep passion for
-                creating custom cakes that not only look stylish but taste
-                incredible too. Baking has always been a true love of mine, and
-                over the years, it has become much more than just a hobby — it’s
-                my way of bringing joy to people through beautifully crafted,
-                delicious cakes.
-              </h5>
-              <br />
-              <h5 class="fst-italic">
-                While I have a solid foundation in classic desserts, my
-                experience extends to a wide range of international cuisines.
-                Whether it’s the intricate flavours of French patisserie, the
-                delicate textures of Italian pastries, I’ve developed a diverse
-                skill set that allows me to create something truly special for
-                every occasion.
-              </h5>
-              <br />
-              <h5 class="fst-italic">
-                I believe that every cake should tell a story, and I work
-                closely with my clients to design bespoke cakes that reflect
-                their personal style and vision. From weddings and birthdays to
-                corporate events, I take pride in delivering cakes that are as
-                unique as the people who order them.
-              </h5>
-              <br />
-              <h5 class="fst-italic">
-                Thank you for stopping by — I can’t wait to work with you to
-                create a cake that’s not only visually stunning but also
-                unforgettable in taste.
-              </h5>
-              <!-- <p class="fst-italic">
-                text
-              </p> -->
-            </div>
-
-            <!-- Image Section -->
-            <div
-              class="col-lg-6 order-2 order-lg-2"
-              data-aos="fade-up"
-              data-aos-delay="100"
-              style="flex: 1"
-            >
-              <div class="about-image">
-                <img
-                  src="../assets/img/about.webp"
-                  class="img-fluid"
-                  alt="About Image"
-                  style="width: 75%"
-                />
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <!-- /About Section -->
-
-      <!-- Testimonials Section -->
-      <section id="testimonials" class="testimonials section">
-        <!-- Section Title -->
-        <div class="container section-title" data-aos="fade-up">
-          <h2>Reviews</h2>
-          <!-- <p>text</p> -->
-        </div>
-        <!-- End Section Title -->
-
-        <div class="container" data-aos="fade-up" data-aos-delay="100">
-          <div class="swiper init-swiper">
-            <script type="application/json" class="swiper-config">
+<!-- Fonts -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect">
+<link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&amp;family=Open+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,300;1,400;1,500;1,600;1,700;1,800&amp;family=Raleway:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&amp;display=swap" rel="stylesheet"><link href="/assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet"/><link href="/assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet"/><link href="/assets/vendor/aos/aos.css" rel="stylesheet"/><link href="/assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet"/><link href="/assets/css/main.css" rel="stylesheet"/><link href="/assets/css/pages/about.css" rel="stylesheet"/>
+<!-- Vendor CSS Files -->
+<!-- Main CSS File -->
+</link></link><meta content="Margo — baker at Dreamy Cake in Cambridgeshire" property="og:image:alt"/>
+<meta content="About Dreamy Cake — small artisan bakery in Huntingdonshire. Modern designs, fresh bakes, Level 2 hygiene, allergen‑aware handling and personal service." name="description"/>
+<link href="/assets/img/favicon.svg" rel="icon" type="image/svg+xml"/>
+<link href="/assets/img/favicon.ico" rel="icon" sizes="any"/>
+<link href="/apple-touch-icon.png" rel="apple-touch-icon"/>
+<link color="#F9F6EC" href="/safari-pinned-tab.svg" rel="mask-icon"/>
+<meta content="#F9F6EC" name="theme-color"/>
+<style>
+/* dc-consent mobile refined */
+@media (max-width: 576px){
+  .dc-consent-banner{
+    position: fixed !important;
+    top: auto !important;
+    left: 10px !important;
+    right: 10px !important;
+    bottom: 10px !important;
+    width: auto !important;
+    max-width: none !important;
+    max-height: 44vh !important;
+    overflow: auto !important;
+    padding: 12px 12px 14px !important;
+    border-radius: 16px !important;
+    box-shadow: 0 8px 24px rgba(0,0,0,.18) !important;
+    background: #fff !important;
+    display: block !important;
+  }
+  .dc-consent-banner__text{
+    width: 100% !important;
+    font-size: 12.5px !important;
+    line-height: 1.5 !important;
+    margin: 0 0 12px 0 !important;
+  }
+  .dc-consent-banner__btns{
+    display: flex !important;
+    width: 100% !important;
+    gap: 8px !important;
+    justify-content: space-between !important;
+  }
+  /* Make reject smaller than accept */
+  .dc-consent-banner__btns .dc-btn[data-choice="reject"]{
+    flex: 0 0 46% !important;
+    font-size: 12px !important;
+    padding: 9px 10px !important;
+  }
+  .dc-consent-banner__btns .dc-btn[data-choice="accept"],
+  .dc-consent-banner__btns .dc-btn.dc-btn--primary{
+    flex: 1 1 auto !important;
+    font-size: 13.5px !important;
+    padding: 11px 12px !important;
+  }
+}
+</style>
+<link href="https://dreamycake.co.uk/About/" rel="canonical"/></head>
+<body class="index-page about-page">
+<header class="header d-flex align-items-center fixed-top" id="header">
+<div class="container-fluid container-xl position-relative d-flex align-items-center justify-content-between">
+<a class="logo d-flex align-items-center" href="/">
+<!-- Uncomment the line below if you also wish to use an image logo -->
+<!-- <img src="/assets/img/logo.png" alt="Dreamy Cake Bakery" width="32" height="32" decoding="async" fetchpriority="high"> -->
+<p class="sitename">Dreamy Cake</p>
+</a>
+<nav class="navmenu" id="navmenu">
+<ul>
+<li><a href="/">Home</a></li>
+<li><a href="/#pricing">Pricing</a></li>
+<li><a href="/#portfolio">Portfolio</a></li>
+<li><a href="/#contact">Contact</a></li><li><a class="active" href="/About">About</a></li>
+<li class="dropdown">
+<button "="" aria-controls="order-submenu" aria-expanded="false" aria-label="Toggle order submenu" class="nav-toggle" type="button"><span>Order</span> <i aria-hidden="true" class="bi bi-chevron-down chev"></i></button>
+<ul id="order-submenu"><li><a href="/Products/celebration-cake/#order">Order Celebration Cake</a></li><li><a href="/Products/themed-cake/#order">Order Themed Cake</a></li><li><a href="/Products/mini-bento-cake/#order">Order Mini / Bento Cake</a></li><li><a href="/Products/cupcakes/#order">Order Cupcakes</a></li><li><a href="/Products/postage-cookie/#order">Order Postage Cookie</a></li><li><a href="/#contact">Bespoke Request</a></li></ul>
+</li>
+<!-- <li><a href="/#how-it-works">Services</a></li> -->
+<li class="dropdown">
+<button "="" aria-controls="info-submenu" aria-expanded="false" aria-label="Toggle info submenu" class="nav-toggle" type="button"><span>Info</span> <i aria-hidden="true" class="bi bi-chevron-down chev"></i></button>
+<ul id="info-submenu">
+<li><a href="/Delivery">Delivery</a></li>
+<li><a href="/Allergens">Allergens</a></li>
+<li><a href="/How-it-works">How it works</a></li>
+<li><a href="/QA">Q&amp;A</a></li>
+</ul>
+</li>
+<li><a href="https://shop.dreamycake.co.uk">Shop</a></li></ul>
+<i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
+</nav>
+</div>
+</header>
+<main class="main">
+<!-- Page Title / Hero -->
+<div class="page-title about-hero dark-background">
+<div class="container position-relative">
+<h1>About Dreamy Cake</h1>
+<p class="subtitle">Handcrafted cakes &amp; cupcakes across Cambridgeshire</p>
+</div>
+</div>
+<section class="about section" id="about">
+<div class="container section-title" data-aos="fade-up">
+<h2>Meet Margo</h2>
+<p class="muted">Founder &amp; baker at Dreamy Cake</p>
+</div>
+<div class="container">
+<div class="row gy-4 align-items-center">
+<div class="col-12 col-lg-5" data-aos="fade-up" data-aos-delay="100">
+<div class="portrait-wrap">
+<img alt="Margo, baker at Dreamy Cake in Cambridgeshire" class="img-fluid rounded-4 shadow-sm" decoding="async" height="1280" loading="lazy" src="../assets/img/about.webp" width="960"/>
+</div>
+</div>
+<div class="col-12 col-lg-7 content" data-aos="fade-up" data-aos-delay="150">
+<h3 class="h5">Stylish designs. Memory‑worthy taste.</h3>
+<p>
+          Hello! I’m Margo — a self‑taught baker who turned a lifelong hobby into Dreamy Cake.
+          I design and bake bespoke cakes and cupcakes that feel personal and look clean and modern.
+          Every order is made to measure: from flavour to finish, you get a cake that truly fits the moment.
+        </p>
+<ul class="checklist">
+<li><i aria-hidden="true" class="bi bi-check2-circle"></i> Made to order — no stock cakes</li>
+<li><i aria-hidden="true" class="bi bi-check2-circle"></i> Level 2 Food Hygiene certified</li>
+<li><i aria-hidden="true" class="bi bi-check2-circle"></i> Allergen‑aware handling</li>
+<li><i aria-hidden="true" class="bi bi-check2-circle"></i> Serving Huntingdon, Cambridge, Peterborough</li>
+</ul>
+<div class="btn-row">
+<a class="btn btn-primary btn-cta" href="/#contact">Start an Order</a>
+<a class="btn btn-outline" href="/QA">Read Q&amp;A</a>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section class="section about-facts">
+<div class="container">
+<div class="row g-3 g-md-4">
+<div class="col-6 col-md-3">
+<div class="fact-card">
+<i class="bi bi-heart"></i>
+<h3>Custom</h3>
+<p>Every cake is designed for <br/>your occasion.</p>
+</div>
+</div>
+<div class="col-6 col-md-3">
+<div class="fact-card">
+<i class="bi bi-shield-check"></i>
+<h3>Certified</h3>
+<p>Food Hygiene Level 2 <br/>&amp; allergen training.</p>
+</div>
+</div>
+<div class="col-6 col-md-3">
+<div class="fact-card">
+<i class="bi bi-truck"></i>
+<h3>Delivery</h3>
+<p>Local delivery &amp;<br/> pickup available.</p>
+</div>
+</div>
+<div class="col-6 col-md-3">
+<div class="fact-card">
+<i class="bi bi-geo-alt"></i>
+<h3>Area</h3>
+<p>Huntingdon, Cambridge,<br/> Peterborough.</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section class="section" id="how-i-work">
+<div class="container section-title" data-aos="fade-up">
+<h2>How I Work</h2>
+<p class="muted">A simple, friendly process from idea to cake</p>
+</div>
+<div class="container">
+<div class="steps">
+<div class="step">
+<span class="step-num">1</span>
+<h3>Tell me about the occasion</h3>
+<p>Share date, servings, style and flavours. Photos or Pinterest boards are welcome.</p>
+</div>
+<div class="step">
+<span class="step-num">2</span>
+<h3>I design &amp; confirm</h3>
+<p>You’ll get a quick plan and a quote. I book your date when you’re happy.</p>
+</div>
+<div class="step">
+<span class="step-num">3</span>
+<h3>Bake &amp; deliver</h3>
+<p>Your cake is baked fresh for the day and delivered or ready for pickup.</p>
+</div>
+</div>
+<div class="btn-row center">
+<a class="btn btn-outline" href="/How-it-works/">See full guide</a>
+</div>
+</div>
+</section>
+<section class="section about-quickfaq" id="quick-answers">
+<div class="container section-title" data-aos="fade-up">
+<h2>Quick answers</h2>
+<p class="muted">Most asked before ordering</p>
+</div>
+<div class="container">
+<div class="qa-grid">
+<a class="qa-chip" href="/QA"><i class="bi bi-truck"></i> Do you deliver?</a>
+<a class="qa-chip" href="/QA"><i class="bi bi-exclamation-triangle"></i> Allergens &amp; handling</a>
+<a class="qa-chip" href="/QA"><i class="bi bi-calendar-event"></i> How far in advance?</a>
+</div>
+</div>
+</section>
+<section class="testimonials section" id="testimonials">
+<!-- Section Title -->
+<div class="container section-title" data-aos="fade-up">
+<h2>Reviews</h2>
+<!-- <p>text</p> -->
+</div>
+<!-- End Section Title -->
+<div class="container" data-aos="fade-up" data-aos-delay="100">
+<div class="swiper init-swiper">
+<script class="swiper-config" type="application/json">
               {
                 "loop": true,
                 "speed": 600,
@@ -246,193 +342,317 @@
                 }
               }
             </script>
-            <div class="swiper-wrapper">
-              <div class="swiper-slide">
-                <div class="testimonial-item">
-                  <div class="row gy-4 justify-content-center">
-                    <div class="col-lg-6">
-                      <div class="testimonial-content">
-                        <p>
-                          <i class="bi bi-quote quote-icon-left"></i>
-                          <span
-                            >Hi, I just wanted to say a massive thank you for
+<div class="swiper-wrapper">
+<div class="swiper-slide">
+<div class="testimonial-item">
+<div class="row gy-4 justify-content-center">
+<div class="col-lg-6">
+<div class="testimonial-content">
+<p>
+<i class="bi bi-quote quote-icon-left"></i>
+<span>Hi, I just wanted to say a massive thank you for
                             the cake you made for my daughter's birthday! It was
                             absolutely stunning, and the flavour was spot
-                            on..</span
-                          >
-                          <i class="bi bi-quote quote-icon-right"></i>
-                        </p>
-                        <h3>Sarah</h3>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <!-- End testimonial item -->
-
-              <div class="swiper-slide">
-                <div class="testimonial-item">
-                  <div class="row gy-4 justify-content-center">
-                    <div class="col-lg-6">
-                      <div class="testimonial-content">
-                        <p>
-                          <i class="bi bi-quote quote-icon-left"></i>
-                          <span
-                            >The cake you made for our anniversary was
+                            on..</span>
+<i class="bi bi-quote quote-icon-right"></i>
+</p>
+<h3>Sarah</h3>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- End testimonial item -->
+<div class="swiper-slide">
+<div class="testimonial-item">
+<div class="row gy-4 justify-content-center">
+<div class="col-lg-6">
+<div class="testimonial-content">
+<p>
+<i class="bi bi-quote quote-icon-left"></i>
+<span>The cake you made for our anniversary was
                             incredible! Not only did it look fantastic, but the
                             taste was out of this world. I’m not much of a cake
                             person myself, but even I couldn’t resist having a
-                            second slice.</span
-                          >
-                          <i class="bi bi-quote quote-icon-right"></i>
-                        </p>
-                        <h3>Anthony</h3>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <!-- End testimonial item -->
-
-              <div class="swiper-slide">
-                <div class="testimonial-item">
-                  <div class="row gy-4 justify-content-center">
-                    <div class="col-lg-6">
-                      <div class="testimonial-content">
-                        <p>
-                          <i class="bi bi-quote quote-icon-left"></i>
-                          <span
-                            >I just wanted to say a huge thank you for the
+                            second slice.</span>
+<i class="bi bi-quote quote-icon-right"></i>
+</p>
+<h3>Anthony</h3>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- End testimonial item -->
+<div class="swiper-slide">
+<div class="testimonial-item">
+<div class="row gy-4 justify-content-center">
+<div class="col-lg-6">
+<div class="testimonial-content">
+<p>
+<i class="bi bi-quote quote-icon-left"></i>
+<span>I just wanted to say a huge thank you for the
                             birthday cake you made for my son’s 5th birthday. It
                             was everything I hoped for and more!
                           </span>
-                          <i class="bi bi-quote quote-icon-right"></i>
-                        </p>
-                        <h3>Laura</h3>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <!-- End testimonial item -->
-
-              <div class="swiper-slide">
-                <div class="testimonial-item">
-                  <div class="row gy-4 justify-content-center">
-                    <div class="col-lg-6">
-                      <div class="testimonial-content">
-                        <p>
-                          <i class="bi bi-quote quote-icon-left"></i>
-                          <span
-                            >Hey, I just wanted to drop you a quick note to say
+<i class="bi bi-quote quote-icon-right"></i>
+</p>
+<h3>Laura</h3>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- End testimonial item -->
+<div class="swiper-slide">
+<div class="testimonial-item">
+<div class="row gy-4 justify-content-center">
+<div class="col-lg-6">
+<div class="testimonial-content">
+<p>
+<i class="bi bi-quote quote-icon-left"></i>
+<span>Hey, I just wanted to drop you a quick note to say
                             how much we appreciated the cake you made for our
                             anniversary. The attention to detail was amazing,
                             and it tasted even better than it looked (which says
-                            a lot, considering how stunning it was!).</span
-                          >
-                          <i class="bi bi-quote quote-icon-right"></i>
-                        </p>
-                        <h3>James</h3>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <!-- End testimonial item -->
-            </div>
-            <div class="swiper-pagination"></div>
-          </div>
-        </div>
-      </section>
-      <!-- /Testimonials Section -->
-    </main>
-
-    <footer id="footer" class="footer dark-background">
-      <div class="container">
-        <div class="row gy-3">
-          <div class="col-lg-3 col-md-6 d-flex">
-            <i class="bi bi-geo-alt icon"></i>
-            <div class="address">
-              <h4>Address</h4>
-              <p>Brampton</p>
-              <p>Huntingdon, PE28</p>
-              <p></p>
-            </div>
-          </div>
-
-          <div class="col-lg-3 col-md-6 d-flex">
-            <i class="bi bi-telephone icon"></i>
-            <div>
-              <h4>Contact</h4>
-              <p>
-                <strong>Phone:</strong> <span>+44 7510 837225</span><br />
-                <strong>Email:</strong> <span>dreamycake.info@gmail.com</span
-                ><br />
-              </p>
-            </div>
-          </div>
-
-          <div class="col-lg-3 col-md-6 d-flex">
-            <i class="bi bi-clock icon"></i>
-            <div>
-              <h4>Opening Hours</h4>
-              <p>
-                <strong>Mon-Sat:</strong> <span>9AM - 8PM</span><br />
-                <strong>Sunday</strong>: <span>10AM - 5PM</span>
-              </p>
-            </div>
-          </div>
-
-          <div class="col-lg-3 col-md-6">
-            <h4>Follow Us</h4>
-            <div class="social-links d-flex">
-              <!-- <a href="#" class="twitter"><i class="bi bi-twitter-x"></i></a> -->
-              <!-- <a href="#" class="facebook"><i class="bi bi-facebook"></i></a> -->
-              <a href="https://www.facebook.com/DreamyCakeStudioLTD/" class="facebook" aria-label="Follow Dreamy Cake on Facebook"><i class="bi bi-facebook"></i></a>
-                <a
-                  href="https://www.instagram.com/dreamycake.bakery/"
-                  class="instagram"
-                  aria-label="Follow Dreamy Cake on Instagram"
-                  ><i class="bi bi-instagram"></i
-                ></a>
-              <!-- <a href="#" class="linkedin"><i class="bi bi-linkedin"></i></a> -->
-            </div>
-          </div>
-        </div>
+                            a lot, considering how stunning it was!).</span>
+<i class="bi bi-quote quote-icon-right"></i>
+</p>
+<h3>James</h3>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- End testimonial item -->
+</div>
+<div class="swiper-pagination"></div>
+</div>
+</div>
+</section>
+<section class="section about-contactband">
+<div class="container">
+<div class="contact-band">
+<div class="left">
+<strong>Prefer messaging?</strong> I’m quick on WhatsApp and email.
       </div>
-
-      <div class="container copyright text-center mt-4">
-        <p>
+<div class="right">
+<a class="btn btn-outline" href="https://wa.me/447510837225"><i class="bi bi-whatsapp"></i> WhatsApp</a>
+<a class="btn btn-outline" href="mailto:dreamycake.info@gmail.com"><i class="bi bi-envelope"></i> Email</a>
+</div>
+</div>
+</div>
+</section>
+<section class="section cta-final">
+<div class="container text-center">
+<h2>Ready to plan your cake?</h2>
+<p class="muted">I reply quickly and help with sizing, flavours and design.</p>
+<div class="btn-row center">
+<a class="btn btn-primary btn-cta" href="/#contact">Start an Order</a>
+<a class="btn btn-outline" href="/#contact">Contact Me</a>
+</div>
+</div>
+</section>
+</main>
+<footer class="footer dark-background" id="footer">
+<div class="container">
+<div class="row gy-3">
+<div class="col-lg-3 col-md-6 d-flex">
+<i class="bi bi-geo-alt icon"></i>
+<div class="address">
+<h4>Address</h4>
+<p>Brampton</p>
+<p>Huntingdon, PE28</p>
+<p></p>
+</div>
+</div>
+<div class="col-lg-3 col-md-6 d-flex">
+<i class="bi bi-telephone icon"></i>
+<div>
+<h4>Contact</h4>
+<p>
+<strong>Phone:</strong> <span><a class="link" href="tel:+447510837225">+44 7510 837225</a></span><br/>
+<strong>Email:</strong> <span><a class="link" href="mailto:dreamycake.info@gmail.com"><a href="mailto:dreamycake.info@gmail.com">dreamycake.info@gmail.com</a></a></span><br/>
+</p>
+</div>
+</div>
+<div class="col-lg-3 col-md-6 d-flex">
+<i class="bi bi-clock icon"></i>
+<div>
+<h4>Opening Hours</h4>
+<p>
+<strong>Mon-Sat:</strong> <span>9AM - 8PM</span><br/>
+<strong>Sunday</strong>: <span>10AM - 5PM</span>
+</p>
+</div>
+</div>
+<div class="col-lg-3 col-md-6">
+<h4>Follow Us</h4>
+<div class="social-links d-flex">
+<!-- <a href="#" class="twitter"><i class="bi bi-twitter-x"></i></a> -->
+<!-- <a href="#" class="facebook"><i class="bi bi-facebook"></i></a> -->
+<a aria-label="Follow Dreamy Cake on Facebook" class="facebook" href="https://www.facebook.com/DreamyCakeStudioLTD/"><i class="bi bi-facebook"></i></a>
+<a aria-label="Follow Dreamy Cake on Instagram" class="instagram" href="https://www.instagram.com/dreamycake.bakery/"><i class="bi bi-instagram"></i></a>
+<!-- <a href="#" class="linkedin"><i class="bi bi-linkedin"></i></a> -->
+</div>
+</div>
+</div>
+</div>
+<div class="container copyright text-center mt-4">
+<p>
           © <span>Copyright</span>
-          <strong class="px-1 sitename">Dreamy Cake Studio LTD</strong>
-          <span>All Rights Reserved</span>
-        </p>
-        <div class="credits">
+<strong class="px-1 sitename">Dreamy Cake Studio LTD</strong>
+<span>All Rights Reserved</span>
+</p>
+<div class="credits">
           Designed by <a href="mailto:bogbond@gmail.com">Bond</a>
-        </div>
-      </div>
-    </footer>
-    <!-- Scroll Top -->
-    <a
-      href="#"
-      id="scroll-top"
-      class="scroll-top d-flex align-items-center justify-content-center"
-      ><i class="bi bi-arrow-up-short"></i
-    ></a>
-
-    <!-- Preloader -->
-    <div id="preloader"></div>
-
-    <!-- Vendor JS Files -->
-    <script src="../assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-    <script src="../assets/vendor/aos/aos.js"></script>
-    <script src="../assets/vendor/typed.js/typed.umd.js"></script>
-    <script src="../assets/vendor/glightbox/js/glightbox.min.js"></script>
-    <script src="../assets/vendor/imagesloaded/imagesloaded.pkgd.min.js"></script>
-    <script src="../assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
-    <script src="../assets/vendor/swiper/swiper-bundle.min.js"></script>
-
-    <!-- Main JS File -->
-    <script src="../assets/js/main.js"></script>
-  </body>
+</div>
+</div>
+</footer>
+<!-- Scroll Top -->
+<a class="scroll-top d-flex align-items-center justify-content-center" href="#" id="scroll-top"><i class="bi bi-arrow-up-short"></i></a>
+<!-- Preloader -->
+<div id="preloader"></div>
+<!-- Vendor JS Files -->
+<!-- Main JS File -->
+<script src="/assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script><script src="/assets/vendor/aos/aos.js"></script><script src="/assets/vendor/typed.js/typed.umd.js"></script><script src="/assets/vendor/imagesloaded/imagesloaded.pkgd.min.js"></script><script src="/assets/vendor/isotope-layout/isotope.pkgd.min.js"></script><script src="/assets/vendor/swiper/swiper-bundle.min.js"></script><script src="/assets/js/main.js"></script><script src="/assets/js/contact-enhanced.js"></script> <script src="/assets/js/navfix.js"></script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"LocalBusiness","name":"Dreamy Cake","image":"https://dreamycake.co.uk/assets/img/about.webp","url":"https://dreamycake.co.uk/","telephone":"+447510837225","priceRange":"££","address":{"@type":"PostalAddress","addressLocality":"Brampton","addressRegion":"Cambridgeshire","postalCode":"PE28","addressCountry":"GB"},"areaServed":["Huntingdon","Cambridge","Peterborough","Cambridgeshire"],"openingHoursSpecification":[{"@type":"OpeningHoursSpecification","dayOfWeek":["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"],"opens":"09:00","closes":"20:00"},{"@type":"OpeningHoursSpecification","dayOfWeek":["Sunday"],"opens":"10:00","closes":"17:00"}],"sameAs":["https://www.instagram.com/dreamycake.bakery/","https://shop.dreamycake.co.uk/"],"founder":{"@type":"Person","name":"Margo"}}</script><script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://dreamycake.co.uk/"},{"@type":"ListItem","position":2,"name":"About","item":"https://dreamycake.co.uk/about/"}]}</script><script type="application/ld+json">{"@context":"https://schema.org","@type":"Review","author":{"@type":"Person","name":"Sarah"},"reviewBody":"Massive thank you for my daughter's birthday cake — stunning and delicious!"}</script></body>
 </html>
+<!-- DC:CONSENT_BANNER_START -->
+<style>
+  .dc-consent-banner{
+    position:fixed; left:0; right:0; bottom:0;
+    z-index:2147483647;
+    background: rgba(255,255,255,0.98);
+    border-top: 1px solid rgba(0,0,0,.1);
+    box-shadow: 0 -8px 24px rgba(0,0,0,.08);
+    padding: 16px; display:flex; gap:16px; align-items: flex-start;
+    font-family: system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
+  }
+  .dc-consent-banner__text{ flex:1; font-size:14px; line-height:1.45; color:#222; }
+  .dc-consent-banner__btns{ display:flex; gap:8px; flex-wrap:wrap; }
+  .dc-btn{ border:1px solid #222; padding:8px 12px; border-radius:999px; background:#fff; cursor:pointer; font-size:14px; }
+  .dc-btn--primary{ background:#222; color:#fff; }
+  .dc-consent-manage{
+    left: 12px !important;
+    position:fixed;
+    right:auto !important; bottom: 6px;
+    z-index:2147483647;
+    border:1px solid #222; background:#fff; padding:6px 10px; border-radius:999px; font-size:12px; cursor:pointer; opacity:.85;
+    line-height:1; white-space:nowrap;
+    transition: bottom .2s ease, right .2s ease, left .2s ease, opacity .2s;
+  }
+  /* When we need to lift above another fixed button (e.g., back-to-top) */
+  /* Put it bottom-left on very small screens to avoid crowding */
+  @media (max-width: 480px) {
+    .dc-consent-manage{ left:16px; right:auto; }
+  }
+  .dc-consent-manage:hover{ opacity:1; }
+</style>
+<script>
+(function(){
+  try {
+    // Create "Manage cookies" floating button
+    var manage = document.createElement('button');
+    manage.className = 'dc-consent-manage';
+    manage.type = 'button';
+    manage.textContent = 'Cookies';
+    manage.setAttribute('aria-label','Manage cookies');
+    manage.addEventListener('click', function(){ showBanner(true); });
+
+    // Build banner
+    function showBanner(force) {
+      var saved = null;
+      try { saved = JSON.parse(localStorage.getItem('dc_consent') || '{}'); } catch(e){}
+      if(!force && saved && (saved.choice === 'accept' || saved.choice === 'reject')) return;
+      var wrap = document.createElement('div');
+      wrap.className = 'dc-consent-banner';
+      wrap.setAttribute('role','dialog');
+      wrap.setAttribute('aria-live','polite');
+      wrap.innerHTML = ''
+        + '<div class="dc-consent-banner__text">To keep things simple, we use essential cookies. If you’re happy, we’ll also use analytics to learn what’s working. You can update your choice anytime in “Cookies”.</div>'
+        + '<div class="dc-consent-banner__btns">'
+        +   '<button type="button" class="dc-btn" data-choice="reject">Reject non-essential</button>'
+        +   '<button type="button" class="dc-btn dc-btn--primary" data-choice="accept">Accept all</button>'
+        + '</div>';
+      document.body.appendChild(wrap);
+      wrap.querySelectorAll('button[data-choice]').forEach(function(btn){
+        btn.addEventListener('click', function(){ setChoice(this.getAttribute('data-choice')); });
+      });
+    }
+
+    function setChoice(choice) {
+      try { localStorage.setItem('dc_consent', JSON.stringify({choice})); } catch(e){}
+      // Update Consent Mode in real-time
+      if (typeof gtag === 'function') {
+        if(choice === 'accept') {
+          gtag('consent', 'update', {
+            analytics_storage: 'granted',
+            ad_storage: 'granted',
+            ad_user_data: 'granted',
+            ad_personalization: 'granted'
+          });
+          // Attempt GA load if ID present
+          if (window.GA_MEASUREMENT_ID && window.GA_MEASUREMENT_ID !== 'G-XXXXXXXXXX' && !window.__ga_loaded) {
+            var s=document.createElement('script'); s.async=1; s.src='https://www.googletagmanager.com/gtag/js?id='+window.GA_MEASUREMENT_ID;
+            document.head.appendChild(s);
+            gtag('js', new Date());
+            gtag('config', window.GA_MEASUREMENT_ID, { 'anonymize_ip': true });
+            window.__ga_loaded = true;
+          }
+        } else {
+          gtag('consent', 'update', {
+            analytics_storage: 'denied',
+            ad_storage: 'denied',
+            ad_user_data: 'denied',
+            ad_personalization: 'denied'
+          });
+        }
+      }
+      var b = document.querySelector('.dc-consent-banner'); if(b) b.remove();
+    }
+
+    // Try to avoid overlap with existing fixed "back to top" buttons
+    function avoidOverlap() {
+      try {
+        var candidates = [
+          '.back-to-top', '.scroll-to-top', '.scroll-top', '.to-top', '.btn-to-top',
+          '#backToTop', '#toTop', '#totop', '[data-backtotop]', '[data-scroll-top]'
+        ];
+        var el = null;
+        for (var i=0; i<candidates.length; i++) {
+          var found = document.querySelector(candidates[i]);
+          if(found) { el = found; break; }
+        }
+        // Reset
+        manage.classList.remove('dc-lift');
+        manage.style.right = ''; manage.style.left = ''; manage.style.bottom = '';
+        // On small screens we already push left via CSS, skip overlap logic
+        if (window.matchMedia('(max-width: 480px)').matches) return;
+        if (!el) return;
+        var r = el.getBoundingClientRect();
+        // Heuristic: if the element sits bottom-right within 120px from the viewport edge, lift our button
+        var nearBottom = (window.innerHeight - r.bottom) <= 120;
+        var nearRight  = (window.innerWidth  - r.right)  <= 120;
+        var visible = r.width>0 && r.height>0;
+        if (visible && nearBottom && nearRight) {
+          // // manage.classList.add('dc-lift'); // disabled // disabled
+        }
+      } catch(e){}
+    }
+
+    document.addEventListener('DOMContentLoaded', function(){
+      document.body.appendChild(manage);
+      showBanner(false);
+      avoidOverlap();
+    });
+    window.addEventListener('scroll', avoidOverlap, {passive:true});
+    window.addEventListener('resize', avoidOverlap);
+
+    // Run a few times shortly after load to catch late-mounted widgets
+    setTimeout(avoidOverlap, 300);
+    setTimeout(avoidOverlap, 1000);
+  } catch(e){ console.error('Consent banner error', e); }
+})();
+</script>
+<!-- DC:CONSENT_BANNER_END -->

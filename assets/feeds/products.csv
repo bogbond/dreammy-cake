@@ -1,0 +1,6 @@
+id,title,link,price,availability,condition,image_link,brand,identifier_exists
+DC-001,Celebration Cake,https://dreamycake.co.uk/Products/celebration-cake/,£65 GBP,in_stock,new,https://dreamycake.co.uk/assets/img/cakes/19-celebration-black-cake-peterborough.webp,Dreamy Cake,no
+DC-002,Themed Cake,https://dreamycake.co.uk/Products/themed-cake/,£75 GBP,in_stock,new,https://dreamycake.co.uk/assets/img/cakes/21-festive-cake-huntingdon.webp,Dreamy Cake,no
+DC-003,Mini / Bento Cake,https://dreamycake.co.uk/Products/mini-bento-cake/,£24 GBP,in_stock,new,https://dreamycake.co.uk/assets/img/cakes/24-mini-bento-cake-brampton.webp,Dreamy Cake,no
+DC-004,Cupcakes,https://dreamycake.co.uk/Products/cupcakes/,£24 GBP,in_stock,new,https://dreamycake.co.uk/assets/img/cakes/10-cupcake-cambridgeshire.webp,Dreamy Cake,no
+DC-005,Postage Cookies (4-pack),https://dreamycake.co.uk/Products/postage-cookie/,£12 GBP,in_stock,new,https://dreamycake.co.uk/assets/img/cakes/22-cookie-cambridgeshire.webp,Dreamy Cake,no

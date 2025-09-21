@@ -1,824 +1,1726 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <!-- Google tag (gtag.js) -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-CC2NRDSRQ9"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
+<!-- DC:GA4_CONSENT_HEAD_START -->
+<!-- Google Analytics 4 + Consent Mode v2 (UK/EU) -->
+<!-- TODO: Replace GA4 ID once you have it by setting window.GA_MEASUREMENT_ID below -->
+<script>
+  // Set your GA4 Measurement ID here once ready, e.g. 'G-ABCD123456'
+  window.GA_MEASUREMENT_ID = window.GA_MEASUREMENT_ID || 'G-CC2NRDSRQ9';
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  // Load saved consent (default: only essential storage granted)
+  (function() {
+    try {
+      const saved = JSON.parse(localStorage.getItem('dc_consent') || '{}');
+      const base = {
+        ad_user_data: 'denied',
+        ad_personalization: 'denied',
+        ad_storage: 'denied',
+        analytics_storage: 'denied',
+        functionality_storage: 'granted',
+        security_storage: 'granted'
+      };
+      const consent = Object.assign({}, base, (saved && saved.choice === 'accept') ? {
+        analytics_storage: 'granted',
+        ad_storage: 'granted',
+        ad_user_data: 'granted',
+        ad_personalization: 'granted'
+      } : {});
+      gtag('consent', 'default', consent);
+    } catch(e) { console.warn('Consent read failed', e); }
+  })();
+  // Load GA only when an ID is provided
+  (function(id) {
+    if(!id || id === 'G-XXXXXXXXXX') {
+      console.warn('GA4 ID is placeholder. Set window.GA_MEASUREMENT_ID to your real GA4 ID.');
+      return;
+    }
+    var s=document.createElement('script'); s.async=1; s.src='https://www.googletagmanager.com/gtag/js?id='+id;
+    document.head.appendChild(s);
     gtag('js', new Date());
+    gtag('config', id, { 'anonymize_ip': true });
+  })(window.GA_MEASUREMENT_ID);
+</script>
+<!-- DC:GA4_CONSENT_HEAD_END -->
+<!DOCTYPE html>
 
-    gtag('config', 'G-CC2NRDSRQ9');
-  </script>
-    <meta charset="utf-8" />
-    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
-    <title>Dreamy Cake | Custom Cakes & Cupcakes in Cambridgeshire</title>
+<html lang="en-GB">
+<head>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<!-- Google tag (gtag.js) -->
+<script async="" src="https://www.googletagmanager.com/gtag/js?id=G-CC2NRDSRQ9">
+</script>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<!-- SEO: Title (v1.0) -->
+<title>Custom Wedding &amp; Birthday Cakes in Cambridgeshire | Dreamy Cake</title>
+<!-- Meta Description -->
+<meta content="Bespoke wedding &amp; birthday cakes, cupcakes and desserts across Cambridgeshire. Handmade in Huntingdon with delivery to Cambridge &amp; Peterborough. Fast quotes." name="description"/>
 
-    <!-- Meta Description -->
-    <meta name="description" content="Dreamy Cake creates bespoke wedding cakes, birthday cakes, and cupcakes in Cambridgeshire. Order unique treats with delivery in Huntingdon, Cambridge, Peterborough, and nearby areas." />
-
-    <!-- Meta Keywords -->
-    <meta name="keywords" content="Dreamy Cake, custom cakes Cambridgeshire, wedding cakes Huntingdon, birthday cakes Cambridge, cupcakes Peterborough, bespoke desserts, artisan cupcakes, cake delivery" />
-
-    <!-- Open Graph Meta Tags for Social Media -->
-    <meta property="og:title" content="Dreamy Cake | Custom Cakes & Cupcakes in Cambridgeshire" />
-    <meta property="og:description" content="Dreamy Cake creates bespoke wedding cakes, birthday cakes, and cupcakes in Cambridgeshire. Order unique treats with delivery in Huntingdon, Cambridge, Peterborough, and nearby areas." />
-    <meta property="og:image" content="https://dreamycake.co.uk/assets/img/cake1200.png"/>
-    <meta property="og:url" content="https://dreamycake.co.uk" />
-    <meta property="og:type" content="website" />
-
-    <!-- Twitter Card Meta Tags -->
-    <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="Dreamy Cake | Custom Cakes & Cupcakes in Cambridgeshire" />
-    <meta name="twitter:description" content="Dreamy Cake creates bespoke wedding cakes, birthday cakes, and cupcakes in Cambridgeshire. Order unique treats with delivery in Huntingdon, Cambridge, Peterborough, and nearby areas." />
-    <meta name="twitter:image" content="https://dreamycake.co.uk/assets/img/cake1200.png"/>
-    <meta name="twitter:url" content="https://dreamycake.co.uk" />
-
-    <link rel="canonical" href="https://dreamycake.co.uk/" />
-
-    <!-- Favicons -->
-    <link rel="icon" type="image/png" href="/assets/img/favicon-96x96.png" sizes="96x96" />
-    <link rel="icon" type="image/svg+xml" href="/assets/img/favicon.svg" />
-    <link rel="shortcut icon" href="/assets/img/favicon.ico" />
-    <link rel="apple-touch-icon" sizes="180x180" href="/assets/img/apple-touch-icon.png" />
-    <meta name="apple-mobile-web-app-title" content="DreamyCake" />
-    <link rel="manifest" href="/assets/img/site.webmanifest" />
-
-    <script type="application/ld+json">
-      {
-        "@context": "https://schema.org",
-        "@type": "Organization",
-        "name": "DreamyCake",
-        "url": "https://dreamycake.co.uk",
-        "logo": "https://dreamycake.co.uk/assets/img/cake_icon.png",
-        "sameAs": [
-          "https://www.instagram.com/dreamy.cakess__"
-        ],
-        "address": {
-          "@type": "PostalAddress",
-          "streetAddress": "Elizabethan Way",
-          "addressLocality": "Huntingdon",
-          "addressRegion": "Cambridgeshire",
-          "postalCode": "PE284SU",
-          "addressCountry": "GB"
-        },
-        "contactPoint": {
+<meta content="website" property="og:type"/>
+<meta content="Custom Wedding &amp; Birthday Cakes in Cambridgeshire | Dreamy Cake" property="og:title"/>
+<meta content="Bespoke wedding &amp; birthday cakes, cupcakes and desserts across Cambridgeshire. Handmade in Huntingdon with delivery to Cambridge &amp; Peterborough. Fast quotes." property="og:description"/>
+<meta content="https://dreamycake.co.uk/" property="og:url"/>
+<meta content="https://dreamycake.co.uk/assets/img/og/home-hero-1200x630.jpg" property="og:image"/>
+<meta content="Dreamy Cake" property="og:site_name"/>
+<meta content="en_GB" property="og:locale"/>
+<meta content="Box of cupcakes — Dreamy Cake, Cambridgeshire" property="og:image:alt"/>
+<!-- Meta Keywords -->
+<meta content="custom cakes Cambridgeshire, wedding cakes Huntingdon, birthday cakes Cambridge, cupcakes, dessert delivery, bespoke cakes" name="keywords"/>
+<!-- Open Graph Meta Tags for Social Media -->
+<meta content="Dreamy Cake | Custom Cakes &amp; Cupcakes in Cambridgeshire" property="og:title"/>
+<meta content="Dreamy Cake bakes bespoke wedding and birthday cakes, cupcakes and desserts across Cambridgeshire — including Huntingdon, Cambridge and Peterborough — with delivery available." property="og:description"/>
+<meta content="https://dreamycake.co.uk/assets/img/cake1200.png" property="og:image"/>
+<meta content="https://dreamycake.co.uk" property="og:url"/>
+<meta content="website" property="og:type"/>
+<!-- Twitter Card Meta Tags -->
+<meta content="summary_large_image" name="twitter:card"/>
+<meta content="Dreamy Cake | Custom Cakes &amp; Cupcakes in Cambridgeshire" name="twitter:title"/>
+<meta content="Dreamy Cake creates bespoke wedding cakes, birthday cakes, and cupcakes in Cambridgeshire. Order unique treats with delivery in Huntingdon, Cambridge, Peterborough, and nearby areas." name="twitter:description"/>
+<meta content="https://dreamycake.co.uk/assets/img/cake1200.png" name="twitter:image"/>
+<meta content="https://dreamycake.co.uk" name="twitter:url"/>
+<!-- Favicons -->
+<link href="/assets/img/favicon.ico" rel="shortcut icon">
+<meta content="DreamyCake" name="apple-mobile-web-app-title"/>
+<link href="/assets/img/site.webmanifest" rel="manifest"/>
+<!-- Fonts -->
+<link href="https://fonts.googleapis.com" rel="preconnect">
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&amp;family=Open+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,300;1,400;1,500;1,600;1,700;1,800&amp;family=Raleway:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&amp;display=swap&amp;display=swap" rel="stylesheet"/>
+<!-- Vendor CSS Files -->
+<link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet"/>
+<link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet"/>
+<link href="assets/vendor/aos/aos.css" rel="stylesheet"/>
+<!-- Main CSS File -->
+<link href="assets/css/main.css" rel="stylesheet"/>
+<!-- Schema.org: WebSite (begin) -->
+<!-- Schema.org: WebSite (end) -->
+<!-- Schema.org: BreadcrumbList (begin) -->
+<!-- Schema.org: BreadcrumbList (end) -->
+<style>
+  /* WhatsApp button styles (v1.2) */
+  .contact-actions{margin-top:12px}
+  .btn-whatsapp{display:inline-flex;align-items:center;gap:.5rem;background:#25D366;color:#fff;text-decoration:none;padding:.8rem 1rem;border-radius:.6rem;font-weight:600}
+  .btn-whatsapp:hover{filter:brightness(0.95)}
+  .btn-whatsapp:focus{outline:3px solid #111;outline-offset:2px}
+  .btn-whatsapp svg{display:inline-block}
+  </style>
+<style>
+  /* Certifications row styles (v1.3) */
+  .images-row{display:flex;justify-content:center;align-items:center;gap:16px;flex-wrap:nowrap;margin-top:8px}
+  .images-row .small-image{height:56px;width:auto;max-width:100%;object-fit:contain;image-rendering:auto}
+  @media (max-width:480px){.images-row{gap:12px}.images-row .small-image{height:48px}}
+  </style>
+<style>
+  /* Contact form desktop refinements (v1.4) */
+  @media (min-width: 1024px){
+    #contact form{max-width:560px !important;margin:0 auto;padding:20px 24px;background:#fff;border:1px solid #eee;border-radius:12px;box-shadow:0 8px 24px rgba(0,0,0,.05)}
+  }
+  #contact input[type="text"],
+  #contact input[type="email"],
+  #contact input[type="tel"],
+  #contact textarea{
+    border:1px solid #ddd;border-radius:10px;padding:10px 12px;outline:none
+  }
+  #contact input[type="text"]:focus,
+  #contact input[type="email"]:focus,
+  #contact input[type="tel"]:focus,
+  #contact textarea:focus{
+    border-color:#ff66a3;box-shadow:0 0 0 3px rgba(255,102,163,.15)
+  }
+  /* Center WhatsApp action row under form */
+  .contact-actions{display:flex;justify-content:center;margin-top:12px}
+  </style>
+<style>
+  /* WhatsApp info-item styles (v1.5) */
+  .info-item.info-whatsapp{border:1px solid #e8f7ee;border-radius:12px;padding:12px 14px;background:#f6fff9}
+  .info-item.info-whatsapp i.bi{color:#25D366;font-size:24px;margin-right:12px}
+  .btn-whatsapp{display:inline-flex;align-items:center;gap:.5rem;background:#25D366;color:#fff;text-decoration:none;padding:.6rem .9rem;border-radius:.6rem;font-weight:600}
+  .btn-whatsapp:hover{filter:brightness(0.95)}
+  .btn-whatsapp:focus{outline:3px solid #111;outline-offset:2px}
+  .btn-whatsapp svg{display:inline-block}
+  </style>
+</link>
+<script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebSite",
+      "@id": "https://dreamycake.co.uk/#website",
+      "url": "https://dreamycake.co.uk/",
+      "name": "Dreamy Cake",
+      "inLanguage": "en-GB",
+      "publisher": {
+        "@id": "https://dreamycake.co.uk/#organization"
+      }
+    },
+    {
+      "@type": "Organization",
+      "@id": "https://dreamycake.co.uk/#organization",
+      "name": "Dreamy Cake",
+      "legalName": "Dreamy Cake Studio Ltd",
+      "url": "https://dreamycake.co.uk/",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://dreamycake.co.uk/assets/img/og/home-hero-1200x630.webp"
+      },
+      "sameAs": [
+        "https://www.facebook.com/DreamyCakeStudioLTD/",
+        "https://www.instagram.com/dreamycake.bakery/",
+        "https://shop.dreamycake.co.uk/",
+        "https://www.etsy.com/shop/DreamyCakeShop"
+      ],
+      "contactPoint": [
+        {
           "@type": "ContactPoint",
-          "telephone": "+44-7510-837225",
-          "contactType": "Customer Service",
+          "telephone": "+44 7510 837225",
+          "email": "dreamycake.info@gmail.com",
+          "contactType": "customer service",
           "areaServed": "GB",
-          "availableLanguage": ["English", "Russian", "Polish", "Ukrainian"]
+          "availableLanguage": [
+            "en"
+          ]
+        }
+      ]
+    },
+    {
+      "@type": "LocalBusiness",
+      "@id": "https://dreamycake.co.uk/#localbusiness",
+      "name": "Dreamy Cake",
+      "image": [
+        "https://dreamycake.co.uk/assets/img/og/home-hero-1200x630.webp",
+        "https://dreamycake.co.uk/assets/img/og/portfolio-rose-cake-1200.webp",
+        "https://dreamycake.co.uk/assets/img/og/portfolio-bento-cake-1200.png",
+        "https://dreamycake.co.uk/assets/img/og/portfolio-cupcakes-1200.webp"
+      ],
+      "url": "https://dreamycake.co.uk/",
+      "telephone": "+44 7510 837225",
+      "email": "dreamycake.info@gmail.com",
+      "priceRange": "££",
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "Huntingdon",
+        "postalCode": "PE28",
+        "addressRegion": "Cambridgeshire",
+        "addressCountry": "GB"
+      },
+      "geo": {
+        "@type": "GeoCoordinates",
+        "latitude": 52.3242487,
+        "longitude": -0.2406139
+      },
+      "hasMap": "https://maps.app.goo.gl/psW7oL2LAus7vUWy5",
+      "areaServed": [
+        {
+          "@type": "AdministrativeArea",
+          "name": "Cambridgeshire"
         },
-        "areaServed": [
-          "Cambridgeshire",
-          "Huntingdon",
-          "Cambridge",
-          "Peterborough",
-          "St Neots",
-          "Bedford"
-        ],
-        "description": "Dreamy Cake creates bespoke wedding cakes, birthday cakes, cupcakes, and desserts with delivery across Cambridgeshire, including Huntingdon, Cambridge, and Peterborough."
+        {
+          "@type": "City",
+          "name": "Huntingdon"
+        },
+        {
+          "@type": "City",
+          "name": "Cambridge"
+        },
+        {
+          "@type": "City",
+          "name": "Peterborough"
+        },
+        {
+          "@type": "City",
+          "name": "St Ives"
+        },
+        {
+          "@type": "City",
+          "name": "St Neots"
+        },
+        {
+          "@type": "City",
+          "name": "Ely"
+        },
+        {
+          "@type": "City",
+          "name": "Godmanchester"
+        },
+        {
+          "@type": "City",
+          "name": "Cambourne"
+        }
+      ],
+      "serviceArea": {
+        "@type": "GeoCircle",
+        "geoMidpoint": {
+          "@type": "GeoCoordinates",
+          "latitude": 52.3242487,
+          "longitude": -0.2406139
+        },
+        "geoRadius": 50000
+      },
+      "openingHoursSpecification": [
+        {
+          "@type": "OpeningHoursSpecification",
+          "dayOfWeek": [
+            "Monday",
+            "Tuesday",
+            "Wednesday",
+            "Thursday",
+            "Friday",
+            "Saturday"
+          ],
+          "opens": "09:00",
+          "closes": "20:00"
+        },
+        {
+          "@type": "OpeningHoursSpecification",
+          "dayOfWeek": "Sunday",
+          "opens": "10:00",
+          "closes": "17:00"
+        }
+      ],
+      "knowsAbout": [
+        "wedding cakes",
+        "birthday cakes",
+        "cupcakes",
+        "celebration cakes",
+        "bespoke cakes",
+        "bento cakes",
+        "lambeth cakes"
+      ],
+      "award": "Etsy Star Seller",
+      "parentOrganization": {
+        "@id": "https://dreamycake.co.uk/#organization"
       }
-    </script>
-
-
-    <!-- Fonts -->
-    <link href="https://fonts.googleapis.com" rel="preconnect" />
-    <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Open+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,300;1,400;1,500;1,600;1,700;1,800&family=Raleway:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
-      rel="stylesheet"
-    />
-
-    <!-- Vendor CSS Files -->
-    <link
-      href="assets/vendor/bootstrap/css/bootstrap.min.css"
-      rel="stylesheet"
-    />
-    <link
-      href="assets/vendor/bootstrap-icons/bootstrap-icons.css"
-      rel="stylesheet"
-    />
-    <link href="assets/vendor/aos/aos.css" rel="stylesheet" />
-    <link
-      href="assets/vendor/glightbox/css/glightbox.min.css"
-      rel="stylesheet"
-    />
-    <link href="assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet" />
-
-    <!-- Main CSS File -->
-    <link href="assets/css/main.css" rel="stylesheet" />
-
-    <style>
-      .hidden-portfolio-item { display: none; }
-      .show-more-container {
-        width: 100%;
-        display: flex;
-        justify-content: center;
-        align-items: center;
+    },
+    {
+      "@type": "WebPage",
+      "@id": "https://dreamycake.co.uk/#webpage",
+      "url": "https://dreamycake.co.uk/",
+      "name": "Custom Wedding & Birthday Cakes in Cambridgeshire | Dreamy Cake",
+      "isPartOf": {
+        "@id": "https://dreamycake.co.uk/#website"
+      },
+      "inLanguage": "en-GB",
+      "about": {
+        "@id": "https://dreamycake.co.uk/#localbusiness"
+      },
+      "primaryImageOfPage": {
+        "@type": "ImageObject",
+        "url": "https://dreamycake.co.uk/assets/img/og/home-hero-1200x630.webp"
+      },
+      "description": "Bespoke wedding & birthday cakes, cupcakes and desserts across Cambridgeshire. Handmade in Huntingdon with delivery to Cambridge & Peterborough. Fast quotes."
+    },
+    {
+      "@type": "Product",
+      "@id": "https://dreamycake.co.uk/#product-celebration-cake",
+      "name": "Celebration Cake",
+      "category": "Cakes",
+      "brand": "Dreamy Cake",
+      "offers": {
+        "@type": "Offer",
+        "price": "65.00",
+        "priceCurrency": "GBP",
+        "availability": "https://schema.org/InStock"
       }
-      #show-more-btn {
-        margin: 0 auto;
+    },
+    {
+      "@type": "Product",
+      "@id": "https://dreamycake.co.uk/#product-postage-cookies",
+      "name": "Postage Cookies (4-pack)",
+      "category": "Cookies",
+      "brand": "Dreamy Cake",
+      "offers": {
+        "@type": "Offer",
+        "price": "12.00",
+        "priceCurrency": "GBP",
+        "availability": "https://schema.org/InStock"
       }
-      .copyright a {
-        display: block;
-        margin: 5px 0;
+    },
+    {
+      "@type": "Product",
+      "@id": "https://dreamycake.co.uk/Products/celebration-cake/#product",
+      "name": "Celebration Cake",
+      "image": [
+        "https://dreamycake.co.uk/assets/img/items/celebration-cake-main.webp"
+      ],
+      "url": "https://dreamycake.co.uk/Products/celebration-cake/",
+      "brand": "Dreamy Cake",
+      "offers": {
+        "@type": "Offer",
+        "price": "65.00",
+        "priceCurrency": "GBP",
+        "availability": "https://schema.org/InStock",
+        "url": "https://dreamycake.co.uk/Products/celebration-cake/",
+        "itemCondition": "https://schema.org/NewCondition"
       }
-    </style>
-  </head>
-
-  <body class="index-page">
-    <header id="header" class="header d-flex align-items-center fixed-top">
-      <div
-        class="container-fluid container-xl position-relative d-flex align-items-center justify-content-between"
-      >
-        <a href="/" class="logo d-flex align-items-center">
-          <!-- Uncomment the line below if you also wish to use an image logo -->
-          <!-- <img src="assets/img/logo-2.png" alt=""> -->
-          <h1 class="sitename">Dreamy Cake Bakery</h1>
-        </a>
-
-        <nav id="navmenu" class="navmenu">
-          <ul>
-            <li><a href="#hero" class="active">Home</a></li>
-            <li><a href="#portfolio">Portfolio</a></li>
-            <li><a href="#contact">Contact</a></li>
-            <li><a href="/QA">Q&A</a></li>
-            <li><a href="/About">About</a></li>
-            <li><a href="/Order">Order</a></li>
-            <li><a href="https://shop.dreamycake.co.uk">MyShop</a></li>
-            <!-- <li><a href="#services">Services</a></li> -->
-          </ul>
-          <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
-        </nav>
-      </div>
-    </header>
-
-    <main class="main">
-      <!-- Hero Section -->
-      <section id="hero" class="hero section dark-background">
-        <img
-          src="assets/img/back.webp"
-          class="hero-bg"
-          alt="Custom cakes and cupcakes by Dreamy Cake in Cambridgeshire"
-          data-aos="fade-in"
-        />
-
-        <div
-          class="container text-center"
-          data-aos="fade-up"
-          data-aos-delay="100"
-        >
-          <img
-            src="assets/img/logo_top_w.webp"
-            class="img-fluid mb-3"
-            alt="Dreamy Cake logo"
-            style="width: 10%"
-          />
-          <h1>Wedding & Birthday Cakes in Cambridgeshire</h1>
-           <!-- <p>
-              I create
-              <span
-                class="typed"
-                data-typed-items="Bespoke Cakes, Wedding Cakes, Cupcakes, Desserts"
-              ></span>
-              <span class="visually-hidden" aria-hidden="true">Bespoke Cakes, Wedding Cakes, Cupcakes, Desserts</span>
-            </p> -->
-            <p class="lead" data-aos="fade-up" data-aos-delay="200">
-              Dreamy Cake’s bespoke cakes, cupcakes, and desserts, delivered across Cambridgeshire, including Huntingdon, Cambridge, and Peterborough.
-            </p>
-          <div>
-            <a href="/Order" class="cta-btn">Order Now</a>
-            <a href="/About" class="cta-btn2">About Me</a>
-          </div>
+    },
+    {
+      "@type": "Product",
+      "@id": "https://dreamycake.co.uk/Products/themed-cake/#product",
+      "name": "Themed Cake",
+      "image": [
+        "https://dreamycake.co.uk/assets/img/items/celebration-cake-main.webp"
+      ],
+      "url": "https://dreamycake.co.uk/Products/themed-cake/",
+      "brand": "Dreamy Cake",
+      "offers": {
+        "@type": "Offer",
+        "price": "75.00",
+        "priceCurrency": "GBP",
+        "availability": "https://schema.org/InStock",
+        "url": "https://dreamycake.co.uk/Products/themed-cake/",
+        "itemCondition": "https://schema.org/NewCondition"
+      }
+    },
+    {
+      "@type": "Product",
+      "@id": "https://dreamycake.co.uk/Products/mini-bento-cake/#product",
+      "name": "Mini / Bento Cake",
+      "image": [
+        "https://dreamycake.co.uk/assets/img/items/themed-cake-main.webp"
+      ],
+      "url": "https://dreamycake.co.uk/Products/mini-bento-cake/",
+      "brand": "Dreamy Cake",
+      "offers": {
+        "@type": "Offer",
+        "price": "24.00",
+        "priceCurrency": "GBP",
+        "availability": "https://schema.org/InStock",
+        "url": "https://dreamycake.co.uk/Products/mini-bento-cake/",
+        "itemCondition": "https://schema.org/NewCondition"
+      }
+    },
+    {
+      "@type": "Product",
+      "@id": "https://dreamycake.co.uk/Products/cupcakes/#product",
+      "name": "Cupcakes",
+      "image": [
+        "https://dreamycake.co.uk/assets/img/items/mini-bento-cake-main.webp"
+      ],
+      "url": "https://dreamycake.co.uk/Products/cupcakes/",
+      "brand": "Dreamy Cake",
+      "offers": {
+        "@type": "Offer",
+        "price": "24.00",
+        "priceCurrency": "GBP",
+        "availability": "https://schema.org/InStock",
+        "url": "https://dreamycake.co.uk/Products/cupcakes/",
+        "itemCondition": "https://schema.org/NewCondition"
+      }
+    },
+    {
+      "@type": "Product",
+      "@id": "https://dreamycake.co.uk/Products/postage-cookie/#product",
+      "name": "Postage Cookies (4-pack)",
+      "image": [
+        "https://dreamycake.co.uk/assets/img/items/cupcakes-main.webp"
+      ],
+      "url": "https://dreamycake.co.uk/Products/postage-cookie/",
+      "brand": "Dreamy Cake",
+      "offers": {
+        "@type": "Offer",
+        "price": "12.00",
+        "priceCurrency": "GBP",
+        "availability": "https://schema.org/InStock",
+        "url": "https://dreamycake.co.uk/Products/postage-cookie/",
+        "itemCondition": "https://schema.org/NewCondition"
+      }
+    },
+    {
+      "@type": "ItemList",
+      "@id": "https://dreamycake.co.uk/#pricing",
+      "name": "Pricing",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "item": {
+            "@id": "https://dreamycake.co.uk/Products/celebration-cake/#product"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "item": {
+            "@id": "https://dreamycake.co.uk/Products/themed-cake/#product"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "item": {
+            "@id": "https://dreamycake.co.uk/Products/mini-bento-cake/#product"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 4,
+          "item": {
+            "@id": "https://dreamycake.co.uk/Products/cupcakes/#product"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 5,
+          "item": {
+            "@id": "https://dreamycake.co.uk/Products/postage-cookie/#product"
+          }
+        }
+      ]
+    },
+    {
+      "@type": "ItemList",
+      "@id": "https://dreamycake.co.uk/#what-youll-love",
+      "name": "What you'll love",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "On‑theme\n          \n          creativity"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Easy\n          \n          ordering"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Loved\n          \n          by clients"
+        }
+      ]
+    },
+    {
+      "@type": "ItemList",
+      "@id": "https://dreamycake.co.uk/#why-choose",
+      "name": "Why choose Dreamy Cake",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Custom\n          \n          designs"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Freshly\n          \n          baked"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Delivery available"
+        }
+      ]
+    },
+    {
+      "@type": "ItemList",
+      "@id": "https://dreamycake.co.uk/#where-when",
+      "name": "Where & when",
+      "itemListElement": []
+    },
+    {
+      "@type": "Service",
+      "@id": "https://dreamycake.co.uk/#delivery-service",
+      "name": "Cake delivery",
+      "serviceType": "Cake delivery",
+      "provider": {
+        "@id": "https://dreamycake.co.uk/#localbusiness"
+      },
+      "areaServed": [
+        "Cambridgeshire",
+        "Huntingdon",
+        "Cambridge",
+        "St Neots",
+        "Peterborough",
+        "Bedford",
+        "London"
+      ],
+      "availableChannel": [
+        {
+          "@type": "ServiceChannel",
+          "serviceUrl": "https://dreamycake.co.uk/Delivery/",
+          "availableLanguage": "en"
+        }
+      ],
+      "offers": [
+        {
+          "@type": "Offer",
+          "price": "0.00",
+          "priceCurrency": "GBP",
+          "description": "Free local delivery within 5 km of Huntingdon.",
+          "eligibleRegion": {
+            "@type": "GeoCircle",
+            "geoMidpoint": {
+              "@type": "GeoCoordinates",
+              "latitude": 52.3242487,
+              "longitude": -0.2406139
+            },
+            "geoRadius": 5000
+          }
+        },
+        {
+          "@type": "Offer",
+          "priceCurrency": "GBP",
+          "description": "Beyond 5 km, delivery fee by distance; hand delivery across Cambridgeshire.",
+          "url": "https://dreamycake.co.uk/Delivery/"
+        }
+      ]
+    },
+    {
+      "@type": "HowTo",
+      "@id": "https://dreamycake.co.uk/#how-it-works",
+      "name": "How it works",
+      "step": [
+        {
+          "@type": "HowToStep",
+          "name": "Share your idea",
+          "text": "Send your inspo, servings, date and delivery postcode — get a tailored quote in 2–3 hours.",
+          "url": "https://dreamycake.co.uk/#how-step-1"
+        },
+        {
+          "@type": "HowToStep",
+          "name": "Book your slot",
+          "text": "Approve the quote to secure your date — we confirm the design details with you.",
+          "url": "https://dreamycake.co.uk/#how-step-2"
+        },
+        {
+          "@type": "HowToStep",
+          "name": "We bake & decorate",
+          "text": "Small-batch, real ingredients and careful finishing — we’ll update you when it’s ready.",
+          "url": "https://dreamycake.co.uk/#how-step-3"
+        },
+        {
+          "@type": "HowToStep",
+          "name": "Delivery or collection",
+          "text": "Hand delivery across Cambridgeshire (free within 5 km; fee by distance) or free collection in Huntingdon.",
+          "url": "https://dreamycake.co.uk/#how-step-4"
+        }
+      ]
+    }
+  ]
+}</script>
+<link href="/assets/css/quick-faq.css" rel="stylesheet"/>
+</link>
+<meta content="Custom Wedding &amp; Birthday Cakes in Cambridgeshire | Dreamy Cake. Bespoke cakes, cupcakes and fondant cookies in Huntingdonshire. Modern design, fresh bak…" name="description"/>
+<link href="/assets/img/favicon.svg" rel="icon" type="image/svg+xml"/>
+<link href="/assets/img/favicon.ico" rel="icon" sizes="any"/>
+<link href="/apple-touch-icon.png" rel="apple-touch-icon"/>
+<link color="#F9F6EC" href="/safari-pinned-tab.svg" rel="mask-icon"/>
+<meta content="#F9F6EC" name="theme-color"/>
+<style>
+/* dc-consent mobile refined */
+@media (max-width: 576px){
+  .dc-consent-banner{
+    position: fixed !important;
+    top: auto !important;
+    left: 10px !important;
+    right: 10px !important;
+    bottom: 10px !important;
+    width: auto !important;
+    max-width: none !important;
+    max-height: 44vh !important;
+    overflow: auto !important;
+    padding: 12px 12px 14px !important;
+    border-radius: 16px !important;
+    box-shadow: 0 8px 24px rgba(0,0,0,.18) !important;
+    background: #fff !important;
+    display: block !important;
+  }
+  .dc-consent-banner__text{
+    width: 100% !important;
+    font-size: 12.5px !important;
+    line-height: 1.5 !important;
+    margin: 0 0 12px 0 !important;
+  }
+  .dc-consent-banner__btns{
+    display: flex !important;
+    width: 100% !important;
+    gap: 8px !important;
+    justify-content: space-between !important;
+  }
+  /* Make reject smaller than accept */
+  .dc-consent-banner__btns .dc-btn[data-choice="reject"]{
+    flex: 0 0 46% !important;
+    font-size: 12px !important;
+    padding: 9px 10px !important;
+  }
+  .dc-consent-banner__btns .dc-btn[data-choice="accept"],
+  .dc-consent-banner__btns .dc-btn.dc-btn--primary{
+    flex: 1 1 auto !important;
+    font-size: 13.5px !important;
+    padding: 11px 12px !important;
+  }
+}
+</style>
+<link href="https://dreamycake.co.uk/" rel="canonical"/></head>
+<body class="index-page">
+<!-- A11y: skip to main content (v1.0) -->
+<header class="header d-flex align-items-center fixed-top" id="header">
+<div class="container-fluid container-xl position-relative d-flex align-items-center justify-content-between">
+<a class="logo d-flex align-items-center" href="/">
+<!-- Uncomment the line below if you also wish to use an image logo -->
+<!-- <img src="/assets/img/logo.png" alt="Dreamy Cake Bakery" width="32" height="32" decoding="async" fetchpriority="high"> -->
+<p class="sitename">Dreamy Cake Bakery</p>
+</a>
+<nav class="navmenu" id="navmenu">
+<ul>
+<li>
+<a aria-current="page" class="active" href="#hero">
+        Home
+       </a>
+</li>
+<li><a href="/#pricing">Pricing</a></li>
+<li>
+<a aria-label="Go to Portfolio section" href="#portfolio">
+        Portfolio
+       </a>
+</li>
+<li>
+<a href="#contact">
+        Contact
+       </a>
+</li><li>
+<a href="/About/">
+        About
+       </a>
+</li><li class="dropdown">
+<button aria-controls="order-submenu" aria-expanded="false" aria-label="Toggle order submenu" class="nav-toggle" type="button"><span>Order</span> <i class="bi bi-chevron-down"></i></button>
+<ul id="order-submenu"><li><a href="/Products/celebration-cake/#order">Order Celebration Cake</a></li><li><a href="/Products/themed-cake/#order">Order Themed Cake</a></li><li><a href="/Products/mini-bento-cake/#order">Order Mini / Bento Cake</a></li><li><a href="/Products/cupcakes/#order">Order Cupcakes</a></li><li><a href="/Products/postage-cookie/#order">Order Postage Cookie</a></li><li><a href="/#contact">Bespoke Request</a></li></ul>
+</li>
+<!-- <li><a href="#how-it-works">Services</a></li> -->
+<li class="dropdown">
+<button aria-controls="info-submenu" aria-expanded="false" aria-label="Toggle info submenu" class="nav-toggle" type="button"><span>Info</span> <i class="bi bi-chevron-down"></i></button>
+<ul id="info-submenu">
+<li><a href="/Delivery/">Delivery</a></li>
+<li><a href="/Allergens/">Allergens</a></li>
+<li><a href="/How-it-works/">How it works</a></li>
+<li><a href="/QA/">Q&amp;A</a></li>
+</ul>
+</li>
+<li>
+<a href="https://shop.dreamycake.co.uk">Shop</a>
+</li></ul>
+<i class="mobile-nav-toggle d-xl-none bi bi-list">
+</i>
+</nav>
+</div>
+</header>
+<main class="main">
+<!-- Hero Section -->
+<section class="hero section dark-background" id="hero">
+<img alt="Custom cakes and cupcakes by Dreamy Cake in Cambridgeshire" class="hero-bg" data-aos="fade-in" decoding="async" fetchpriority="high" height="853" src="assets/img/back.webp" width="1280"/>
+<div class="container text-center" data-aos="fade-up" data-aos-delay="100">
+<img alt="Dreamy Cake Bakery" class="img-fluid mb-3" decoding="async" height="238" loading="lazy" src="assets/img/logo_top_w.webp" style="width: 10%" width="213"/>
+<h1>Wedding &amp; Birthday Cakes in Cambridgeshire</h1>
+<!-- <p>Custom-made cakes, cupcakes & desserts — handmade in Huntingdon; delivery to Cambridge & Peterborough.</p> -->
+<p class="lead" data-aos="fade-up" data-aos-delay="200">Custom-made cakes, cupcakes &amp; desserts — handmade in Huntingdon; delivery to Cambridge &amp; Peterborough.</p>
+<div>
+<a aria-label="Get a fast quote in 2–3 hours — opens order form" class="cta-btn btn-quote" href="#contact"> Get a fast quote (2–3 hours)</a>
+<a aria-label="Open link" class="cta-btn2 btn-quote" href="/About">About me</a>
+</div>
+</div>
+</section>
+<section class="section py-5" id="features">
+<div class="container section-title" data-aos="fade-up">
+<h2 id="why-choose">
+      Why choose Dreamy Cake
+     </h2>
+<p class="section-subtitle">Handmade, bespoke cakes with fast 2–3 hour quotes and careful hand delivery across Cambridgeshire.</p>
+</div>
+<div class="container">
+<div class="row g-4 usp-grid">
+<div class="col-12 col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="0">
+<article class="usp-card d-flex align-items-start gap-3 p-3 rounded-4 shadow-sm h-100">
+<div class="usp-icon flex-shrink-0 rounded-3">
+         🎂
         </div>
-      </section>
-      <!-- /Hero Section -->
-
-      <!-- Features Section -->
-      <section id="features" class="features section">
-        <!-- Section Title -->
-        <div class="container section-title" data-aos="fade-up">
-          <h2>Features</h2>
-          <!--  <p>bla bla</p> -->
+<div class="usp-content">
+<h3 class="h6 mb-1">
+<strong>
+           Custom
+          </strong>
+          designs
+         </h3>
+<p class="mb-2 small text-body-secondary">
+          From bento cakes to themed centrepieces — tailored to your story and colours.
+         </p>
+<div class="usp-tags d-flex flex-wrap gap-2">
+<span class="usp-tag small">
+           Hand‑piped
+          </span>
+<span class="usp-tag small">
+           Edible toppers
+          </span>
+<span class="usp-tag small">
+           Colour‑match
+          </span>
+</div>
+</div>
+</article>
+</div>
+<div class="col-12 col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="50">
+<article class="usp-card d-flex align-items-start gap-3 p-3 rounded-4 shadow-sm h-100">
+<div class="usp-icon flex-shrink-0 rounded-3">
+         🍯
         </div>
-        <!-- End Section Title -->
-
-        <div class="container">
-          <div class="row gy-4">
-            <div
-              class="col-xl-3 col-md-6"
-              data-aos="zoom-in"
-              data-aos-delay="100"
-            >
-              <div class="feature-box orange">
-                <i class="bi bi-award"></i>
-                <h4>Premium Ingredients</h4>
-                <p>
-                  Only the finest, hand-picked ingredients are used in every
-                  dessert to ensure unparalleled taste and freshness
-                </p>
-              </div>
-            </div>
-            <!-- End Feature Borx-->
-
-            <div
-              class="col-xl-3 col-md-6"
-              data-aos="zoom-in"
-              data-aos-delay="200"
-            >
-              <div class="feature-box orange_new">
-                <i class="bi bi-patch-check"></i>
-                <h4>Delivery</h4>
-                <p>
-                  We proudly deliver fresh and delicious desserts to Huntingdon,
-                  as well as popular locations like Cambridge, Peterborough, and
-                  London. Our service also extends to nearby towns, ensuring
-                  your treats arrive right at your doorstep!
-                </p>
-              </div>
-            </div>
-            <!-- End Feature Borx-->
-
-            <div
-              class="col-xl-3 col-md-6"
-              data-aos="zoom-in"
-              data-aos-delay="300"
-            >
-              <div class="feature-box orange">
-                <i class="bi bi-sunrise"></i>
-                <h4>Custom Creations</h4>
-                <p>
-                  Every cake and dessert is uniquely crafted to match your
-                  special occasion, from weddings to birthdays, ensuring it
-                  perfectly reflects your vision
-                </p>
-              </div>
-            </div>
-            <!-- End Feature Borx-->
-
-            <div
-              class="col-xl-3 col-md-6"
-              data-aos="zoom-in"
-              data-aos-delay="400"
-            >
-              <div class="feature-box orange_new">
-                <i class="bi bi-shield-check"></i>
-                <h4>Expert Craftsmanship</h4>
-                <p>
-                  With years of expertise and passion for baking, each dessert
-                  is meticulously designed and baked to perfection
-                </p>
-              </div>
-            </div>
-            <!-- End Feature Borx-->
-          </div>
+<div class="usp-content">
+<h3 class="h6 mb-1">
+<strong>
+           Freshly
+          </strong>
+          baked
+         </h3>
+<p class="mb-2 small text-body-secondary">
+          Small batches, real buttercream and quality ingredients — never compromise on taste.
+         </p>
+<div class="usp-tags d-flex flex-wrap gap-2">
+<span class="usp-tag small">
+           Vanilla bean
+          </span>
+<span class="usp-tag small">
+           Chocolate fudge
+          </span>
+<span class="usp-tag small">
+           Cream cheese frosting
+          </span>
+</div>
+</div>
+</article>
+</div>
+<div class="col-12 col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="100">
+<article class="usp-card d-flex align-items-start gap-3 p-3 rounded-4 shadow-sm h-100">
+<div class="usp-icon flex-shrink-0 rounded-3">
+         📦
         </div>
-      </section>
-      <!-- /Features Section -->
-
-      <!-- Portfolio Section -->
-      <section id="portfolio" class="portfolio section">
-        <div class="container section-title" data-aos="fade-up">
-          <h2>Portfolio</h2>
-          <p>Range of my sweets</p>
-        </div>
-        <div class="container">
-          <div class="isotope-layout" data-default-filter="*" data-layout="masonry" data-sort="original-order">
-            <ul class="portfolio-filters isotope-filters" data-aos="fade-up" data-aos-delay="100">
-              <li data-filter="*" class="filter-active">All</li>
-              <li data-filter=".filter-cakes">Cakes</li>
-              <li data-filter=".filter-cupcakes">Cupcakes</li>
-              <li data-filter=".filter-desserts">Desserts</li>
-            </ul>
-            <div class="row gy-4 isotope-container" data-aos="fade-up" data-aos-delay="200">
-              <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-cakes">
-                <img src="assets/img/cakes/preview/1-wedding-cake-huntingdon.webp" class="img-fluid" alt="Elegant wedding cake with intricate designs in Huntingdon" loading="lazy">
-                <div class="portfolio-info">
-                  <h4>Wedding Cake</h4>
-                  <p>from £150</p>
-                  <a href="assets/img/cakes/1-wedding-cake-huntingdon.webp" title="Wedding Cake" data-gallery="portfolio-gallery-app" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
-                  <a href="/Order" title="Order" class="details-link"><i class="bi bi-cart"></i></a>
-                </div>
-              </div>
-              <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-cupcakes">
-                <img src="assets/img/cakes/preview/2-hen-do-cupcake-brampton.webp" class="img-fluid" alt="Festive hen do cupcakes with vibrant decorations in Brampton" loading="lazy">
-                <div class="portfolio-info">
-                  <h4>Hen Do Cupcakes</h4>
-                  <p>from £25</p>
-                  <a href="assets/img/cakes/2-hen-do-cupcake-brampton.webp" title="Hen Do Cupcakes" data-gallery="portfolio-gallery-app" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
-                  <a href="/Order" title="Order" class="details-link"><i class="bi bi-cart"></i></a>
-                </div>
-              </div>
-              <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-cakes">
-                <img src="assets/img/cakes/preview/3-fortnite-cake-huntingdon.webp" class="img-fluid" alt="Custom Fortnite-themed birthday cake in Huntingdon" loading="lazy">
-                <div class="portfolio-info">
-                  <h4>Fortnite Cake</h4>
-                  <p>from £85</p>
-                  <a href="assets/img/cakes/3-fortnite-cake-huntingdon.webp" title="Fortnite Cake" data-gallery="portfolio-gallery-app" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
-                  <a href="/Order" title="Order" class="details-link"><i class="bi bi-cart"></i></a>
-                </div>
-              </div>
-              <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-cupcakes">
-                <img src="assets/img/cakes/preview/4-cupcake_cambridge4.webp" class="img-fluid" alt="Delicious handcrafted cupcakes with floral designs in Cambridge" loading="lazy">
-                <div class="portfolio-info">
-                  <h4>Cupcakes</h4>
-                  <p>from £20</p>
-                  <a href="assets/img/cakes/4-cupcake_cambridge4.webp" title="Cupcakes" data-gallery="portfolio-gallery-app" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
-                  <a href="/Order" title="Order" class="details-link"><i class="bi bi-cart"></i></a>
-                </div>
-              </div>
-              <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-cakes">
-                <img src="assets/img/cakes/preview/5-childrens-birthday-cake-brampton.webp" class="img-fluid" alt="Colorful children's birthday cake with fun decorations in Brampton" loading="lazy">
-                <div class="portfolio-info">
-                  <h4>Children's Birthday Cake</h4>
-                  <p>from £80</p>
-                  <a href="assets/img/cakes/5-childrens-birthday-cake-brampton.webp" title="Children's Birthday Cake" data-gallery="portfolio-gallery-app" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
-                  <a href="/Order" title="Order" class="details-link"><i class="bi bi-cart"></i></a>
-                </div>
-              </div>
-              <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-cakes">
-                <img src="assets/img/cakes/preview/6-celebration-birthday-cake-cambridgeshire.webp" class="img-fluid" alt="Stunning celebration birthday cake in Cambridgeshire" loading="lazy">
-                <div class="portfolio-info">
-                  <h4>Celebration Birthday Cake</h4>
-                  <p>from £75</p>
-                  <a href="assets/img/cakes/6-celebration-birthday-cake-cambridgeshire.webp" title="Celebration Birthday Cake" data-gallery="portfolio-gallery-app" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
-                  <a href="/Order" title="Order" class="details-link"><i class="bi bi-cart"></i></a>
-                </div>
-              </div>
-              <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-cakes">
-                <img src="assets/img/cakes/preview/7-chocolate-cake-cambridgeshire.webp" class="img-fluid" alt="Rich chocolate cake with decadent frosting in Cambridgeshire" loading="lazy">
-                <div class="portfolio-info">
-                  <h4>Chocolate Cake</h4>
-                  <p>from £70</p>
-                  <a href="assets/img/cakes/7-chocolate-cake-cambridgeshire.webp" title="Chocolate Cake" data-gallery="portfolio-gallery-app" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
-                  <a href="/Order" title="Order" class="details-link"><i class="bi bi-cart"></i></a>
-                </div>
-              </div>
-              <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-cakes">
-                <img src="assets/img/cakes/preview/8-unicorn-cake-cambridgeshire.webp" class="img-fluid" alt="Magical unicorn-themed cake for kids in Cambridgeshire" loading="lazy">
-                <div class="portfolio-info">
-                  <h4>Unicorn Cake</h4>
-                  <p>from £85</p>
-                  <a href="assets/img/cakes/8-unicorn-cake-cambridgeshire.webp" title="Unicorn Cake" data-gallery="portfolio-gallery-app" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
-                  <a href="/Order" title="Order" class="details-link"><i class="bi bi-cart"></i></a>
-                </div>
-              </div>
-              <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-cakes">
-                <img src="assets/img/cakes/preview/9-birthday-cake-st-neots.webp" class="img-fluid" alt="Custom birthday cake with elegant design in St Neots" loading="lazy">
-                <div class="portfolio-info">
-                  <h4>Birthday Cake</h4>
-                  <p>from £75</p>
-                  <a href="assets/img/cakes/9-birthday-cake-st-neots.webp" title="Birthday Cake" data-gallery="portfolio-gallery-app" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
-                  <a href="/Order" title="Order" class="details-link"><i class="bi bi-cart"></i></a>
-                </div>
-              </div>
-              <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-cupcakes">
-                <img src="assets/img/cakes/preview/10-cupcake-cambridgeshire.webp" class="img-fluid" alt="Gourmet cupcakes with creamy frosting in Cambridgeshire" loading="lazy">
-                <div class="portfolio-info">
-                  <h4>Cupcakes</h4>
-                  <p>from £20</p>
-                  <a href="assets/img/cakes/10-cupcake-cambridgeshire.webp" title="Cupcakes" data-gallery="portfolio-gallery-app" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
-                  <a href="/Order" title="Order" class="details-link"><i class="bi bi-cart"></i></a>
-                </div>
-              </div>
-              <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-cakes">
-                <img src="assets/img/cakes/preview/11-graduation-cake-cambridgeshire.webp" class="img-fluid" alt="Celebratory graduation cake with academic theme in Cambridgeshire" loading="lazy">
-                <div class="portfolio-info">
-                  <h4>Graduation Cake</h4>
-                  <p>from £70</p>
-                  <a href="assets/img/cakes/11-graduation-cake-cambridgeshire.webp" title="Graduation Cake" data-gallery="portfolio-gallery-app" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
-                  <a href="/Order" title="Order" class="details-link"><i class="bi bi-cart"></i></a>
-                </div>
-              </div>
-              <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-cakes">
-                <img src="assets/img/cakes/preview/12-birthday-cake-huntingdon.webp" class="img-fluid" alt="Personalized birthday cake with vibrant colors in Huntingdon" loading="lazy">
-                <div class="portfolio-info">
-                  <h4>Birthday Cake</h4>
-                  <p>from £65</p>
-                  <a href="assets/img/cakes/12-birthday-cake-huntingdon.webp" title="Birthday Cake" data-gallery="portfolio-gallery-app" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
-                  <a href="/Order" title="Order" class="details-link"><i class="bi bi-cart"></i></a>
-                </div>
-              </div>
-              <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-cupcakes hidden-portfolio-item">
-                <img src="assets/img/cakes/preview/13-hen-do-cupcake-cambridge.webp" class="img-fluid" alt="Chic hen do cupcakes with elegant toppings in Cambridge" loading="lazy">
-                <div class="portfolio-info">
-                  <h4>Hen Do Cupcakes</h4>
-                  <p>from £25</p>
-                  <a href="assets/img/cakes/13-hen-do-cupcake-cambridge.webp" title="Hen Do Cupcakes" data-gallery="portfolio-gallery-app" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
-                  <a href="/Order" title="Order" class="details-link"><i class="bi bi-cart"></i></a>
-                </div>
-              </div>
-              <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-cupcakes hidden-portfolio-item">
-                <img src="assets/img/cakes/preview/14-vanilla-cupcakes-huntingdon.webp" class="img-fluid" alt="Classic vanilla cupcakes with smooth buttercream in Huntingdon" loading="lazy">
-                <div class="portfolio-info">
-                  <h4>Vanilla Cupcakes</h4>
-                  <p>from £20</p>
-                  <a href="assets/img/cakes/14-vanilla-cupcakes-huntingdon.webp" title="Vanilla Cupcakes" data-gallery="portfolio-gallery-app" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
-                  <a href="/Order" title="Order" class="details-link"><i class="bi bi-cart"></i></a>
-                </div>
-              </div>
-              <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-cakes hidden-portfolio-item">
-                <img src="assets/img/cakes/preview/15-wedding-cake-peterborough.webp" class="img-fluid" alt="Luxurious wedding cake with floral accents in Peterborough" loading="lazy">
-                <div class="portfolio-info">
-                  <h4>Wedding Cake</h4>
-                  <p>from £120</p>
-                  <a href="assets/img/cakes/15-wedding-cake-peterborough.webp" title="Wedding Cake" data-gallery="portfolio-gallery-app" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
-                  <a href="/Order" title="Order" class="details-link"><i class="bi bi-cart"></i></a>
-                </div>
-              </div>
-              <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-desserts hidden-portfolio-item">
-                <img src="assets/img/cakes/preview/16-celebration-desserts.webp" class="img-fluid" alt="Assorted celebration desserts for events in Cambridgeshire" loading="lazy">
-                <div class="portfolio-info">
-                  <h4>Celebration Desserts</h4>
-                  <p>from £28</p>
-                  <a href="assets/img/cakes/16-celebration-desserts.webp" title="Celebration Desserts" data-gallery="portfolio-gallery-app" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
-                  <a href="/Order" title="Order" class="details-link"><i class="bi bi-cart"></i></a>
-                </div>
-              </div>
-              <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-cakes hidden-portfolio-item">
-                <img src="assets/img/cakes/preview/17-bento-cake-brampton.webp" class="img-fluid" alt="Adorable bento cake with minimalist design in Brampton" loading="lazy">
-                <div class="portfolio-info">
-                  <h4>Bento Cake</h4>
-                  <p>from £35</p>
-                  <a href="assets/img/cakes/17-bento-cake-brampton.webp" title="Bento Cake" data-gallery="portfolio-gallery-app" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
-                  <a href="/Order" title="Order" class="details-link"><i class="bi bi-cart"></i></a>
-                </div>
-              </div>
-              <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-cakes hidden-portfolio-item">
-                <img src="assets/img/cakes/preview/18-napoleon-cake-cambridge.webp" class="img-fluid" alt="Traditional Napoleon cake with creamy layers in Cambridge" loading="lazy">
-                <div class="portfolio-info">
-                  <h4>Napoleon Cake</h4>
-                  <p>from £65</p>
-                  <a href="assets/img/cakes/18-napoleon-cake-cambridge.webp" title="Napoleon Cake" data-gallery="portfolio-gallery-app" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
-                  <a href="/Order" title="Order" class="details-link"><i class="bi bi-cart"></i></a>
-                </div>
-              </div>
-              <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-cakes hidden-portfolio-item">
-                <img src="assets/img/cakes/preview/19-celebration-black-cake-peterborough.webp" class="img-fluid" alt="Bold celebration black cake with modern design in Peterborough" loading="lazy">
-                <div class="portfolio-info">
-                  <h4>Celebration Black Cake</h4>
-                  <p>from £70</p>
-                  <a href="assets/img/cakes/19-celebration-black-cake-peterborough.webp" title="Celebration Black Cake" data-gallery="portfolio-gallery-app" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
-                  <a href="/Order" title="Order" class="details-link"><i class="bi bi-cart"></i></a>
-                </div>
-              </div>
-              <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-cakes hidden-portfolio-item">
-                <img src="assets/img/cakes/preview/20-corporate-cake-cambridge.webp" class="img-fluid" alt="Professional corporate cake with sleek branding in Cambridge" loading="lazy">
-                <div class="portfolio-info">
-                  <h4>Corporate Cake</h4>
-                  <p>from £80</p>
-                  <a href="assets/img/cakes/20-corporate-cake-cambridge.webp" title="Corporate Cake" data-gallery="portfolio-gallery-app" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
-                  <a href="/Order" title="Order" class="details-link"><i class="bi bi-cart"></i></a>
-                </div>
-              </div>
-              <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-cakes hidden-portfolio-item">
-                <img src="assets/img/cakes/preview/21-festive-cake-huntingdon.webp" class="img-fluid" alt="Festive holiday cake with seasonal decor in Huntingdon" loading="lazy">
-                <div class="portfolio-info">
-                  <h4>Festive Cake</h4>
-                  <p>from £55</p>
-                  <a href="assets/img/cakes/21-festive-cake-huntingdon.webp" title="Festive Cake" data-gallery="portfolio-gallery-app" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
-                  <a href="/Order" title="Order" class="details-link"><i class="bi bi-cart"></i></a>
-                </div>
-              </div>
-              <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-desserts hidden-portfolio-item">
-                <img src="assets/img/cakes/preview/22-cookie-cambridgeshire.webp" class="img-fluid" alt="Artisanal cookies with intricate designs in Cambridgeshire" loading="lazy">
-                <div class="portfolio-info">
-                  <h4>Cookies</h4>
-                  <p>from £19</p>
-                  <a href="assets/img/cakes/22-cookie-cambridgeshire.webp" title="Cookies" data-gallery="portfolio-gallery-app" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
-                  <a href="/Order" title="Order" class="details-link"><i class="bi bi-cart"></i></a>
-                </div>
-              </div>
-              <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-cakes hidden-portfolio-item">
-                <img src="assets/img/cakes/preview/23-sapphire-white-cake-huntingdon.webp" class="img-fluid" alt="Sophisticated sapphire white cake for special occasions in Huntingdon" loading="lazy">
-                <div class="portfolio-info">
-                  <h4>Sapphire White Cake</h4>
-                  <p>from £65</p>
-                  <a href="assets/img/cakes/23-sapphire-white-cake-huntingdon.webp" title="Sapphire White Cake" data-gallery="portfolio-gallery-app" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
-                  <a href="/Order" title="Order" class="details-link"><i class="bi bi-cart"></i></a>
-                </div>
-              </div>
-              <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-cakes hidden-portfolio-item">
-                <img src="assets/img/cakes/preview/24-mini-bento-cake-brampton.webp" class="img-fluid" alt="Cute mini bento cake with personalized touches in Brampton" loading="lazy">
-                <div class="portfolio-info">
-                  <h4>Mini Bento Cake</h4>
-                  <p>from £28</p>
-                  <a href="assets/img/cakes/24-mini-bento-cake-brampton.webp" title="Mini Bento Cake" data-gallery="portfolio-gallery-app" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
-                  <a href="/Order" title="Order" class="details-link"><i class="bi bi-cart"></i></a>
-                </div>
-              </div>
-              <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-cupcakes hidden-portfolio-item">
-                <img src="assets/img/cakes/preview/25-celebration-cupcakes.webp" class="img-fluid" alt="Festive celebration cupcakes with colorful toppings in Cambridgeshire" loading="lazy">
-                <div class="portfolio-info">
-                  <h4>Celebration Cupcakes</h4>
-                  <p>from £25</p>
-                  <a href="assets/img/cakes/25-celebration-cupcakes.webp" title="Celebration Cupcakes" data-gallery="portfolio-gallery-app" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
-                  <a href="/Order" title="Order" class="details-link"><i class="bi bi-cart"></i></a>
-                </div>
-              </div>
-              <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-desserts hidden-portfolio-item">
-                <img src="assets/img/cakes/preview/26-portion-desserts-cambridge.webp" class="img-fluid" alt="Individual portion desserts with exquisite flavors in Cambridge" loading="lazy">
-                <div class="portfolio-info">
-                  <h4>Portion Desserts</h4>
-                  <p>from £35</p>
-                  <a href="assets/img/cakes/26-portion-desserts-cambridge.webp" title="Portion Desserts" data-gallery="portfolio-gallery-app" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
-                  <a href="/Order" title="Order" class="details-link"><i class="bi bi-cart"></i></a>
-                </div>
-              </div>
-              <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-cupcakes hidden-portfolio-item">
-                <img src="assets/img/cakes/preview/27-chocolate-cupcakes-bedford.webp" class="img-fluid" alt="Indulgent chocolate cupcakes with rich ganache in Bedford" loading="lazy">
-                <div class="portfolio-info">
-                  <h4>Chocolate Cupcakes</h4>
-                  <p>from £20</p>
-                  <a href="assets/img/cakes/27-chocolate-cupcakes-bedford.webp" title="Chocolate Cupcakes" data-gallery="portfolio-gallery-app" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
-                  <a href="/Order" title="Order" class="details-link"><i class="bi bi-cart"></i></a>
-                </div>
-              </div>
-              <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-cupcakes hidden-portfolio-item">
-                <img src="assets/img/cakes/preview/28-babyshower-cupcake-cambridge.webp" class="img-fluid" alt="Adorable baby shower cupcakes with pastel decorations in Cambridge" loading="lazy">
-                <div class="portfolio-info">
-                  <h4>Baby Shower Cupcakes</h4>
-                  <p>from £25</p>
-                  <a href="assets/img/cakes/28-babyshower-cupcake-cambridge.webp" title="Baby Shower Cupcakes" data-gallery="portfolio-gallery-app" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
-                  <a href="/Order" title="Order" class="details-link"><i class="bi bi-cart"></i></a>
-                </div>
-              </div>
-              <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-cupcakes hidden-portfolio-item">
-                <img src="assets/img/cakes/preview/29-corporation-cupcake-rushden.webp" class="img-fluid" alt="Professional corporate cupcakes with branded designs in Rushden" loading="lazy">
-                <div class="portfolio-info">
-                  <h4>Corporate Cupcakes</h4>
-                  <p>from £80</p>
-                  <a href="assets/img/cakes/29-corporation-cupcake-rushden.webp" title="Corporate Cupcakes" data-gallery="portfolio-gallery-app" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
-                  <a href="/Order" title="Order" class="details-link"><i class="bi bi-cart"></i></a>
-                </div>
-              </div>
-              <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-cupcakes hidden-portfolio-item">
-                <img src="assets/img/cakes/preview/30-buttercream-cupcake-st-ives.webp" class="img-fluid" alt="Smooth buttercream cupcakes with delicate swirls in St Ives" loading="lazy">
-                <div class="portfolio-info">
-                  <h4>Buttercream Cupcakes</h4>
-                  <p>from £20</p>
-                  <a href="assets/img/cakes/30-buttercream-cupcake-st-ives.webp" title="Buttercream Cupcakes" data-gallery="portfolio-gallery-app" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
-                  <a href="/Order" title="Order" class="details-link"><i class="bi bi-cart"></i></a>
-                </div>
-              </div>
-              <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-cakes hidden-portfolio-item">
-                <img src="assets/img/cakes/preview/31-custom-cake-huntingdon.webp" class="img-fluid" alt="Unique custom-designed cake for special events in Huntingdon" loading="lazy">
-                <div class="portfolio-info">
-                  <h4>Custom Cake</h4>
-                  <p>from £95</p>
-                  <a href="assets/img/cakes/31-custom-cake-huntingdon.webp" title="Custom Cake" data-gallery="portfolio-gallery-app" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
-                  <a href="/Order" title="Order" class="details-link"><i class="bi bi-cart"></i></a>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="show-more-container text-center mt-4">
-            <button id="show-more-btn" class="btn btn-primary">Show More</button>
-          </div>
-        </div>
-      </section>
-      <!-- /Portfolio Section -->
-
-      <!-- Contact Section -->
-      <section id="contact" class="contact section">
-        <!-- Section Title -->
-        <div class="container section-title" data-aos="fade-up">
-          <h2>Contact</h2>
-          <p>
-            Feel free to get in touch, and I'll craft something special just for
-            you
+<div class="usp-content">
+<h3 class="h6 mb-1"><strong>Delivery</strong> available</h3>
+<p class="mb-2 small text-body-secondary">
+          Huntingdon &amp; Cambridgeshire — delivery to London available by arrangement.
+         </p>
+<div class="usp-tags d-flex flex-wrap gap-2">
+<span class="usp-tag small">Hand delivery</span>
+<span class="usp-tag small">Evening slots</span>
+<span class="usp-tag small">Set‑up on request</span>
+</div>
+</div>
+</article>
+</div>
+</div>
+</div>
+</section>
+<section class="section py-5" id="pricing">
+<div class="container section-title" data-aos="fade-up">
+<h2>
+      Pricing
+     </h2>
+<p class="section-subtitle">Pricing depends on design complexity and servings — check guide ranges and request a custom quote.</p>
+</div>
+<div class="container">
+<div class="row g-4" data-aos="fade-up" data-aos-delay="100" id="pricing-grid">
+<div class="col-12 col-sm-6 col-lg-4">
+<article class="price-card position-relative rounded-4 overflow-hidden shadow-sm" data-item-category="cakes" data-item-id="dc-celebration" data-item-name="Celebration Cake" data-item-price="55">
+<img alt="Celebration cake — custom buttercream cake by Dreamy Cake in Cambridgeshire" class="w-100 h-100 object-fit-cover" decoding="async" height="1066" loading="lazy" src="/assets/img/items/celebration-cake-main.webp" width="800"/>
+<div class="price-overlay d-flex flex-column justify-content-end p-3">
+<div class="price-head d-flex align-items-center justify-content-between gap-2">
+<h3 class="h5 mb-2 price-title"><a aria-label="Open link" class="price-title" href="/Products/celebration-cake/">Celebration Cake</a></h3>
+<p class="mb-0 fw-semibold">
+           From £65
+           <span class="qty">
+            · 6" round
+           </span>
+</p>
+</div>
+<div class="price-details mt-1">
+<p class="mb-2 small">
+           Classic birthday &amp; occasion cakes made to order — available across Cambridgeshire &amp; London.
           </p>
+<a aria-label="Order now: Celebration Cake" class="btn btn-accent btn-sm btn-quote" href="/Products/celebration-cake/">Get a quote</a>
+</div>
+</div>
+</article>
+</div>
+<div class="col-12 col-sm-6 col-lg-4">
+<article class="price-card position-relative rounded-4 overflow-hidden shadow-sm" data-item-category="cakes" data-item-id="dc-themed" data-item-name="Themed Cake" data-item-price="75">
+<img alt="Themed cake — bespoke design by Dreamy Cake, Cambridge &amp; Cambridgeshire" class="w-100 h-100 object-fit-cover" decoding="async" height="1066" loading="lazy" src="/assets/img/items/themed-cake-main.webp" width="800"/>
+<div class="price-overlay d-flex flex-column justify-content-end p-3">
+<div class="price-head d-flex align-items-center justify-content-between gap-2">
+<h3 class="h5 mb-2 price-title"><a aria-label="Open link" class="price-title" href="/Products/themed-cake/">Themed Cake</a></h3>
+<p class="mb-0 fw-semibold">
+           From £75
+           <span class="qty">
+            · custom
+           </span>
+</p>
+</div>
+<div class="price-details mt-1">
+<p class="mb-2 small">
+           Character, sculpted and on‑theme designs — priced by complexity.
+          </p>
+<a aria-label="Order now: Themed Cake" class="btn btn-accent btn-sm btn-quote" href="/Products/themed-cake/">Get a quote</a>
+</div>
+</div>
+</article>
+</div>
+<div class="col-12 col-sm-6 col-lg-4">
+<article class="price-card position-relative rounded-4 overflow-hidden shadow-sm" data-item-category="cakes" data-item-id="dc-mini-bento" data-item-name="Mini / Bento Cake" data-item-price="24">
+<img alt="Mini bento cake — single‑serve personalised cake by Dreamy Cake UK" class="w-100 h-100 object-fit-cover" decoding="async" height="1066" loading="lazy" src="/assets/img/items/mini-bento-cake-main.webp" width="800"/>
+<div class="price-overlay d-flex flex-column justify-content-end p-3">
+<div class="price-head d-flex align-items-center justify-content-between gap-2">
+<h3 class="h5 mb-2 price-title"><a aria-label="Open link" class="price-title" href="/Products/mini-bento-cake/">Mini / Bento Cake</a></h3>
+<p class="mb-0 fw-semibold">
+           From £24
+           <span class="qty">
+            · 4–6 servings
+           </span>
+</p>
+</div>
+<div class="price-details mt-1">
+<p class="mb-2 small">
+           Small but special — perfect for gifts and intimate celebrations.
+          </p>
+<a aria-label="Order now: Mini / Bento Cake" class="btn btn-accent btn-sm btn-quote" href="/Products/mini-bento-cake/">Get a quote</a>
+</div>
+</div>
+</article>
+</div>
+<div class="col-12 col-sm-6 col-lg-4">
+<article class="price-card position-relative rounded-4 overflow-hidden shadow-sm" data-item-category="cakes" data-item-id="dc-cupcakes" data-item-name="Cupcakes" data-item-price="24">
+<img alt="Cupcakes — artisan cupcakes by Dreamy Cake, Huntingdon &amp; Cambridge" class="w-100 h-100 object-fit-cover" decoding="async" height="1066" loading="lazy" src="/assets/img/items/cupcakes-main.webp" width="800"/>
+<div class="price-overlay d-flex flex-column justify-content-end p-3">
+<div class="price-head d-flex align-items-center justify-content-between gap-2">
+<h3 class="h5 mb-2 price-title"><a aria-label="Open link" class="price-title" href="/Products/cupcakes/">Cupcakes</a></h3>
+<p class="mb-0 fw-semibold">
+           From £24
+           <span class="qty">
+            · box of 6
+           </span>
+</p>
+</div>
+<div class="price-details mt-1">
+<p class="mb-2 small">
+           Mix &amp; match flavours, colours and toppers for any occasion.
+          </p>
+<a aria-label="Order now: Cupcakes" class="btn btn-accent btn-sm btn-quote" href="/Products/cupcakes/">Get a quote</a>
+</div>
+</div>
+</article>
+</div>
+<div class="col-12 col-sm-6 col-lg-4">
+<article class="price-card position-relative rounded-4 overflow-hidden shadow-sm" data-item-category="cakes" data-item-id="dc-postage-cookie" data-item-name="Postage Cookie" data-item-price="8">
+<img alt="Postage cookie — decorated letterbox cookie, UK nationwide delivery by Dreamy Cake" class="w-100 h-100 object-fit-cover" decoding="async" height="1066" loading="lazy" src="/assets/img/items/postage-cookie-main.webp" width="800"/>
+<div class="price-overlay d-flex flex-column justify-content-end p-3">
+<div class="price-head d-flex align-items-center justify-content-between gap-2">
+<h3 class="h5 mb-2 price-title"><a aria-label="Open link" class="price-title" href="/Products/postage-cookie/">Postage Cookie</a></h3>
+<p class="mb-0 fw-semibold">
+           From £12
+           <span class="qty">
+            · 4-pack</span>
+</p>
+</div>
+<div class="price-details mt-1">
+<p class="mb-2 small">
+           Personalised message cookie — gift‑ready and eligible for post.
+          </p>
+<a aria-label="Order now: Postage Cookie" class="btn btn-accent btn-sm btn-quote" href="/Products/postage-cookie/">Get a quote</a>
+</div>
+</div>
+</article>
+</div>
+</div>
+</div>
+</section>
+<section class="section py-5" id="highlights">
+<div class="container section-title" data-aos="fade-up">
+<h2 id="what-youll-love">
+      What you’ll love
+     </h2>
+<p class="section-subtitle">
+      Personal touches, simple process, and cakes people return for.
+     </p>
+</div>
+<div class="container">
+<div class="row g-4 usp-grid">
+<div class="col-12 col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="100">
+<article class="usp-card d-flex align-items-start gap-3 p-3 rounded-4 shadow-sm h-100">
+<div class="usp-icon flex-shrink-0 rounded-3">
+         🖌️
         </div>
-        <!-- End Section Title -->
-
-        <div class="container" data-aos="fade" data-aos-delay="100">
-          <div class="row gy-4">
-            <div class="col-lg-4">
-              <div
-                class="info-item d-flex"
-                data-aos="fade-up"
-                data-aos-delay="200"
-              >
-                <i class="bi bi-geo-alt flex-shrink-0"></i>
-                <div>
-                  <h3>Address</h3>
-                  <p>Brampton, Huntingdon PE28</p>
-                </div>
-              </div>
-              <!-- End Info Item -->
-
-              <div
-                class="info-item d-flex"
-                data-aos="fade-up"
-                data-aos-delay="300"
-              >
-                <i class="bi bi-telephone flex-shrink-0"></i>
-                <div>
-                  <h3>Call Us</h3>
-                  <p>+44 7510 837225</p>
-                </div>
-              </div>
-              <!-- End Info Item -->
-
-              <div
-                class="info-item d-flex"
-                data-aos="fade-up"
-                data-aos-delay="400"
-              >
-                <i class="bi bi-envelope flex-shrink-0"></i>
-                <div>
-                  <h3>Email Us</h3>
-                  <p>dreamycake.info@gmail.com</p>
-                </div>
-              </div>
-              <!-- End Info Item -->
-            </div>
-
-            <form
-              class="my-email-form"
-              action="https://formsubmit.co/ab0c0409fa937bd163077d308f7ca38f"
-              method="POST"
-              autocomplete="on"
-            >
-              <!-- Скрытые поля -->
-              <input type="hidden" name="subject" value="Contact Form" />
-              <input type="hidden" name="_honey" value="" />
-              <input type="hidden" name="_captcha" value="false" />
-              <input type="hidden" name="_next" value="https://www.dreamycake.co.uk" />
-              <input type="hidden" name="_template" value="table" />
-              <input type="hidden" name="_autoresponse" value="Thank you for reaching out! We will get back to you soon." />
-
-              <div class="row gy-4">
-                <div class="col-md-6">
-                  <input
-                    type="text"
-                    name="name"
-                    class="form-control"
-                    placeholder="Your Name"
-                    autocomplete="on"
-                    required
-                    lang="en"
-                  />
-                </div>
-                <div class="col-md-6">
-                  <input
-                    type="email"
-                    class="form-control"
-                    name="email"
-                    placeholder="Your Email"
-                    autocomplete="on"
-                    required
-                    lang="en"
-                  />
-                </div>
-                <div class="col-md-12">
-                  <input
-                    type="text"
-                    class="form-control"
-                    name="subject"
-                    placeholder="Subject"
-                    autocomplete="off"
-                    required
-                    lang="en"
-                  />
-                </div>
-                <div class="col-md-12">
-                  <textarea
-                    class="form-control"
-                    name="message"
-                    rows="6"
-                    placeholder="Message"
-                    autocomplete="off"
-                    required
-                    lang="en"
-                  ></textarea>
-                </div>
-
-                <div class="form-group mt-3">
-                  <input type="checkbox" id="consent" required />
-                  <label for="consent"
-                    >I accept the
-                    <a href="/Privacy_Policy"
-                      >Privacy Policy</a
-                    ></label
-                  >
-                </div>
-
-                <div class="col-md-12 text-center">
-                  <button type="submit" id="submit-btn">Send Message</button>
-                </div>
-              </div>
-            </form>
-          </div>
+<div class="usp-content">
+<h3 class="h6 mb-1">
+<strong>
+           On‑theme
+          </strong>
+          creativity
+         </h3>
+<p class="mb-2 small text-body-secondary">
+          Characters, logos, graduation caps — we make it yours without looking generic.
+         </p>
+<div class="usp-tags d-flex flex-wrap gap-2">
+<span class="usp-tag small">
+           Brand colours
+          </span>
+<span class="usp-tag small">
+           Lettering
+          </span>
+<span class="usp-tag small">
+           Gold leaf
+          </span>
+</div>
+</div>
+</article>
+</div>
+<div class="col-12 col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="150">
+<article class="usp-card d-flex align-items-start gap-3 p-3 rounded-4 shadow-sm h-100">
+<div class="usp-icon flex-shrink-0 rounded-3">
+         💬
         </div>
-        <br><br>
-        <div class="col-md-12 text-center mt-3">
-          <div class="images-row">
-            <img src="assets/img/food.webp" alt="Dreamy Cake Food Standards Agency certification" class="small-image" />
-            <img src="assets/img/one.webp" alt="Dreamy Cake food safety certification by One Training Services" class="small-image" />
-          </div>
+<div class="usp-content">
+<h3 class="h6 mb-1">
+<strong>
+           Easy
+          </strong>
+          ordering
+         </h3>
+<p class="mb-2 small text-body-secondary">
+          Quick chat, date check, and a tailored quote. Simple process from idea to cake.
+         </p>
+<div class="usp-tags d-flex flex-wrap gap-2">
+<span class="usp-tag small">
+           WhatsApp
+          </span>
+<span class="usp-tag small">
+           Instagram
+          </span>
+<span class="usp-tag small">
+           Email
+          </span>
+</div>
+</div>
+</article>
+</div>
+<div class="col-12 col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="200">
+<article class="usp-card d-flex align-items-start gap-3 p-3 rounded-4 shadow-sm h-100">
+<div class="usp-icon flex-shrink-0 rounded-3">
+         ⭐
         </div>
-      </section>
-    </main>
-
-    <footer id="footer" class="footer dark-background">
-      <div class="container">
-        <div class="row gy-3">
-          <div class="col-lg-3 col-md-6 d-flex">
-            <i class="bi bi-geo-alt icon"></i>
-            <div class="address">
-              <h4>Address</h4>
-              <p>Brampton</p>
-              <p>Huntingdon, PE28</p>
-              <p></p>
-            </div>
-          </div>
-
-          <div class="col-lg-3 col-md-6 d-flex">
-            <i class="bi bi-telephone icon"></i>
-            <div>
-              <h4>Contact</h4>
-              <p>
-                <strong>Phone:</strong> <span>+44 7510 837225</span><br />
-                <strong>Email:</strong> <span>dreamycake.info@gmail.com</span
-                ><br />
-              </p>
-            </div>
-          </div>
-
-          <div class="col-lg-3 col-md-6 d-flex">
-            <i class="bi bi-clock icon"></i>
-            <div>
-              <h4>Opening Hours</h4>
-              <p>
-                <strong>Mon-Sat:</strong> <span>9AM - 8PM</span><br />
-                <strong>Sunday</strong>: <span>10AM - 5PM</span>
-              </p>
-            </div>
-          </div>
-
-          <div class="col-lg-3 col-md-6">
-            <h4>Follow Us</h4>
-            <div class="social-links d-flex">
-              <a href="https://www.facebook.com/DreamyCakeStudioLTD/" class="facebook" aria-label="Follow Dreamy Cake on Facebook"><i class="bi bi-facebook"></i></a>
-              <a
-                href="https://www.instagram.com/dreamycake.bakery/"
-                class="instagram"
-                aria-label="Follow Dreamy Cake on Instagram"
-                ><i class="bi bi-instagram"></i
-              ></a>
-            </div>
-          </div>
-        </div>
+<div class="usp-content">
+<h3 class="h6 mb-1">
+<strong>
+           Loved
+          </strong>
+          by clients
+         </h3>
+<p class="mb-2 small text-body-secondary">
+          Word‑of‑mouth and repeat orders — cakes that taste as good as they look.
+         </p>
+<div class="usp-tags d-flex flex-wrap gap-2">
+<span class="usp-tag small">
+           Birthdays
+          </span>
+<span class="usp-tag small">
+           Weddings
+          </span>
+<span class="usp-tag small">
+           Corporate
+          </span>
+</div>
+</div>
+</article>
+</div>
+</div>
+</div>
+</section>
+<!-- /Hero Section -->
+<!-- Features Section -->
+<!-- /Features Section -->
+<!-- Portfolio Section -->
+<section aria-labelledby="areas-title" class="section service-areas" id="service-areas">
+<div class="container" data-aos="fade-up">
+<div class="text-center mb-4">
+<h2 class="section-title" id="areas-title">Where &amp; when</h2>
+<p class="section-subtitle">Lead times, delivery &amp; collection at a glance.</p>
+</div>
+<div class="areas-grid">
+<div class="area-card"><h3>Service areas</h3><p>Huntingdon • Cambridge • Peterborough • Bedford • London (by arrangement)</p></div>
+<div class="area-card"><h3>Lead time</h3><p>Standard 7–14 days. Rush orders — please ask.</p></div>
+<div class="area-card"><h3>Delivery &amp; collection</h3><p>Delivery (fee by distance) or free collection by appointment.</p></div>
+<div class="area-card"><h3>Typical window</h3><p>10:00–18:00 (flexible by arrangement).</p></div>
+</div>
+<div class="text-center mt-3"><a aria-label="Open link" class="btn btn-primary btn-quote" data-quote="Delivery/Areas" href="#contact">Get a quote</a> <a aria-label="Delivery information for Cambridgeshire and nearby" class="btn btn-outline" href="/Delivery/">Delivery &amp; areas</a></div>
+</div>
+</section><section aria-labelledby="how-title" class="section how-it-works" id="how-it-works">
+<div class="container" data-aos="fade-up">
+<div class="text-center mb-4">
+<h2 class="section-title" id="how-title">How it works</h2>
+<p class="section-subtitle">From idea to cake in 4 simple steps.</p>
+</div>
+<div class="how-grid">
+<div class="how-card"><div aria-hidden="true" class="how-icon">💡</div><h3 class="how-step" id="how-step-1">1. Share your idea</h3><p>Send your inspo, servings, date and delivery postcode — get a tailored quote in 2–3 hours. <a aria-label="Get a fast quote — tailored in 2–3 hours" href="#contact">Get a fast quote</a>.</p></div>
+<div class="how-card"><div aria-hidden="true" class="how-icon">✍️</div><h3 class="how-step" id="how-step-2">2. Book your slot</h3><p>Approve the quote to secure your date — we confirm the design details with you.</p></div>
+<div class="how-card"><div aria-hidden="true" class="how-icon">🧁</div><h3 class="how-step" id="how-step-3">3. We bake &amp; decorate</h3><p>Small-batch, real ingredients and careful finishing — we’ll update you when it’s ready.</p></div>
+<div class="how-card"><div aria-hidden="true" class="how-icon">🚚</div><h3 class="how-step" id="how-step-4">4. Delivery or collection</h3><p>Hand delivery across Cambridgeshire (free within 5 km; fee by distance) or free collection in Huntingdon. <a aria-label="See delivery details for delivery &amp; collection" href="/Delivery/">Delivery details</a>.</p></div>
+</div>
+<div class="text-center mt-3"><a aria-label="Open link" class="btn btn-primary btn-quote" data-quote="How it works" href="#contact">Get a quote</a> <a aria-label="Open link" class="btn btn-outline" href="/How-it-works/">Learn more</a></div>
+</div>
+</section><section class="portfolio section" id="portfolio">
+<div class="container section-title" data-aos="fade-up">
+<h2>Portfolio</h2>
+<p class="section-subtitle">Range of my sweets</p>
+</div>
+<div class="container">
+<div class="gallery"><img alt="Floral Cake with Edible Gold — Buckden, Cambridgeshire" data-full="assets/img/cakes/floral-cake-with-edible-gold-buckden-cambridgeshire-001.webp" data-index="1" decoding="async" loading="lazy" src="assets/img/cakes/preview/floral-cake-with-edible-gold-buckden-cambridgeshire-001.webp"/><img alt="Buttercream Cake with Sugar Flowers — Ramsey, Cambridgeshire" data-full="assets/img/cakes/buttercream-cake-with-sugar-flowers-ramsey-cambridgeshire-002.webp" data-index="2" decoding="async" loading="lazy" src="assets/img/cakes/preview/buttercream-cake-with-sugar-flowers-ramsey-cambridgeshire-002.webp"/><img alt="Buttercream Cake Pistachio with Edible Gold — Hemingford Grey, Cambridgeshire" data-full="assets/img/cakes/buttercream-cake-pistachio-with-edible-gold-hemingford-grey-cambridgeshire-003.webp" data-index="3" decoding="async" loading="lazy" src="assets/img/cakes/preview/buttercream-cake-pistachio-with-edible-gold-hemingford-grey-cambridgeshire-003.webp"/><img alt="Semi Naked Cake Fondant Finish — Cambridge, Cambridgeshire" data-full="assets/img/cakes/semi-naked-cake-fondant-finish-cambridge-cambridgeshire-004.webp" data-index="4" decoding="async" loading="lazy" src="assets/img/cakes/preview/semi-naked-cake-fondant-finish-cambridge-cambridgeshire-004.webp"/><img alt="Floral Cake with Edible Gold — Sawtry, Cambridgeshire" data-full="assets/img/cakes/floral-cake-with-edible-gold-sawtry-cambridgeshire-005.webp" data-index="5" decoding="async" loading="lazy" src="assets/img/cakes/preview/floral-cake-with-edible-gold-sawtry-cambridgeshire-005.webp"/><img alt="Floral Cake Buttercream Finish — Buckden, Cambridgeshire" data-full="assets/img/cakes/floral-cake-buttercream-finish-buckden-cambridgeshire-006.webp" data-index="6" decoding="async" loading="lazy" src="assets/img/cakes/preview/floral-cake-buttercream-finish-buckden-cambridgeshire-006.webp"/><img alt="Floral Cake Personalised Topper — Sawtry, Cambridgeshire" data-full="assets/img/cakes/floral-cake-personalised-topper-sawtry-cambridgeshire-007.webp" data-index="7" decoding="async" loading="lazy" src="assets/img/cakes/preview/floral-cake-personalised-topper-sawtry-cambridgeshire-007.webp"/><img alt="Birthday Cake Personalised Topper — Cambourne, Cambridgeshire" data-full="assets/img/cakes/birthday-cake-personalised-topper-cambourne-cambridgeshire-008.webp" data-index="8" decoding="async" loading="lazy" src="assets/img/cakes/preview/birthday-cake-personalised-topper-cambourne-cambridgeshire-008.webp"/><img alt="Floral Cake Hand Piped Details — Ely, Cambridgeshire" data-full="assets/img/cakes/floral-cake-hand-piped-details-ely-cambridgeshire-009.webp" data-index="9" decoding="async" loading="lazy" src="assets/img/cakes/preview/floral-cake-hand-piped-details-ely-cambridgeshire-009.webp"/><img alt="Birthday Cake Fondant Finish — Cambourne, Cambridgeshire" data-full="assets/img/cakes/birthday-cake-fondant-finish-cambourne-cambridgeshire-010.webp" data-index="10" decoding="async" loading="lazy" src="assets/img/cakes/preview/birthday-cake-fondant-finish-cambourne-cambridgeshire-010.webp"/><img alt="Drip Cake Hand Piped Details Chatteris — Cambridgeshire" data-full="assets/img/cakes/drip-cake-hand-piped-details-chatteris-cambridgeshire-011.webp" data-index="11" decoding="async" loading="lazy" src="assets/img/cakes/preview/drip-cake-hand-piped-details-chatteris-cambridgeshire-011.webp"/><img alt="Tiered Cake with Edible Gold — Cambourne, Cambridgeshire" data-full="assets/img/cakes/tiered-cake-with-edible-gold-cambourne-cambridgeshire-012.webp" data-index="12" decoding="async" loading="lazy" src="assets/img/cakes/preview/tiered-cake-with-edible-gold-cambourne-cambridgeshire-012.webp"/><img alt="Birthday Cake Hand Piped Details Peterborough" data-full="assets/img/cakes/birthday-cake-hand-piped-details-peterborough-013.webp" data-index="13" decoding="async" loading="lazy" src="assets/img/cakes/preview/birthday-cake-hand-piped-details-peterborough-013.webp"/><img alt="Tiered Cake Personalised Topper — Cambourne, Cambridgeshire" data-full="assets/img/cakes/tiered-cake-personalised-topper-cambourne-cambridgeshire-014.webp" data-index="14" decoding="async" loading="lazy" src="assets/img/cakes/preview/tiered-cake-personalised-topper-cambourne-cambridgeshire-014.webp"/><img alt="Wedding Cake Buttercream Finish Peterborough" data-full="assets/img/cakes/wedding-cake-buttercream-finish-peterborough-015.webp" data-index="15" decoding="async" loading="lazy" src="assets/img/cakes/preview/wedding-cake-buttercream-finish-peterborough-015.webp"/><img alt="Birthday Cake Hand Piped Details Peterborough" data-full="assets/img/cakes/birthday-cake-hand-piped-details-peterborough-016.webp" data-index="16" decoding="async" loading="lazy" src="assets/img/cakes/preview/birthday-cake-hand-piped-details-peterborough-016.webp"/><img alt="Semi Naked Cake Pistachio Personalised Topper — Cambridge, Cambridgeshire" data-full="assets/img/cakes/semi-naked-cake-pistachio-personalised-topper-cambridge-cambridgeshire-017.webp" data-index="17" decoding="async" loading="lazy" src="assets/img/cakes/preview/semi-naked-cake-pistachio-personalised-topper-cambridge-cambridgeshire-017.webp"/><img alt="Drip Cake with Sugar Flowers Chatteris — Cambridgeshire" data-full="assets/img/cakes/drip-cake-with-sugar-flowers-chatteris-cambridgeshire-018.webp" data-index="18" decoding="async" loading="lazy" src="assets/img/cakes/preview/drip-cake-with-sugar-flowers-chatteris-cambridgeshire-018.webp"/><img alt="Drip Cake Buttercream Finish Chatteris — Cambridgeshire" data-full="assets/img/cakes/drip-cake-buttercream-finish-chatteris-cambridgeshire-019.webp" data-index="19" decoding="async" loading="lazy" src="assets/img/cakes/preview/drip-cake-buttercream-finish-chatteris-cambridgeshire-019.webp"/><img alt="Wedding Cake Buttercream Finish — Godmanchester, Cambridgeshire" data-full="assets/img/cakes/wedding-cake-buttercream-finish-godmanchester-cambridgeshire-020.webp" data-index="20" decoding="async" loading="lazy" src="assets/img/cakes/preview/wedding-cake-buttercream-finish-godmanchester-cambridgeshire-020.webp"/><img alt="Wedding Cake with Sugar Flowers — Sawtry, Cambridgeshire" data-full="assets/img/cakes/wedding-cake-with-sugar-flowers-sawtry-cambridgeshire-021.webp" data-index="21" decoding="async" loading="lazy" src="assets/img/cakes/preview/wedding-cake-with-sugar-flowers-sawtry-cambridgeshire-021.webp"/><img alt="Stacked Cake with Sugar Flowers — Ely, Cambridgeshire" data-full="assets/img/cakes/stacked-cake-with-sugar-flowers-ely-cambridgeshire-022.webp" data-index="22" decoding="async" loading="lazy" src="assets/img/cakes/preview/stacked-cake-with-sugar-flowers-ely-cambridgeshire-022.webp"/><img alt="Floral Cake Personalised Topper — Ely, Cambridgeshire" data-full="assets/img/cakes/floral-cake-personalised-topper-ely-cambridgeshire-023.webp" data-index="23" decoding="async" loading="lazy" src="assets/img/cakes/preview/floral-cake-personalised-topper-ely-cambridgeshire-023.webp"/><img alt="Birthday Cake Personalised Topper Peterborough" data-full="assets/img/cakes/birthday-cake-personalised-topper-peterborough-024.webp" data-index="24" decoding="async" loading="lazy" src="assets/img/cakes/preview/birthday-cake-personalised-topper-peterborough-024.webp"/><img alt="Birthday Cake Buttercream Finish — Huntingdon, Cambridgeshire" data-full="assets/img/cakes/birthday-cake-buttercream-finish-huntingdon-cambridgeshire-025.webp" data-index="25" decoding="async" loading="lazy" src="assets/img/cakes/preview/birthday-cake-buttercream-finish-huntingdon-cambridgeshire-025.webp"/><img alt="Themed Cake with Sugar Flowers March — Cambridgeshire" data-full="assets/img/cakes/themed-cake-with-sugar-flowers-march-cambridgeshire-026.webp" data-index="26" decoding="async" loading="lazy" src="assets/img/cakes/preview/themed-cake-with-sugar-flowers-march-cambridgeshire-026.webp"/><img alt="Buttercream Cake Hand Piped Details — Hemingford Grey, Cambridgeshire" data-full="assets/img/cakes/buttercream-cake-hand-piped-details-hemingford-grey-cambridgeshire-027.webp" data-index="27" decoding="async" loading="lazy" src="assets/img/cakes/preview/buttercream-cake-hand-piped-details-hemingford-grey-cambridgeshire-027.webp"/><img alt="Themed Cake with Sugar Flowers — Cambridge, Cambridgeshire" data-full="assets/img/cakes/themed-cake-with-sugar-flowers-cambridge-cambridgeshire-028.webp" data-index="28" decoding="async" loading="lazy" src="assets/img/cakes/preview/themed-cake-with-sugar-flowers-cambridge-cambridgeshire-028.webp"/><img alt="Buttercream Cake with Sugar Flowers — Ramsey, Cambridgeshire" data-full="assets/img/cakes/buttercream-cake-with-sugar-flowers-ramsey-cambridgeshire-029.webp" data-index="29" decoding="async" loading="lazy" src="assets/img/cakes/preview/buttercream-cake-with-sugar-flowers-ramsey-cambridgeshire-029.webp"/><img alt="Drip Cake with Edible Gold — Godmanchester, Cambridgeshire" data-full="assets/img/cakes/drip-cake-with-edible-gold-godmanchester-cambridgeshire-030.webp" data-index="30" decoding="async" loading="lazy" src="assets/img/cakes/preview/drip-cake-with-edible-gold-godmanchester-cambridgeshire-030.webp"/><img alt="Floral Cake with Sugar Flowers — Ely, Cambridgeshire" data-full="assets/img/cakes/floral-cake-with-sugar-flowers-ely-cambridgeshire-031.webp" data-index="31" decoding="async" loading="lazy" src="assets/img/cakes/preview/floral-cake-with-sugar-flowers-ely-cambridgeshire-031.webp"/><img alt="Themed Cake Personalised Topper — Cambridge, Cambridgeshire" data-full="assets/img/cakes/themed-cake-personalised-topper-cambridge-cambridgeshire-032.webp" data-index="32" decoding="async" loading="lazy" src="assets/img/cakes/preview/themed-cake-personalised-topper-cambridge-cambridgeshire-032.webp"/><img alt="Drip Cake Hand Piped Details — Godmanchester, Cambridgeshire" data-full="assets/img/cakes/drip-cake-hand-piped-details-godmanchester-cambridgeshire-033.webp" data-index="33" decoding="async" loading="lazy" src="assets/img/cakes/preview/drip-cake-hand-piped-details-godmanchester-cambridgeshire-033.webp"/><img alt="Birthday Cake with Sugar Flowers — Cambourne, Cambridgeshire" data-full="assets/img/cakes/birthday-cake-with-sugar-flowers-cambourne-cambridgeshire-034.webp" data-index="34" decoding="async" loading="lazy" src="assets/img/cakes/preview/birthday-cake-with-sugar-flowers-cambourne-cambridgeshire-034.webp"/><img alt="Floral Cake Strawberry with Sugar Flowers — Buckden, Cambridgeshire" data-full="assets/img/cakes/floral-cake-strawberry-with-sugar-flowers-buckden-cambridgeshire-035.webp" data-index="35" decoding="async" loading="lazy" src="assets/img/cakes/preview/floral-cake-strawberry-with-sugar-flowers-buckden-cambridgeshire-035.webp"/><img alt="Wedding Cake Hand Piped Details — Godmanchester, Cambridgeshire" data-full="assets/img/cakes/wedding-cake-hand-piped-details-godmanchester-cambridgeshire-036.webp" data-index="36" decoding="async" loading="lazy" src="assets/img/cakes/preview/wedding-cake-hand-piped-details-godmanchester-cambridgeshire-036.webp"/><img alt="Drip Cake with Edible Gold — St Ives, Cambridgeshire" data-full="assets/img/cakes/drip-cake-with-edible-gold-st-ives-cambridgeshire-037.webp" data-index="37" decoding="async" loading="lazy" src="assets/img/cakes/preview/drip-cake-with-edible-gold-st-ives-cambridgeshire-037.webp"/><img alt="Buttercream Cake Buttercream Finish — Hemingford Grey, Cambridgeshire" data-full="assets/img/cakes/buttercream-cake-buttercream-finish-hemingford-grey-cambridgeshire-038.webp" data-index="38" decoding="async" loading="lazy" src="assets/img/cakes/preview/buttercream-cake-buttercream-finish-hemingford-grey-cambridgeshire-038.webp"/><img alt="Drip Cake Personalised Topper — St Ives, Cambridgeshire" data-full="assets/img/cakes/drip-cake-personalised-topper-st-ives-cambridgeshire-039.webp" data-index="39" decoding="async" loading="lazy" src="assets/img/cakes/preview/drip-cake-personalised-topper-st-ives-cambridgeshire-039.webp"/><img alt="Drip Cake Hand Piped Details — St Ives, Cambridgeshire" data-full="assets/img/cakes/drip-cake-hand-piped-details-st-ives-cambridgeshire-040.webp" data-index="40" decoding="async" loading="lazy" src="assets/img/cakes/preview/drip-cake-hand-piped-details-st-ives-cambridgeshire-040.webp"/><img alt="Drip Cake with Sugar Flowers — St Ives, Cambridgeshire" data-full="assets/img/cakes/drip-cake-with-sugar-flowers-st-ives-cambridgeshire-041.webp" data-index="41" decoding="async" loading="lazy" src="assets/img/cakes/preview/drip-cake-with-sugar-flowers-st-ives-cambridgeshire-041.webp"/></div>
+<div class="load-more-wrap"><button class="btn-load-more" type="button">Load more</button></div>
+<div class="cta-after">
+<a aria-label="Open link" class="btn btn-primary" href="/#contact">Inspired? Start an order →</a>
+<a aria-label="Go to Pricing section" class="btn btn-outline" href="#pricing">See Pricing</a>
+</div>
+</div>
+</section>
+<!-- removed legacy initPortfolioLoadMore inline script --><!-- /Portfolio Section -->
+<!-- Contact Section -->
+<section aria-labelledby="cta-title" class="section cta-links" id="cta-links">
+<div class="container" data-aos="fade-up">
+<div class="text-center mb-4">
+<h2 class="section-title" id="cta-title">Want to know more?</h2>
+<p class="subhead">Price, size, delivery &amp; allergens — quick answers here. Request your custom quote and we’ll reply in <strong>2–3 hours</strong>.</p>
+</div>
+<nav aria-label="Important site links" class="cta-grid">
+<a aria-label="About Dreamy Cake — meet the baker" class="cta-card cta-primary" href="/About/" title="About Dreamy Cake">
+<span aria-hidden="true" class="cta-emoji">👩‍🍳</span>
+<span class="cta-text">About me</span>
+</a>
+<a aria-label="Frequently Asked Questions" class="cta-card cta-secondary" href="/QA/" title="Frequently Asked Questions">
+<span aria-hidden="true" class="cta-emoji">❓</span>
+<span class="cta-text">FAQ</span>
+</a>
+<a aria-label="Contact Dreamy Cake" class="cta-card cta-accent" data-scroll="#contact" href="#contact" title="Contact Dreamy Cake">
+<span aria-hidden="true" class="cta-emoji">✉️</span>
+<span class="cta-text">Contact</span>
+</a>
+<a aria-label="Follow Dreamy Cake on Instagram (opens in a new tab)" class="cta-card cta-instagram" href="https://www.instagram.com/dreamycake.bakery/" rel="noopener noreferrer" target="_blank" title="Dreamy Cake on Instagram">
+<span aria-hidden="true" class="cta-emoji">📸</span>
+<span class="cta-text">Instagram</span>
+</a>
+</nav>
+</div>
+</section>
+<section class="section mini-faq" id="mini-faq">
+<div class="container aos-init aos-animate" data-aos="fade-up">
+<div class="text-center mb-4">
+<h2 class="section-title" id="faq-title">FAQ — quick answers</h2>
+<p class="section-subtitle">Top questions answered at a glance.</p>
+</div>
+<div class="faq-list">
+<details><summary>Is my date available?</summary><div class="faq-a">
+        We typically need <strong>7–14 days</strong>. Rush orders may be possible <strong>by request</strong>.
+        Tell us your date and delivery postcode — we’ll confirm availability and
+        <strong>hold your slot with a 50% deposit</strong>. Usual reply time: <strong>2–3 hours</strong>.
+      </div></details>
+<details><summary>How much will my cake cost?</summary><div class="faq-a">
+        Prices vary by <strong>servings, design detail and delivery</strong>.
+        Check our <a href="/#pricing">Pricing</a> and Servings guide is available on product pages. guides,
+        send your inspo, and we’ll suggest the right size with a <strong>no‑obligation quote in 2–3 hours</strong>.
+      </div></details>
+<details><summary>What size do I need?</summary><div class="faq-a">
+        Use the Servings guide is available on product pages. to match guest count ↔ cake size.
+        If you’re between sizes, we’ll recommend the <strong>most cost‑efficient</strong> option and adapt the design to suit.
+      </div></details>
+<details><summary>Do you deliver and set up?</summary><div class="faq-a">
+        Yes — we deliver within <strong>~50 km</strong> of Cambridgeshire; further afield <strong>on request</strong>.
+        Fees are postcode‑based. For tiered/tall designs we can handle <strong>venue setup</strong> for safe placement.
+        See <a href="/Delivery/">Delivery</a> for details.
+      </div></details>
+<details><summary>Can you do vegan / gluten‑friendly / nut‑free?</summary><div class="faq-a">
+        Options available on request. However, all cakes are made in a kitchen that handles gluten, dairy, eggs, nuts and soy,
+        so they may <strong>not be suitable for severe allergies</strong>. See our <a href="/Allergens/">Allergens</a> page.
+      </div></details>
+</div>
+<div class="text-center mt-3">
+<a class="btn btn-primary" href="#contact">Get a quote</a>
+<a class="btn btn-outline" href="/QA/">See all questions</a>
+</div>
+</div>
+</section>
+<section aria-labelledby="allergens-title" class="section allergens" id="allergens">
+<div class="container" data-aos="fade-up">
+<div class="text-center mb-4">
+<h2 class="section-title" id="allergens-title">Allergens &amp; dietary</h2>
+<p class="section-subtitle">Please read before ordering.</p>
+</div>
+<div class="allergens-grid">
+<div class="allergen-card important"><h3>Allergens handled</h3><p>Made in a kitchen that handles <strong>gluten, eggs, milk, soy and nuts</strong>. While great care is taken, traces may be present.</p></div>
+<div class="allergen-card"><h3>Dietary options</h3><p>Some options (e.g. vegan or gluten-free) may be available on request — please ask in advance.</p></div>
+<div class="allergen-card"><h3>Care &amp; storage</h3><p>Keep boxed, cool and out of direct sunlight. Specific care instructions will be provided with your order.</p></div>
+</div>
+<div class="text-center mt-3"><a class="btn btn-primary btn-quote" data-quote="Allergens" href="#contact">Get a quote</a> <a class="btn btn-outline" href="/Allergens/">Read full policy</a></div>
+</div>
+</section>
+<section class="contact section" id="contact">
+<!-- Section Title -->
+<div class="container section-title" data-aos="fade-up">
+<h2>
+      Contact
+     </h2>
+<p class="section-subtitle">
+      Feel free to get in touch, and I'll craft something special just for
+            you
+     </p>
+</div>
+<!-- End Section Title -->
+<div class="container" data-aos="fade" data-aos-delay="100">
+<div class="row gy-4">
+<div class="col-lg-4">
+<div class="info-item d-flex" data-aos="fade-up" data-aos-delay="200">
+<i class="bi bi-geo-alt flex-shrink-0">
+</i>
+<div>
+<h3>
+          Address
+         </h3>
+<p>
+          Brampton, Huntingdon PE28
+         </p></div>
+</div>
+<!-- End Info Item -->
+<div class="info-item d-flex" data-aos="fade-up" data-aos-delay="300">
+<i class="bi bi-telephone flex-shrink-0">
+</i>
+<div>
+<h3>
+          Call Us
+         </h3>
+<p><a class="link" href="tel:+447510837225">+44 7510 837225</a></p>
+</div>
+</div>
+<!-- End Info Item -->
+<div class="info-item d-flex" data-aos="fade-up" data-aos-delay="400">
+<i class="bi bi-envelope flex-shrink-0">
+</i>
+<div>
+<h3>
+          Email Us
+         </h3>
+<p><a class="link" href="mailto:dreamycake.info@gmail.com"><a href="mailto:dreamycake.info@gmail.com">dreamycake.info@gmail.com</a></a></p>
+</div>
+</div>
+<!-- End Info Item -->
+<!-- WhatsApp info-item (begin v1.9) -->
+<div class="info-item info-whatsapp d-flex align-items-center" data-aos="fade-up" data-aos-delay="300">
+<i class="bi bi-whatsapp"></i>
+<div>
+<h3 class="mb-1">WhatsApp</h3>
+<p class="mb-2 small text-muted">Fast reply during working hours</p>
+<a aria-label="Chat on WhatsApp" class="btn-whatsapp" href="https://wa.me/447510837225" onclick="if(window.gtag){gtag('event','whatsapp_click',{label:'contact_info'});}" rel="noopener" target="_blank">
+<svg aria-hidden="true" height="18" style="vertical-align:middle;" viewbox="0 0 32 32" width="18">
+<path d="M19.11 17.52c-.3-.15-1.76-.86-2.03-.96-.27-.1-.47-.15-.68.15-.2.3-.78.95-.95 1.14-.17.2-.35.22-.65.07-.3-.15-1.26-.46-2.4-1.47-.89-.79-1.49-1.76-1.66-2.06-.17-.3-.02-.46.13-.61.13-.13.3-.35.45-.52.15-.17.2-.3.3-.5.1-.2.05-.38-.02-.53-.07-.15-.68-1.64-.93-2.24-.25-.6-.5-.5-.68-.5-.17 0-.38-.02-.58-.02-.2 0-.53.08-.81.38-.27.3-1.07 1.05-1.07 2.56 0 1.5 1.1 2.95 1.26 3.15.15.2 2.16 3.3 5.22 4.64.73.32 1.3.51 1.75.65.73.23 1.39.2 1.91.12.58-.09 1.76-.72 2.01-1.42.25-.7.25-1.3.17-1.42-.07-.12-.27-.2-.57-.35zM16 3C8.82 3 3 8.82 3 16c0 2.3.62 4.46 1.7 6.3L3 29l6.87-1.77C11.6 28.38 13.73 29 16 29c7.18 0 13-5.82 13-13S23.18 3 16 3z" fill="currentColor"></path>
+</svg>
+<span>Message us</span>
+</a>
+</div>
+</div>
+<!-- WhatsApp info-item (end v1.9) -->
+</div><form action="https://formsubmit.co/ab0c0409fa937bd163077d308f7ca38f" class="contact-enhanced needs-validation" data-form="primary" id="contactFormEnhanced" method="POST" novalidate="">
+<input name="subject" type="hidden" value="Contact Form"/><input name="_honey" type="hidden" value=""/><input name="_captcha" type="hidden" value="false"/><input name="_next" type="hidden" value="https://www.dreamycake.co.uk"/><input name="_template" type="hidden" value="table"/><input name="_autoresponse" type="hidden" value="Thank you for reaching out! We will get back to you soon."/>
+<div class="row gy-3">
+<div class="col-md-6">
+<label class="form-label" for="name">Full name<span class="text-danger">*</span></label>
+<input aria-required="true" autocomplete="name" class="form-control soft-field" id="name" name="name" placeholder="Jane Smith" required="" type="text"/>
+<div class="invalid-feedback">Please enter your name.</div>
+</div>
+<div class="col-md-6">
+<label class="form-label" for="email">Email<span class="text-danger">*</span></label>
+<input aria-required="true" autocomplete="email" class="form-control soft-field" id="email" name="email" placeholder="you@example.com" required="" type="email"/>
+<div class="invalid-feedback">Please enter a valid email address.</div>
+</div>
+<div class="col-md-6">
+<label class="form-label" for="phone">Phone (optional)</label>
+<input aria-describedby="phoneHelp" autocomplete="tel" class="form-control soft-field" id="phone" inputmode="tel" name="phone" pattern="^[0-9+()\s-]{7,}$" placeholder="+44 7700 900123" type="tel"/>
+</div>
+<div class="col-md-6">
+<label class="form-label" for="subject">Subject<span class="text-danger">*</span></label>
+<input aria-required="true" autocomplete="off" class="form-control soft-field" id="subject" name="subject" placeholder="Custom cookie stamp" required="" type="text"/>
+<div class="invalid-feedback">Please add a subject.</div>
+</div>
+<div class="col-12">
+<label class="form-label" for="message">Message<span class="text-danger">*</span></label>
+<textarea aria-required="true" autocomplete="off" class="form-control soft-field" id="message" name="message" placeholder="Tell us about your idea…" required="" rows="5"></textarea>
+<div class="invalid-feedback">Please enter a message.</div>
+<div class="form-hint small mt-2">
+        Need to attach a file? Email it to <a href="mailto:dreamycake.info@gmail.com" onclick="if(window.gtag){gtag('event','email_click',{label:'contact'});}"><a class="link" href="tel:+447510837225">+44 7510 837225</a></a> or use a link (Google Drive/Dropbox) in your message.
       </div>
-
-      <div class="container copyright text-center mt-4">
-        <a href="/Terms_and_Conditions">Terms & Conditions</a>
-        <a href="/Privacy_Policy">Privacy Policy</a>
-        <br />
-        <p>
-          © <span>Copyright</span>
-          <strong class="px-1 sitename">Dreamy Cake Studio LTD</strong>
-          <span>All Rights Reserved</span>
-        </p>
-        <div class="credits">
-          Designed by <a href="mailto:bogbond@gmail.com">Bond</a>
-        </div>
-      </div>
-    </footer>
-
-    <!-- Scroll Top -->
-    <a
-      href="#"
-      id="scroll-top"
-      class="scroll-top d-flex align-items-center justify-content-center"
-      ><i class="bi bi-arrow-up-short"></i
-    ></a>
-
-    <!-- Preloader -->
-    <div id="preloader"></div>
-    <script>
-      const consentCheckbox = document.getElementById("consent");
-      const submitButton = document.getElementById("submit-btn");
-
-      // Enable the submit button only when the checkbox is checked
-      consentCheckbox.addEventListener("change", function () {
-        submitButton.disabled = !consentCheckbox.checked;
-      });
-    </script>
-
-    <!-- Vendor JS Files -->
-    <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-    <!-- <script src="assets/vendor/php-email-form/validate.js"></script> -->
-    <script src="assets/vendor/aos/aos.js"></script>
-    <script src="assets/vendor/typed.js/typed.umd.js"></script>
-    <script src="assets/vendor/glightbox/js/glightbox.min.js"></script>
-    <script src="assets/vendor/imagesloaded/imagesloaded.pkgd.min.js"></script>
-    <script src="assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
-    <script src="assets/vendor/swiper/swiper-bundle.min.js"></script>
-
-    <!-- Main JS File -->
-    <script src="assets/js/main.js"></script>
-  </body>
+</div>
+<div class="col-12 d-flex align-items-center justify-content-between gap-3 mt-2">
+<div class="d-flex align-items-center gap-2 small text-muted">
+<i class="bi bi-clock"></i>
+<span>We usually reply within 2–3 hours.</span>
+</div>
+<button class="btn btn-accent px-4 py-2" id="contactSubmitBtn" type="submit">
+<span class="btn-label">Send message</span>
+<span aria-hidden="true" class="btn-spinner d-none"></span>
+</button>
+<p class="form-consent">By clicking the button, I agree to the <a href="/Privacy-Policy/" rel="noopener" target="_blank">Privacy Policy</a>.</p>
+</div>
+<div class="col-12">
+<div aria-live="polite" class="alert d-none mt-3" id="contactAlert" role="alert"></div>
+</div>
+</div>
+</form><!-- Certifications row (end v1.3) -->
+<div aria-hidden="true" aria-labelledby="contactSuccessTitle" aria-modal="true" class="contact-modal" id="contactSuccessModal" role="dialog">
+<div class="contact-modal__content">
+<button aria-label="Close" class="contact-modal__close" data-close-modal="" type="button">
+<i class="bi bi-x-lg"></i>
+</button>
+<div aria-hidden="true" class="contact-modal__icon"><i class="bi bi-check2-circle"></i></div>
+<h3 class="mb-2" id="contactSuccessTitle">Message sent!</h3>
+<p>Thank you — we’ll get back to you shortly.</p>
+<button class="btn btn-accent mt-2" data-close-modal="" type="button">Great</button>
+</div>
+</div>
+</div>
+</div>
+<br/>
+<br/>
+<div class="col-md-12 text-center mt-3">
+<!-- Certifications row (begin v1.3) -->
+<div class="images-row">
+<img alt="Dreamy Cake Food Standards Agency certification" class="small-image" decoding="async" height="192" loading="lazy" src="assets/img/food.webp" width="480"/>
+<img alt="Dreamy Cake food safety certification by One Training Services" class="small-image" decoding="async" height="400" loading="lazy" src="assets/img/one.webp" width="1200"/>
+</div>
+</div>
+<script>
+  /* v1.10 form script: client-side validation + honeypot + submit time gate */
+  (function(){
+    var form = document.getElementById('contact-form');
+    if (!form) return;
+    var startedAt = Date.now();
+    var interactedAt = null;
+    form.addEventListener('input', function(){ if(!interactedAt) interactedAt = Date.now(); }, {once:true});
+    function showError(id, on){
+      var el = document.getElementById(id + '-error');
+      if (el){ el.classList[on ? 'add' : 'remove']('show'); }
+      var field = document.getElementById(id);
+      if (field){ field.setAttribute('aria-invalid', on ? 'true' : 'false'); }
+    }
+    form.addEventListener('submit', function(e){
+      var ok = true;
+      // Basic validation
+      var name = document.getElementById('full-name');
+      var email = document.getElementById('email');
+      var message = document.getElementById('message');
+      var hp = document.getElementById('hp-website');
+      var gateMs = (interactedAt || startedAt);
+      // Honeypot or too fast (< 4000ms from first interaction / load)
+      if (hp && hp.value) ok = false;
+      if (Date.now() - gateMs < 4000) ok = false;
+      // Field checks
+      if (name && !name.value.trim()){ ok = false; showError('full-name', true); } else { showError('full-name', false); }
+      if (email){
+        var v = email.value.trim();
+        var re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!re.test(v)){ ok = false; showError('email', true); } else { showError('email', false); }
+      }
+      if (message && message.value.trim().length < 5){ ok = false; showError('message', true); } else { showError('message', false); }
+      if (!ok){ e.preventDefault(); e.stopPropagation(); }
+    });
+  })();
+  </script>
+</section>
+</main>
+<footer class="footer dark-background" id="footer">
+<div class="container">
+<div class="row gy-3">
+<div class="col-lg-3 col-md-6 d-flex">
+<i class="bi bi-geo-alt icon">
+</i>
+<div class="address">
+<h4>
+        Address
+       </h4>
+<p>
+        Brampton
+       </p>
+<p>
+        Huntingdon, PE28
+       </p>
+<p>
+</p>
+</div>
+</div>
+<div class="col-lg-3 col-md-6 d-flex">
+<i class="bi bi-telephone icon">
+</i>
+<div>
+<h4>
+        Contact
+       </h4>
+<p>
+<strong>
+         Phone:
+        </strong>
+<span><a class="link" href="tel:+447510837225">+44 7510 837225</a></span>
+<br/>
+<strong>
+          Email:
+         </strong>
+<span><a class="link" href="mailto:dreamycake.info@gmail.com"><a href="mailto:dreamycake.info@gmail.com">dreamycake.info@gmail.com</a></a></span>
+<br/>
+</p>
+</div>
+</div>
+<div class="col-lg-3 col-md-6 d-flex">
+<i class="bi bi-clock icon">
+</i>
+<div>
+<h4>
+        Opening Hours
+       </h4>
+<p>
+<strong>
+         Mon-Sat:
+        </strong>
+<span>
+         9AM - 8PM
+        </span>
+<br/>
+<strong>
+         Sunday
+        </strong>
+        :
+        <span>
+         10AM - 5PM
+        </span>
+</p>
+</div>
+</div>
+<div class="col-lg-3 col-md-6">
+<h4>
+       Follow Us
+      </h4>
+<div class="social-links d-flex">
+<a aria-label="Follow Dreamy Cake on Facebook" class="facebook" href="https://www.facebook.com/DreamyCakeStudioLTD/">
+<i class="bi bi-facebook">
+</i>
+</a>
+<a aria-label="Follow Dreamy Cake on Instagram" class="instagram" href="https://www.instagram.com/dreamycake.bakery/">
+<i class="bi bi-instagram">
+</i>
+</a>
+</div>
+</div>
+</div>
+</div>
+<div class="container copyright text-center mt-4">
+<a href="/Terms-and-Conditions/">
+     Terms &amp; Conditions
+    </a>
+<a href="/Privacy-Policy/">
+     Privacy Policy
+    </a>
+<br/>
+<p>
+     ©
+     <span>
+      Copyright
+     </span>
+<strong class="px-1 sitename">
+      Dreamy Cake Studio LTD
+     </strong>
+<span>
+      All Rights Reserved
+     </span>
+</p>
+<div class="credits">
+     Designed by
+     <a href="mailto:bogbond@gmail.com" onclick="if(window.gtag){gtag('event','email_click',{label:'contact'});}">
+      Bond
+     </a>
+</div>
+</div>
+</footer>
+<!-- Scroll Top -->
+<button aria-label="Scroll to top" class="scroll-top d-flex align-items-center justify-content-center" id="scroll-top" type="button">
+<i class="bi bi-arrow-up-short">
+</i>
+</button>
+<!-- Preloader -->
+<div id="preloader">
+</div>
+<!-- Vendor JS Files -->
+<script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js">
+</script>
+<!-- -->
+<script src="assets/vendor/aos/aos.js">
+</script>
+<!-- Main JS File -->
+<script src="assets/js/main.js">
+</script>
+<script defer="" src="assets/js/contact-enhanced.js"></script>
+<script src="/assets/js/navfix.js"></script>
+<script defer="" src="/assets/js/know-more-gtag.js"></script>
+<script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Is my date available?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "We typically need 7–14 days. Rush orders may be possible by request. Tell us your date and delivery postcode — we’ll confirm availability and hold your slot with a 50% deposit. Usual reply time: 2–3 hours."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How much will my cake cost?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Prices vary by servings, design detail and delivery. Check our Pricing and Servings guides, send your inspo, and we’ll suggest the right size with a no-obligation quote in 2–3 hours."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What size do I need?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Use the Servings Guide to match guest count to cake size. If you’re between sizes, we’ll recommend the most cost-efficient option and adapt the design to suit."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Do you deliver and set up?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes — we deliver within approximately 50 km of Cambridgeshire; further afield on request. Fees are postcode-based. For tiered or tall designs we can handle venue setup for safe placement."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Can you do vegan / gluten-friendly / nut-free?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Options available on request. However, all cakes are made in a kitchen that handles gluten, dairy, eggs, nuts and soy, so they may not be suitable for severe allergies. See our Allergens page for details."
+      }
+    }
+  ]
+}</script>
+<script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@type": "WebPage",
+  "name": "Allergens & dietary information (home section)",
+  "about": {
+    "@type": "Thing",
+    "name": "Cake allergens and dietary options"
+  },
+  "audience": {
+    "@type": "PeopleAudience",
+    "audienceType": "People with food allergies or intolerances"
+  },
+  "hasPart": {
+    "@type": "ItemList",
+    "name": "Allergens handled",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "item": {
+          "@type": "DefinedTerm",
+          "name": "Gluten"
+        }
+      },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "item": {
+          "@type": "DefinedTerm",
+          "name": "Dairy"
+        }
+      },
+      {
+        "@type": "ListItem",
+        "position": 3,
+        "item": {
+          "@type": "DefinedTerm",
+          "name": "Eggs"
+        }
+      },
+      {
+        "@type": "ListItem",
+        "position": 4,
+        "item": {
+          "@type": "DefinedTerm",
+          "name": "Nuts"
+        }
+      },
+      {
+        "@type": "ListItem",
+        "position": 5,
+        "item": {
+          "@type": "DefinedTerm",
+          "name": "Soy"
+        }
+      },
+      {
+        "@type": "ListItem",
+        "position": 6,
+        "item": {
+          "@type": "DefinedTerm",
+          "name": "Sesame"
+        }
+      }
+    ]
+  },
+  "isPartOf": {
+    "@type": "WebSite",
+    "name": "Dreamy Cake"
+  },
+  "mentions": [
+    {
+      "@type": "RestrictedDiet",
+      "name": "VeganDiet"
+    },
+    {
+      "@type": "RestrictedDiet",
+      "name": "VegetarianDiet"
+    }
+  ],
+  "hasPartUrl": "https://dreamycake.co.uk/Allergens/"
+}</script>
+</body>
 </html>
+<!-- DC:CONSENT_BANNER_START -->
+<style>
+  .dc-consent-banner{
+    position:fixed; left:0; right:0; bottom:0;
+    z-index:2147483647;
+    background: rgba(255,255,255,0.98);
+    border-top: 1px solid rgba(0,0,0,.1);
+    box-shadow: 0 -8px 24px rgba(0,0,0,.08);
+    padding: 16px; display:flex; gap:16px; align-items: flex-start;
+    font-family: system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
+  }
+  .dc-consent-banner__text{ flex:1; font-size:14px; line-height:1.45; color:#222; }
+  .dc-consent-banner__btns{ display:flex; gap:8px; flex-wrap:wrap; }
+  .dc-btn{ border:1px solid #222; padding:8px 12px; border-radius:999px; background:#fff; cursor:pointer; font-size:14px; }
+  .dc-btn--primary{ background:#222; color:#fff; }
+  .dc-consent-manage{
+    left: 12px !important;
+    position:fixed;
+    right:auto !important; bottom: 6px;
+    z-index:2147483647;
+    border:1px solid #222; background:#fff; padding:6px 10px; border-radius:999px; font-size:12px; cursor:pointer; opacity:.85;
+    line-height:1; white-space:nowrap;
+    transition: bottom .2s ease, right .2s ease, left .2s ease, opacity .2s;
+  }
+  /* When we need to lift above another fixed button (e.g., back-to-top) */
+  /* Put it bottom-left on very small screens to avoid crowding */
+  @media (max-width: 480px) {
+    .dc-consent-manage{ left:16px; right:auto; }
+  }
+  .dc-consent-manage:hover{ opacity:1; }
+</style>
+<script>
+(function(){
+  try {
+    // Create "Manage cookies" floating button
+    var manage = document.createElement('button');
+    manage.className = 'dc-consent-manage';
+    manage.type = 'button';
+    manage.textContent = 'Cookies';
+    manage.setAttribute('aria-label','Manage cookies');
+    manage.addEventListener('click', function(){ showBanner(true); });
+
+    // Build banner
+    function showBanner(force) {
+      var saved = null;
+      try { saved = JSON.parse(localStorage.getItem('dc_consent') || '{}'); } catch(e){}
+      if(!force && saved && (saved.choice === 'accept' || saved.choice === 'reject')) return;
+      var wrap = document.createElement('div');
+      wrap.className = 'dc-consent-banner';
+      wrap.setAttribute('role','dialog');
+      wrap.setAttribute('aria-live','polite');
+      wrap.innerHTML = ''
+        + '<div class="dc-consent-banner__text">To keep things simple, we use essential cookies. If you’re happy, we’ll also use analytics to learn what’s working. You can update your choice anytime in “Cookies”.</div>'
+        + '<div class="dc-consent-banner__btns">'
+        +   '<button type="button" class="dc-btn" data-choice="reject">Reject non-essential</button>'
+        +   '<button type="button" class="dc-btn dc-btn--primary" data-choice="accept">Accept all</button>'
+        + '</div>';
+      document.body.appendChild(wrap);
+      wrap.querySelectorAll('button[data-choice]').forEach(function(btn){
+        btn.addEventListener('click', function(){ setChoice(this.getAttribute('data-choice')); });
+      });
+    }
+
+    function setChoice(choice) {
+      try { localStorage.setItem('dc_consent', JSON.stringify({choice})); } catch(e){}
+      // Update Consent Mode in real-time
+      if (typeof gtag === 'function') {
+        if(choice === 'accept') {
+          gtag('consent', 'update', {
+            analytics_storage: 'granted',
+            ad_storage: 'granted',
+            ad_user_data: 'granted',
+            ad_personalization: 'granted'
+          });
+          // Attempt GA load if ID present
+          if (window.GA_MEASUREMENT_ID && window.GA_MEASUREMENT_ID !== 'G-XXXXXXXXXX' && !window.__ga_loaded) {
+            var s=document.createElement('script'); s.async=1; s.src='https://www.googletagmanager.com/gtag/js?id='+window.GA_MEASUREMENT_ID;
+            document.head.appendChild(s);
+            gtag('js', new Date());
+            gtag('config', window.GA_MEASUREMENT_ID, { 'anonymize_ip': true });
+            window.__ga_loaded = true;
+          }
+        } else {
+          gtag('consent', 'update', {
+            analytics_storage: 'denied',
+            ad_storage: 'denied',
+            ad_user_data: 'denied',
+            ad_personalization: 'denied'
+          });
+        }
+      }
+      var b = document.querySelector('.dc-consent-banner'); if(b) b.remove();
+    }
+
+    // Try to avoid overlap with existing fixed "back to top" buttons
+    function avoidOverlap() {
+      try {
+        var candidates = [
+          '.back-to-top', '.scroll-to-top', '.scroll-top', '.to-top', '.btn-to-top',
+          '#backToTop', '#toTop', '#totop', '[data-backtotop]', '[data-scroll-top]'
+        ];
+        var el = null;
+        for (var i=0; i<candidates.length; i++) {
+          var found = document.querySelector(candidates[i]);
+          if(found) { el = found; break; }
+        }
+        // Reset
+        manage.classList.remove('dc-lift');
+        manage.style.right = ''; manage.style.left = ''; manage.style.bottom = '';
+        // On small screens we already push left via CSS, skip overlap logic
+        if (window.matchMedia('(max-width: 480px)').matches) return;
+        if (!el) return;
+        var r = el.getBoundingClientRect();
+        // Heuristic: if the element sits bottom-right within 120px from the viewport edge, lift our button
+        var nearBottom = (window.innerHeight - r.bottom) <= 120;
+        var nearRight  = (window.innerWidth  - r.right)  <= 120;
+        var visible = r.width>0 && r.height>0;
+        if (visible && nearBottom && nearRight) {
+          // // manage.classList.add('dc-lift'); // disabled // disabled
+        }
+      } catch(e){}
+    }
+
+    document.addEventListener('DOMContentLoaded', function(){
+      document.body.appendChild(manage);
+      showBanner(false);
+      avoidOverlap();
+    });
+    window.addEventListener('scroll', avoidOverlap, {passive:true});
+    window.addEventListener('resize', avoidOverlap);
+
+    // Run a few times shortly after load to catch late-mounted widgets
+    setTimeout(avoidOverlap, 300);
+    setTimeout(avoidOverlap, 1000);
+  } catch(e){ console.error('Consent banner error', e); }
+})();
+</script>
+<!-- DC:CONSENT_BANNER_END -->
