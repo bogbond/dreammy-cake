@@ -2419,11 +2419,20 @@ body.mobile-nav-active { overflow: hidden; }
   object-position: 50% var(--img-pos-y, 50%);
 }
 .price-card[data-item-name="Celebration Cake"]{
-  --img-pos-y: 54%; /* subtle shift DOWN from center to keep composition natural */
+  --img-pos-y: 45%; /* subtle shift DOWN from center to keep composition natural */
 }
 @media (max-width: 576px){
   .price-card[data-item-name="Celebration Cake"]{ --img-pos-y: 60%; }
 }
+
+/* ---- Image framing tweak: Themed Cake card (Pricing) ---- */
+.price-card[data-item-name="Themed Cake"]{
+  --img-pos-y: 34%; /* подбери значение: 50% центр, больше = ниже */
+}
+@media (max-width: 576px){
+  .price-card[data-item-name="Themed Cake"]{ --img-pos-y: 58%; }
+}
+
 
 
 /* === Global Accent Button (reused across site) === */
