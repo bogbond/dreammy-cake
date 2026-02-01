@@ -1,0 +1,16 @@
+{
+  "enabled": true,
+  "id": "mini-bento-spotlight",
+  "validFrom": null,
+  "validTo": "2026-02-14",
+  "headline": "Hot offer",
+  "title": "Mini / Bento Cake",
+  "subtitle": "A sweet surprise for your favourite person — limited slots this week.",
+  "image": "assets/img/promo/Elegant-Valentine's-Day-Sale.webp",
+  "imageAlt": "Mini bento cake with delicate decoration",
+  "href": "Products/mini-bento-cake/",
+  "ctaLabel": "More details",
+  "dismissLabel": "Not now",
+  "cooldownHours": 24,
+  "triggerDelayMs": 6000
+}
