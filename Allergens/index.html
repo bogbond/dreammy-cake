@@ -1,16 +1,86 @@
+<!DOCTYPE html>
+
+<html lang="en-GB">
+<head>
 <!-- DC:GA4_CONSENT_HEAD_START -->
 <!-- Google Analytics 4 + Consent Mode v2 (UK/EU) -->
-<!-- TODO: Replace GA4 ID once you have it by setting window.GA_MEASUREMENT_ID below -->
 <script>
-  // Set your GA4 Measurement ID here once ready, e.g. 'G-ABCD123456'
+  // GA4 Measurement ID (change here if needed)
   window.GA_MEASUREMENT_ID = window.GA_MEASUREMENT_ID || 'G-CC2NRDSRQ9';
+
+  // Consent state: 'accept' | 'reject' | null
+  window.__dc_consent_choice = window.__dc_consent_choice || null;
+
+  // GA load guard
+  window.__ga_loaded = window.__ga_loaded || false;
+
+  // DataLayer + gtag wrapper:
+  // - Always allow Consent Mode commands
+  // - Block analytics/events until user accepts
   window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  // Load saved consent (default: only essential storage granted)
+  function gtag(){
+    try {
+      if (arguments && arguments.length && arguments[0] === 'consent') {
+        window.dataLayer.push(arguments);
+        return;
+      }
+      if (window.__dc_consent_choice === 'accept') {
+        window.dataLayer.push(arguments);
+      }
+    } catch(e) {}
+  }
+  window.gtag = window.gtag || gtag;
+
+  // Helper: load GA script once (only call after consent 'accept')
+  window.dcLoadGAOnce = window.dcLoadGAOnce || function() {
+    var id = window.GA_MEASUREMENT_ID;
+    if (window.__ga_loaded) return;
+    if(!id || id === 'G-XXXXXXXXXX') {
+      console.warn('GA4 ID is placeholder. Set window.GA_MEASUREMENT_ID to your real GA4 ID.');
+      return;
+    }
+    // Avoid duplicate script tags
+    if (!document.querySelector('script[src^="https://www.googletagmanager.com/gtag/js?id="]')) {
+      var s = document.createElement('script');
+      s.async = true;
+      s.src = 'https://www.googletagmanager.com/gtag/js?id=' + id;
+      document.head.appendChild(s);
+    }
+    window.__ga_loaded = true;
+    gtag('js', new Date());
+    gtag('config', id, { anonymize_ip: true });
+  };
+
+  // Helper: attempt to clear GA cookies on "reject" (best-effort)
+  window.dcClearGACookies = window.dcClearGACookies || function() {
+    try {
+      var expires = 'Thu, 01 Jan 1970 00:00:00 GMT';
+      var domains = [location.hostname, '.' + location.hostname];
+      function del(name) {
+        // Host-only
+        document.cookie = name + '=; expires=' + expires + '; path=/';
+        // Explicit domains
+        for (var i=0; i<domains.length; i++) {
+          document.cookie = name + '=; expires=' + expires + '; path=/; domain=' + domains[i];
+        }
+      }
+      document.cookie.split(';').forEach(function(c){
+        var name = c.split('=')[0].trim();
+        if(name === '_ga' || name === '_gid' || name.indexOf('_ga_') === 0 || name.indexOf('_gat') === 0) {
+          del(name);
+        }
+      });
+    } catch(e) {}
+  };
+
+  // Read saved consent and set defaults (Consent Mode v2)
   (function() {
     try {
-      const saved = JSON.parse(localStorage.getItem('dc_consent') || '{}');
-      const base = {
+      var saved = JSON.parse(localStorage.getItem('dc_consent') || '{}');
+      var choice = (saved && (saved.choice === 'accept' || saved.choice === 'reject')) ? saved.choice : null;
+      window.__dc_consent_choice = choice;
+
+      var base = {
         ad_user_data: 'denied',
         ad_personalization: 'denied',
         ad_storage: 'denied',
@@ -18,32 +88,25 @@
         functionality_storage: 'granted',
         security_storage: 'granted'
       };
-      const consent = Object.assign({}, base, (saved && saved.choice === 'accept') ? {
+
+      var consent = Object.assign({}, base, (choice === 'accept') ? {
         analytics_storage: 'granted',
         ad_storage: 'granted',
         ad_user_data: 'granted',
         ad_personalization: 'granted'
       } : {});
+
       gtag('consent', 'default', consent);
+
+      // Load GA only if user already accepted previously
+      if (choice === 'accept') {
+        window.dcLoadGAOnce();
+      }
     } catch(e) { console.warn('Consent read failed', e); }
   })();
-  // Load GA only when an ID is provided
-  (function(id) {
-    if(!id || id === 'G-XXXXXXXXXX') {
-      console.warn('GA4 ID is placeholder. Set window.GA_MEASUREMENT_ID to your real GA4 ID.');
-      return;
-    }
-    var s=document.createElement('script'); s.async=1; s.src='https://www.googletagmanager.com/gtag/js?id='+id;
-    document.head.appendChild(s);
-    gtag('js', new Date());
-    gtag('config', id, { 'anonymize_ip': true });
-  })(window.GA_MEASUREMENT_ID);
 </script>
 <!-- DC:GA4_CONSENT_HEAD_END -->
-<!DOCTYPE html>
 
-<html lang="en-GB">
-<head>
 <link href="https://fonts.googleapis.com" rel="preconnect"/>
 <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/><meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1" name="viewport"/>
@@ -53,8 +116,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&amp;family=Open+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,300;1,400;1,500;1,600;1,700;1,800&amp;family=Raleway:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&amp;display=swap" rel="stylesheet"/>
 <link href="../assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet"/>
 <link href="../assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet"/><link href="../assets/css/main.css" rel="stylesheet"><link href="../assets/css/pages/allergens.css" rel="stylesheet">
-</link></link><meta content="Allergens &amp; Ingredients — Dreamy Cake Bakery" property="og:title"/><meta content="Allergen and ingredient information for our cakes and cupcakes. We bake in a home kitchen where traces of allergens may be present. Tell us your requirements before ordering." property="og:description"/><meta content="website" property="og:type"/><meta content="/Allergens/" property="og:url"/><meta content="/assets/img/og/home-og-1200.webp" property="og:image"/><meta content="summary_large_image" name="twitter:card"/><meta content="Allergens &amp; Ingredients — Dreamy Cake Bakery" name="twitter:title"/><meta content="Allergen and ingredient information for our cakes and cupcakes. We bake in a home kitchen where traces of allergens may be present. Tell us your requirements before ordering." name="twitter:description"/><meta content="/assets/img/og/home-og-1200.webp" name="twitter:image"/><meta content="en_GB" property="og:locale"/>
-<meta content="Allergen guidance for Dreamy Cake products. Please disclose allergies at enquiry. We bake with care but trace risks may remain." name="description"/>
+<meta content="Allergens &amp; Ingredients — Dreamy Cake Bakery" property="og:title"/><meta content="Allergen and ingredient information for our cakes and cupcakes. We bake in a home kitchen where traces of allergens may be present. Tell us your requirements before ordering." property="og:description"/><meta content="website" property="og:type"/><meta content="https://dreamycake.co.uk/Allergens/" property="og:url"/><meta content="https://dreamycake.co.uk/assets/img/og/home-hero-1200x630.jpg" property="og:image"/><meta content="summary_large_image" name="twitter:card"/><meta content="Allergens &amp; Ingredients — Dreamy Cake Bakery" name="twitter:title"/><meta content="Allergen and ingredient information for our cakes and cupcakes. We bake in a home kitchen where traces of allergens may be present. Tell us your requirements before ordering." name="twitter:description"/><meta content="https://dreamycake.co.uk/assets/img/og/home-hero-1200x630.jpg" name="twitter:image"/><meta content="en_GB" property="og:locale"/>
 <link href="/assets/img/favicon.svg" rel="icon" type="image/svg+xml"/>
 <link href="/assets/img/favicon.ico" rel="icon" sizes="any"/>
 <link href="/apple-touch-icon.png" rel="apple-touch-icon"/>
@@ -106,7 +168,7 @@
 }
 </style>
 <link href="https://dreamycake.co.uk/Allergens/" rel="canonical"/>
-<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"WebPage","@id":"https://dreamycake.co.uk/Allergens/#webpage","url":"https://dreamycake.co.uk/Allergens/","name":"Allergens & Ingredients","description":"Allergen and ingredient information for our cakes and cupcakes. We bake in a home kitchen where traces of allergens may be present. Tell us your requirements before ordering.","about":{"@type":"Thing","name":"Food allergens and ingredient handling"},"isPartOf":{"@type":"WebSite","@id":"https://dreamycake.co.uk/#website"},"breadcrumb":{"@id":"https://dreamycake.co.uk/Allergens/#breadcrumb"}},{"@type":"BreadcrumbList","@id":"https://dreamycake.co.uk/Allergens/#breadcrumb","itemListElement":[{"@type":"ListItem","position":1,"item":{"@id":"https://dreamycake.co.uk/","name":"Home"}},{"@type":"ListItem","position":2,"item":{"@id":"https://dreamycake.co.uk/Allergens/","name":"Allergens & Ingredients"}}]},{"@type":"FAQPage","@id":"https://dreamycake.co.uk/Allergens/#faq","mainEntity":[{"@type":"Question","name":"Can you make a nut\u2011free cake?","acceptedAnswer":{"@type":"Answer","text":"We can avoid adding nuts, but traces are possible as the kitchen handles nuts. Please tell us your requirements before ordering."}},{"@type":"Question","name":"Do you offer gluten\u2011free options?","acceptedAnswer":{"@type":"Answer","text":"Sometimes on request; cross\u2011contact is possible. We cannot guarantee a trace\u2011free environment."}},{"@type":"Question","name":"Where can I read more?","acceptedAnswer":{"@type":"Answer","text":"See the full Q&A and Delivery pages for details, or message us with your specific needs."}}]}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"WebPage","@id":"https://dreamycake.co.uk/Allergens/#webpage","url":"https://dreamycake.co.uk/Allergens/","name":"Allergens & Ingredients","description":"Allergen and ingredient information for our cakes and cupcakes. We bake in a home kitchen where traces of allergens may be present. Tell us your requirements before ordering.","about":{"@type":"Thing","name":"Food allergens and ingredient handling"},"isPartOf":{"@type":"WebSite","@id":"https://dreamycake.co.uk/#website"},"breadcrumb":{"@id":"https://dreamycake.co.uk/Allergens/#breadcrumb"}},{"@type":"BreadcrumbList","@id":"https://dreamycake.co.uk/Allergens/#breadcrumb","itemListElement":[{"@type":"ListItem","position":1,"item":{"@id":"https://dreamycake.co.uk/","name":"Home"}},{"@type":"ListItem","position":2,"item":{"@id":"https://dreamycake.co.uk/Allergens/","name":"Allergens & Ingredients"}}]},{"@type":"FAQPage","@id":"https://dreamycake.co.uk/Allergens/#faq","mainEntity":[{"@type":"Question","name":"Can you make a nut‑free cake?","acceptedAnswer":{"@type":"Answer","text":"We can avoid adding nuts, but traces are possible as the kitchen handles nuts. Please tell us your requirements before ordering."}},{"@type":"Question","name":"Do you offer gluten‑free options?","acceptedAnswer":{"@type":"Answer","text":"Sometimes on request; cross‑contact is possible. We cannot guarantee a trace‑free environment."}},{"@type":"Question","name":"Where can I read more?","acceptedAnswer":{"@type":"Answer","text":"See the full Q&A and Delivery pages for details, or message us with your specific needs."}}]}]}</script>
 </head>
 <body class="dc-dark-header">
 <header class="header d-flex align-items-center fixed-top" id="header">
@@ -136,21 +198,21 @@
         Contact
        </a>
 </li><li>
-<a href="/About">
+<a href="/About/">
         About
        </a>
 </li><li class="dropdown">
 <button aria-controls="order-submenu" aria-expanded="false" aria-label="Toggle order submenu" class="nav-toggle" type="button"><span>Order</span> <i aria-hidden="true" class="bi bi-chevron-down chev"></i></button>
-<ul id="order-submenu"><li><a href="/Products/celebration-cake/#order">Order Celebration Cake</a></li><li><a href="/Products/themed-cake/#order">Order Themed Cake</a></li><li><a href="/Products/mini-bento-cake/#order">Order Mini / Bento Cake</a></li><li><a href="/Products/cupcakes/#order">Order Cupcakes</a></li><li><a href="/Products/postage-cookie/#order">Order Postage Cookie</a></li><li><a href="/#contact">Bespoke Request</a></li></ul>
+<ul id="order-submenu"><li><a href="/Products/celebration-cake/#order">Order Celebration Cake</a></li><li><a href="/Products/themed-cake/#order">Order Themed Cake</a></li><li><a href="/Products/mini-bento-cake/#order">Order Mini / Bento Cake</a></li><li><a href="/Products/cupcakes/#order">Order Cupcakes</a></li><li><a href="/Products/postage-cookie/#order">Order Postage Cookie</a></li><li><a href="/Products/valentines-collection/#order">Order Valentine&#39;s Collection</a></li><li><a href="/#contact">Bespoke Request</a></li></ul>
 </li>
 <!-- <li><a href="/#how-it-works">Services</a></li> -->
 <li class="dropdown">
 <button aria-controls="info-submenu" aria-expanded="false" aria-label="Toggle info submenu" class="nav-toggle" type="button"><span>Info</span> <i aria-hidden="true" class="bi bi-chevron-down chev"></i></button>
 <ul id="info-submenu">
-<li><a href="/Delivery">Delivery</a></li>
-<li><a href="/Allergens">Allergens</a></li>
-<li><a href="/How-it-works">How it works</a></li>
-<li><a href="/QA">Q&amp;A</a></li>
+<li><a href="/Delivery/">Delivery</a></li>
+<li><a href="/Allergens/">Allergens</a></li>
+<li><a href="/How-it-works/">How it works</a></li>
+<li><a href="/QA/">Q&amp;A</a></li>
 </ul>
 </li>
 <li>
@@ -224,13 +286,13 @@
 <h3>Where can I read more?</h3>
 <i class="bi bi-chevron-down"></i>
 </div>
-<div class="acc-body"><div>See the full <a href="/QA">Q&amp;A page</a> for more details, or message us — we’ll happily answer specific questions.</div></div>
+<div class="acc-body"><div>See the full <a href="/QA/">Q&amp;A page</a> for more details, or message us — we’ll happily answer specific questions.</div></div>
 </div>
 </div>
 </div>
 <div class="dc-container">
 <div class="cta" style="justify-content:center; margin-top:14px;">
-<a class="btn" href="/QA"><i class="bi bi-question-circle"></i> Read the full Q&amp;A</a>
+<a class="btn" href="/QA/"><i class="bi bi-question-circle"></i> Read the full Q&amp;A</a>
 </div>
 </div>
 <div class="dc-container small mt-2">
@@ -298,7 +360,12 @@
 <strong>
           Email:
          </strong>
-<span><a class="link" href="mailto:dreamycake.info@gmail.com"><a href="mailto:dreamycake.info@gmail.com">dreamycake.info@gmail.com</a></a></span>
+<span><a class="link" href="mailto:dreamycake.info@gmail.com">dreamycake.info@gmail.com</a></span>
+<br/>
+<strong>
+          WhatsApp:
+         </strong>
+<span><a aria-label="Chat on WhatsApp" class="link" href="https://wa.me/447510837225" onclick="if(window.gtag){gtag('event','whatsapp_click',{label:'footer_contact'});}" rel="noopener" target="_blank"><i class="bi bi-whatsapp"></i> Message us</a></span>
 <br/>
 </p>
 </div>
@@ -340,16 +407,15 @@
 <a aria-label="Follow Dreamy Cake on Instagram" class="instagram" href="https://www.instagram.com/dreamycake.bakery/">
 <i class="bi bi-instagram">
 </i>
-</a>
-</div>
+</a></div>
 </div>
 </div>
 </div>
 <div class="container copyright text-center mt-4">
-<a href="/Terms-and-Conditions">
+<a href="/Terms-and-Conditions/">
      Terms &amp; Conditions
     </a>
-<a href="/Privacy-Policy">
+<a href="/Privacy-Policy/">
      Privacy Policy
     </a>
 <br/>
@@ -371,13 +437,10 @@
       Bond
      </a>
 </div>
-</div>
-<div class="contact-inline" style="margin-top:12px;"> <a href="mailto:dreamycake.info@gmail.com"><a href="mailto:dreamycake.info@gmail.com">dreamycake.info@gmail.com</a></a> ·  <a href="tel:+447510837225">+447510837225</a> ·  <a href="https://wa.me/447510837225" rel="noopener" target="_blank">WhatsApp</a> </div>
-</footer>
+</div></footer>
 <script defer="" src="../assets/js/pages/info-pages.js"></script>
 <script src="/assets/js/navfix.js"></script>
-</body>
-</html>
+
 <!-- DC:CONSENT_BANNER_START -->
 <style>
   .dc-consent-banner{
@@ -442,7 +505,9 @@
     }
 
     function setChoice(choice) {
-      try { localStorage.setItem('dc_consent', JSON.stringify({choice})); } catch(e){}
+      try { localStorage.setItem('dc_consent', JSON.stringify({choice: choice})); } catch(e){}
+      window.__dc_consent_choice = choice;
+
       // Update Consent Mode in real-time
       if (typeof gtag === 'function') {
         if(choice === 'accept') {
@@ -452,13 +517,9 @@
             ad_user_data: 'granted',
             ad_personalization: 'granted'
           });
-          // Attempt GA load if ID present
-          if (window.GA_MEASUREMENT_ID && window.GA_MEASUREMENT_ID !== 'G-XXXXXXXXXX' && !window.__ga_loaded) {
-            var s=document.createElement('script'); s.async=1; s.src='https://www.googletagmanager.com/gtag/js?id='+window.GA_MEASUREMENT_ID;
-            document.head.appendChild(s);
-            gtag('js', new Date());
-            gtag('config', window.GA_MEASUREMENT_ID, { 'anonymize_ip': true });
-            window.__ga_loaded = true;
+          // Load GA once (no duplicates)
+          if (typeof window.dcLoadGAOnce === 'function') {
+            window.dcLoadGAOnce();
           }
         } else {
           gtag('consent', 'update', {
@@ -467,8 +528,13 @@
             ad_user_data: 'denied',
             ad_personalization: 'denied'
           });
+          // Best-effort cookie cleanup
+          if (typeof window.dcClearGACookies === 'function') {
+            window.dcClearGACookies();
+          }
         }
       }
+
       var b = document.querySelector('.dc-consent-banner'); if(b) b.remove();
     }
 
@@ -516,3 +582,5 @@
 })();
 </script>
 <!-- DC:CONSENT_BANNER_END -->
+</body>
+</html>

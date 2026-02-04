@@ -1,16 +1,86 @@
+<!DOCTYPE html>
+
+<html lang="en-GB">
+<head>
 <!-- DC:GA4_CONSENT_HEAD_START -->
 <!-- Google Analytics 4 + Consent Mode v2 (UK/EU) -->
-<!-- TODO: Replace GA4 ID once you have it by setting window.GA_MEASUREMENT_ID below -->
 <script>
-  // Set your GA4 Measurement ID here once ready, e.g. 'G-ABCD123456'
+  // GA4 Measurement ID (change here if needed)
   window.GA_MEASUREMENT_ID = window.GA_MEASUREMENT_ID || 'G-CC2NRDSRQ9';
+
+  // Consent state: 'accept' | 'reject' | null
+  window.__dc_consent_choice = window.__dc_consent_choice || null;
+
+  // GA load guard
+  window.__ga_loaded = window.__ga_loaded || false;
+
+  // DataLayer + gtag wrapper:
+  // - Always allow Consent Mode commands
+  // - Block analytics/events until user accepts
   window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  // Load saved consent (default: only essential storage granted)
+  function gtag(){
+    try {
+      if (arguments && arguments.length && arguments[0] === 'consent') {
+        window.dataLayer.push(arguments);
+        return;
+      }
+      if (window.__dc_consent_choice === 'accept') {
+        window.dataLayer.push(arguments);
+      }
+    } catch(e) {}
+  }
+  window.gtag = window.gtag || gtag;
+
+  // Helper: load GA script once (only call after consent 'accept')
+  window.dcLoadGAOnce = window.dcLoadGAOnce || function() {
+    var id = window.GA_MEASUREMENT_ID;
+    if (window.__ga_loaded) return;
+    if(!id || id === 'G-XXXXXXXXXX') {
+      console.warn('GA4 ID is placeholder. Set window.GA_MEASUREMENT_ID to your real GA4 ID.');
+      return;
+    }
+    // Avoid duplicate script tags
+    if (!document.querySelector('script[src^="https://www.googletagmanager.com/gtag/js?id="]')) {
+      var s = document.createElement('script');
+      s.async = true;
+      s.src = 'https://www.googletagmanager.com/gtag/js?id=' + id;
+      document.head.appendChild(s);
+    }
+    window.__ga_loaded = true;
+    gtag('js', new Date());
+    gtag('config', id, { anonymize_ip: true });
+  };
+
+  // Helper: attempt to clear GA cookies on "reject" (best-effort)
+  window.dcClearGACookies = window.dcClearGACookies || function() {
+    try {
+      var expires = 'Thu, 01 Jan 1970 00:00:00 GMT';
+      var domains = [location.hostname, '.' + location.hostname];
+      function del(name) {
+        // Host-only
+        document.cookie = name + '=; expires=' + expires + '; path=/';
+        // Explicit domains
+        for (var i=0; i<domains.length; i++) {
+          document.cookie = name + '=; expires=' + expires + '; path=/; domain=' + domains[i];
+        }
+      }
+      document.cookie.split(';').forEach(function(c){
+        var name = c.split('=')[0].trim();
+        if(name === '_ga' || name === '_gid' || name.indexOf('_ga_') === 0 || name.indexOf('_gat') === 0) {
+          del(name);
+        }
+      });
+    } catch(e) {}
+  };
+
+  // Read saved consent and set defaults (Consent Mode v2)
   (function() {
     try {
-      const saved = JSON.parse(localStorage.getItem('dc_consent') || '{}');
-      const base = {
+      var saved = JSON.parse(localStorage.getItem('dc_consent') || '{}');
+      var choice = (saved && (saved.choice === 'accept' || saved.choice === 'reject')) ? saved.choice : null;
+      window.__dc_consent_choice = choice;
+
+      var base = {
         ad_user_data: 'denied',
         ad_personalization: 'denied',
         ad_storage: 'denied',
@@ -18,32 +88,25 @@
         functionality_storage: 'granted',
         security_storage: 'granted'
       };
-      const consent = Object.assign({}, base, (saved && saved.choice === 'accept') ? {
+
+      var consent = Object.assign({}, base, (choice === 'accept') ? {
         analytics_storage: 'granted',
         ad_storage: 'granted',
         ad_user_data: 'granted',
         ad_personalization: 'granted'
       } : {});
+
       gtag('consent', 'default', consent);
+
+      // Load GA only if user already accepted previously
+      if (choice === 'accept') {
+        window.dcLoadGAOnce();
+      }
     } catch(e) { console.warn('Consent read failed', e); }
   })();
-  // Load GA only when an ID is provided
-  (function(id) {
-    if(!id || id === 'G-XXXXXXXXXX') {
-      console.warn('GA4 ID is placeholder. Set window.GA_MEASUREMENT_ID to your real GA4 ID.');
-      return;
-    }
-    var s=document.createElement('script'); s.async=1; s.src='https://www.googletagmanager.com/gtag/js?id='+id;
-    document.head.appendChild(s);
-    gtag('js', new Date());
-    gtag('config', id, { 'anonymize_ip': true });
-  })(window.GA_MEASUREMENT_ID);
 </script>
 <!-- DC:GA4_CONSENT_HEAD_END -->
-<!DOCTYPE html>
 
-<html lang="en-GB">
-<head>
 <link href="https://fonts.googleapis.com" rel="preconnect"/>
 <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/><meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1" name="viewport"/>
@@ -58,73 +121,7 @@
 <!-- Favicons -->
 <link href="../assets/img/favicon.ico" rel="shortcut icon"/>
 
-<script id="dc-delivery-jsonld" type="application/ld+json">{
-  "@context": "https://schema.org",
-  "@type": "Service",
-  "name": "Local cake delivery",
-  "areaServed": {
-    "@type": "AdministrativeArea",
-    "name": "Cambridgeshire, UK"
-  },
-  "offers": [
-    {
-      "@type": "Offer",
-      "priceSpecification": [
-        {
-          "@type": "DeliveryChargeSpecification",
-          "name": "Local delivery within 5 km",
-          "appliesToDeliveryMethod": "https://schema.org/DeliveryModeOwnFleet",
-          "price": 0,
-          "priceCurrency": "GBP",
-          "eligibleRegion": "Cambridgeshire, UK",
-          "eligibleQuantity": {
-            "@type": "QuantitativeValue",
-            "maxValue": 5,
-            "unitCode": "KMT"
-          }
-        }
-      ],
-      "availability": "https://schema.org/InStock",
-      "eligibleRegion": "Cambridgeshire, UK"
-    },
-    {
-      "@type": "Offer",
-      "priceSpecification": [
-        {
-          "@type": "DeliveryChargeSpecification",
-          "name": "Beyond local radius",
-          "appliesToDeliveryMethod": "https://schema.org/DeliveryModeOwnFleet",
-          "price": 5,
-          "priceCurrency": "GBP",
-          "eligibleRegion": "Cambridgeshire, UK",
-          "eligibleQuantity": {
-            "@type": "QuantitativeValue",
-            "minValue": 5,
-            "unitCode": "KMT"
-          }
-        }
-      ],
-      "availability": "https://schema.org/InStock",
-      "eligibleRegion": "Cambridgeshire, UK"
-    }
-  ],
-  "hasOfferCatalog": {
-    "@type": "OfferCatalog",
-    "name": "Delivery speed",
-    "itemListElement": [
-      {
-        "@type": "Offer",
-        "name": "Standard lead time",
-        "deliveryLeadTime": {
-          "@type": "QuantitativeValue",
-          "minValue": 7,
-          "maxValue": 14,
-          "unitCode": "DAY"
-        }
-      }
-    ]
-  }
-}</script><meta content="Cake Delivery in Cambridgeshire — Free within 5 km | Dreamy Cake Bakery" property="og:title"/><meta content="Hand delivery across Cambridgeshire. Free within 5 km; up to ~50 km by arrangement (Cambridge, St Neots, Peterborough). Get a quick estimate." property="og:description"/><meta content="website" property="og:type"/><meta content="https://dreamycake.co.uk/Delivery/" property="og:url"/><meta content="https://dreamycake.co.uk/assets/img/og/home-og-1200.webp" property="og:image"/><meta content="summary_large_image" name="twitter:card"/><meta content="Cake Delivery in Cambridgeshire — Free within 5 km | Dreamy Cake Bakery" name="twitter:title"/><meta content="Hand delivery across Cambridgeshire. Free within 5 km; up to ~50 km by arrangement (Cambridge, St Neots, Peterborough). Get a quick estimate." name="twitter:description"/><meta content="/assets/img/og/home-og-1200.webp" name="twitter:image"/><script id="delivery-trailing-slash-fix">
+<script id="dc-delivery-jsonld" type="application/ld+json">{"@context":"https://schema.org","@type":"Service","name":"Local cake delivery","areaServed":{"@type":"AdministrativeArea","name":"Cambridgeshire, UK"},"offers":[{"@type":"Offer","priceSpecification":[{"@type":"DeliveryChargeSpecification","name":"Local delivery within 5 km","appliesToDeliveryMethod":"https://schema.org/DeliveryModeOwnFleet","price":0,"priceCurrency":"GBP","eligibleRegion":"Cambridgeshire, UK","eligibleQuantity":{"@type":"QuantitativeValue","maxValue":5,"unitCode":"KMT"}}],"availability":"https://schema.org/InStock","eligibleRegion":"Cambridgeshire, UK"},{"@type":"Offer","priceSpecification":[{"@type":"DeliveryChargeSpecification","name":"Beyond local radius","appliesToDeliveryMethod":"https://schema.org/DeliveryModeOwnFleet","price":5,"priceCurrency":"GBP","eligibleRegion":"Cambridgeshire, UK","eligibleQuantity":{"@type":"QuantitativeValue","minValue":5,"unitCode":"KMT"}}],"availability":"https://schema.org/InStock","eligibleRegion":"Cambridgeshire, UK"}],"hasOfferCatalog":{"@type":"OfferCatalog","name":"Delivery speed","itemListElement":[{"@type":"Offer","name":"Standard lead time","deliveryLeadTime":{"@type":"QuantitativeValue","minValue":7,"maxValue":14,"unitCode":"DAY"}}]}}</script><meta content="Cake Delivery in Cambridgeshire — Free within 5 km | Dreamy Cake Bakery" property="og:title"/><meta content="Hand delivery across Cambridgeshire. Free within 5 km; up to ~50 km by arrangement (Cambridge, St Neots, Peterborough). Get a quick estimate." property="og:description"/><meta content="website" property="og:type"/><meta content="https://dreamycake.co.uk/Delivery/" property="og:url"/><meta content="https://dreamycake.co.uk/assets/img/og/home-hero-1200x630.jpg" property="og:image"/><meta content="summary_large_image" name="twitter:card"/><meta content="Cake Delivery in Cambridgeshire — Free within 5 km | Dreamy Cake Bakery" name="twitter:title"/><meta content="Hand delivery across Cambridgeshire. Free within 5 km; up to ~50 km by arrangement (Cambridge, St Neots, Peterborough). Get a quick estimate." name="twitter:description"/><meta content="https://dreamycake.co.uk/assets/img/og/home-hero-1200x630.jpg" name="twitter:image"/><script id="delivery-trailing-slash-fix">
 (function(){
   try {
     var p = window.location.pathname;
@@ -134,39 +131,7 @@
     }
   } catch(e) {}
 })();
-</script><script type="application/ld+json">{
-  "@context": "https://schema.org",
-  "@type": "BreadcrumbList",
-  "itemListElement": [
-    {
-      "@type": "ListItem",
-      "position": 1,
-      "name": "Home",
-      "item": "https://dreamycake.co.uk/"
-    },
-    {
-      "@type": "ListItem",
-      "position": 2,
-      "name": "Info",
-      "item": "https://dreamycake.co.uk/#info"
-    },
-    {
-      "@type": "ListItem",
-      "position": 3,
-      "name": "Delivery",
-      "item": "https://dreamycake.co.uk/Delivery/"
-    }
-  ]
-}</script><script type="application/ld+json">{
-  "@context": "https://schema.org",
-  "@type": "WebPage",
-  "name": "Delivery & Collection — Dreamy Cake",
-  "url": "https://dreamycake.co.uk/Delivery/",
-  "inLanguage": "en-GB",
-  "dateModified": "2025-09-19",
-  "description": "Hand delivery across Cambridgeshire (free within 5 km) with collection from Brampton, PE28 4SU, and arranged London deliveries."
-}</script>
-<meta content="Cake delivery across Huntingdon &amp; Cambridgeshire with fair local rates. UK‑wide postage available for cookies. See delivery zones, timings and collection opt…" name="description"/>
+</script><script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://dreamycake.co.uk/"},{"@type":"ListItem","position":2,"name":"Delivery","item":"https://dreamycake.co.uk/Delivery/"}]}</script><script type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","name":"Delivery & Collection — Dreamy Cake","url":"https://dreamycake.co.uk/Delivery/","inLanguage":"en-GB","dateModified":"2025-09-19","description":"Hand delivery across Cambridgeshire (free within 5 km) with collection from Brampton, PE28 4SU, and arranged London deliveries."}</script>
 <link href="/assets/img/favicon.svg" rel="icon" type="image/svg+xml"/>
 <link href="/assets/img/favicon.ico" rel="icon" sizes="any"/>
 <link href="/apple-touch-icon.png" rel="apple-touch-icon"/>
@@ -246,21 +211,21 @@
         Contact
        </a>
 </li><li>
-<a href="/About">
+<a href="/About/">
         About
        </a>
 </li><li class="dropdown">
 <button aria-controls="order-submenu" aria-expanded="false" aria-label="Toggle order submenu" class="nav-toggle" type="button"><span>Order</span> <i aria-hidden="true" class="bi bi-chevron-down chev"></i></button>
-<ul id="order-submenu"><li><a href="/Products/celebration-cake/#order">Order Celebration Cake</a></li><li><a href="/Products/themed-cake/#order">Order Themed Cake</a></li><li><a href="/Products/mini-bento-cake/#order">Order Mini / Bento Cake</a></li><li><a href="/Products/cupcakes/#order">Order Cupcakes</a></li><li><a href="/Products/postage-cookie/#order">Order Postage Cookie</a></li><li><a href="/#contact">Bespoke Request</a></li></ul>
+<ul id="order-submenu"><li><a href="/Products/celebration-cake/#order">Order Celebration Cake</a></li><li><a href="/Products/themed-cake/#order">Order Themed Cake</a></li><li><a href="/Products/mini-bento-cake/#order">Order Mini / Bento Cake</a></li><li><a href="/Products/cupcakes/#order">Order Cupcakes</a></li><li><a href="/Products/postage-cookie/#order">Order Postage Cookie</a></li><li><a href="/Products/valentines-collection/#order">Order Valentine&#39;s Collection</a></li><li><a href="/#contact">Bespoke Request</a></li></ul>
 </li>
 <!-- <li><a href="/#how-it-works">Services</a></li> -->
 <li class="dropdown">
 <button aria-controls="info-submenu" aria-expanded="false" aria-label="Toggle info submenu" class="nav-toggle" type="button"><span>Info</span> <i aria-hidden="true" class="bi bi-chevron-down chev"></i></button>
 <ul id="info-submenu">
-<li><a href="/Delivery">Delivery</a></li>
-<li><a href="/Allergens">Allergens</a></li>
-<li><a href="/How-it-works">How it works</a></li>
-<li><a href="/QA">Q&amp;A</a></li>
+<li><a href="/Delivery/">Delivery</a></li>
+<li><a href="/Allergens/">Allergens</a></li>
+<li><a href="/How-it-works/">How it works</a></li>
+<li><a href="/QA/">Q&amp;A</a></li>
 </ul>
 </li>
 <li>
@@ -275,7 +240,7 @@
 <section class="hero">
 <div class="dc-container wrap">
 <div>
-<h1>Delivery &amp; Collection</h1><nav aria-label="breadcrumb" class="breadcrumb small"><ol class="breadcrumb mb-2"><li class="breadcrumb-item"><a href="/">Home</a></li><li class="breadcrumb-item"><a href="/#info">Info</a></li><li aria-current="page" class="breadcrumb-item active">Delivery</li></ol></nav>
+<h1>Delivery &amp; Collection</h1><nav aria-label="breadcrumb" class="breadcrumb small"><ol class="breadcrumb mb-2"><li class="breadcrumb-item"><a href="/">Home</a></li><li aria-current="page" class="breadcrumb-item active">Delivery</li></ol></nav>
 <p class="lead">We hand‑deliver your bakes with care. Free within <strong>5 km</strong>; up to <strong>~50 km</strong> by arrangement (Cambridgeshire, Peterborough and selected London postcodes).</p>
 <div class="badges">
 <span class="badge"><i class="bi bi-geo-alt"></i> Covering ~50 km radius</span>
@@ -335,11 +300,11 @@
 </div>
 <div class="card">
 <h3><i class="bi bi-info-circle"></i> Changes &amp; cancellations</h3>
-<p>Plans changed? Let us know as soon as possible. Small timing tweaks are fine if our schedule allows. For cancellation terms, please see our <a href="/Terms-and-Conditions">Terms</a>.</p>
+<p>Plans changed? Let us know as soon as possible. Small timing tweaks are fine if our schedule allows. For cancellation terms, please see our <a href="/Terms-and-Conditions/">Terms</a>.</p>
 </div>
 </div>
 <div class="dc-container policy mt-2">
-        * By placing an order you agree to our <a href="/Privacy-Policy">Privacy Policy</a> and <a href="/Terms-and-Conditions">Terms</a>.
+        * By placing an order you agree to our <a href="/Privacy-Policy/">Privacy Policy</a> and <a href="/Terms-and-Conditions/">Terms</a>.
       </div>
 </section>
 </main>
@@ -379,7 +344,12 @@
 <strong>
           Email:
          </strong>
-<span><a class="link" href="mailto:dreamycake.info@gmail.com"><a href="mailto:dreamycake.info@gmail.com">dreamycake.info@gmail.com</a></a></span>
+<span><a class="link" href="mailto:dreamycake.info@gmail.com">dreamycake.info@gmail.com</a></span>
+<br/>
+<strong>
+          WhatsApp:
+         </strong>
+<span><a aria-label="Chat on WhatsApp" class="link" href="https://wa.me/447510837225" onclick="if(window.gtag){gtag('event','whatsapp_click',{label:'footer_contact'});}" rel="noopener" target="_blank"><i class="bi bi-whatsapp"></i> Message us</a></span>
 <br/>
 </p>
 </div>
@@ -421,16 +391,15 @@
 <a aria-label="Follow Dreamy Cake on Instagram" class="instagram" href="https://www.instagram.com/dreamycake.bakery/">
 <i class="bi bi-instagram">
 </i>
-</a>
-</div>
+</a></div>
 </div>
 </div>
 </div>
 <div class="container copyright text-center mt-4">
-<a href="/Terms-and-Conditions">
+<a href="/Terms-and-Conditions/">
      Terms &amp; Conditions
     </a>
-<a href="/Privacy-Policy">
+<a href="/Privacy-Policy/">
      Privacy Policy
     </a>
 <br/>
@@ -452,99 +421,12 @@
       Bond
      </a>
 </div>
-</div>
-<div class="contact-inline" style="margin-top:12px;"> <a href="mailto:dreamycake.info@gmail.com"><a href="mailto:dreamycake.info@gmail.com">dreamycake.info@gmail.com</a></a> ·  <a href="tel:+447510837225">+447510837225</a> ·  <a href="https://wa.me/447510837225" rel="noopener" target="_blank">WhatsApp</a> </div>
-</footer>
+</div></footer>
 <script defer="" src="../assets/js/pages/info-pages.js"></script>
-<script type="application/ld+json">{
-  "@context": "https://schema.org",
-  "@type": "Bakery",
-  "name": "Dreamy Cake Bakery",
-  "areaServed": [
-    "Huntingdon",
-    "Cambridge",
-    "Ely",
-    "St Neots",
-    "Peterborough",
-    "North/East London"
-  ],
-  "hasDelivery": true,
-  "openingHoursSpecification": [
-    {
-      "@type": "OpeningHoursSpecification",
-      "dayOfWeek": [
-        "Monday",
-        "Tuesday",
-        "Wednesday",
-        "Thursday",
-        "Friday",
-        "Saturday",
-        "Sunday"
-      ],
-      "opens": "10:00",
-      "closes": "20:00"
-    }
-  ],
-  "url": "https://dreamycake.co.uk/Delivery/",
-  "address": {
-    "@type": "PostalAddress",
-    "addressLocality": "Brampton",
-    "addressRegion": "Cambridgeshire",
-    "postalCode": "PE28 4SU",
-    "addressCountry": "GB"
-  },
-  "priceRange": "££",
-  "sameAs": [
-    "https://www.instagram.com/dreamycake.bakery/"
-  ],
-  "hasMap": "https://www.google.com/maps?q=PE28%204SU"
-}</script>
-<script type="application/ld+json">{
-  "@context": "https://schema.org",
-  "@type": "Bakery",
-  "name": "Dreamy Cake Bakery",
-  "areaServed": [
-    "Huntingdon",
-    "Cambridge",
-    "Ely",
-    "St Neots",
-    "Peterborough",
-    "North/East London"
-  ],
-  "hasDelivery": true,
-  "openingHoursSpecification": [
-    {
-      "@type": "OpeningHoursSpecification",
-      "dayOfWeek": [
-        "Monday",
-        "Tuesday",
-        "Wednesday",
-        "Thursday",
-        "Friday",
-        "Saturday",
-        "Sunday"
-      ],
-      "opens": "10:00",
-      "closes": "20:00"
-    }
-  ],
-  "url": "https://dreamycake.co.uk/Delivery/",
-  "address": {
-    "@type": "PostalAddress",
-    "addressLocality": "Brampton",
-    "addressRegion": "Cambridgeshire",
-    "postalCode": "PE28 4SU",
-    "addressCountry": "GB"
-  },
-  "priceRange": "££",
-  "sameAs": [
-    "https://www.instagram.com/dreamycake.bakery/"
-  ],
-  "hasMap": "https://www.google.com/maps?q=PE28%204SU"
-}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Bakery","name":"Dreamy Cake Bakery","areaServed":["Huntingdon","Cambridge","Ely","St Neots","Peterborough","North/East London"],"hasDelivery":true,"openingHoursSpecification":[{"@type":"OpeningHoursSpecification","dayOfWeek":["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"],"opens":"10:00","closes":"20:00"}],"url":"https://dreamycake.co.uk/Delivery/","address":{"@type":"PostalAddress","addressLocality":"Brampton","addressRegion":"Cambridgeshire","postalCode":"PE28 4SU","addressCountry":"GB"},"priceRange":"££","sameAs":["https://www.instagram.com/dreamycake.bakery/"],"hasMap":"https://www.google.com/maps?q=PE28%204SU"}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Bakery","name":"Dreamy Cake Bakery","areaServed":["Huntingdon","Cambridge","Ely","St Neots","Peterborough","North/East London"],"hasDelivery":true,"openingHoursSpecification":[{"@type":"OpeningHoursSpecification","dayOfWeek":["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"],"opens":"10:00","closes":"20:00"}],"url":"https://dreamycake.co.uk/Delivery/","address":{"@type":"PostalAddress","addressLocality":"Brampton","addressRegion":"Cambridgeshire","postalCode":"PE28 4SU","addressCountry":"GB"},"priceRange":"££","sameAs":["https://www.instagram.com/dreamycake.bakery/"],"hasMap":"https://www.google.com/maps?q=PE28%204SU"}</script>
 <script src="/assets/js/navfix.js"></script>
-</body>
-</html>
+
 <!-- DC:CONSENT_BANNER_START -->
 <style>
   .dc-consent-banner{
@@ -609,7 +491,9 @@
     }
 
     function setChoice(choice) {
-      try { localStorage.setItem('dc_consent', JSON.stringify({choice})); } catch(e){}
+      try { localStorage.setItem('dc_consent', JSON.stringify({choice: choice})); } catch(e){}
+      window.__dc_consent_choice = choice;
+
       // Update Consent Mode in real-time
       if (typeof gtag === 'function') {
         if(choice === 'accept') {
@@ -619,13 +503,9 @@
             ad_user_data: 'granted',
             ad_personalization: 'granted'
           });
-          // Attempt GA load if ID present
-          if (window.GA_MEASUREMENT_ID && window.GA_MEASUREMENT_ID !== 'G-XXXXXXXXXX' && !window.__ga_loaded) {
-            var s=document.createElement('script'); s.async=1; s.src='https://www.googletagmanager.com/gtag/js?id='+window.GA_MEASUREMENT_ID;
-            document.head.appendChild(s);
-            gtag('js', new Date());
-            gtag('config', window.GA_MEASUREMENT_ID, { 'anonymize_ip': true });
-            window.__ga_loaded = true;
+          // Load GA once (no duplicates)
+          if (typeof window.dcLoadGAOnce === 'function') {
+            window.dcLoadGAOnce();
           }
         } else {
           gtag('consent', 'update', {
@@ -634,8 +514,13 @@
             ad_user_data: 'denied',
             ad_personalization: 'denied'
           });
+          // Best-effort cookie cleanup
+          if (typeof window.dcClearGACookies === 'function') {
+            window.dcClearGACookies();
+          }
         }
       }
+
       var b = document.querySelector('.dc-consent-banner'); if(b) b.remove();
     }
 
@@ -683,3 +568,5 @@
 })();
 </script>
 <!-- DC:CONSENT_BANNER_END -->
+</body>
+</html>

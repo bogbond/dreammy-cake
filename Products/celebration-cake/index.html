@@ -1,16 +1,86 @@
+<!DOCTYPE html>
+
+<html lang="en-GB">
+<head>
 <!-- DC:GA4_CONSENT_HEAD_START -->
 <!-- Google Analytics 4 + Consent Mode v2 (UK/EU) -->
-<!-- TODO: Replace GA4 ID once you have it by setting window.GA_MEASUREMENT_ID below -->
 <script>
-  // Set your GA4 Measurement ID here once ready, e.g. 'G-ABCD123456'
+  // GA4 Measurement ID (change here if needed)
   window.GA_MEASUREMENT_ID = window.GA_MEASUREMENT_ID || 'G-CC2NRDSRQ9';
+
+  // Consent state: 'accept' | 'reject' | null
+  window.__dc_consent_choice = window.__dc_consent_choice || null;
+
+  // GA load guard
+  window.__ga_loaded = window.__ga_loaded || false;
+
+  // DataLayer + gtag wrapper:
+  // - Always allow Consent Mode commands
+  // - Block analytics/events until user accepts
   window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  // Load saved consent (default: only essential storage granted)
+  function gtag(){
+    try {
+      if (arguments && arguments.length && arguments[0] === 'consent') {
+        window.dataLayer.push(arguments);
+        return;
+      }
+      if (window.__dc_consent_choice === 'accept') {
+        window.dataLayer.push(arguments);
+      }
+    } catch(e) {}
+  }
+  window.gtag = window.gtag || gtag;
+
+  // Helper: load GA script once (only call after consent 'accept')
+  window.dcLoadGAOnce = window.dcLoadGAOnce || function() {
+    var id = window.GA_MEASUREMENT_ID;
+    if (window.__ga_loaded) return;
+    if(!id || id === 'G-XXXXXXXXXX') {
+      console.warn('GA4 ID is placeholder. Set window.GA_MEASUREMENT_ID to your real GA4 ID.');
+      return;
+    }
+    // Avoid duplicate script tags
+    if (!document.querySelector('script[src^="https://www.googletagmanager.com/gtag/js?id="]')) {
+      var s = document.createElement('script');
+      s.async = true;
+      s.src = 'https://www.googletagmanager.com/gtag/js?id=' + id;
+      document.head.appendChild(s);
+    }
+    window.__ga_loaded = true;
+    gtag('js', new Date());
+    gtag('config', id, { anonymize_ip: true });
+  };
+
+  // Helper: attempt to clear GA cookies on "reject" (best-effort)
+  window.dcClearGACookies = window.dcClearGACookies || function() {
+    try {
+      var expires = 'Thu, 01 Jan 1970 00:00:00 GMT';
+      var domains = [location.hostname, '.' + location.hostname];
+      function del(name) {
+        // Host-only
+        document.cookie = name + '=; expires=' + expires + '; path=/';
+        // Explicit domains
+        for (var i=0; i<domains.length; i++) {
+          document.cookie = name + '=; expires=' + expires + '; path=/; domain=' + domains[i];
+        }
+      }
+      document.cookie.split(';').forEach(function(c){
+        var name = c.split('=')[0].trim();
+        if(name === '_ga' || name === '_gid' || name.indexOf('_ga_') === 0 || name.indexOf('_gat') === 0) {
+          del(name);
+        }
+      });
+    } catch(e) {}
+  };
+
+  // Read saved consent and set defaults (Consent Mode v2)
   (function() {
     try {
-      const saved = JSON.parse(localStorage.getItem('dc_consent') || '{}');
-      const base = {
+      var saved = JSON.parse(localStorage.getItem('dc_consent') || '{}');
+      var choice = (saved && (saved.choice === 'accept' || saved.choice === 'reject')) ? saved.choice : null;
+      window.__dc_consent_choice = choice;
+
+      var base = {
         ad_user_data: 'denied',
         ad_personalization: 'denied',
         ad_storage: 'denied',
@@ -18,32 +88,25 @@
         functionality_storage: 'granted',
         security_storage: 'granted'
       };
-      const consent = Object.assign({}, base, (saved && saved.choice === 'accept') ? {
+
+      var consent = Object.assign({}, base, (choice === 'accept') ? {
         analytics_storage: 'granted',
         ad_storage: 'granted',
         ad_user_data: 'granted',
         ad_personalization: 'granted'
       } : {});
+
       gtag('consent', 'default', consent);
+
+      // Load GA only if user already accepted previously
+      if (choice === 'accept') {
+        window.dcLoadGAOnce();
+      }
     } catch(e) { console.warn('Consent read failed', e); }
   })();
-  // Load GA only when an ID is provided
-  (function(id) {
-    if(!id || id === 'G-XXXXXXXXXX') {
-      console.warn('GA4 ID is placeholder. Set window.GA_MEASUREMENT_ID to your real GA4 ID.');
-      return;
-    }
-    var s=document.createElement('script'); s.async=1; s.src='https://www.googletagmanager.com/gtag/js?id='+id;
-    document.head.appendChild(s);
-    gtag('js', new Date());
-    gtag('config', id, { 'anonymize_ip': true });
-  })(window.GA_MEASUREMENT_ID);
 </script>
 <!-- DC:GA4_CONSENT_HEAD_END -->
-<!DOCTYPE html>
 
-<html lang="en-GB">
-<head>
 <link href="https://fonts.googleapis.com" rel="preconnect"/>
 <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
 <meta charset="utf-8"/>
@@ -62,14 +125,13 @@
 <meta content="product" property="og:type"/>
 <meta content="Celebration Cake · Dreamy Cake Studio" property="og:title"/>
 <meta content="Stylish, made-to-order celebration cakes — designed and baked by Dreamy Cake. Serving Huntingdon, Cambridge, Peterborough. Get a quote and plan your cake today." property="og:description"/>
-<meta content="https://dreamycake.co.uk/../../assets/img/items/celebration-cake-main.webp" property="og:image"/>
+<meta content="https://dreamycake.co.uk/assets/img/og/home-hero-1200x630.jpg" property="og:image"/>
 <meta content="https://dreamycake.co.uk/Products/celebration-cake/" property="og:url"/>
 <meta content="summary_large_image" name="twitter:card"/>
 <meta content="Celebration Cake · Dreamy Cake Studio" name="twitter:title"/>
 <meta content="Stylish, made-to-order celebration cakes — designed and baked by Dreamy Cake. Serving Huntingdon, Cambridge, Peterborough. Get a quote and plan your cake today." name="twitter:description"/>
-<meta content="https://dreamycake.co.uk/../../assets/img/items/celebration-cake-main.webp" name="twitter:image"/>
-<script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "Do you deliver?", "acceptedAnswer": {"@type": "Answer", "text": "Yes \u2014 I deliver across Cambridgeshire, including Huntingdon, Cambridge and Peterborough. Pickup is also available by arrangement."}}, {"@type": "Question", "name": "How far in advance should I book?", "acceptedAnswer": {"@type": "Answer", "text": "On weekdays I can often book 3\u20135 days ahead; for weekends and busier dates, please reserve as early as possible to secure your slot."}}, {"@type": "Question", "name": "Can you accommodate allergens?", "acceptedAnswer": {"@type": "Answer", "text": "I handle allergens carefully and can often suggest alternatives; however, cakes are prepared in a kitchen that handles common allergens, so I cannot guarantee trace\u2011free bakes."}}]}</script></link><script type="application/ld+json">{"@context":"https://schema.org","@type":"Product","name":"Celebration Cake","description":"Stylish, made-to-order celebration cakes — designed and baked by Dreamy Cake. Serving Huntingdon, Cambridge, Peterborough. Get a quote and plan your cake today.","image":[{"@type":"ImageObject","url":"https://dreamycake.co.uk/assets/img/items/celebration-cake-main.webp","caption":"Celebration cake — hero view"},{"@type":"ImageObject","url":"https://dreamycake.co.uk/assets/img/items/celebration-cake-02.webp","caption":"Celebration cake — alternate angle"},{"@type":"ImageObject","url":"https://dreamycake.co.uk/assets/img/items/celebration-cake-03.webp","caption":"Celebration cake — detail view"},{"@type":"ImageObject","url":"https://dreamycake.co.uk/assets/img/items/celebration-cake-04.webp","caption":"Celebration cake — buttercream with purple palette knife strokes, flowers & “Happy 60th Birthday Mum” topper"},{"@type":"ImageObject","url":"https://dreamycake.co.uk/assets/img/items/celebration-cake-05.webp","caption":"Celebration cake — black buttercream with gold leaf & chocolate bar decorations"},{"@type":"ImageObject","url":"https://dreamycake.co.uk/assets/img/items/themed-cake-main.webp","caption":"Themed cake — hero view (portfolio example)"}],"sku":"celebration-cake","category":"Cakes","url":"https://dreamycake.co.uk/Products/celebration-cake/","brand":{"@type":"Brand","name":"Dreamy Cake Studio"},"areaServed":["Huntingdon","Cambridge","Peterborough","St Ives","Ely","St Neots","London",{"@type":"GeoCircle","geoMidpoint":{"@type":"GeoCoordinates","addressLocality":"Huntingdon","addressCountry":"GB"},"geoRadius":70000}],"offers":{"@type":"AggregateOffer","priceCurrency":"GBP","lowPrice":"65","offerCount":1,"offers":[{"@type":"Offer","priceCurrency":"GBP","price":"65","availability":"https://schema.org/PreOrder","url":"https://dreamycake.co.uk/Products/celebration-cake/","shippingDetails":{"@type":"OfferShippingDetails","shippingDestination":{"@type":"DefinedRegion","addressCountry":"GB","addressRegion":"Cambridgeshire area"}},"hasMerchantReturnPolicy":{"@type":"MerchantReturnPolicy","applicableCountry":"GB","returnPolicyCategory":"https://schema.org/MerchantReturnNotPermitted"}}],"shippingDetails":{"@type":"OfferShippingDetails","shippingDestination":{"@type":"DefinedRegion","addressCountry":"GB","addressRegion":"Cambridgeshire area"}},"hasMerchantReturnPolicy":{"@type":"MerchantReturnPolicy","applicableCountry":"GB","returnPolicyCategory":"https://schema.org/MerchantReturnNotPermitted"}},"additionalProperty":[{"@type":"PropertyValue","name":"Made to order","value":"Yes"},{"@type":"PropertyValue","name":"Service area","value":"Cambridgeshire + nearby (50–70km radius)"}]}</script>
-<meta content="Celebration Cake | Dreamy Cake Studio — Huntingdon &amp; Cambridgeshire. Bespoke cakes, cupcakes and fondant cookies in Huntingdonshire. Modern design, fresh…" name="description"/>
+<meta content="https://dreamycake.co.uk/assets/img/og/home-hero-1200x630.jpg" name="twitter:image"/>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Do you deliver?","acceptedAnswer":{"@type":"Answer","text":"Yes — I deliver across Cambridgeshire, including Huntingdon, Cambridge and Peterborough. Pickup is also available by arrangement."}},{"@type":"Question","name":"How far in advance should I book?","acceptedAnswer":{"@type":"Answer","text":"On weekdays I can often book 3–5 days ahead; for weekends and busier dates, please reserve as early as possible to secure your slot."}},{"@type":"Question","name":"Can you accommodate allergens?","acceptedAnswer":{"@type":"Answer","text":"I handle allergens carefully and can often suggest alternatives; however, cakes are prepared in a kitchen that handles common allergens, so I cannot guarantee trace‑free bakes."}}]}</script><script type="application/ld+json">{"@context":"https://schema.org","@type":"Product","name":"Celebration Cake","description":"Stylish, made-to-order celebration cakes — designed and baked by Dreamy Cake. Serving Huntingdon, Cambridge, Peterborough. Get a quote and plan your cake today.","image":[{"@type":"ImageObject","url":"https://dreamycake.co.uk/assets/img/og/home-hero-1200x630.jpg","caption":"Celebration cake — hero view"},{"@type":"ImageObject","url":"https://dreamycake.co.uk/assets/img/og/home-hero-1200x630.jpg","caption":"Celebration cake — alternate angle"},{"@type":"ImageObject","url":"https://dreamycake.co.uk/assets/img/og/home-hero-1200x630.jpg","caption":"Celebration cake — detail view"},{"@type":"ImageObject","url":"https://dreamycake.co.uk/assets/img/og/home-hero-1200x630.jpg","caption":"Celebration cake — buttercream with purple palette knife strokes, flowers & “Happy 60th Birthday Mum” topper"},{"@type":"ImageObject","url":"https://dreamycake.co.uk/assets/img/og/home-hero-1200x630.jpg","caption":"Celebration cake — black buttercream with gold leaf & chocolate bar decorations"}],"sku":"celebration-cake","category":"Cakes","url":"https://dreamycake.co.uk/Products/celebration-cake/","brand":{"@type":"Brand","name":"Dreamy Cake Studio"},"areaServed":["Huntingdon","Cambridge","Peterborough","St Ives","Ely","St Neots","London",{"@type":"GeoCircle","geoMidpoint":{"@type":"GeoCoordinates","addressLocality":"Huntingdon","addressCountry":"GB"},"geoRadius":70000}],"offers":{"@type":"AggregateOffer","priceCurrency":"GBP","lowPrice":"65","offerCount":1,"offers":[{"@type":"Offer","priceCurrency":"GBP","price":"65","availability":"https://schema.org/PreOrder","url":"https://dreamycake.co.uk/Products/celebration-cake/","hasMerchantReturnPolicy":{"@type":"MerchantReturnPolicy","applicableCountry":"GB","returnPolicyCategory":"https://schema.org/MerchantReturnNotPermitted"},"itemCondition":"https://schema.org/NewCondition"}],"hasMerchantReturnPolicy":{"@type":"MerchantReturnPolicy","applicableCountry":"GB","returnPolicyCategory":"https://schema.org/MerchantReturnNotPermitted"}},"additionalProperty":[{"@type":"PropertyValue","name":"Made to order","value":"Yes"},{"@type":"PropertyValue","name":"Service area","value":"Cambridgeshire + nearby (50–70km radius)"}],"mpn":"DC-CELEBRATION-CAKE"}</script>
 <link href="/assets/img/favicon.svg" rel="icon" type="image/svg+xml"/>
 <link href="/assets/img/favicon.ico" rel="icon" sizes="any"/>
 <link href="/apple-touch-icon.png" rel="apple-touch-icon"/>
@@ -149,7 +211,7 @@
         Contact
        </a>
 </li><li>
-<a href="/About">
+<a href="/About/">
         About
        </a>
 </li>
@@ -161,16 +223,16 @@
 
 
 "><span>Order</span> <i aria-hidden="true" class="bi bi-chevron-down chev"></i></button>
-<ul id="order-submenu"><li><a href="/Products/celebration-cake/#order">Order Celebration Cake</a></li><li><a href="/Products/themed-cake/#order">Order Themed Cake</a></li><li><a href="/Products/mini-bento-cake/#order">Order Mini / Bento Cake</a></li><li><a href="/Products/cupcakes/#order">Order Cupcakes</a></li><li><a href="/Products/postage-cookie/#order">Order Postage Cookie</a></li><li><a href="/#contact">Bespoke Request</a></li></ul>
+<ul id="order-submenu"><li><a href="/Products/celebration-cake/#order">Order Celebration Cake</a></li><li><a href="/Products/themed-cake/#order">Order Themed Cake</a></li><li><a href="/Products/mini-bento-cake/#order">Order Mini / Bento Cake</a></li><li><a href="/Products/cupcakes/#order">Order Cupcakes</a></li><li><a href="/Products/postage-cookie/#order">Order Postage Cookie</a></li><li><a href="/Products/valentines-collection/#order">Order Valentine&#39;s Collection</a></li><li><a href="/#contact">Bespoke Request</a></li></ul>
 </li>
 <!-- <li><a href="/#how-it-works">Services</a></li> -->
 <li class="dropdown">
 <button aria-controls="info-submenu" aria-expanded="false" aria-label="Toggle info submenu" class="nav-toggle" type="button"><span>Info</span> <i aria-hidden="true" class="bi bi-chevron-down chev"></i></button>
 <ul id="info-submenu">
-<li><a href="/Delivery">Delivery</a></li>
-<li><a href="/Allergens">Allergens</a></li>
-<li><a href="/How-it-works">How it works</a></li>
-<li><a href="/QA">Q&amp;A</a></li>
+<li><a href="/Delivery/">Delivery</a></li>
+<li><a href="/Allergens/">Allergens</a></li>
+<li><a href="/How-it-works/">How it works</a></li>
+<li><a href="/QA/">Q&amp;A</a></li>
 </ul>
 </li>
 <li>
@@ -186,10 +248,11 @@
 <div class="page-title product-hero" style="--hero-img:url('../../assets/img/items/celebration-cake-main.webp')">
 <div class="container position-relative">
 <h1>Celebration Cake</h1>
-<p>Modern, made-to-order celebration cakes</p><p class="promise">Clean, modern, made to order — delivered across Cambridgeshire.</p>
+<p>Modern, made-to-order celebration cakes</p>
+<p class="delivery-note"><strong>From £65</strong> — free delivery within 5 km, then from £5 (distance-based) across Cambridgeshire.</p>
 <div class="chipbar">
-<a class="chip" href="/Delivery"><i class="bi bi-truck"></i> Delivery</a>
-<a class="chip" href="/Allergens"><i class="bi bi-exclamation-triangle"></i> Allergens</a>
+<a class="chip" href="/Delivery/"><i class="bi bi-truck"></i> Delivery</a>
+<a class="chip" href="/Allergens/"><i class="bi bi-exclamation-triangle"></i> Allergens</a>
 <a class="chip" href="/How-it-works/"><i class="bi bi-calendar-event"></i> How it works</a>
 </div>
 </div>
@@ -358,7 +421,7 @@
 <summary><span>Storage</span><i class="bi bi-chevron-down chev"></i></summary>
 <div class="answer">Carry flat; keep cool (not a hot car). Best the same day or next morning. I provide storage tips upon delivery.</div>
 </details>
-<div class="faq-cta mt-3"><a class="btn btn-primary" href="/QA">See full Q&amp;A</a></div>
+<div class="faq-cta mt-3"><a class="btn btn-primary" href="/QA/">See full Q&amp;A</a></div>
 </div>
 </div>
 </div>
@@ -371,7 +434,7 @@
 <input name="_honey" type="hidden" value=""/>
 <input name="_captcha" type="hidden" value="false"/>
 <input name="_template" type="hidden" value="table"/>
-<input name="_next" type="hidden" value="https://www.dreamycake.co.uk/Thank-You/"/>
+<input name="_next" type="hidden" value="https://dreamycake.co.uk/Thank-You/"/>
 <input name="product_name" type="hidden" value="Celebration Cake"/>
 <input name="page_url" type="hidden" value="/Products/celebration-cake/"/>
 <div class="row g-2">
@@ -496,7 +559,7 @@
 <input autocomplete="off" class="form-control" id="products-celebration-cake-index-f1-budget" min="0" name="budget_from" placeholder="e.g., 60" step="5" type="number"/>
 </div>
 <div class="col-12 small text-muted">
-                  By clicking the button, I agree with the <a href="/Privacy-Policy">Privacy Policy</a>.
+                  By clicking the button, I agree with the <a href="/Privacy-Policy/">Privacy Policy</a>.
                 </div>
 <div class="col-12">
 <fieldset class="form-fieldset"><legend class="form-label form-legend">Design style (optional)</legend><div class="d-flex flex-wrap gap-1">
@@ -570,7 +633,12 @@
 <strong>
           Email:
          </strong>
-<span><a class="link" href="mailto:dreamycake.info@gmail.com"><a href="mailto:dreamycake.info@gmail.com">dreamycake.info@gmail.com</a></a></span>
+<span><a class="link" href="mailto:dreamycake.info@gmail.com">dreamycake.info@gmail.com</a></span>
+<br/>
+<strong>
+          WhatsApp:
+         </strong>
+<span><a aria-label="Chat on WhatsApp" class="link" href="https://wa.me/447510837225" onclick="if(window.gtag){gtag('event','whatsapp_click',{label:'footer_contact'});}" rel="noopener" target="_blank"><i class="bi bi-whatsapp"></i> Message us</a></span>
 <br/>
 </p>
 </div>
@@ -612,16 +680,15 @@
 <a aria-label="Follow Dreamy Cake on Instagram" class="instagram" href="https://www.instagram.com/dreamycake.bakery/">
 <i class="bi bi-instagram">
 </i>
-</a>
-</div>
+</a></div>
 </div>
 </div>
 </div>
 <div class="container copyright text-center mt-4">
-<a href="/Terms-and-Conditions">
+<a href="/Terms-and-Conditions/">
      Terms &amp; Conditions
     </a>
-<a href="/Privacy-Policy">
+<a href="/Privacy-Policy/">
      Privacy Policy
     </a>
 <br/>
@@ -656,8 +723,7 @@
 <script src="../../assets/vendor/swiper/swiper-bundle.min.js"></script>
 <script src="../../assets/js/main.js"></script><script src="../../assets/js/product.js"></script>
 <script src="/assets/js/navfix.js"></script>
-</body>
-</html>
+
 <!-- DC:CONSENT_BANNER_START -->
 <style>
   .dc-consent-banner{
@@ -722,7 +788,9 @@
     }
 
     function setChoice(choice) {
-      try { localStorage.setItem('dc_consent', JSON.stringify({choice})); } catch(e){}
+      try { localStorage.setItem('dc_consent', JSON.stringify({choice: choice})); } catch(e){}
+      window.__dc_consent_choice = choice;
+
       // Update Consent Mode in real-time
       if (typeof gtag === 'function') {
         if(choice === 'accept') {
@@ -732,13 +800,9 @@
             ad_user_data: 'granted',
             ad_personalization: 'granted'
           });
-          // Attempt GA load if ID present
-          if (window.GA_MEASUREMENT_ID && window.GA_MEASUREMENT_ID !== 'G-XXXXXXXXXX' && !window.__ga_loaded) {
-            var s=document.createElement('script'); s.async=1; s.src='https://www.googletagmanager.com/gtag/js?id='+window.GA_MEASUREMENT_ID;
-            document.head.appendChild(s);
-            gtag('js', new Date());
-            gtag('config', window.GA_MEASUREMENT_ID, { 'anonymize_ip': true });
-            window.__ga_loaded = true;
+          // Load GA once (no duplicates)
+          if (typeof window.dcLoadGAOnce === 'function') {
+            window.dcLoadGAOnce();
           }
         } else {
           gtag('consent', 'update', {
@@ -747,8 +811,13 @@
             ad_user_data: 'denied',
             ad_personalization: 'denied'
           });
+          // Best-effort cookie cleanup
+          if (typeof window.dcClearGACookies === 'function') {
+            window.dcClearGACookies();
+          }
         }
       }
+
       var b = document.querySelector('.dc-consent-banner'); if(b) b.remove();
     }
 
@@ -796,3 +865,5 @@
 })();
 </script>
 <!-- DC:CONSENT_BANNER_END -->
+</body>
+</html>

@@ -24,7 +24,7 @@
     subtitle: "A sweet surprise for your favourite person — limited slots this week.",
     image: "assets/img/items/mini-bento-cake-main.webp",
     imageAlt: "Mini bento cake with delicate decoration",
-    href: "Products/mini-bento-cake/",
+    href: "/Products/mini-bento-cake/",
     ctaLabel: "More details",
     dismissLabel: "Not now",
     cooldownHours: 24,

@@ -1,16 +1,86 @@
+<!DOCTYPE html>
+
+<html lang="en-GB">
+<head>
 <!-- DC:GA4_CONSENT_HEAD_START -->
 <!-- Google Analytics 4 + Consent Mode v2 (UK/EU) -->
-<!-- TODO: Replace GA4 ID once you have it by setting window.GA_MEASUREMENT_ID below -->
 <script>
-  // Set your GA4 Measurement ID here once ready, e.g. 'G-ABCD123456'
+  // GA4 Measurement ID (change here if needed)
   window.GA_MEASUREMENT_ID = window.GA_MEASUREMENT_ID || 'G-CC2NRDSRQ9';
+
+  // Consent state: 'accept' | 'reject' | null
+  window.__dc_consent_choice = window.__dc_consent_choice || null;
+
+  // GA load guard
+  window.__ga_loaded = window.__ga_loaded || false;
+
+  // DataLayer + gtag wrapper:
+  // - Always allow Consent Mode commands
+  // - Block analytics/events until user accepts
   window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  // Load saved consent (default: only essential storage granted)
+  function gtag(){
+    try {
+      if (arguments && arguments.length && arguments[0] === 'consent') {
+        window.dataLayer.push(arguments);
+        return;
+      }
+      if (window.__dc_consent_choice === 'accept') {
+        window.dataLayer.push(arguments);
+      }
+    } catch(e) {}
+  }
+  window.gtag = window.gtag || gtag;
+
+  // Helper: load GA script once (only call after consent 'accept')
+  window.dcLoadGAOnce = window.dcLoadGAOnce || function() {
+    var id = window.GA_MEASUREMENT_ID;
+    if (window.__ga_loaded) return;
+    if(!id || id === 'G-XXXXXXXXXX') {
+      console.warn('GA4 ID is placeholder. Set window.GA_MEASUREMENT_ID to your real GA4 ID.');
+      return;
+    }
+    // Avoid duplicate script tags
+    if (!document.querySelector('script[src^="https://www.googletagmanager.com/gtag/js?id="]')) {
+      var s = document.createElement('script');
+      s.async = true;
+      s.src = 'https://www.googletagmanager.com/gtag/js?id=' + id;
+      document.head.appendChild(s);
+    }
+    window.__ga_loaded = true;
+    gtag('js', new Date());
+    gtag('config', id, { anonymize_ip: true });
+  };
+
+  // Helper: attempt to clear GA cookies on "reject" (best-effort)
+  window.dcClearGACookies = window.dcClearGACookies || function() {
+    try {
+      var expires = 'Thu, 01 Jan 1970 00:00:00 GMT';
+      var domains = [location.hostname, '.' + location.hostname];
+      function del(name) {
+        // Host-only
+        document.cookie = name + '=; expires=' + expires + '; path=/';
+        // Explicit domains
+        for (var i=0; i<domains.length; i++) {
+          document.cookie = name + '=; expires=' + expires + '; path=/; domain=' + domains[i];
+        }
+      }
+      document.cookie.split(';').forEach(function(c){
+        var name = c.split('=')[0].trim();
+        if(name === '_ga' || name === '_gid' || name.indexOf('_ga_') === 0 || name.indexOf('_gat') === 0) {
+          del(name);
+        }
+      });
+    } catch(e) {}
+  };
+
+  // Read saved consent and set defaults (Consent Mode v2)
   (function() {
     try {
-      const saved = JSON.parse(localStorage.getItem('dc_consent') || '{}');
-      const base = {
+      var saved = JSON.parse(localStorage.getItem('dc_consent') || '{}');
+      var choice = (saved && (saved.choice === 'accept' || saved.choice === 'reject')) ? saved.choice : null;
+      window.__dc_consent_choice = choice;
+
+      var base = {
         ad_user_data: 'denied',
         ad_personalization: 'denied',
         ad_storage: 'denied',
@@ -18,37 +88,27 @@
         functionality_storage: 'granted',
         security_storage: 'granted'
       };
-      const consent = Object.assign({}, base, (saved && saved.choice === 'accept') ? {
+
+      var consent = Object.assign({}, base, (choice === 'accept') ? {
         analytics_storage: 'granted',
         ad_storage: 'granted',
         ad_user_data: 'granted',
         ad_personalization: 'granted'
       } : {});
+
       gtag('consent', 'default', consent);
+
+      // Load GA only if user already accepted previously
+      if (choice === 'accept') {
+        window.dcLoadGAOnce();
+      }
     } catch(e) { console.warn('Consent read failed', e); }
   })();
-  // Load GA only when an ID is provided
-  (function(id) {
-    if(!id || id === 'G-XXXXXXXXXX') {
-      console.warn('GA4 ID is placeholder. Set window.GA_MEASUREMENT_ID to your real GA4 ID.');
-      return;
-    }
-    var s=document.createElement('script'); s.async=1; s.src='https://www.googletagmanager.com/gtag/js?id='+id;
-    document.head.appendChild(s);
-    gtag('js', new Date());
-    gtag('config', id, { 'anonymize_ip': true });
-  })(window.GA_MEASUREMENT_ID);
 </script>
 <!-- DC:GA4_CONSENT_HEAD_END -->
-<!DOCTYPE html>
 
-<html lang="en-GB">
-<head>
 <link href="https://fonts.googleapis.com" rel="preconnect"/>
 <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
-<!-- Google tag (gtag.js) -->
-<script async="" src="https://www.googletagmanager.com/gtag/js?id=G-CC2NRDSRQ9"></script>
-
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
 <title>FAQ: Ordering, Delivery &amp; Allergens | Dreamy Cake</title>
@@ -63,7 +123,7 @@
 <!-- Open Graph Meta Tags for Social Media -->
 <meta content="Q&amp;A | Dreamy Cake - Cakes &amp; Cupcakes in Cambridgeshire" property="og:title"/>
 <meta content="Answers to your questions about Dreamy Cake’s custom cakes, cupcakes, and desserts. Learn about orders, delivery, and payment in Huntingdon, Cambridge, Peterborough, and Cambridgeshire." property="og:description"/>
-<meta content="https://dreamycake.co.uk/assets/img/cake1200.png" property="og:image"/>
+<meta content="https://dreamycake.co.uk/assets/img/og/home-hero-1200x630.jpg" property="og:image"/>
 <meta content="1200" property="og:image:width"/>
 <meta content="630" property="og:image:height"/>
 <meta content="https://dreamycake.co.uk/QA/" property="og:url"/>
@@ -72,298 +132,13 @@
 <meta content="summary_large_image" name="twitter:card"/>
 <meta content="Q&amp;A | Dreamy Cake - Cakes &amp; Cupcakes in Cambridgeshire" name="twitter:title"/>
 <meta content="Answers to your questions about Dreamy Cake’s custom cakes, cupcakes, and desserts. Learn about orders, delivery, and payment in Huntingdon, Cambridge, Peterborough, and Cambridgeshire." name="twitter:description"/>
-<meta content="https://dreamycake.co.uk/assets/img/cake1200.png" name="twitter:image"/>
-<meta content="https://dreamycake.co.uk/QA" name="twitter:url"/>
+<meta content="https://dreamycake.co.uk/assets/img/og/home-hero-1200x630.jpg" name="twitter:image"/>
+<meta content="https://dreamycake.co.uk/QA/" name="twitter:url"/>
 <meta content="@dreamy_cakess" name="twitter:site"/>
 <link href="https://dreamycake.co.uk/QA/" rel="canonical"/>
 <!-- Favicons -->
 <meta content="DreamyCake" name="apple-mobile-web-app-title"/>
-<script type="application/ld+json">{
-  "@context": "https://schema.org",
-  "@type": "FAQPage",
-  "mainEntity": [
-    {
-      "@type": "Question",
-      "name": "Where can I collect my order?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Our bakery is located in Brampton, Huntingdon, about a\n                      30-minute drive from Cambridge. The exact address will be\n                      provided once your order is confirmed."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "Do you deliver?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Yes, we offer delivery to Huntingdon, Cambridge,\n                      Peterborough, and nearby towns and villages. For some\n                      orders, we may be able to arrange delivery to London as\n                      well."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "Do you offer free delivery?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "We offer free delivery within a 5-mile radius of\n                      Huntingdon. For locations beyond that, delivery charges\n                      will be calculated specifically for your order."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "Is weekend or early morning/late evening delivery available?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Yes, we can accommodate deliveries on weekends or at\n                      specific times, but this should be arranged when placing\n                      your order, as there may be certain limitations."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "Can I request custom decorations or personalized text on my\n                    order?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Absolutely! We’re happy to customize your cake or cupcakes\n                      with decorations, names, and more. Once you submit the\n                      order form, we’ll discuss the specifics with you."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "Do you require a deposit?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Yes, in some cases, a deposit of 50% of the order value is\n                      required. Please refer to our refund/cancellation policy\n                      for more details."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "Can I get my deposit back if I cancel my order?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Yes, as long as you cancel at least 10 days before the\n                      scheduled delivery date. More details are available in our\n                      refund/cancellation policy."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "What is the preferred way to contact you?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Email is our preferred method of communication, as it is\n                      secure and keeps all details in one place for easy\n                      reference."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "What happens after I submit my cake order form?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Once you submit your order form, we’ll reach out to you\n                      within 1-2 business days. Due to high demand, we may not\n                      be able to fulfill every request. If your order can\n                      proceed, you’ll receive a detailed quote by email. After\n                      you approve the quote, an invoice will be sent, and\n                      payment will be required within 48 hours to confirm the\n                      order. Please check your spam folder in case our email\n                      goes there!"
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "How far in advance should I place my order?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "We recommend placing orders 2-3 weeks in advance. For\n                      urgent orders, we do offer an expedited service with an\n                      additional charge. Please specify any urgent needs in the\n                      order form."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "Can I make changes to my order after it has been submitted?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Yes, you can make changes to your order after it has been\n                      fully agreed upon, but this must be done at least 10 days\n                      before your scheduled delivery date. If you need to make\n                      changes after this deadline, additional charges may apply."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "How should I store my cake after receiving it?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "To keep your cake fresh, we recommend storing it in the\n                      refrigerator at a temperature between 0°C and 5°C (32°F to\n                      41°F). Our cakes are made without preservatives, so they\n                      are best enjoyed within 7–14 days after delivery."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "What payment methods do you accept?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "We accept cash or bank transfer as payment methods for\n                      your orders."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "How far in advance should I book?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Most dates fill 2–3 weeks ahead; peak weekends and tiered cakes fill earlier. Tell us your event date — we’ll confirm realistic options. Please specify any urgent needs in the order form."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "How do I place an order?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Send the order form with date, servings, flavour and a brief idea. Or start directly on a product page: Celebration Cake , Themed Cake , Mini/Bento , Cupcakes . We reply within 1–2 business days with availability and a quote. Your invoice is due within 48 hours to secure the slot."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "Do you accept rush orders?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Sometimes, if the schedule allows. A rush fee may apply for priority prep/materials; we’ll confirm feasibility first."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "Can I reserve a date without details yet?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Yes — we can hold a date after a deposit. Final design details are due 10 days before your event."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "What info helps you quote accurately?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Date/time, servings, flavour, inspiration photos/colours, venue or collection, any allergies, and a budget range."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "Do you do tasting boxes?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Occasionally (limited dates). Email dreamycake.info@gmail.com with your event date, preferred flavours and collection/delivery area, and we’ll confirm the next available slot and options."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "Can I order via Instagram/DM?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "For clarity and records, we finalise orders by email/form. We’re happy to answer quick questions in DMs, then move to email to book."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "How much do your cakes cost?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Pricing depends on size, flavour and design time. See current “from” prices in the Pricing section."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "Are personalised cakes refundable if I change my mind?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Under UK rules, bespoke/personalised goods don’t carry a no‑fault right to cancel (the 14‑day cooling‑off for distance sales doesn’t apply). Faulty or not‑as‑described items remain protected by consumer law. See gov.uk for details."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "What counts as “faulty or not as described”?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "We follow UK consumer standards; if an item is faulty or not as described, we’ll assess evidence and resolve per law. Keep the cake cool/flat and send photos promptly so we can help."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "Can I split payment?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Usually yes (deposit + balance). The booking is confirmed only after the deposit is received."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "Do you charge for design revisions?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Your quote includes one minor revision. Extra concept work may be billed."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "Do you deliver? Where to?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Local delivery across Huntingdon, Cambridge, Peterborough, St Ives, St Neots, Ely and nearby villages; some London deliveries by arrangement. See Delivery details . Delivery is quoted by distance and time window."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "Can I collect?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Yes — collection from Brampton, Huntingdon (PE28) at an agreed time. We share the exact address after confirmation."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "How do delivery time windows work?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "We give a window based on route and traffic. Early‑morning/late‑evening slots are possible if pre‑arranged."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "What if I miss the delivery window?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "We’ll try to re‑route where possible; additional fees may apply. If same‑day re‑delivery isn’t feasible, collection can be arranged."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "Venue setup for tiered cakes?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Available on request (fees depend on distance, time and access). Please share venue contact and loading details."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "Who is responsible after handover?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "After collection/delivery, care and transport are the customer’s responsibility; we photograph items before handover as condition proof."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "Do you offer nationwide shipping?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Fresh cakes are hand‑delivered or collected only. Postable items (e.g., cookie favours) may be offered seasonally."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "Can I change delivery address/time?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Usually possible up to 48 hours before; later changes depend on route and may incur a fee."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "What cake size do I need?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Tell us headcount and slice style (party ≈ 1×2×5 cm; finger ≈ 2.5×2.5×10 cm). Guide for tall single tiers: 6\" (15 cm) : ~10–12 party / ~20 finger 8\" (20 cm) : ~20–24 party / ~40 finger 10\" (25 cm) : ~35–40 party / ~60–70 finger. Servings vary by height and cutting method; wedding charts often assume smaller slices."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "Do you make tiered cakes?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Yes. We’ll plan boards/dowels and advise the right stand and transport approach."
-      }
-    }
-  ]
-}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Where can I collect my order?","acceptedAnswer":{"@type":"Answer","text":"Our bakery is located in Brampton, Huntingdon, about a\n                      30-minute drive from Cambridge. The exact address will be\n                      provided once your order is confirmed."}},{"@type":"Question","name":"Do you deliver?","acceptedAnswer":{"@type":"Answer","text":"Yes, we offer delivery to Huntingdon, Cambridge,\n                      Peterborough, and nearby towns and villages. For some\n                      orders, we may be able to arrange delivery to London as\n                      well."}},{"@type":"Question","name":"Do you offer free delivery?","acceptedAnswer":{"@type":"Answer","text":"We offer free delivery within a 5-mile radius of\n                      Huntingdon. For locations beyond that, delivery charges\n                      will be calculated specifically for your order."}},{"@type":"Question","name":"Is weekend or early morning/late evening delivery available?","acceptedAnswer":{"@type":"Answer","text":"Yes, we can accommodate deliveries on weekends or at\n                      specific times, but this should be arranged when placing\n                      your order, as there may be certain limitations."}},{"@type":"Question","name":"Can I request custom decorations or personalized text on my\n                    order?","acceptedAnswer":{"@type":"Answer","text":"Absolutely! We’re happy to customize your cake or cupcakes\n                      with decorations, names, and more. Once you submit the\n                      order form, we’ll discuss the specifics with you."}},{"@type":"Question","name":"Do you require a deposit?","acceptedAnswer":{"@type":"Answer","text":"Yes, in some cases, a deposit of 50% of the order value is\n                      required. Please refer to our refund/cancellation policy\n                      for more details."}},{"@type":"Question","name":"Can I get my deposit back if I cancel my order?","acceptedAnswer":{"@type":"Answer","text":"Yes, as long as you cancel at least 10 days before the\n                      scheduled delivery date. More details are available in our\n                      refund/cancellation policy."}},{"@type":"Question","name":"What is the preferred way to contact you?","acceptedAnswer":{"@type":"Answer","text":"Email is our preferred method of communication, as it is\n                      secure and keeps all details in one place for easy\n                      reference."}},{"@type":"Question","name":"What happens after I submit my cake order form?","acceptedAnswer":{"@type":"Answer","text":"Once you submit your order form, we’ll reach out to you\n                      within 1-2 business days. Due to high demand, we may not\n                      be able to fulfill every request. If your order can\n                      proceed, you’ll receive a detailed quote by email. After\n                      you approve the quote, an invoice will be sent, and\n                      payment will be required within 48 hours to confirm the\n                      order. Please check your spam folder in case our email\n                      goes there!"}},{"@type":"Question","name":"How far in advance should I place my order?","acceptedAnswer":{"@type":"Answer","text":"We recommend placing orders 2-3 weeks in advance. For\n                      urgent orders, we do offer an expedited service with an\n                      additional charge. Please specify any urgent needs in the\n                      order form."}},{"@type":"Question","name":"Can I make changes to my order after it has been submitted?","acceptedAnswer":{"@type":"Answer","text":"Yes, you can make changes to your order after it has been\n                      fully agreed upon, but this must be done at least 10 days\n                      before your scheduled delivery date. If you need to make\n                      changes after this deadline, additional charges may apply."}},{"@type":"Question","name":"How should I store my cake after receiving it?","acceptedAnswer":{"@type":"Answer","text":"To keep your cake fresh, we recommend storing it in the\n                      refrigerator at a temperature between 0°C and 5°C (32°F to\n                      41°F). Our cakes are made without preservatives, so they\n                      are best enjoyed within 7–14 days after delivery."}},{"@type":"Question","name":"What payment methods do you accept?","acceptedAnswer":{"@type":"Answer","text":"We accept cash or bank transfer as payment methods for\n                      your orders."}},{"@type":"Question","name":"How far in advance should I book?","acceptedAnswer":{"@type":"Answer","text":"Most dates fill 2–3 weeks ahead; peak weekends and tiered cakes fill earlier. Tell us your event date — we’ll confirm realistic options. Please specify any urgent needs in the order form."}},{"@type":"Question","name":"How do I place an order?","acceptedAnswer":{"@type":"Answer","text":"Send the order form with date, servings, flavour and a brief idea. Or start directly on a product page: Celebration Cake , Themed Cake , Mini/Bento , Cupcakes . We reply within 1–2 business days with availability and a quote. Your invoice is due within 48 hours to secure the slot."}},{"@type":"Question","name":"Do you accept rush orders?","acceptedAnswer":{"@type":"Answer","text":"Sometimes, if the schedule allows. A rush fee may apply for priority prep/materials; we’ll confirm feasibility first."}},{"@type":"Question","name":"Can I reserve a date without details yet?","acceptedAnswer":{"@type":"Answer","text":"Yes — we can hold a date after a deposit. Final design details are due 10 days before your event."}},{"@type":"Question","name":"What info helps you quote accurately?","acceptedAnswer":{"@type":"Answer","text":"Date/time, servings, flavour, inspiration photos/colours, venue or collection, any allergies, and a budget range."}},{"@type":"Question","name":"Do you do tasting boxes?","acceptedAnswer":{"@type":"Answer","text":"Occasionally (limited dates). Email dreamycake.info@gmail.com with your event date, preferred flavours and collection/delivery area, and we’ll confirm the next available slot and options."}},{"@type":"Question","name":"Can I order via Instagram/DM?","acceptedAnswer":{"@type":"Answer","text":"For clarity and records, we finalise orders by email/form. We’re happy to answer quick questions in DMs, then move to email to book."}},{"@type":"Question","name":"How much do your cakes cost?","acceptedAnswer":{"@type":"Answer","text":"Pricing depends on size, flavour and design time. See current “from” prices in the Pricing section."}},{"@type":"Question","name":"Are personalised cakes refundable if I change my mind?","acceptedAnswer":{"@type":"Answer","text":"Under UK rules, bespoke/personalised goods don’t carry a no‑fault right to cancel (the 14‑day cooling‑off for distance sales doesn’t apply). Faulty or not‑as‑described items remain protected by consumer law. See gov.uk for details."}},{"@type":"Question","name":"What counts as “faulty or not as described”?","acceptedAnswer":{"@type":"Answer","text":"We follow UK consumer standards; if an item is faulty or not as described, we’ll assess evidence and resolve per law. Keep the cake cool/flat and send photos promptly so we can help."}},{"@type":"Question","name":"Can I split payment?","acceptedAnswer":{"@type":"Answer","text":"Usually yes (deposit + balance). The booking is confirmed only after the deposit is received."}},{"@type":"Question","name":"Do you charge for design revisions?","acceptedAnswer":{"@type":"Answer","text":"Your quote includes one minor revision. Extra concept work may be billed."}},{"@type":"Question","name":"Do you deliver? Where to?","acceptedAnswer":{"@type":"Answer","text":"Local delivery across Huntingdon, Cambridge, Peterborough, St Ives, St Neots, Ely and nearby villages; some London deliveries by arrangement. See Delivery details . Delivery is quoted by distance and time window."}},{"@type":"Question","name":"Can I collect?","acceptedAnswer":{"@type":"Answer","text":"Yes — collection from Brampton, Huntingdon (PE28) at an agreed time. We share the exact address after confirmation."}},{"@type":"Question","name":"How do delivery time windows work?","acceptedAnswer":{"@type":"Answer","text":"We give a window based on route and traffic. Early‑morning/late‑evening slots are possible if pre‑arranged."}},{"@type":"Question","name":"What if I miss the delivery window?","acceptedAnswer":{"@type":"Answer","text":"We’ll try to re‑route where possible; additional fees may apply. If same‑day re‑delivery isn’t feasible, collection can be arranged."}},{"@type":"Question","name":"Venue setup for tiered cakes?","acceptedAnswer":{"@type":"Answer","text":"Available on request (fees depend on distance, time and access). Please share venue contact and loading details."}},{"@type":"Question","name":"Who is responsible after handover?","acceptedAnswer":{"@type":"Answer","text":"After collection/delivery, care and transport are the customer’s responsibility; we photograph items before handover as condition proof."}},{"@type":"Question","name":"Do you offer nationwide shipping?","acceptedAnswer":{"@type":"Answer","text":"Fresh cakes are hand‑delivered or collected only. Postable items (e.g., cookie favours) may be offered seasonally."}},{"@type":"Question","name":"Can I change delivery address/time?","acceptedAnswer":{"@type":"Answer","text":"Usually possible up to 48 hours before; later changes depend on route and may incur a fee."}},{"@type":"Question","name":"What cake size do I need?","acceptedAnswer":{"@type":"Answer","text":"Tell us headcount and slice style (party ≈ 1×2×5 cm; finger ≈ 2.5×2.5×10 cm). Guide for tall single tiers: 6\" (15 cm) : ~10–12 party / ~20 finger 8\" (20 cm) : ~20–24 party / ~40 finger 10\" (25 cm) : ~35–40 party / ~60–70 finger. Servings vary by height and cutting method; wedding charts often assume smaller slices."}},{"@type":"Question","name":"Do you make tiered cakes?","acceptedAnswer":{"@type":"Answer","text":"Yes. We’ll plan boards/dowels and advise the right stand and transport approach."}}]}</script>
 <!-- Fonts -->
 <link href="https://fonts.googleapis.com" rel="preconnect"/>
 <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
@@ -633,7 +408,7 @@ body.mobile-nav-active.faq-page .mobile-nav-toggle {
 }
 
 </style>
-</link></link><script id="qa-trailing-slash-fix">
+<script id="qa-trailing-slash-fix">
 (function(){
   try {
     var p = window.location.pathname;
@@ -643,39 +418,7 @@ body.mobile-nav-active.faq-page .mobile-nav-toggle {
     }
   } catch(e) {}
 })();
-</script><script type="application/ld+json">{
-  "@context": "https://schema.org",
-  "@type": "BreadcrumbList",
-  "itemListElement": [
-    {
-      "@type": "ListItem",
-      "position": 1,
-      "name": "Home",
-      "item": "https://dreamycake.co.uk/"
-    },
-    {
-      "@type": "ListItem",
-      "position": 2,
-      "name": "Info",
-      "item": "https://dreamycake.co.uk/#info"
-    },
-    {
-      "@type": "ListItem",
-      "position": 3,
-      "name": "FAQ",
-      "item": "https://dreamycake.co.uk/QA/"
-    }
-  ]
-}</script><script type="application/ld+json">{
-  "@context": "https://schema.org",
-  "@type": "WebPage",
-  "name": "FAQ — Dreamy Cake",
-  "url": "https://dreamycake.co.uk/QA/",
-  "inLanguage": "en-GB",
-  "dateModified": "2025-09-19",
-  "description": "Answers on ordering, lead times, delivery, pricing, sizes, flavours and allergens for Dreamy Cake."
-}</script>
-<meta content="Quick questions about cakes, cookies, delivery, allergens and lead times. Find answers fast or message us for personalised help." name="description"/>
+</script><script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://dreamycake.co.uk/"},{"@type":"ListItem","position":2,"name":"FAQ","item":"https://dreamycake.co.uk/QA/"}]}</script><script type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","name":"FAQ — Dreamy Cake","url":"https://dreamycake.co.uk/QA/","inLanguage":"en-GB","dateModified":"2025-09-19","description":"Answers on ordering, lead times, delivery, pricing, sizes, flavours and allergens for Dreamy Cake."}</script>
 <link rel="icon" type="image/svg+xml" href="/assets/img/favicon.svg">
 <link rel="icon" href="/assets/img/favicon.ico" sizes="any">
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
@@ -718,22 +461,22 @@ body.mobile-nav-active.faq-page .mobile-nav-toggle {
         Contact
        </a>
 </li><li>
-<a href="/About">
+<a href="/About/">
         About
        </a>
 </li>
 <li class="dropdown">
 <button aria-controls="order-submenu" aria-expanded="false" aria-label="Toggle order submenu" class="nav-toggle" type="button"><span>Order</span> <i aria-hidden="true" class="bi bi-chevron-down chev"></i></button>
-<ul id="order-submenu"><li><a href="/Products/celebration-cake/#order">Order Celebration Cake</a></li><li><a href="/Products/themed-cake/#order">Order Themed Cake</a></li><li><a href="/Products/mini-bento-cake/#order">Order Mini / Bento Cake</a></li><li><a href="/Products/cupcakes/#order">Order Cupcakes</a></li><li><a href="/Products/postage-cookie/#order">Order Postage Cookie</a></li><li><a href="/#contact">Bespoke Request</a></li></ul>
+<ul id="order-submenu"><li><a href="/Products/celebration-cake/#order">Order Celebration Cake</a></li><li><a href="/Products/themed-cake/#order">Order Themed Cake</a></li><li><a href="/Products/mini-bento-cake/#order">Order Mini / Bento Cake</a></li><li><a href="/Products/cupcakes/#order">Order Cupcakes</a></li><li><a href="/Products/postage-cookie/#order">Order Postage Cookie</a></li><li><a href="/Products/valentines-collection/#order">Order Valentine&#39;s Collection</a></li><li><a href="/#contact">Bespoke Request</a></li></ul>
 </li>
 <!-- <li><a href="/#how-it-works">Services</a></li> -->
 <li class="dropdown">
 <button aria-controls="info-submenu" aria-expanded="false" aria-label="Toggle info submenu" class="nav-toggle" type="button"><span>Info</span> <i aria-hidden="true" class="bi bi-chevron-down chev"></i></button>
 <ul id="info-submenu">
-<li><a href="/Delivery">Delivery</a></li>
-<li><a href="/Allergens">Allergens</a></li>
-<li><a href="/How-it-works">How it works</a></li>
-<li><a href="/QA">Q&amp;A</a></li>
+<li><a href="/Delivery/">Delivery</a></li>
+<li><a href="/Allergens/">Allergens</a></li>
+<li><a href="/How-it-works/">How it works</a></li>
+<li><a href="/QA/">Q&amp;A</a></li>
 </ul>
 </li>
 <li>
@@ -745,7 +488,7 @@ body.mobile-nav-active.faq-page .mobile-nav-toggle {
 </div>
 </header>
 <main class="main">
-<section class="section" id="faq-intro"><nav aria-label="breadcrumb" class="breadcrumb small"><ol class="breadcrumb mb-2"><li class="breadcrumb-item"><a href="/">Home</a></li><li class="breadcrumb-item"><a href="/#info">Info</a></li><li aria-current="page" class="breadcrumb-item active">FAQ</li></ol></nav>
+<section class="section" id="faq-intro"><nav aria-label="breadcrumb" class="breadcrumb small"><ol class="breadcrumb mb-2"><li class="breadcrumb-item"><a href="/">Home</a></li><li aria-current="page" class="breadcrumb-item active">FAQ</li></ol></nav>
 <div class="container section-title">
 <h1>Frequently Asked Questions</h1>
 <p class="text-body-secondary">All the essentials — ordering, delivery, pricing, and lead times.</p>
@@ -1008,7 +751,7 @@ body.mobile-nav-active.faq-page .mobile-nav-toggle {
 <i class="faq-icon bi bi-question-circle"></i>
 <h3 aria-controls="faqp-6128479" aria-expanded="false" role="button" tabindex="0">Do you do tasting boxes?</h3>
 <div aria-hidden="true" class="faq-content" id="faqp-6128479" role="region">
-<p>Occasionally (limited dates). Email <a href="mailto:dreamycake.info@gmail.com"><a href="mailto:dreamycake.info@gmail.com">dreamycake.info@gmail.com</a></a> with your event date, preferred flavours and collection/delivery area, and we’ll confirm the next available slot and options.</p>
+<p>Occasionally (limited dates). Email <a href="mailto:dreamycake.info@gmail.com">dreamycake.info@gmail.com</a> with your event date, preferred flavours and collection/delivery area, and we’ll confirm the next available slot and options.</p>
 </div>
 <i aria-hidden="true" class="faq-toggle bi bi-chevron-right"></i>
 </div>
@@ -1418,8 +1161,8 @@ body.mobile-nav-active.faq-page .mobile-nav-toggle {
 <div class="container">
 <div class="row g-3 justify-content-center text-center" data-aos="fade-up">
 <div class="col-md-3"><a class="btn btn-outline-dark w-100" href="/How-it-works/">How it works</a></div>
-<div class="col-md-3"><a class="btn btn-outline-dark w-100" href="/Delivery">Delivery</a></div>
-<div class="col-md-3"><a class="btn btn-outline-dark w-100" href="/Allergens">Allergens</a></div>
+<div class="col-md-3"><a class="btn btn-outline-dark w-100" href="/Delivery/">Delivery</a></div>
+<div class="col-md-3"><a class="btn btn-outline-dark w-100" href="/Allergens/">Allergens</a></div>
 <div class="col-md-3"><a class="btn btn-dark w-100" href="/#contact">Order a cake</a></div>
 </div>
 </div>
@@ -1461,7 +1204,12 @@ body.mobile-nav-active.faq-page .mobile-nav-toggle {
 <strong>
           Email:
          </strong>
-<span><a class="link" href="mailto:dreamycake.info@gmail.com"><a href="mailto:dreamycake.info@gmail.com">dreamycake.info@gmail.com</a></a></span>
+<span><a class="link" href="mailto:dreamycake.info@gmail.com">dreamycake.info@gmail.com</a></span>
+<br/>
+<strong>
+          WhatsApp:
+         </strong>
+<span><a aria-label="Chat on WhatsApp" class="link" href="https://wa.me/447510837225" onclick="if(window.gtag){gtag('event','whatsapp_click',{label:'footer_contact'});}" rel="noopener" target="_blank"><i class="bi bi-whatsapp"></i> Message us</a></span>
 <br/>
 </p>
 </div>
@@ -1503,16 +1251,15 @@ body.mobile-nav-active.faq-page .mobile-nav-toggle {
 <a aria-label="Follow Dreamy Cake on Instagram" class="instagram" href="https://www.instagram.com/dreamycake.bakery/">
 <i class="bi bi-instagram">
 </i>
-</a>
-</div>
+</a></div>
 </div>
 </div>
 </div>
 <div class="container copyright text-center mt-4">
-<a href="/Terms-and-Conditions">
+<a href="/Terms-and-Conditions/">
      Terms &amp; Conditions
     </a>
-<a href="/Privacy-Policy">
+<a href="/Privacy-Policy/">
      Privacy Policy
     </a>
 <br/>
@@ -1534,9 +1281,7 @@ body.mobile-nav-active.faq-page .mobile-nav-toggle {
       Bond
      </a>
 </div>
-</div>
-<div class="contact-inline" style="margin-top:12px;"> <a href="mailto:dreamycake.info@gmail.com"><a href="mailto:dreamycake.info@gmail.com">dreamycake.info@gmail.com</a></a> ·  <a href="tel:+447510837225">+447510837225</a> ·  <a href="https://wa.me/447510837225" rel="noopener" target="_blank">WhatsApp</a> </div>
-</footer>
+</div></footer>
 <a class="scroll-top d-flex align-items-center justify-content-center" href="#" id="scroll-top"><i class="bi bi-arrow-up-short"></i></a>
 <div id="preloader"></div>
 <!-- Vendor JS Files -->
@@ -1611,8 +1356,7 @@ document.addEventListener('DOMContentLoaded', function () {
   var item = panel.closest('.faq-item');
   if (item) item.classList.add('active');
 });
-</script></body>
-</html>
+</script>
 <!-- DC:CONSENT_BANNER_START -->
 <style>
   .dc-consent-banner{
@@ -1629,16 +1373,15 @@ document.addEventListener('DOMContentLoaded', function () {
   .dc-btn{ border:1px solid #222; padding:8px 12px; border-radius:999px; background:#fff; cursor:pointer; font-size:14px; }
   .dc-btn--primary{ background:#222; color:#fff; }
   .dc-consent-manage{
-    left:16px !important;
+    left: 12px !important;
     position:fixed;
-    right:auto !important; bottom:16px;
+    right:auto !important; bottom: 6px;
     z-index:2147483647;
     border:1px solid #222; background:#fff; padding:6px 10px; border-radius:999px; font-size:12px; cursor:pointer; opacity:.85;
     line-height:1; white-space:nowrap;
     transition: bottom .2s ease, right .2s ease, left .2s ease, opacity .2s;
   }
   /* When we need to lift above another fixed button (e.g., back-to-top) */
-  .dc-consent-manage.dc-lift{ bottom: 88px; }
   /* Put it bottom-left on very small screens to avoid crowding */
   @media (max-width: 480px) {
     .dc-consent-manage{ left:16px; right:auto; }
@@ -1678,7 +1421,9 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     function setChoice(choice) {
-      try { localStorage.setItem('dc_consent', JSON.stringify({choice})); } catch(e){}
+      try { localStorage.setItem('dc_consent', JSON.stringify({choice: choice})); } catch(e){}
+      window.__dc_consent_choice = choice;
+
       // Update Consent Mode in real-time
       if (typeof gtag === 'function') {
         if(choice === 'accept') {
@@ -1688,13 +1433,9 @@ document.addEventListener('DOMContentLoaded', function () {
             ad_user_data: 'granted',
             ad_personalization: 'granted'
           });
-          // Attempt GA load if ID present
-          if (window.GA_MEASUREMENT_ID && window.GA_MEASUREMENT_ID !== 'G-XXXXXXXXXX' && !window.__ga_loaded) {
-            var s=document.createElement('script'); s.async=1; s.src='https://www.googletagmanager.com/gtag/js?id='+window.GA_MEASUREMENT_ID;
-            document.head.appendChild(s);
-            gtag('js', new Date());
-            gtag('config', window.GA_MEASUREMENT_ID, { 'anonymize_ip': true });
-            window.__ga_loaded = true;
+          // Load GA once (no duplicates)
+          if (typeof window.dcLoadGAOnce === 'function') {
+            window.dcLoadGAOnce();
           }
         } else {
           gtag('consent', 'update', {
@@ -1703,8 +1444,13 @@ document.addEventListener('DOMContentLoaded', function () {
             ad_user_data: 'denied',
             ad_personalization: 'denied'
           });
+          // Best-effort cookie cleanup
+          if (typeof window.dcClearGACookies === 'function') {
+            window.dcClearGACookies();
+          }
         }
       }
+
       var b = document.querySelector('.dc-consent-banner'); if(b) b.remove();
     }
 
@@ -1732,7 +1478,7 @@ document.addEventListener('DOMContentLoaded', function () {
         var nearRight  = (window.innerWidth  - r.right)  <= 120;
         var visible = r.width>0 && r.height>0;
         if (visible && nearBottom && nearRight) {
-          manage.classList.add('dc-lift'); // moves it ~72px up
+          // // manage.classList.add('dc-lift'); // disabled // disabled
         }
       } catch(e){}
     }
@@ -1752,3 +1498,5 @@ document.addEventListener('DOMContentLoaded', function () {
 })();
 </script>
 <!-- DC:CONSENT_BANNER_END -->
+</body>
+</html>

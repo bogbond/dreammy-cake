@@ -1,16 +1,86 @@
+<!DOCTYPE html>
+
+<html lang="en-GB">
+<head>
 <!-- DC:GA4_CONSENT_HEAD_START -->
 <!-- Google Analytics 4 + Consent Mode v2 (UK/EU) -->
-<!-- TODO: Replace GA4 ID once you have it by setting window.GA_MEASUREMENT_ID below -->
 <script>
-  // Set your GA4 Measurement ID here once ready, e.g. 'G-ABCD123456'
+  // GA4 Measurement ID (change here if needed)
   window.GA_MEASUREMENT_ID = window.GA_MEASUREMENT_ID || 'G-CC2NRDSRQ9';
+
+  // Consent state: 'accept' | 'reject' | null
+  window.__dc_consent_choice = window.__dc_consent_choice || null;
+
+  // GA load guard
+  window.__ga_loaded = window.__ga_loaded || false;
+
+  // DataLayer + gtag wrapper:
+  // - Always allow Consent Mode commands
+  // - Block analytics/events until user accepts
   window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  // Load saved consent (default: only essential storage granted)
+  function gtag(){
+    try {
+      if (arguments && arguments.length && arguments[0] === 'consent') {
+        window.dataLayer.push(arguments);
+        return;
+      }
+      if (window.__dc_consent_choice === 'accept') {
+        window.dataLayer.push(arguments);
+      }
+    } catch(e) {}
+  }
+  window.gtag = window.gtag || gtag;
+
+  // Helper: load GA script once (only call after consent 'accept')
+  window.dcLoadGAOnce = window.dcLoadGAOnce || function() {
+    var id = window.GA_MEASUREMENT_ID;
+    if (window.__ga_loaded) return;
+    if(!id || id === 'G-XXXXXXXXXX') {
+      console.warn('GA4 ID is placeholder. Set window.GA_MEASUREMENT_ID to your real GA4 ID.');
+      return;
+    }
+    // Avoid duplicate script tags
+    if (!document.querySelector('script[src^="https://www.googletagmanager.com/gtag/js?id="]')) {
+      var s = document.createElement('script');
+      s.async = true;
+      s.src = 'https://www.googletagmanager.com/gtag/js?id=' + id;
+      document.head.appendChild(s);
+    }
+    window.__ga_loaded = true;
+    gtag('js', new Date());
+    gtag('config', id, { anonymize_ip: true });
+  };
+
+  // Helper: attempt to clear GA cookies on "reject" (best-effort)
+  window.dcClearGACookies = window.dcClearGACookies || function() {
+    try {
+      var expires = 'Thu, 01 Jan 1970 00:00:00 GMT';
+      var domains = [location.hostname, '.' + location.hostname];
+      function del(name) {
+        // Host-only
+        document.cookie = name + '=; expires=' + expires + '; path=/';
+        // Explicit domains
+        for (var i=0; i<domains.length; i++) {
+          document.cookie = name + '=; expires=' + expires + '; path=/; domain=' + domains[i];
+        }
+      }
+      document.cookie.split(';').forEach(function(c){
+        var name = c.split('=')[0].trim();
+        if(name === '_ga' || name === '_gid' || name.indexOf('_ga_') === 0 || name.indexOf('_gat') === 0) {
+          del(name);
+        }
+      });
+    } catch(e) {}
+  };
+
+  // Read saved consent and set defaults (Consent Mode v2)
   (function() {
     try {
-      const saved = JSON.parse(localStorage.getItem('dc_consent') || '{}');
-      const base = {
+      var saved = JSON.parse(localStorage.getItem('dc_consent') || '{}');
+      var choice = (saved && (saved.choice === 'accept' || saved.choice === 'reject')) ? saved.choice : null;
+      window.__dc_consent_choice = choice;
+
+      var base = {
         ad_user_data: 'denied',
         ad_personalization: 'denied',
         ad_storage: 'denied',
@@ -18,32 +88,25 @@
         functionality_storage: 'granted',
         security_storage: 'granted'
       };
-      const consent = Object.assign({}, base, (saved && saved.choice === 'accept') ? {
+
+      var consent = Object.assign({}, base, (choice === 'accept') ? {
         analytics_storage: 'granted',
         ad_storage: 'granted',
         ad_user_data: 'granted',
         ad_personalization: 'granted'
       } : {});
+
       gtag('consent', 'default', consent);
+
+      // Load GA only if user already accepted previously
+      if (choice === 'accept') {
+        window.dcLoadGAOnce();
+      }
     } catch(e) { console.warn('Consent read failed', e); }
   })();
-  // Load GA only when an ID is provided
-  (function(id) {
-    if(!id || id === 'G-XXXXXXXXXX') {
-      console.warn('GA4 ID is placeholder. Set window.GA_MEASUREMENT_ID to your real GA4 ID.');
-      return;
-    }
-    var s=document.createElement('script'); s.async=1; s.src='https://www.googletagmanager.com/gtag/js?id='+id;
-    document.head.appendChild(s);
-    gtag('js', new Date());
-    gtag('config', id, { 'anonymize_ip': true });
-  })(window.GA_MEASUREMENT_ID);
 </script>
 <!-- DC:GA4_CONSENT_HEAD_END -->
-<!DOCTYPE html>
 
-<html lang="en-GB">
-<head>
 <meta charset="utf-8"/>
 <title>Page not found — Dreamy Cake</title>
 <meta content="width=device-width, initial-scale=1" name="viewport"/>
@@ -61,11 +124,11 @@
 
 <meta content="Page not found — Dreamy Cake" property="og:title"/>
 <meta content="Page not found. Try the homepage or contact Dreamy Cake — email, phone and WhatsApp below." property="og:description"/>
-<meta content="https:///www.dreamycake.co.uk/404.html" property="og:url"/>
+<meta content="https://dreamycake.co.uk/404.html" property="og:url"/>
 <meta content="summary" name="twitter:card"/>
 <meta content="Page not found — Dreamy Cake" name="twitter:title"/>
 <meta content="Page not found. Try the homepage or contact Dreamy Cake — email, phone and WhatsApp below." name="twitter:description"/>
-<meta content="https:///www.dreamycake.co.uk/assets/img/logo.png" property="og:image"/>
+<meta content="https://dreamycake.co.uk/assets/img/og/home-hero-1200x630.jpg" property="og:image"/>
 <link href="/assets/img/favicon.svg" rel="icon" type="image/svg+xml"/>
 <link href="/assets/img/favicon.ico" rel="icon" sizes="any"/>
 <link href="/apple-touch-icon.png" rel="apple-touch-icon"/>
@@ -127,11 +190,8 @@
 <a class="btn btn-outline" href="/Products/celebration-cake/">See Cakes</a>
 </div>
 </div>
-<footer>
-<div class="contact-inline" style="margin-top:12px;"> <a href="mailto:dreamycake.info@gmail.com"><a href="mailto:dreamycake.info@gmail.com">dreamycake.info@gmail.com</a></a> ·  <a href="tel:+447510837225">+447510837225</a> ·  <a href="https://wa.me/447510837225" rel="noopener" target="_blank">WhatsApp</a> </div>
-</footer>
-</body>
-</html>
+<footer></footer>
+
 <!-- DC:CONSENT_BANNER_START -->
 <style>
   .dc-consent-banner{
@@ -196,7 +256,9 @@
     }
 
     function setChoice(choice) {
-      try { localStorage.setItem('dc_consent', JSON.stringify({choice})); } catch(e){}
+      try { localStorage.setItem('dc_consent', JSON.stringify({choice: choice})); } catch(e){}
+      window.__dc_consent_choice = choice;
+
       // Update Consent Mode in real-time
       if (typeof gtag === 'function') {
         if(choice === 'accept') {
@@ -206,13 +268,9 @@
             ad_user_data: 'granted',
             ad_personalization: 'granted'
           });
-          // Attempt GA load if ID present
-          if (window.GA_MEASUREMENT_ID && window.GA_MEASUREMENT_ID !== 'G-XXXXXXXXXX' && !window.__ga_loaded) {
-            var s=document.createElement('script'); s.async=1; s.src='https://www.googletagmanager.com/gtag/js?id='+window.GA_MEASUREMENT_ID;
-            document.head.appendChild(s);
-            gtag('js', new Date());
-            gtag('config', window.GA_MEASUREMENT_ID, { 'anonymize_ip': true });
-            window.__ga_loaded = true;
+          // Load GA once (no duplicates)
+          if (typeof window.dcLoadGAOnce === 'function') {
+            window.dcLoadGAOnce();
           }
         } else {
           gtag('consent', 'update', {
@@ -221,8 +279,13 @@
             ad_user_data: 'denied',
             ad_personalization: 'denied'
           });
+          // Best-effort cookie cleanup
+          if (typeof window.dcClearGACookies === 'function') {
+            window.dcClearGACookies();
+          }
         }
       }
+
       var b = document.querySelector('.dc-consent-banner'); if(b) b.remove();
     }
 
@@ -270,3 +333,5 @@
 })();
 </script>
 <!-- DC:CONSENT_BANNER_END -->
+</body>
+</html>

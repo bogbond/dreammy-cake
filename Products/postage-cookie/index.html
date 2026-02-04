@@ -1,16 +1,86 @@
+<!DOCTYPE html>
+
+<html lang="en-GB">
+<head>
 <!-- DC:GA4_CONSENT_HEAD_START -->
 <!-- Google Analytics 4 + Consent Mode v2 (UK/EU) -->
-<!-- TODO: Replace GA4 ID once you have it by setting window.GA_MEASUREMENT_ID below -->
 <script>
-  // Set your GA4 Measurement ID here once ready, e.g. 'G-ABCD123456'
+  // GA4 Measurement ID (change here if needed)
   window.GA_MEASUREMENT_ID = window.GA_MEASUREMENT_ID || 'G-CC2NRDSRQ9';
+
+  // Consent state: 'accept' | 'reject' | null
+  window.__dc_consent_choice = window.__dc_consent_choice || null;
+
+  // GA load guard
+  window.__ga_loaded = window.__ga_loaded || false;
+
+  // DataLayer + gtag wrapper:
+  // - Always allow Consent Mode commands
+  // - Block analytics/events until user accepts
   window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  // Load saved consent (default: only essential storage granted)
+  function gtag(){
+    try {
+      if (arguments && arguments.length && arguments[0] === 'consent') {
+        window.dataLayer.push(arguments);
+        return;
+      }
+      if (window.__dc_consent_choice === 'accept') {
+        window.dataLayer.push(arguments);
+      }
+    } catch(e) {}
+  }
+  window.gtag = window.gtag || gtag;
+
+  // Helper: load GA script once (only call after consent 'accept')
+  window.dcLoadGAOnce = window.dcLoadGAOnce || function() {
+    var id = window.GA_MEASUREMENT_ID;
+    if (window.__ga_loaded) return;
+    if(!id || id === 'G-XXXXXXXXXX') {
+      console.warn('GA4 ID is placeholder. Set window.GA_MEASUREMENT_ID to your real GA4 ID.');
+      return;
+    }
+    // Avoid duplicate script tags
+    if (!document.querySelector('script[src^="https://www.googletagmanager.com/gtag/js?id="]')) {
+      var s = document.createElement('script');
+      s.async = true;
+      s.src = 'https://www.googletagmanager.com/gtag/js?id=' + id;
+      document.head.appendChild(s);
+    }
+    window.__ga_loaded = true;
+    gtag('js', new Date());
+    gtag('config', id, { anonymize_ip: true });
+  };
+
+  // Helper: attempt to clear GA cookies on "reject" (best-effort)
+  window.dcClearGACookies = window.dcClearGACookies || function() {
+    try {
+      var expires = 'Thu, 01 Jan 1970 00:00:00 GMT';
+      var domains = [location.hostname, '.' + location.hostname];
+      function del(name) {
+        // Host-only
+        document.cookie = name + '=; expires=' + expires + '; path=/';
+        // Explicit domains
+        for (var i=0; i<domains.length; i++) {
+          document.cookie = name + '=; expires=' + expires + '; path=/; domain=' + domains[i];
+        }
+      }
+      document.cookie.split(';').forEach(function(c){
+        var name = c.split('=')[0].trim();
+        if(name === '_ga' || name === '_gid' || name.indexOf('_ga_') === 0 || name.indexOf('_gat') === 0) {
+          del(name);
+        }
+      });
+    } catch(e) {}
+  };
+
+  // Read saved consent and set defaults (Consent Mode v2)
   (function() {
     try {
-      const saved = JSON.parse(localStorage.getItem('dc_consent') || '{}');
-      const base = {
+      var saved = JSON.parse(localStorage.getItem('dc_consent') || '{}');
+      var choice = (saved && (saved.choice === 'accept' || saved.choice === 'reject')) ? saved.choice : null;
+      window.__dc_consent_choice = choice;
+
+      var base = {
         ad_user_data: 'denied',
         ad_personalization: 'denied',
         ad_storage: 'denied',
@@ -18,32 +88,25 @@
         functionality_storage: 'granted',
         security_storage: 'granted'
       };
-      const consent = Object.assign({}, base, (saved && saved.choice === 'accept') ? {
+
+      var consent = Object.assign({}, base, (choice === 'accept') ? {
         analytics_storage: 'granted',
         ad_storage: 'granted',
         ad_user_data: 'granted',
         ad_personalization: 'granted'
       } : {});
+
       gtag('consent', 'default', consent);
+
+      // Load GA only if user already accepted previously
+      if (choice === 'accept') {
+        window.dcLoadGAOnce();
+      }
     } catch(e) { console.warn('Consent read failed', e); }
   })();
-  // Load GA only when an ID is provided
-  (function(id) {
-    if(!id || id === 'G-XXXXXXXXXX') {
-      console.warn('GA4 ID is placeholder. Set window.GA_MEASUREMENT_ID to your real GA4 ID.');
-      return;
-    }
-    var s=document.createElement('script'); s.async=1; s.src='https://www.googletagmanager.com/gtag/js?id='+id;
-    document.head.appendChild(s);
-    gtag('js', new Date());
-    gtag('config', id, { 'anonymize_ip': true });
-  })(window.GA_MEASUREMENT_ID);
 </script>
 <!-- DC:GA4_CONSENT_HEAD_END -->
-<!DOCTYPE html>
 
-<html lang="en-GB">
-<head>
 <link href="https://fonts.googleapis.com" rel="preconnect"/>
 <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
 <meta charset="utf-8"/>
@@ -63,14 +126,13 @@
 <meta content="product" property="og:type"/>
 <meta content="Postage Cookie · Dreamy Cake Studio" property="og:title"/>
 <meta content="Personalised message cookie — gift‑ready and eligible for post. Sweet surprise delivered across the UK." property="og:description"/>
-<meta content="https://dreamycake.co.uk/../../assets/img/items/postage-cookie-main.webp" property="og:image"/>
+<meta content="https://dreamycake.co.uk/assets/img/og/home-hero-1200x630.jpg" property="og:image"/>
 <meta content="https://dreamycake.co.uk/Products/postage-cookie/" property="og:url"/>
 <meta content="summary_large_image" name="twitter:card"/>
 <meta content="Postage Cookie · Dreamy Cake Studio" name="twitter:title"/>
 <meta content="Personalised message cookie — gift‑ready and eligible for post. Sweet surprise delivered across the UK." name="twitter:description"/>
-<meta content="https://dreamycake.co.uk/../../assets/img/items/postage-cookie-main.webp" name="twitter:image"/>
-<script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "Do you deliver?", "acceptedAnswer": {"@type": "Answer", "text": "Yes \u2014 I deliver across Cambridgeshire, including Huntingdon, Cambridge and Peterborough. Pickup is also available by arrangement."}}, {"@type": "Question", "name": "How far in advance should I book?", "acceptedAnswer": {"@type": "Answer", "text": "On weekdays I can often book 3\u20135 days ahead; for weekends and busier dates, please reserve as early as possible to secure your slot."}}, {"@type": "Question", "name": "Can you accommodate allergens?", "acceptedAnswer": {"@type": "Answer", "text": "I handle allergens carefully and can often suggest alternatives; however, cakes are prepared in a kitchen that handles common allergens, so I cannot guarantee trace\u2011free bakes."}}]}</script></link></link></link><script type="application/ld+json">{"@context":"https://schema.org","@type":"Product","name":"Postage Cookie","description":"Personalised message cookie \u2014 gift\u2011ready and eligible for post. Sweet surprise delivered across the UK.","image":["https://dreamycake.co.uk/assets/img/items/postage-cookie-main.webp","https://dreamycake.co.uk/assets/img/items/postage-cookie-02.webp","https://dreamycake.co.uk/assets/img/items/postage-cookie-03.webp","https://dreamycake.co.uk/assets/img/items/celebration-cake-main.webp"],"sku":"postage-cookie","category":"Cookies","url":"https://dreamycake.co.uk/Products/postage-cookie/","brand":{"@type":"Brand","name":"Dreamy Cake Studio"},"areaServed":["United Kingdom",{"@type":"DefinedRegion","addressCountry":"GB"}],"offers":{"@type":"AggregateOffer","priceCurrency":"GBP","lowPrice":"12","offerCount":1,"offers":[{"@type":"Offer","priceCurrency":"GBP","price":"12","availability":"https://schema.org/PreOrder","url":"https://dreamycake.co.uk/Products/postage-cookie/","shippingDetails":{"@type":"OfferShippingDetails","shippingDestination":[{"@type":"DefinedRegion","addressCountry":"GB"}],"deliveryTime":{"@type":"ShippingDeliveryTime","handlingTime":{"@type":"QuantitativeValue","minValue":1,"maxValue":3,"unitCode":"d"}}},"hasMerchantReturnPolicy":{"@type":"MerchantReturnPolicy","applicableCountry":"GB","returnPolicyCategory":"https://schema.org/MerchantReturnNotPermitted"}}],"shippingDetails":{"@type":"OfferShippingDetails","shippingDestination":[{"@type":"DefinedRegion","addressCountry":"GB"}],"deliveryTime":{"@type":"ShippingDeliveryTime","handlingTime":{"@type":"QuantitativeValue","minValue":1,"maxValue":3,"unitCode":"d"}}},"hasMerchantReturnPolicy":{"@type":"MerchantReturnPolicy","applicableCountry":"GB","returnPolicyCategory":"https://schema.org/MerchantReturnNotPermitted"}},"additionalProperty":[{"@type":"PropertyValue","name":"Flavours","value":"Vanilla, Chocolate, Lemon, Almond"},{"@type":"PropertyValue","name":"Packaging","value":"Individually heat-sealed; optional ribbon & tags"},{"@type":"PropertyValue","name":"Delivery","value":"Postage UK-wide (Royal Mail) + local pickup in Huntingdon"}]}</script>
-<meta content="Postage Cookie | Dreamy Cake Studio — Huntingdon &amp; Cambridgeshire. Bespoke cakes, cupcakes and fondant cookies in Huntingdonshire. Modern design, fresh b…" name="description"/>
+<meta content="https://dreamycake.co.uk/assets/img/og/home-hero-1200x630.jpg" name="twitter:image"/>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Do you deliver?","acceptedAnswer":{"@type":"Answer","text":"Yes — I deliver across Cambridgeshire, including Huntingdon, Cambridge and Peterborough. Pickup is also available by arrangement."}},{"@type":"Question","name":"How far in advance should I book?","acceptedAnswer":{"@type":"Answer","text":"On weekdays I can often book 3–5 days ahead; for weekends and busier dates, please reserve as early as possible to secure your slot."}},{"@type":"Question","name":"Can you accommodate allergens?","acceptedAnswer":{"@type":"Answer","text":"I handle allergens carefully and can often suggest alternatives; however, cakes are prepared in a kitchen that handles common allergens, so I cannot guarantee trace‑free bakes."}}]}</script><script type="application/ld+json">{"@context":"https://schema.org","@type":"Product","name":"Postage Cookie","description":"Personalised message cookie — gift‑ready and eligible for post. Sweet surprise delivered across the UK.","image":["https://dreamycake.co.uk/assets/img/og/home-hero-1200x630.jpg","https://dreamycake.co.uk/assets/img/og/home-hero-1200x630.jpg","https://dreamycake.co.uk/assets/img/og/home-hero-1200x630.jpg"],"sku":"postage-cookie","category":"Cookies","url":"https://dreamycake.co.uk/Products/postage-cookie/","brand":{"@type":"Brand","name":"Dreamy Cake Studio"},"areaServed":["United Kingdom",{"@type":"DefinedRegion","addressCountry":"GB"}],"offers":{"@type":"AggregateOffer","priceCurrency":"GBP","lowPrice":"12","offerCount":1,"offers":[{"@type":"Offer","priceCurrency":"GBP","price":"12","availability":"https://schema.org/PreOrder","url":"https://dreamycake.co.uk/Products/postage-cookie/","hasMerchantReturnPolicy":{"@type":"MerchantReturnPolicy","applicableCountry":"GB","returnPolicyCategory":"https://schema.org/MerchantReturnNotPermitted"},"itemCondition":"https://schema.org/NewCondition"}],"hasMerchantReturnPolicy":{"@type":"MerchantReturnPolicy","applicableCountry":"GB","returnPolicyCategory":"https://schema.org/MerchantReturnNotPermitted"}},"additionalProperty":[{"@type":"PropertyValue","name":"Flavours","value":"Vanilla, Chocolate, Lemon, Almond"},{"@type":"PropertyValue","name":"Packaging","value":"Individually heat-sealed; optional ribbon & tags"},{"@type":"PropertyValue","name":"Delivery","value":"Postage UK-wide (Royal Mail) + local pickup in Huntingdon"}],"mpn":"DC-POSTAGE-COOKIE"}</script>
 <link href="/assets/img/favicon.svg" rel="icon" type="image/svg+xml"/>
 <link href="/assets/img/favicon.ico" rel="icon" sizes="any"/>
 <link href="/apple-touch-icon.png" rel="apple-touch-icon"/>
@@ -150,22 +212,22 @@
         Contact
        </a>
 </li><li>
-<a href="/About">
+<a href="/About/">
         About
        </a>
 </li>
 <li class="dropdown">
 <button aria-controls="order-submenu" aria-expanded="false" aria-label="Toggle order submenu" class="nav-toggle" type="button"><span>Order</span> <i aria-hidden="true" class="bi bi-chevron-down chev"></i></button>
-<ul id="order-submenu"><li><a href="/Products/celebration-cake/#order">Order Celebration Cake</a></li><li><a href="/Products/themed-cake/#order">Order Themed Cake</a></li><li><a href="/Products/mini-bento-cake/#order">Order Mini / Bento Cake</a></li><li><a href="/Products/cupcakes/#order">Order Cupcakes</a></li><li><a href="/Products/postage-cookie/#order">Order Postage Cookie</a></li><li><a href="/#contact">Bespoke Request</a></li></ul>
+<ul id="order-submenu"><li><a href="/Products/celebration-cake/#order">Order Celebration Cake</a></li><li><a href="/Products/themed-cake/#order">Order Themed Cake</a></li><li><a href="/Products/mini-bento-cake/#order">Order Mini / Bento Cake</a></li><li><a href="/Products/cupcakes/#order">Order Cupcakes</a></li><li><a href="/Products/postage-cookie/#order">Order Postage Cookie</a></li><li><a href="/Products/valentines-collection/#order">Order Valentine&#39;s Collection</a></li><li><a href="/#contact">Bespoke Request</a></li></ul>
 </li>
 <!-- <li><a href="/#how-it-works">Services</a></li> -->
 <li class="dropdown">
 <button aria-controls="info-submenu" aria-expanded="false" aria-label="Toggle info submenu" class="nav-toggle" type="button"><span>Info</span> <i aria-hidden="true" class="bi bi-chevron-down chev"></i></button>
 <ul id="info-submenu">
-<li><a href="/Delivery">Delivery</a></li>
-<li><a href="/Allergens">Allergens</a></li>
-<li><a href="/How-it-works">How it works</a></li>
-<li><a href="/QA">Q&amp;A</a></li>
+<li><a href="/Delivery/">Delivery</a></li>
+<li><a href="/Allergens/">Allergens</a></li>
+<li><a href="/How-it-works/">How it works</a></li>
+<li><a href="/QA/">Q&amp;A</a></li>
 </ul>
 </li>
 <li>
@@ -181,10 +243,11 @@
 <div class="page-title product-hero" style="--hero-img:url('../../assets/img/items/postage-cookie-main.webp')">
 <div class="container position-relative">
 <h1>Postage Cookie</h1>
-<p>Modern, made-to-order postage cookies</p><p class="promise">Clean, modern, made to order — delivered across Cambridgeshire.</p>
+<p>Modern, made-to-order postage cookies</p>
+<p class="delivery-note"><strong>From £12</strong> — UK-wide Royal Mail postage, or pickup in Huntingdon.</p>
 <div class="chipbar">
-<a class="chip" href="/Delivery"><i class="bi bi-truck"></i> Delivery</a>
-<a class="chip" href="/Allergens"><i class="bi bi-exclamation-triangle"></i> Allergens</a>
+<a class="chip" href="/Delivery/"><i class="bi bi-truck"></i> Delivery</a>
+<a class="chip" href="/Allergens/"><i class="bi bi-exclamation-triangle"></i> Allergens</a>
 <a class="chip" href="/How-it-works/"><i class="bi bi-calendar-event"></i> How it works</a>
 </div>
 </div>
@@ -231,7 +294,7 @@
 </section>
 <!-- Sizes & Servings + Flavours -->
 <!-- Related -->
-<section class="section alt-white"><div class="container"><div class="row g-4"><div class="mx-auto col-12 col-lg-12 col-xl-10 col-xxl-9"><div class="order-card" id="order-desktop"><h3 class="h5">Start an order</h3><form action="https://formsubmit.co/ab0c0409fa937bd163077d308f7ca38f" class="product-form" data-form="f1" id="order" method="POST"><input name="subject" type="hidden" value="New Order Request — Postage Cookie"/><input name="_honey" type="hidden" value=""/><input name="_captcha" type="hidden" value="false"/><input name="_template" type="hidden" value="table"/><input name="_next" type="hidden" value="https://www.dreamycake.co.uk/Thank-You/"/><input name="product_name" type="hidden" value="Postage Cookie"/><div class="row g-3"><div class="col-12 col-md-6"><label class="form-label" for="products-postage-cookie-index-f1-name">Your name</label><input class="form-control" id="products-postage-cookie-index-f1-name" name="name" placeholder="Jane Doe" required="" type="text"/></div><div class="col-12 col-md-6"><label class="form-label" for="products-postage-cookie-index-f1-email">Email</label><input autocomplete="email" class="form-control" id="products-postage-cookie-index-f1-email" name="email" placeholder="you@example.com" required="" type="email"/></div><div class="col-12 col-md-6"><label class="form-label" for="products-postage-cookie-index-f1-phone">Phone</label><input autocomplete="tel" class="form-control" id="products-postage-cookie-index-f1-phone" name="phone" placeholder="+44 ..." type="tel"/></div><div class="col-6"><label class="form-label" for="products-postage-cookie-index-f1-date">Event date (optional)</label><input autocomplete="off" class="form-control" id="products-postage-cookie-index-f1-date" name="date" type="date"/></div><div class="col-6"><label class="form-label" for="products-postage-cookie-index-f1-time">Time (optional)</label><input autocomplete="off" class="form-control" id="products-postage-cookie-index-f1-time" name="time" type="time"/></div><div class="col-12"><fieldset class="mb-2"><label class="form-label fw-600">Quantity</label><div class="d-flex flex-wrap gap-2"><input autocomplete="off" checked="checked" class="btn-check" id="qty-6" name="quantity" type="radio" value="6"/><label class="btn btn-outline-dark btn-sm" for="qty-6">6</label><input autocomplete="off" class="btn-check" id="qty-12" name="quantity" type="radio" value="12"/><label class="btn btn-outline-dark btn-sm" for="qty-12">12</label><input autocomplete="off" class="btn-check" id="qty-18" name="quantity" type="radio" value="18"/><label class="btn btn-outline-dark btn-sm" for="qty-18">18</label><input autocomplete="off" class="btn-check" id="qty-24" name="quantity" type="radio" value="24"/><label class="btn btn-outline-dark btn-sm" for="qty-24">24</label><input autocomplete="off" class="btn-check" id="qty-36plus" name="quantity" type="radio" value="36+"/><label class="btn btn-outline-dark btn-sm" for="qty-36plus">36+</label></div></fieldset></div><div class="col-12 col-md-6"><label class="form-label" for="products-postage-cookie-index-f1-flavour">Flavour</label><select class="form-select" id="products-postage-cookie-index-f1-flavour" name="flavour"><option disabled="disabled" selected="selected" value="">Choose a flavour</option><option value="Vanilla">Vanilla</option><option value="Chocolate">Chocolate</option><option value="Lemon">Lemon</option><option value="Almond">Almond</option></select></div><div class="col-12 col-md-6"><label class="form-label" for="products-postage-cookie-index-f1-text">Text to emboss (names, date, initials)</label><input class="form-control" id="products-postage-cookie-index-f1-text" name="emboss_text" placeholder="e.g., EMILY • 12.10.2025" type="text"/></div><div class="col-12"><label class="form-label" for="products-postage-cookie-index-f1-refs">Reference links (optional)</label><input class="form-control" id="products-postage-cookie-index-f1-refs" name="reference_links" placeholder="Paste Pinterest/Instagram links" type="url"/></div><div class="col-12"><label class="form-label" for="products-postage-cookie-index-f1-notes">Notes / design ideas</label><textarea class="form-control" id="products-postage-cookie-index-f1-notes" name="notes" placeholder="Colours, ribbon/tag preferences, logo, etc." rows="3"></textarea></div><div class="col-12"><label class="form-label" for="products-postage-cookie-index-html-delivery-option">Delivery or pickup?</label><select autocomplete="off" class="form-control" id="products-postage-cookie-index-html-delivery-option" name="delivery_option"><option disabled="disabled" selected="selected" value="">Choose option</option><option value="postage">Postage (Royal Mail)</option><option value="pickup">Pickup</option></select></div><div class="col-12 col-md-6"><label class="form-label" for="products-postage-cookie-index-f1-postcode">Postcode / area</label><input class="form-control" id="products-postage-cookie-index-f1-postcode" name="postcode" placeholder="e.g., PE28" type="text"/></div><div class="col-12 col-md-6"><label class="form-label" for="products-postage-cookie-index-f1-budget">Budget from (optional)</label><input class="form-control" id="products-postage-cookie-index-f1-budget" min="10" name="budget_from" placeholder="£" step="1" type="number"/></div><div class="col-12 text-end mt-2"><button class="btn btn-primary" type="submit">Get a quote</button></div></div></form></div><div class="product-subtitle mt-4"><h2 class="h4 m-0">Quick questions</h2><div class="caption">BEFORE YOU ORDER</div></div><div class="mt-3" id="quick-questions-desktop"><div class="overflow-hidden faq-accordion mt-2"><details><summary><span>Do you post UK‑wide?</span><i class="bi bi-chevron-down chev"></i></summary><div class="answer">Yes — I post UK‑wide via Royal Mail in letterbox‑friendly packaging. Local pickup in Huntingdon is also available.</div></details><details><summary><span>How far in advance should I order?</span><i class="bi bi-chevron-down chev"></i></summary><div class="answer">Ideally 7–14 days. For larger quantities or popular dates, please enquire earlier to secure your slot.</div></details><details><summary><span>Allergens</span><i class="bi bi-chevron-down chev"></i></summary><div class="answer">Cookies are made in a kitchen that handles common allergens. Please tell me about any allergies when ordering.</div></details><details><summary><span>Storage / shelf life</span><i class="bi bi-chevron-down chev"></i></summary><div class="answer">Keep in a cool, dry place (not the fridge). For best look and texture, enjoy within 7–10 days.</div></details></div></div><div class="mt-2"><a class="btn btn-outline" href="/QA/" role="button">See full Q&amp;A →</a></div></div></div></div></section><section class="alt-1 section alt-white product-help" id="help">
+<section class="section alt-white"><div class="container"><div class="row g-4"><div class="mx-auto col-12 col-lg-12 col-xl-10 col-xxl-9"><div class="order-card" id="order-desktop"><h3 class="h5">Start an order</h3><form action="https://formsubmit.co/ab0c0409fa937bd163077d308f7ca38f" class="product-form" data-form="f1" id="order" method="POST"><input name="subject" type="hidden" value="New Order Request — Postage Cookie"/><input name="_honey" type="hidden" value=""/><input name="_captcha" type="hidden" value="false"/><input name="_template" type="hidden" value="table"/><input name="_next" type="hidden" value="https://dreamycake.co.uk/Thank-You/"/><input name="product_name" type="hidden" value="Postage Cookie"/><div class="row g-3"><div class="col-12 col-md-6"><label class="form-label" for="products-postage-cookie-index-f1-name">Your name</label><input class="form-control" id="products-postage-cookie-index-f1-name" name="name" placeholder="Jane Doe" required="" type="text"/></div><div class="col-12 col-md-6"><label class="form-label" for="products-postage-cookie-index-f1-email">Email</label><input autocomplete="email" class="form-control" id="products-postage-cookie-index-f1-email" name="email" placeholder="you@example.com" required="" type="email"/></div><div class="col-12 col-md-6"><label class="form-label" for="products-postage-cookie-index-f1-phone">Phone</label><input autocomplete="tel" class="form-control" id="products-postage-cookie-index-f1-phone" name="phone" placeholder="+44 ..." type="tel"/></div><div class="col-6"><label class="form-label" for="products-postage-cookie-index-f1-date">Event date (optional)</label><input autocomplete="off" class="form-control" id="products-postage-cookie-index-f1-date" name="date" type="date"/></div><div class="col-6"><label class="form-label" for="products-postage-cookie-index-f1-time">Time (optional)</label><input autocomplete="off" class="form-control" id="products-postage-cookie-index-f1-time" name="time" type="time"/></div><div class="col-12"><fieldset class="mb-2"><label class="form-label fw-600">Quantity</label><div class="d-flex flex-wrap gap-2"><input autocomplete="off" checked="checked" class="btn-check" id="qty-6" name="quantity" type="radio" value="6"/><label class="btn btn-outline-dark btn-sm" for="qty-6">6</label><input autocomplete="off" class="btn-check" id="qty-12" name="quantity" type="radio" value="12"/><label class="btn btn-outline-dark btn-sm" for="qty-12">12</label><input autocomplete="off" class="btn-check" id="qty-18" name="quantity" type="radio" value="18"/><label class="btn btn-outline-dark btn-sm" for="qty-18">18</label><input autocomplete="off" class="btn-check" id="qty-24" name="quantity" type="radio" value="24"/><label class="btn btn-outline-dark btn-sm" for="qty-24">24</label><input autocomplete="off" class="btn-check" id="qty-36plus" name="quantity" type="radio" value="36+"/><label class="btn btn-outline-dark btn-sm" for="qty-36plus">36+</label></div></fieldset></div><div class="col-12 col-md-6"><label class="form-label" for="products-postage-cookie-index-f1-flavour">Flavour</label><select class="form-select" id="products-postage-cookie-index-f1-flavour" name="flavour"><option disabled="disabled" selected="selected" value="">Choose a flavour</option><option value="Vanilla">Vanilla</option><option value="Chocolate">Chocolate</option><option value="Lemon">Lemon</option><option value="Almond">Almond</option></select></div><div class="col-12 col-md-6"><label class="form-label" for="products-postage-cookie-index-f1-text">Text to emboss (names, date, initials)</label><input class="form-control" id="products-postage-cookie-index-f1-text" name="emboss_text" placeholder="e.g., EMILY • 12.10.2025" type="text"/></div><div class="col-12"><label class="form-label" for="products-postage-cookie-index-f1-refs">Reference links (optional)</label><input class="form-control" id="products-postage-cookie-index-f1-refs" name="reference_links" placeholder="Paste Pinterest/Instagram links" type="url"/></div><div class="col-12"><label class="form-label" for="products-postage-cookie-index-f1-notes">Notes / design ideas</label><textarea class="form-control" id="products-postage-cookie-index-f1-notes" name="notes" placeholder="Colours, ribbon/tag preferences, logo, etc." rows="3"></textarea></div><div class="col-12"><label class="form-label" for="products-postage-cookie-index-html-delivery-option">Delivery or pickup?</label><select autocomplete="off" class="form-control" id="products-postage-cookie-index-html-delivery-option" name="delivery_option"><option disabled="disabled" selected="selected" value="">Choose option</option><option value="postage">Postage (Royal Mail)</option><option value="pickup">Pickup</option></select></div><div class="col-12 col-md-6"><label class="form-label" for="products-postage-cookie-index-f1-postcode">Postcode / area</label><input class="form-control" id="products-postage-cookie-index-f1-postcode" name="postcode" placeholder="e.g., PE28" type="text"/></div><div class="col-12 col-md-6"><label class="form-label" for="products-postage-cookie-index-f1-budget">Budget from (optional)</label><input class="form-control" id="products-postage-cookie-index-f1-budget" min="10" name="budget_from" placeholder="£" step="1" type="number"/></div><div class="col-12 text-end mt-2"><button class="btn btn-primary" type="submit">Get a quote</button></div></div></form></div><div class="product-subtitle mt-4"><h2 class="h4 m-0">Quick questions</h2><div class="caption">BEFORE YOU ORDER</div></div><div class="mt-3" id="quick-questions-desktop"><div class="overflow-hidden faq-accordion mt-2"><details><summary><span>Do you post UK‑wide?</span><i class="bi bi-chevron-down chev"></i></summary><div class="answer">Yes — I post UK‑wide via Royal Mail in letterbox‑friendly packaging. Local pickup in Huntingdon is also available.</div></details><details><summary><span>How far in advance should I order?</span><i class="bi bi-chevron-down chev"></i></summary><div class="answer">Ideally 7–14 days. For larger quantities or popular dates, please enquire earlier to secure your slot.</div></details><details><summary><span>Allergens</span><i class="bi bi-chevron-down chev"></i></summary><div class="answer">Cookies are made in a kitchen that handles common allergens. Please tell me about any allergies when ordering.</div></details><details><summary><span>Storage / shelf life</span><i class="bi bi-chevron-down chev"></i></summary><div class="answer">Keep in a cool, dry place (not the fridge). For best look and texture, enjoy within 7–10 days.</div></details></div></div><div class="mt-2"><a class="btn btn-outline" href="/QA/" role="button">See full Q&amp;A →</a></div></div></div></div></section><section class="alt-1 section alt-white product-help" id="help">
 <div class="container">
 <div class="help-band d-flex flex-column flex-md-row align-items-start align-items-md-center justify-content-between gap-2">
 <div><strong>Questions?</strong> I reply quickly on WhatsApp and email.</div>
@@ -292,7 +355,12 @@
 <strong>
           Email:
          </strong>
-<span><a class="link" href="mailto:dreamycake.info@gmail.com"><a href="mailto:dreamycake.info@gmail.com">dreamycake.info@gmail.com</a></a></span>
+<span><a class="link" href="mailto:dreamycake.info@gmail.com">dreamycake.info@gmail.com</a></span>
+<br/>
+<strong>
+          WhatsApp:
+         </strong>
+<span><a aria-label="Chat on WhatsApp" class="link" href="https://wa.me/447510837225" onclick="if(window.gtag){gtag('event','whatsapp_click',{label:'footer_contact'});}" rel="noopener" target="_blank"><i class="bi bi-whatsapp"></i> Message us</a></span>
 <br/>
 </p>
 </div>
@@ -334,16 +402,15 @@
 <a aria-label="Follow Dreamy Cake on Instagram" class="instagram" href="https://www.instagram.com/dreamycake.bakery/">
 <i class="bi bi-instagram">
 </i>
-</a>
-</div>
+</a></div>
 </div>
 </div>
 </div>
 <div class="container copyright text-center mt-4">
-<a href="/Terms-and-Conditions">
+<a href="/Terms-and-Conditions/">
      Terms &amp; Conditions
     </a>
-<a href="/Privacy-Policy">
+<a href="/Privacy-Policy/">
      Privacy Policy
     </a>
 <br/>
@@ -378,8 +445,7 @@
 <script src="../../assets/vendor/swiper/swiper-bundle.min.js"></script>
 <script src="../../assets/js/main.js"></script><script src="../../assets/js/product.js"></script>
 <script src="/assets/js/navfix.js"></script>
-</body>
-</html>
+
 <!-- DC:CONSENT_BANNER_START -->
 <style>
   .dc-consent-banner{
@@ -444,7 +510,9 @@
     }
 
     function setChoice(choice) {
-      try { localStorage.setItem('dc_consent', JSON.stringify({choice})); } catch(e){}
+      try { localStorage.setItem('dc_consent', JSON.stringify({choice: choice})); } catch(e){}
+      window.__dc_consent_choice = choice;
+
       // Update Consent Mode in real-time
       if (typeof gtag === 'function') {
         if(choice === 'accept') {
@@ -454,13 +522,9 @@
             ad_user_data: 'granted',
             ad_personalization: 'granted'
           });
-          // Attempt GA load if ID present
-          if (window.GA_MEASUREMENT_ID && window.GA_MEASUREMENT_ID !== 'G-XXXXXXXXXX' && !window.__ga_loaded) {
-            var s=document.createElement('script'); s.async=1; s.src='https://www.googletagmanager.com/gtag/js?id='+window.GA_MEASUREMENT_ID;
-            document.head.appendChild(s);
-            gtag('js', new Date());
-            gtag('config', window.GA_MEASUREMENT_ID, { 'anonymize_ip': true });
-            window.__ga_loaded = true;
+          // Load GA once (no duplicates)
+          if (typeof window.dcLoadGAOnce === 'function') {
+            window.dcLoadGAOnce();
           }
         } else {
           gtag('consent', 'update', {
@@ -469,8 +533,13 @@
             ad_user_data: 'denied',
             ad_personalization: 'denied'
           });
+          // Best-effort cookie cleanup
+          if (typeof window.dcClearGACookies === 'function') {
+            window.dcClearGACookies();
+          }
         }
       }
+
       var b = document.querySelector('.dc-consent-banner'); if(b) b.remove();
     }
 
@@ -518,3 +587,5 @@
 })();
 </script>
 <!-- DC:CONSENT_BANNER_END -->
+</body>
+</html>
