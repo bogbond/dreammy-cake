@@ -9,22 +9,19 @@
   "use strict";
 
   const STATE_KEY = "dc_promo_state_v1";
+  const LAUNCHER_ID = "dc-promo-launcher";
 
   // Fallback config (used if JSON cannot be fetched, e.g. when opening the site directly via file://)
   const FALLBACK_CONFIG = {
-    enabled: true,
-    id: "mini-bento-spotlight",
-    // Optional schedule window (local time). Use either ISO date (YYYY-MM-DD) or full datetime.
-    // validFrom: "2026-02-01",
-    // validTo: "2026-02-14",
-    validFrom: null,
-    validTo: null,
+    // Default: disabled (we only show when an active seasonal promo is found)
+    enabled: false,
+    id: "seasonal",
     headline: "Hot offer",
-    title: "Mini / Bento Cake",
-    subtitle: "A sweet surprise for your favourite person — limited slots this week.",
-    image: "assets/img/items/mini-bento-cake-main.webp",
-    imageAlt: "Mini bento cake with delicate decoration",
-    href: "/Products/mini-bento-cake/",
+    title: "",
+    subtitle: "",
+    image: "",
+    imageAlt: "",
+    href: "#",
     ctaLabel: "More details",
     dismissLabel: "Not now",
     cooldownHours: 24,
@@ -34,6 +31,154 @@
   function safeJsonParse(str, fallback) {
     try { return JSON.parse(str); } catch (e) { return fallback; }
   }
+  // --- Seasonal promo support (shared config for popup + menu) -----------------
+  function getTZDateParts(tz) {
+    try {
+      const fmt = new Intl.DateTimeFormat("en-CA", {
+        timeZone: tz,
+        year: "numeric",
+        month: "2-digit",
+        day: "2-digit"
+      });
+      const parts = fmt.formatToParts(new Date());
+      const get = (type) => {
+        const p = parts.find((x) => x.type === type);
+        return p ? p.value : null;
+      };
+      const y = Number(get("year"));
+      const m = Number(get("month"));
+      const d = Number(get("day"));
+      if (y && m && d) return { year: y, month: m, day: d };
+    } catch (e) {}
+    const n = new Date();
+    return { year: n.getFullYear(), month: n.getMonth() + 1, day: n.getDate() };
+  }
+
+  function utcDate(y, m, d) {
+    return new Date(Date.UTC(y, m - 1, d, 0, 0, 0, 0));
+  }
+
+  function addDaysUTC(dt, days) {
+    return new Date(dt.getTime() + days * 86400000);
+  }
+
+  function easterSundayUTC(year) {
+    // Meeus/Jones/Butcher Gregorian algorithm
+    const a = year % 19;
+    const b = Math.floor(year / 100);
+    const c = year % 100;
+    const d = Math.floor(b / 4);
+    const e = b % 4;
+    const f = Math.floor((b + 8) / 25);
+    const g = Math.floor((b - f + 1) / 3);
+    const h = (19 * a + b - d - g + 15) % 30;
+    const i = Math.floor(c / 4);
+    const k = c % 4;
+    const l = (32 + 2 * e + 2 * i - h - k) % 7;
+    const m = Math.floor((a + 11 * h + 22 * l) / 451);
+    const month = Math.floor((h + l - 7 * m + 114) / 31); // 3=Mar, 4=Apr
+    const day = ((h + l - 7 * m + 114) % 31) + 1;
+    return utcDate(year, month, day);
+  }
+
+  function motheringSundayUTC(year) {
+    // UK Mothering Sunday = 3 weeks before Easter Sunday
+    return addDaysUTC(easterSundayUTC(year), -21);
+  }
+
+  function fathersDayUTC(year) {
+    // 3rd Sunday in June (UK)
+    const june1 = new Date(Date.UTC(year, 5, 1)); // month=5 => June
+    const dow = june1.getUTCDay(); // 0=Sun
+    const toFirstSunday = (7 - dow) % 7;
+    const firstSundayDay = 1 + toFirstSunday;
+    const thirdSundayDay = firstSundayDay + 14;
+    return new Date(Date.UTC(year, 5, thirdSundayDay));
+  }
+
+  function resolveDateSpec(spec, year) {
+    if (!spec) return null;
+    if (typeof spec === "string") {
+      const s = spec.trim();
+      const m = /^(\d{2})-(\d{2})$/.exec(s);
+      if (!m) return null;
+      return utcDate(year, Number(m[1]), Number(m[2]));
+    }
+    if (typeof spec === "object" && spec.rule) {
+      const rule = String(spec.rule);
+      let base = null;
+      if (rule === "easterSunday") base = easterSundayUTC(year);
+      else if (rule === "easterMonday") base = addDaysUTC(easterSundayUTC(year), 1);
+      else if (rule === "motheringSunday") base = motheringSundayUTC(year);
+      else if (rule === "fathersDay") base = fathersDayUTC(year);
+      if (!base) return null;
+      const off = Number(spec.offsetDays || 0);
+      return addDaysUTC(base, off);
+    }
+    return null;
+  }
+
+  function getCandidateRanges(season, year) {
+    // Evaluate for the given start-year. If end < start, try end in next year (for cross-year seasons).
+    const start = resolveDateSpec(season.dateFrom, year);
+    if (!start) return [];
+    let end = resolveDateSpec(season.dateTo, year);
+    if (!end) return [];
+    if (end.getTime() < start.getTime()) {
+      const end2 = resolveDateSpec(season.dateTo, year + 1);
+      if (end2) end = end2;
+    }
+    return [{ start, end }];
+  }
+
+  function findActiveSeason(seasons, tz) {
+    if (!Array.isArray(seasons)) return null;
+    const p = getTZDateParts(tz || "Europe/London");
+    const today = utcDate(p.year, p.month, p.day);
+    const yearsToCheck = [p.year, p.year - 1]; // handles cross-year ranges like Nov → Jan
+    for (const season of seasons) {
+      if (!season || season.enabled === false) continue;
+      for (const y of yearsToCheck) {
+        const ranges = getCandidateRanges(season, y);
+        for (const r of ranges) {
+          if (today.getTime() >= r.start.getTime() && today.getTime() <= r.end.getTime()) {
+            return season;
+          }
+        }
+      }
+    }
+    return null;
+  }
+
+  function normalizePromoConfig(raw) {
+    if (!raw) return null;
+
+    // New format: one config controls both menu + popup
+    if (raw.seasons && Array.isArray(raw.seasons)) {
+      const tz = raw.timezone || "Europe/London";
+      const active = findActiveSeason(raw.seasons, tz);
+      if (!active) return { enabled: false };
+
+      const popup = (active.popup && active.popup.enabled !== false) ? active.popup : null;
+      if (!popup) return { enabled: false };
+
+      const defaults = (raw.popupDefaults && typeof raw.popupDefaults === "object") ? raw.popupDefaults : {};
+      const cfg = Object.assign({}, defaults, popup);
+
+      // Backfill sensible defaults
+      cfg.enabled = true;
+      cfg.id = cfg.id || active.id || "seasonal";
+      cfg.title = cfg.title || active.name || "Seasonal collection";
+      cfg.href = cfg.href || active.href || (active.orderHref || "#");
+
+      return cfg;
+    }
+
+    // Old format: promo.json is a single popup config object
+    return raw;
+  }
+  // ---------------------------------------------------------------------------
+
 
   function resolveConfigUrl() {
     // Resolve relative to this script (works with http(s) and file://)
@@ -51,11 +196,12 @@
     try {
       const res = await fetch(url, { cache: "no-store" });
       if (!res.ok) throw new Error("HTTP " + res.status);
-      const cfg = await res.json();
-      return cfg;
+      const raw = await res.json();
+      return normalizePromoConfig(raw);
     } catch (e) {
       console.warn("[dc-promo] Config load failed:", e);
-      return (window.DC_PROMO_CONFIG || FALLBACK_CONFIG);
+      const raw = (window.DC_PROMO_CONFIG || FALLBACK_CONFIG);
+      return normalizePromoConfig(raw);
     }
   }
 
@@ -157,6 +303,91 @@
     return window.matchMedia && window.matchMedia("(max-width: 768px)").matches;
   }
 
+  // --- Launcher (collapsed promo button) -------------------------------------
+  function getLauncherLabel(cfg) {
+    const explicit = pick(cfg, ["launcherLabel", "launcher_label"]);
+    if (explicit !== undefined) return String(explicit);
+    const t = String(cfg.title || "").trim();
+    if (t && t.length <= 26) return t;
+    return "Seasonal offer";
+  }
+
+  function ensureLauncher(cfg) {
+    let btn = document.getElementById(LAUNCHER_ID);
+    if (btn) return btn;
+    btn = el("button", { id: LAUNCHER_ID, class: "dc-promo-launcher", type: "button" });
+    btn.setAttribute("aria-label", "Open seasonal offer");
+    btn.textContent = getLauncherLabel(cfg);
+    document.body.appendChild(btn);
+    return btn;
+  }
+
+  function showLauncher(btn, cfg) {
+    if (!btn) return;
+    if (cfg) btn.textContent = getLauncherLabel(cfg);
+    btn.classList.add("dc-is-visible");
+    positionLauncher(btn);
+  }
+
+  function hideLauncher(btn) {
+    if (!btn) return;
+    btn.classList.remove("dc-is-visible");
+  }
+
+  function getFixedBottomOffset(rect) {
+    if (!rect) return 0;
+    const distFromBottom = Math.max(0, Math.round(window.innerHeight - rect.bottom));
+    return distFromBottom + Math.round(rect.height);
+  }
+
+  function computeLauncherBottomPx() {
+    let base = 16;
+    const gap = 10;
+
+    // Cookie consent banner (full-width at bottom)
+    const banner = document.querySelector(".dc-consent-banner");
+    if (banner) {
+      const r = banner.getBoundingClientRect();
+      if (r.width > 0 && r.height > 0) {
+        base = Math.max(base, getFixedBottomOffset(r) + gap);
+      }
+    }
+
+    // Cookie "Manage" pill (bottom-left)
+    const manage = document.querySelector(".dc-consent-manage");
+    if (manage) {
+      const r = manage.getBoundingClientRect();
+      const cs = window.getComputedStyle(manage);
+      const visible = r.width > 0 && r.height > 0 && cs.display !== "none" && cs.visibility !== "hidden";
+      if (visible) {
+        base = Math.max(base, getFixedBottomOffset(r) + gap);
+      }
+    }
+
+    return base;
+  }
+
+  function positionLauncher(btn) {
+    if (!btn) return;
+    const px = computeLauncherBottomPx();
+    btn.style.setProperty("--dc-promo-launcher-bottom", `${px}px`);
+  }
+
+  function rectCenter(r) {
+    return { x: r.left + r.width / 2, y: r.top + r.height / 2 };
+  }
+
+  function collapseTransform(modalRect, launcherRect) {
+    if (!modalRect || !launcherRect) return null;
+    const mc = rectCenter(modalRect);
+    const lc = rectCenter(launcherRect);
+    const dx = lc.x - mc.x;
+    const dy = lc.y - mc.y;
+    const scale = 0.22;
+    return `translate(${dx.toFixed(2)}px, ${dy.toFixed(2)}px) scale(${scale})`;
+  }
+  // ---------------------------------------------------------------------------
+
   function buildPopup(cfg) {
     const overlay = el("div", { class: "dc-promo-overlay", hidden: "" });
 
@@ -233,7 +464,11 @@
     ).filter((n) => n.offsetParent !== null);
   }
 
-  function openPopup(cfg) {
+  function openPopup(cfg, opts) {
+    opts = opts || {};
+    const launcher = opts.launcher || null;
+    const fromLauncher = !!opts.fromLauncher;
+
     // Avoid stacking with bootstrap modals/offcanvas
     const anyBootstrapOpen = document.querySelector(".modal.show, .offcanvas.show");
     if (anyBootstrapOpen) return;
@@ -244,9 +479,40 @@
     const ui = buildPopup(cfg);
     document.body.appendChild(ui.overlay);
 
-    // Show
+    // Launcher stays visible only when popup is collapsed/closed
+    if (launcher) hideLauncher(launcher);
+
     ui.overlay.hidden = false;
     document.body.classList.add("dc-promo-open");
+
+    const prefersReduced = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const canCollapse = !prefersReduced && launcher && launcher.getBoundingClientRect;
+
+    // If opened from launcher, animate from the launcher's position (unfold effect)
+    if (fromLauncher && canCollapse) {
+      try {
+        const launcherRect = launcher.getBoundingClientRect();
+
+        // Prevent flash while measuring
+        ui.overlay.style.visibility = "hidden";
+        ui.modal.classList.add("dc-no-anim");
+
+        // Force final layout (visible state) to compute deltas
+        ui.overlay.classList.add("dc-is-visible");
+        const modalRect = ui.modal.getBoundingClientRect();
+        const tr = collapseTransform(modalRect, launcherRect);
+        if (tr) ui.modal.style.setProperty("--dc-promo-transform", tr);
+
+        // Back to collapsed state (base) before animating in
+        ui.overlay.classList.remove("dc-is-visible");
+        ui.modal.classList.remove("dc-no-anim");
+        ui.overlay.style.visibility = "";
+      } catch (e) {
+        ui.overlay.style.visibility = "";
+        ui.modal.classList.remove("dc-no-anim");
+        ui.overlay.classList.remove("dc-is-visible");
+      }
+    }
 
     // Animate in
     requestAnimationFrame(() => {
@@ -255,25 +521,6 @@
     });
 
     let closed = false;
-
-    const close = () => {
-      if (closed) return;
-      closed = true;
-
-      document.body.classList.remove("dc-promo-open");
-      ui.overlay.classList.remove("dc-is-visible");
-
-      const remove = () => {
-        if (ui.overlay && ui.overlay.parentNode) ui.overlay.parentNode.removeChild(ui.overlay);
-        try { if (prevFocus && prevFocus.focus) prevFocus.focus({ preventScroll: true }); } catch(e){}
-      };
-
-      const prefersReduced = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-      if (prefersReduced) remove();
-      else setTimeout(remove, 300);
-
-      document.removeEventListener("keydown", onKeyDown, true);
-    };
 
     const onKeyDown = (e) => {
       if (e.key === "Escape") {
@@ -296,6 +543,37 @@
           first.focus();
         }
       }
+    };
+
+    const close = () => {
+      if (closed) return;
+      closed = true;
+
+      document.body.classList.remove("dc-promo-open");
+
+      const remove = () => {
+        if (ui.overlay && ui.overlay.parentNode) ui.overlay.parentNode.removeChild(ui.overlay);
+        try { if (prevFocus && prevFocus.focus) prevFocus.focus({ preventScroll: true }); } catch(e){}
+        if (launcher) showLauncher(launcher, cfg);
+      };
+
+      // Collapse animation into launcher (if available)
+      if (canCollapse) {
+        try {
+          const launcherRect = launcher.getBoundingClientRect();
+          const modalRect = ui.modal.getBoundingClientRect();
+          const tr = collapseTransform(modalRect, launcherRect);
+          if (tr) ui.modal.style.setProperty("--dc-promo-transform", tr);
+        } catch(e){}
+      }
+
+      ui.overlay.classList.remove("dc-is-visible");
+
+      const prefersReduced2 = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+      if (prefersReduced2) remove();
+      else setTimeout(remove, 300);
+
+      document.removeEventListener("keydown", onKeyDown, true);
     };
 
     ui.closeBtn.addEventListener("click", close);
@@ -349,7 +627,7 @@
     setTimeout(() => fire(), 30000);
   }
 
-  function initWithConfig(cfg) {
+  function initWithConfig(cfg, launcher) {
     if (!shouldShow(cfg)) return;
 
     const delayMs = Math.max(0, Number(cfg.triggerDelayMs || 6000));
@@ -358,14 +636,50 @@
       whenVisible(() => {
         setTimeout(() => {
           if (!shouldShow(cfg)) return;
-          openPopup(cfg);
+          openPopup(cfg, { launcher });
         }, delayMs);
       });
     });
+
+    // Safety fallback: show after 30s if user never interacts
+    setTimeout(() => {
+      if (document.hidden) return;
+      if (!shouldShow(cfg)) return;
+      openPopup(cfg, { launcher });
+    }, 30000);
   }
 
   document.addEventListener("DOMContentLoaded", async function () {
     const cfg = await loadConfig();
-    if (cfg) initWithConfig(cfg);
+    if (!cfg || !cfg.enabled) return;
+
+    const launcher = ensureLauncher(cfg);
+    hideLauncher(launcher);
+
+    // Keep the launcher from overlapping other fixed UI (cookie button/banner).
+    const reposition = () => positionLauncher(launcher);
+    reposition();
+    window.addEventListener("resize", reposition);
+
+    // Cookie banner is mounted/unmounted dynamically. Re-check position when DOM changes.
+    if (window.MutationObserver && document.body) {
+      const mo = new MutationObserver(() => reposition());
+      mo.observe(document.body, { childList: true });
+      // A couple of extra runs after load to catch late widgets.
+      setTimeout(reposition, 300);
+      setTimeout(reposition, 1000);
+    }
+
+    launcher.addEventListener("click", function () {
+      openPopup(cfg, { launcher: launcher, fromLauncher: true });
+    });
+
+    // Auto-open at most once per cooldown window, but keep a small launcher button
+    // so the promo can be reopened anytime.
+    if (shouldShow(cfg)) {
+      initWithConfig(cfg, launcher);
+    } else {
+      showLauncher(launcher, cfg);
+    }
   });
 })();

@@ -1,0 +1,839 @@
+<!DOCTYPE html>
+
+<html lang="en-GB">
+<head>
+<!-- DC:GA4_CONSENT_HEAD_START -->
+<!-- Google Analytics 4 + Consent Mode v2 (UK/EU) -->
+<script>
+  // GA4 Measurement ID (change here if needed)
+  window.GA_MEASUREMENT_ID = window.GA_MEASUREMENT_ID || 'G-CC2NRDSRQ9';
+
+  // Consent state: 'accept' | 'reject' | null
+  window.__dc_consent_choice = window.__dc_consent_choice || null;
+
+  // GA load guard
+  window.__ga_loaded = window.__ga_loaded || false;
+
+  // DataLayer + gtag wrapper:
+  // - Always allow Consent Mode commands
+  // - Block analytics/events until user accepts
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){
+    try {
+      if (arguments && arguments.length && arguments[0] === 'consent') {
+        window.dataLayer.push(arguments);
+        return;
+      }
+      if (window.__dc_consent_choice === 'accept') {
+        window.dataLayer.push(arguments);
+      }
+    } catch(e) {}
+  }
+  window.gtag = window.gtag || gtag;
+
+  // Helper: load GA script once (only call after consent 'accept')
+  window.dcLoadGAOnce = window.dcLoadGAOnce || function() {
+    var id = window.GA_MEASUREMENT_ID;
+    if (window.__ga_loaded) return;
+    if(!id || id === 'G-XXXXXXXXXX') {
+      console.warn('GA4 ID is placeholder. Set window.GA_MEASUREMENT_ID to your real GA4 ID.');
+      return;
+    }
+    // Avoid duplicate script tags
+    if (!document.querySelector('script[src^="https://www.googletagmanager.com/gtag/js?id="]')) {
+      var s = document.createElement('script');
+      s.async = true;
+      s.src = 'https://www.googletagmanager.com/gtag/js?id=' + id;
+      document.head.appendChild(s);
+    }
+    window.__ga_loaded = true;
+    gtag('js', new Date());
+    gtag('config', id, { anonymize_ip: true });
+  };
+
+  // Helper: attempt to clear GA cookies on "reject" (best-effort)
+  window.dcClearGACookies = window.dcClearGACookies || function() {
+    try {
+      var expires = 'Thu, 01 Jan 1970 00:00:00 GMT';
+      var domains = [location.hostname, '.' + location.hostname];
+      function del(name) {
+        // Host-only
+        document.cookie = name + '=; expires=' + expires + '; path=/';
+        // Explicit domains
+        for (var i=0; i<domains.length; i++) {
+          document.cookie = name + '=; expires=' + expires + '; path=/; domain=' + domains[i];
+        }
+      }
+      document.cookie.split(';').forEach(function(c){
+        var name = c.split('=')[0].trim();
+        if(name === '_ga' || name === '_gid' || name.indexOf('_ga_') === 0 || name.indexOf('_gat') === 0) {
+          del(name);
+        }
+      });
+    } catch(e) {}
+  };
+
+  // Read saved consent and set defaults (Consent Mode v2)
+  (function() {
+    try {
+      var saved = JSON.parse(localStorage.getItem('dc_consent') || '{}');
+      var choice = (saved && (saved.choice === 'accept' || saved.choice === 'reject')) ? saved.choice : null;
+      window.__dc_consent_choice = choice;
+
+      var base = {
+        ad_user_data: 'denied',
+        ad_personalization: 'denied',
+        ad_storage: 'denied',
+        analytics_storage: 'denied',
+        functionality_storage: 'granted',
+        security_storage: 'granted'
+      };
+
+      var consent = Object.assign({}, base, (choice === 'accept') ? {
+        analytics_storage: 'granted',
+        ad_storage: 'granted',
+        ad_user_data: 'granted',
+        ad_personalization: 'granted'
+      } : {});
+
+      gtag('consent', 'default', consent);
+
+      // Load GA only if user already accepted previously
+      if (choice === 'accept') {
+        window.dcLoadGAOnce();
+      }
+    } catch(e) { console.warn('Consent read failed', e); }
+  })();
+</script>
+<!-- DC:GA4_CONSENT_HEAD_END -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Classic Cake From £60 | 6″/8″ sizes | Dreamy Cake Bakery (Huntingdon)</title>
+<meta content="Classic Cake express menu in Huntingdon &amp; Cambridgeshire — ready today or tomorrow (subject to availability). Sizes: 6″ (£60, 8–12 servings) or 8″ (£80, 14–20 servings). Styles: Chocolate &amp; Biscoff Drip Cake or White &amp; Gold Teddy Cake. Request now — slot confirmed after your request; delivery fee confirmed separately." name="description"/>
+<link href="../../assets/img/site.webmanifest" rel="manifest"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&amp;family=Raleway:wght@600;700;800&amp;family=Open+Sans:wght@400;600&amp;display=swap" rel="stylesheet"/>
+<link href="../../assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet"/>
+<link href="../../assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet"/>
+<link href="../../assets/vendor/aos/aos.css" rel="stylesheet"/>
+<link href="../../assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
+<link href="../../assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet"/>
+<link href="../../assets/css/main.css" rel="stylesheet"/><link href="../../assets/css/product.css" rel="stylesheet"/>
+<meta content="product" property="og:type"/>
+<meta content="Classic Cake From £60 · 6″/8″ sizes · Dreamy Cake Bakery" property="og:title"/>
+<meta content="Classic Cake express menu in Huntingdon &amp; Cambridgeshire — ready today or tomorrow (subject to availability). Sizes: 6″ (£60, 8–12 servings) or 8″ (£80, 14–20 servings). Styles: Chocolate &amp; Biscoff Drip Cake or White &amp; Gold Teddy Cake. Request now — slot confirmed after your request; delivery fee confirmed separately." property="og:description"/>
+<meta content="https://dreamycake.co.uk/assets/img/items/express-cake-main.webp" property="og:image"/>
+<meta content="https://dreamycake.co.uk/Products/classic-cake/" property="og:url"/>
+<meta content="summary_large_image" name="twitter:card"/>
+<meta content="Classic Cake From £60 · 6″/8″ sizes · Dreamy Cake Bakery" name="twitter:title"/>
+<meta content="Classic Cake express menu in Huntingdon &amp; Cambridgeshire — ready today or tomorrow (subject to availability). Sizes: 6″ (£60, 8–12 servings) or 8″ (£80, 14–20 servings). Styles: Chocolate &amp; Biscoff Drip Cake or White &amp; Gold Teddy Cake. Request now — slot confirmed after your request; delivery fee confirmed separately." name="twitter:description"/>
+<meta content="https://dreamycake.co.uk/assets/img/items/express-cake-main.webp" name="twitter:image"/>
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"Product","name":"Classic Cake","description":"Classic Cake from our Express menu — ready today or tomorrow (subject to availability). Sizes: 6 inch (£60, 8–12 servings) or 8 inch (£80, 14–20 servings). Styles: Chocolate & Biscoff Drip Cake (Choco Biscoff inside) or White & Gold Teddy Cake (Vanilla Raspberry inside). Slot confirmed after your request; delivery fee confirmed separately.","image":[{"@type":"ImageObject","url":"https://dreamycake.co.uk/assets/img/items/express-cake-main.webp","caption":"Classic Cake – Chocolate & Biscoff Drip Cake"},{"@type":"ImageObject","url":"https://dreamycake.co.uk/assets/img/items/express-cake-04.webp","caption":"Classic Cake – White & Gold Teddy Cake"},{"@type":"ImageObject","url":"https://dreamycake.co.uk/assets/img/items/express-cake-02.webp","caption":"Classic Cake – Chocolate & Biscoff Drip Cake"},{"@type":"ImageObject","url":"https://dreamycake.co.uk/assets/img/items/express-cake-03.webp","caption":"Classic Cake – White & Gold Teddy Cake"}],"sku":"classic-cake","category":"Cakes","url":"https://dreamycake.co.uk/Products/classic-cake/","brand":{"@type":"Brand","name":"Dreamy Cake Bakery"},"areaServed":["Huntingdon","Cambridgeshire",{"@type":"DefinedRegion","addressCountry":"GB"}],"offers":{"@type":"AggregateOffer","priceCurrency":"GBP","lowPrice":60,"highPrice":80,"offerCount":2,"availability":"https://schema.org/LimitedAvailability","url":"https://dreamycake.co.uk/Products/classic-cake/"},"additionalProperty":[{"@type":"PropertyValue","name":"Sizes","value":"6 inch (£60, 8–12 servings) / 8 inch (£80, 14–20 servings)"},{"@type":"PropertyValue","name":"Styles","value":"Chocolate & Biscoff Drip Cake (Choco Biscoff inside); White & Gold Teddy Cake (Vanilla Raspberry inside)"},{"@type":"PropertyValue","name":"Turnaround","value":"Today / tomorrow (subject to availability)"}],"mpn":"classic-cake"},{"@type":"FAQPage","mainEntity":[{"@type":"Question","name":"How fast can I order a Classic Cake from the express menu?","acceptedAnswer":{"@type":"Answer","text":"Usually for today or tomorrow (subject to availability). Express slots are limited — I’ll reply to confirm your slot after your request."}},{"@type":"Question","name":"What sizes are available and how many servings?","acceptedAnswer":{"@type":"Answer","text":"Two sizes: 6 inch (£60, 8–12 servings) or 8 inch (£80, 14–20 servings)."}},{"@type":"Question","name":"What’s the difference between the two styles?","acceptedAnswer":{"@type":"Answer","text":"Chocolate & Biscoff Drip Cake has a rich drip finish; White & Gold Teddy Cake has a clean white‑and‑gold teddy design. The base price depends only on the size."}},{"@type":"Question","name":"Can I choose the flavour?","acceptedAnswer":{"@type":"Answer","text":"For the express menu, the flavour is fixed based on your chosen style: Choco Biscoff inside for the Drip Cake, or Vanilla Raspberry inside for the Teddy Cake."}},{"@type":"Question","name":"How does the topper work?","acceptedAnswer":{"@type":"Answer","text":"Optional personalised topper on a stick (+£4.50). Add your topper text (up to 25 characters). Colour is chosen by the baker to match your cake."}},{"@type":"Question","name":"How does delivery work?","acceptedAnswer":{"@type":"Answer","text":"Choose Collection or Delivery and add your postcode/area. Delivery fee is confirmed separately when I confirm your slot (not included in the estimate)."}},{"@type":"Question","name":"When is payment required?","acceptedAnswer":{"@type":"Answer","text":"After I confirm availability and the total (including any delivery), I’ll send payment details. Your slot is reserved once paid."}}]}]}</script>
+<link href="/assets/img/favicon.svg" rel="icon" type="image/svg+xml"/>
+<link href="/assets/img/favicon.ico" rel="icon" sizes="any"/>
+<link href="/apple-touch-icon.png" rel="apple-touch-icon"/>
+<link color="#F9F6EC" href="/safari-pinned-tab.svg" rel="mask-icon"/>
+<meta content="#F9F6EC" name="theme-color"/>
+<style>
+/* dc-consent mobile refined */
+@media (max-width: 576px){
+  .dc-consent-banner{
+    position: fixed !important;
+    top: auto !important;
+    left: 10px !important;
+    right: 10px !important;
+    bottom: 10px !important;
+    width: auto !important;
+    max-width: none !important;
+    max-height: 44vh !important;
+    overflow: auto !important;
+    padding: 12px 12px 14px !important;
+    border-radius: 16px !important;
+    box-shadow: 0 8px 24px rgba(0,0,0,.18) !important;
+    background: #fff !important;
+    display: block !important;
+  }
+  .dc-consent-banner__text{
+    width: 100% !important;
+    font-size: 12.5px !important;
+    line-height: 1.5 !important;
+    margin: 0 0 12px 0 !important;
+  }
+  .dc-consent-banner__btns{
+    display: flex !important;
+    width: 100% !important;
+    gap: 8px !important;
+    justify-content: space-between !important;
+  }
+  /* Make reject smaller than accept */
+  .dc-consent-banner__btns .dc-btn[data-choice="reject"]{
+    flex: 0 0 46% !important;
+    font-size: 12px !important;
+    padding: 9px 10px !important;
+  }
+  .dc-consent-banner__btns .dc-btn[data-choice="accept"],
+  .dc-consent-banner__btns .dc-btn.dc-btn--primary{
+    flex: 1 1 auto !important;
+    font-size: 13.5px !important;
+    padding: 11px 12px !important;
+  }
+}
+</style>
+<style>
+/* Classic Cake UI fixes (page-specific) */
+.classic-size-toggle .btn-check:checked + .btn,
+.classic-style-toggle .btn-check:checked + .btn{
+  background: rgb(190, 187, 177) !important; /* match header on scroll */
+  border-color: rgba(33,37,41,.25) !important;
+  color: #212529 !important;
+}
+.classic-size-toggle .btn-check:checked + .btn .text-muted,
+.classic-style-toggle .btn-check:checked + .btn .text-muted{
+  color: rgba(33,37,41,.78) !important;
+}
+</style>
+
+<link href="https://dreamycake.co.uk/Products/classic-cake/" rel="canonical"/>
+</head>
+<body class="index-page">
+<header class="header d-flex align-items-center fixed-top" id="header">
+<div class="container-fluid container-xl position-relative d-flex align-items-center justify-content-between">
+<a class="logo d-flex align-items-center" href="/">
+<!-- Uncomment the line below if you also wish to use an image logo -->
+<!-- <img src="/assets/img/logo.png" alt="Dreamy Cake Bakery" width="32" height="32" decoding="async" fetchpriority="high"> -->
+<p class="sitename">
+      Dreamy Cake Bakery
+     </p>
+</a>
+<nav class="navmenu" id="navmenu">
+<ul>
+<li>
+<a aria-current="page" class="active" href="/#hero">
+        Home
+       </a>
+</li>
+<li><a href="/#pricing">Pricing</a></li>
+<li>
+<a aria-label="Go to Portfolio section" href="/#portfolio">
+        Portfolio
+       </a>
+</li>
+<li>
+<a href="/#contact">
+        Contact
+       </a>
+</li><li>
+<a href="/About/">
+        About
+       </a>
+</li>
+<li class="dropdown">
+<button aria-controls="order-submenu" aria-expanded="false" aria-label="Toggle order submenu" class="nav-toggle" type="button"><span>Order</span> <i aria-hidden="true" class="bi bi-chevron-down chev"></i></button>
+<ul id="order-submenu"><li><a href="/Products/celebration-cake/#order">Order Celebration Cake</a></li><li><a href="/Products/themed-cake/#order">Order Themed Cake</a></li><li><a href="/Products/mini-bento-cake/#order">Order Mini / Bento Cake</a></li><li><a href="/Products/cupcakes/#order">Order Cupcakes</a></li><li><a href="/Products/postage-cookie/#order">Order Postage Cookie</a></li>
+<li><a href="/#contact">Bespoke Request</a></li></ul>
+</li>
+<!-- <li><a href="/#how-it-works">Services</a></li> -->
+<li class="dropdown">
+<button aria-controls="info-submenu" aria-expanded="false" aria-label="Toggle info submenu" class="nav-toggle" type="button"><span>Info</span> <i aria-hidden="true" class="bi bi-chevron-down chev"></i></button>
+<ul id="info-submenu">
+<li><a href="/Delivery/">Delivery</a></li>
+<li><a href="/Allergens/">Allergens</a></li>
+<li><a href="/How-it-works/">How it works</a></li>
+<li><a href="/QA/">Q&amp;A</a></li>
+</ul>
+</li>
+<li>
+<a href="https://shop.dreamycake.co.uk">Shop</a>
+</li></ul>
+<i class="mobile-nav-toggle d-xl-none bi bi-list">
+</i>
+</nav>
+</div>
+</header>
+<main class="main product">
+<!-- Hero -->
+<div class="page-title product-hero" style="--hero-img:url('../../assets/img/items/express-cake-main.webp')">
+<div class="container position-relative">
+<h1>Classic Cake</h1>
+<p>Ready today / tomorrow • Express menu • 6″ / 8″ sizes</p>
+<p class="delivery-note"><strong>From £60</strong> — 6″ (£60) or 8″ (£80). Slot confirmed after your request; delivery fee confirmed separately.</p>
+<div class="chipbar">
+<a class="chip" href="/Delivery/"><i class="bi bi-truck"></i> Delivery</a>
+<a class="chip" href="/Allergens/"><i class="bi bi-exclamation-triangle"></i> Allergens</a>
+<a class="chip" href="/How-it-works/"><i class="bi bi-calendar-event"></i> How it works</a>
+</div>
+</div>
+</div>
+<section class="product-trust section alt-white">
+<div class="container">
+<div class="trust-grid">
+<div class="trust-item"><i class="bi bi-shield-check"></i> 5★ Food Hygiene Rating</div>
+<div class="trust-item"><i class="bi bi-heart"></i> Made fresh to order</div>
+<div class="trust-item"><i class="bi bi-truck"></i> Local delivery available</div>
+</div>
+</div>
+</section>
+<!-- Gallery & About -->
+<section class="section alt-white">
+<div class="container">
+<div class="row gy-4">
+<div class="col-12 col-lg-5 gallery" data-aos="fade-up">
+<div class="swiper product-swiper">
+<div class="swiper-wrapper"><div class="swiper-slide"><a class="glightbox" data-gallery="product" href="../../assets/img/items/express-cake-main.webp"><img alt="Classic Cake – Chocolate &amp; Biscoff Drip Cake" src="../../assets/img/items/express-cake-main.webp" width="800"/></a></div><div class="swiper-slide"><a class="glightbox" data-gallery="product" href="../../assets/img/items/express-cake-04.webp"><img alt="Classic Cake – White &amp; Gold Teddy Cake" src="../../assets/img/items/express-cake-04.webp" width="800"/></a></div><div class="swiper-slide"><a class="glightbox" data-gallery="product" href="../../assets/img/items/express-cake-02.webp"><img alt="Classic Cake – Chocolate &amp; Biscoff Drip Cake" src="../../assets/img/items/express-cake-02.webp" width="800"/></a></div><div class="swiper-slide"><a class="glightbox" data-gallery="product" href="../../assets/img/items/express-cake-03.webp"><img alt="Classic Cake – White &amp; Gold Teddy Cake" src="../../assets/img/items/express-cake-03.webp" width="800"/></a></div></div>
+<div class="swiper-pagination"></div>
+<div class="swiper-button-prev"></div>
+<div class="swiper-button-next"></div>
+</div>
+</div>
+<div class="col-12 col-lg-7" data-aos="fade-up" data-aos-delay="100">
+<h2 class="h4">Classic Cake — Express menu</h2>
+<p>Need a cake fast? Classic Cake is a clean, premium‑finish cake from our Express menu — available today or tomorrow (subject to availability). Choose your size and 1 of 2 styles, then send your request. I’ll reply to confirm your slot and the final total.</p>
+<div class="row g-3 mt-3">
+  <div class="col-12 col-md-6">
+    <div class="p-3 border rounded-3 bg-white">
+      <div class="fw-semibold mb-2">Sizes</div>
+      <ul class="bullets mb-0">
+        <li><i class="bi bi-check2-circle"></i> 6 inch — £60 — 8–12 servings</li>
+        <li><i class="bi bi-check2-circle"></i> 8 inch — £80 — 14–20 servings</li>
+      </ul>
+    </div>
+  </div>
+  <div class="col-12 col-md-6">
+    <div class="p-3 border rounded-3 bg-white">
+      <div class="fw-semibold mb-2">Styles</div>
+      <ul class="bullets mb-0">
+        <li><i class="bi bi-check2-circle"></i> Chocolate &amp; Biscoff Drip Cake — flavour inside: Choco Biscoff</li>
+        <li><i class="bi bi-check2-circle"></i> White &amp; Gold Teddy Cake — flavour inside: Vanilla Raspberry</li>
+      </ul>
+    </div>
+  </div>
+</div>
+<p class="mt-3 mb-0">Express slots are limited — I’ll confirm your slot after your request. Delivery fee is confirmed separately.</p>
+
+<div class="d-none d-lg-block"><h3 class="h6 mb-2">Why Dreamy Cake Bakery</h3>
+<ul class="bullets">
+<li><i class="bi bi-check2-circle"></i> Made to order — every cake is personalised for your occasion</li>
+<li><i class="bi bi-check2-circle"></i> Photo-ready finish — clean, delicate details (perfect for gifting)</li>
+<li><i class="bi bi-check2-circle"></i> Collection / local delivery around Huntingdon &amp; nearby areas</li>
+</ul></div>
+<div class="product-help-inline mt-3 d-none d-lg-block">
+<div class="help-band d-flex flex-column flex-md-row align-items-start align-items-md-center justify-content-between gap-2">
+<div><strong>Prefer WhatsApp?</strong> Send your date + servings + postcode + style ideas — I’ll reply with availability and a quote.</div>
+<div class="d-flex gap-2 flex-wrap">
+<a class="btn btn-outline btn-whatsapp" href="https://wa.me/447510837225"><i class="bi bi-whatsapp"></i> WhatsApp</a>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section class="section alt-cream d-lg-none" id="m-finishes"><div class="container"><h3 class="h6 mb-2">Why Dreamy Cake Bakery</h3>
+<ul class="bullets">
+<li><i class="bi bi-check2-circle"></i> Made to order — every cake is personalised for your occasion</li>
+<li><i class="bi bi-check2-circle"></i> Photo-ready finish — clean, delicate details (perfect for gifting)</li>
+<li><i class="bi bi-check2-circle"></i> Collection / local delivery around Huntingdon &amp; nearby areas</li>
+</ul></div></section>
+<section class="section alt-white d-lg-none" id="m-whatsapp"><div class="container"><div class="product-help-inline mt-3">
+<div class="help-band d-flex flex-column flex-md-row align-items-start align-items-md-center justify-content-between gap-2">
+<div><strong>Prefer WhatsApp?</strong> Send your date + servings + postcode + style ideas — I’ll reply with availability and a quote.</div><div class="d-flex gap-2 flex-wrap">
+<a class="btn btn-outline btn-whatsapp" href="https://wa.me/447510837225"><i class="bi bi-whatsapp"></i> WhatsApp</a>
+</div></div></div></div></section>
+<!-- Sizes & Servings + Flavours -->
+<!-- Related -->
+<section class="section alt-cream d-lg-none" id="order-mobile"><div class="container"><div data-order-slot="mobile"></div></div></section><section class="section alt-white d-lg-none"><div class="container"><div class="mt-3"><div class="overflow-hidden faq-accordion mt-2">
+<details>
+<summary><span>How fast can I order a Classic Cake from the express menu?</span><i class="bi bi-chevron-down chev"></i></summary>
+<div class="answer">Usually for today or tomorrow (subject to availability). Express slots are limited — I’ll reply to confirm your slot after your request.</div>
+</details>
+<details>
+<summary><span>What sizes are available and how many servings?</span><i class="bi bi-chevron-down chev"></i></summary>
+<div class="answer">Two sizes: 6 inch (£60, 8–12 servings) or 8 inch (£80, 14–20 servings).</div>
+</details>
+<details>
+<summary><span>What’s the difference between the two styles?</span><i class="bi bi-chevron-down chev"></i></summary>
+<div class="answer">Chocolate &amp; Biscoff Drip Cake has a rich drip finish; White &amp; Gold Teddy Cake has a clean white‑and‑gold teddy design. The base price depends only on the size.</div>
+</details>
+<details>
+<summary><span>Can I choose the flavour?</span><i class="bi bi-chevron-down chev"></i></summary>
+<div class="answer">For the express menu, the flavour is fixed based on your chosen style: Choco Biscoff inside for the Drip Cake, or Vanilla Raspberry inside for the Teddy Cake.</div>
+</details>
+<details>
+<summary><span>How does the topper work?</span><i class="bi bi-chevron-down chev"></i></summary>
+<div class="answer">Optional personalised topper on a stick (+£4.50). Add your topper text (up to 25 characters). Colour is chosen by the baker to match your cake.</div>
+</details>
+<details>
+<summary><span>How does delivery work?</span><i class="bi bi-chevron-down chev"></i></summary>
+<div class="answer">Choose Collection or Delivery and add your postcode/area. Delivery fee is confirmed separately when I confirm your slot (not included in the estimate).</div>
+</details>
+<details>
+<summary><span>When is payment required?</span><i class="bi bi-chevron-down chev"></i></summary>
+<div class="answer">After I confirm availability and the total (including any delivery), I’ll send payment details. Your slot is reserved once paid.</div>
+</details>
+</div></div></div></section><section class="section alt-cream d-none d-lg-block"><div class="container"><div class="row g-4"><div class="mx-auto col-12 col-lg-12 col-xl-10 col-xxl-9"><div data-order-slot="desktop" id="order-desktop"><div class="order-card" data-order-card="1">
+<h3 class="h5">Request an Express Slot</h3>
+<p class="text-body-secondary small mb-3">This is an express menu item: short &amp; simple design for a fast turnaround. Choose your size (6″ or 8″) and style, then I’ll reply to confirm availability and the final total.</p>
+<form action="https://formsubmit.co/ab0c0409fa937bd163077d308f7ca38f" class="product-form" data-form="f1" data-product="classic-cake" id="order" method="POST">
+<input name="_subject" type="hidden" value="Dreamy Cake — Order request — Classic Cake"/>
+<input name="_honey" type="hidden" value=""/>
+<input name="_captcha" type="hidden" value="false"/>
+<input name="_template" type="hidden" value="table"/>
+<input name="_next" type="hidden" value="https://dreamycake.co.uk/Thank-You/"/>
+<input name="product_name" type="hidden" value="Classic Cake"/>
+<input name="page_url" type="hidden" value="/Products/classic-cake/"/>
+
+<input id="products-classic-cake-index-f1-size-hidden" name="size" type="hidden" value="6 inch"/>
+<input id="products-classic-cake-index-f1-style-hidden" name="style" type="hidden" value="Chocolate &amp; Biscoff Drip Cake"/>
+<input id="products-classic-cake-index-f1-base-price" name="base_price" type="hidden" value="60"/>
+<input id="products-classic-cake-index-f1-topper-selected" name="topper_selected" type="hidden" value="No"/>
+<input id="products-classic-cake-index-f1-topper-text-hidden" name="topper_text" type="hidden" value=""/>
+<input id="products-classic-cake-index-f1-estimated-price" name="estimated_price" type="hidden" value="£60.00"/>
+<input id="products-classic-cake-index-f1-order-summary" name="order_summary" type="hidden" value="Size: 6 inch (£60, 8–12 servings) | Style: Chocolate &amp; Biscoff Drip Cake (Choco Biscoff inside) | Topper: No | Delivery:  | Estimated: £60.00"/>
+
+<div class="row g-3">
+  <div class="col-12 col-md-6">
+    <label class="form-label" for="products-classic-cake-index-f1-name">Full name</label>
+    <input autocomplete="name" class="form-control" id="products-classic-cake-index-f1-name" name="name" placeholder="Jane Doe" required="" type="text"/>
+  </div>
+
+  <div class="col-12 col-md-6">
+    <label class="form-label" for="products-classic-cake-index-f1-email">Email</label>
+    <input autocomplete="email" class="form-control" id="products-classic-cake-index-f1-email" name="email" placeholder="you@example.com" required="" type="email"/>
+  </div>
+
+  <div class="col-12 col-md-6">
+    <label class="form-label" for="products-classic-cake-index-f1-phone">Phone <span class="small text-muted">(optional, but helpful)</span></label>
+    <input autocomplete="tel" class="form-control" id="products-classic-cake-index-f1-phone" name="phone" placeholder="+44 ..." type="tel"/>
+  </div>
+
+  <div class="col-12 col-md-6">
+    <label class="form-label" for="products-classic-cake-index-f1-date">Date needed</label>
+    <input autocomplete="off" class="form-control" id="products-classic-cake-index-f1-date" name="date" required="" type="date"/>
+    <div class="form-text">Designed for today / tomorrow slots. I’ll confirm availability after your request.</div>
+  </div>
+
+  <div class="col-12">
+    <label class="form-label">Size</label>
+    <div aria-label="Classic Cake size" class="d-flex flex-column flex-sm-row gap-2 classic-size-toggle" role="group">
+      <div class="flex-fill">
+        <input autocomplete="off" checked="" class="btn-check" id="products-classic-cake-index-f1-size-6" name="size_ui" required="" type="radio" value="6 inch"/>
+        <label class="btn btn-outline-dark w-100 py-2 text-center" for="products-classic-cake-index-f1-size-6">
+          <div class="fw-semibold">6 inch</div>
+          <div class="small text-muted">£60 · 8–12 servings</div>
+        </label>
+      </div>
+      <div class="flex-fill">
+        <input autocomplete="off" class="btn-check" id="products-classic-cake-index-f1-size-8" name="size_ui" required="" type="radio" value="8 inch"/>
+        <label class="btn btn-outline-dark w-100 py-2 text-center" for="products-classic-cake-index-f1-size-8">
+          <div class="fw-semibold">8 inch</div>
+          <div class="small text-muted">£80 · 14–20 servings</div>
+        </label>
+      </div>
+    </div>
+    <div class="form-text">Two fixed sizes only: 6″ (£60, 8–12 servings) or 8″ (£80, 14–20 servings).</div>
+  </div>
+
+  <div class="col-12">
+    <label class="form-label">Style <span class="small text-muted">(design option)</span></label>
+    <div aria-label="Classic Cake style" class="d-grid gap-2 classic-style-toggle" role="group">
+      <div>
+        <input autocomplete="off" checked="" class="btn-check" id="products-classic-cake-index-f1-style-choco" name="style_ui" required="" type="radio" value="Chocolate &amp; Biscoff Drip Cake"/>
+        <label class="btn btn-outline-dark w-100 text-start p-2 ps-3 ps-sm-4 d-flex gap-2 align-items-center" for="products-classic-cake-index-f1-style-choco">
+          <img alt="Classic Cake – Chocolate &amp; Biscoff Drip Cake" class="rounded-2 border flex-shrink-0 ms-2" decoding="async" height="72" loading="lazy" src="../../assets/img/items/express-cake-02.webp" style="object-fit: cover;" width="72"/>
+          <div>
+            <div class="fw-semibold">Chocolate &amp; Biscoff Drip Cake</div>
+            <div class="small text-muted">Flavour inside: Choco Biscoff</div>
+          </div>
+        </label>
+      </div>
+      <div>
+        <input autocomplete="off" class="btn-check" id="products-classic-cake-index-f1-style-teddy" name="style_ui" required="" type="radio" value="White &amp; Gold Teddy Cake"/>
+        <label class="btn btn-outline-dark w-100 text-start p-2 ps-3 ps-sm-4 d-flex gap-2 align-items-center" for="products-classic-cake-index-f1-style-teddy">
+          <img alt="Classic Cake – White &amp; Gold Teddy Cake" class="rounded-2 border flex-shrink-0 ms-2" decoding="async" height="72" loading="lazy" src="../../assets/img/items/express-cake-03.webp" style="object-fit: cover;" width="72"/>
+          <div>
+            <div class="fw-semibold">White &amp; Gold Teddy Cake</div>
+            <div class="small text-muted">Flavour inside: Vanilla Raspberry</div>
+          </div>
+        </label>
+      </div>
+    </div>
+    <div class="form-text">Your chosen style doesn’t change the base price.</div>
+  </div>
+
+  <div class="col-12 col-md-6">
+    <label class="form-label" for="products-classic-cake-index-f1-delivery-option">Collection or delivery?</label>
+    <select autocomplete="off" class="form-control" id="products-classic-cake-index-f1-delivery-option" name="delivery_option" required="">
+      <option disabled="" selected="" value="">Choose option</option>
+      <option value="collection">Collection (+£0)</option>
+      <option value="delivery">Delivery (fee confirmed later)</option>
+    </select>
+    <div class="form-text">Delivery fee will be confirmed after I confirm your slot.</div>
+  </div>
+
+  <div class="col-12 col-md-6">
+    <label class="form-label" for="products-classic-cake-index-f1-postcode">Postcode / area</label>
+    <input class="form-control" id="products-classic-cake-index-f1-postcode" name="postcode" placeholder="e.g., PE28" type="text"/>
+    <div class="form-text">Required for delivery.</div>
+  </div>
+
+  <div class="col-12">
+    <div class="p-3 border rounded-3 bg-white">
+      <div class="fw-semibold mb-2">Extras</div>
+      <div class="form-check">
+        <input class="form-check-input" id="products-classic-cake-index-f1-extra-topper" name="topper_ui" type="checkbox" value="Personalised topper (on a stick)"/>
+        <label class="form-check-label" for="products-classic-cake-index-f1-extra-topper">Personalised topper (on a stick) <span class="small text-muted">(+£4.50)</span></label>
+        <div class="form-text mt-1">Colour chosen by the baker to match your cake.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-12 d-none" id="products-classic-cake-index-f1-topper-fields">
+    <div class="row g-3">
+      <div class="col-12 col-md-8">
+        <label class="form-label" for="products-classic-cake-index-f1-topper-text">Topper text</label>
+        <input class="form-control" disabled="" id="products-classic-cake-index-f1-topper-text" maxlength="25" name="topper_text_ui" placeholder="e.g., Happy 30" type="text"/>
+        <div class="form-text">Max 25 characters. Colour chosen by the baker to match your cake.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-12 mt-2">
+    <div class="d-flex flex-column flex-sm-row align-items-sm-center justify-content-between gap-2">
+      <button class="btn btn-primary" type="submit">Request Classic Cake</button>
+      <div class="text-sm-end">
+        <div class="fw-semibold">Estimated: <span class="badge bg-light text-dark border" id="products-classic-cake-index-f1-estimate-display">£60.00</span></div>
+        <div class="small text-muted">Delivery fee is confirmed separately.</div>
+      </div>
+    </div>
+  </div>
+</div>
+</form>
+</div></div><div class="product-subtitle mt-4"><h2 class="h4 m-0">Quick questions</h2><div class="caption">BEFORE YOU REQUEST</div></div><div class="mt-3" id="quick-questions-desktop"><div class="overflow-hidden faq-accordion mt-2">
+<details>
+<summary><span>How fast can I order a Classic Cake from the express menu?</span><i class="bi bi-chevron-down chev"></i></summary>
+<div class="answer">Usually for today or tomorrow (subject to availability). Express slots are limited — I’ll reply to confirm your slot after your request.</div>
+</details>
+<details>
+<summary><span>What sizes are available and how many servings?</span><i class="bi bi-chevron-down chev"></i></summary>
+<div class="answer">Two sizes: 6 inch (£60, 8–12 servings) or 8 inch (£80, 14–20 servings).</div>
+</details>
+<details>
+<summary><span>What’s the difference between the two styles?</span><i class="bi bi-chevron-down chev"></i></summary>
+<div class="answer">Chocolate &amp; Biscoff Drip Cake has a rich drip finish; White &amp; Gold Teddy Cake has a clean white‑and‑gold teddy design. The base price depends only on the size.</div>
+</details>
+<details>
+<summary><span>Can I choose the flavour?</span><i class="bi bi-chevron-down chev"></i></summary>
+<div class="answer">For the express menu, the flavour is fixed based on your chosen style: Choco Biscoff inside for the Drip Cake, or Vanilla Raspberry inside for the Teddy Cake.</div>
+</details>
+<details>
+<summary><span>How does the topper work?</span><i class="bi bi-chevron-down chev"></i></summary>
+<div class="answer">Optional personalised topper on a stick (+£4.50). Add your topper text (up to 25 characters). Colour is chosen by the baker to match your cake.</div>
+</details>
+<details>
+<summary><span>How does delivery work?</span><i class="bi bi-chevron-down chev"></i></summary>
+<div class="answer">Choose Collection or Delivery and add your postcode/area. Delivery fee is confirmed separately when I confirm your slot (not included in the estimate).</div>
+</details>
+<details>
+<summary><span>When is payment required?</span><i class="bi bi-chevron-down chev"></i></summary>
+<div class="answer">After I confirm availability and the total (including any delivery), I’ll send payment details. Your slot is reserved once paid.</div>
+</details>
+</div></div><div class="mt-2"><a class="btn btn-outline" href="/QA/" role="button">See full Q&amp;A →</a></div></div></div></div></section><section class="alt-1 section product-help alt-cream" id="help">
+<div class="container">
+<div class="help-band d-flex flex-column flex-md-row align-items-start align-items-md-center justify-content-between gap-2">
+<div><strong>Questions?</strong> I reply quickly on WhatsApp and email.</div>
+<div class="d-flex gap-2 flex-wrap">
+<a class="btn btn-outline" href="https://wa.me/447510837225"><i class="bi bi-whatsapp"></i> WhatsApp</a>
+<a class="btn btn-outline" href="mailto:dreamycake.info@gmail.com"><i class="bi bi-envelope"></i> Email</a>
+</div>
+</div>
+</div>
+</section>
+<section class="section related alt-white" id="related-section">
+<div class="container">
+<h3 class="h5 mb-3">You may also like</h3>
+<div class="row g-3 row-cols-2 row-cols-md-3 row-cols-xl-4">
+<div class="col-6 col-md-3"><a class="card text-decoration-none h-100 overflow-hidden rounded-3" href="/Products/celebration-cake/"><img alt="Celebration Cake" decoding="async" loading="lazy" src="../../assets/img/items/celebration-cake-main.webp"/><div class="p-2 text-center"><strong>Celebration Cake</strong></div></a></div><div class="col-6 col-md-3"><a class="card text-decoration-none h-100 overflow-hidden rounded-3" href="/Products/themed-cake/"><img alt="Themed Cake" decoding="async" loading="lazy" src="../../assets/img/items/themed-cake-main.webp"/><div class="p-2 text-center"><strong>Themed Cake</strong></div></a></div><div class="col-6 col-md-3"><a class="card text-decoration-none h-100 overflow-hidden rounded-3" href="/Products/mini-bento-cake/"><img alt="Mini / Bento Cake" decoding="async" loading="lazy" src="../../assets/img/items/mini-bento-cake-main.webp"/><div class="p-2 text-center"><strong>Mini / Bento Cake</strong></div></a></div><div class="col-6 col-md-3"><a class="card text-decoration-none h-100 overflow-hidden rounded-3" href="/Products/cupcakes/"><img alt="Cupcakes" decoding="async" loading="lazy" src="../../assets/img/items/cupcakes-main.webp"/><div class="p-2 text-center"><strong>Cupcakes</strong></div></a></div></div>
+</div>
+</section>
+
+</main>
+<div aria-hidden="false" class="mobile-sticky-bar">
+<div class="bar">
+<a class="btn btn-primary" href="#order-desktop" id="btn-order-sticky">Request Classic Cake</a>
+<a class="btn btn-outline" href="/#contact" id="btn-help-sticky">Ask a question</a>
+</div>
+</div>
+<footer class="footer dark-background" id="footer">
+<div class="container">
+<div class="row gy-3">
+<div class="col-lg-3 col-md-6 d-flex">
+<i class="bi bi-geo-alt icon">
+</i>
+<div class="address">
+<h4>
+        Address
+       </h4>
+<p>
+        Brampton
+       </p>
+<p>
+        Huntingdon, PE28
+       </p>
+<p>
+</p>
+</div>
+</div>
+<div class="col-lg-3 col-md-6 d-flex">
+<i class="bi bi-telephone icon">
+</i>
+<div>
+<h4>
+        Contact
+       </h4>
+<p>
+<strong>
+         Phone:
+        </strong>
+<span><a class="link" href="tel:+447510837225">+44 7510 837225</a></span>
+<br/>
+<strong>
+          Email:
+         </strong>
+<span><a class="link" href="mailto:dreamycake.info@gmail.com">dreamycake.info@gmail.com</a></span>
+<br/>
+<strong>
+          WhatsApp:
+         </strong>
+<span><a aria-label="Chat on WhatsApp" class="link" href="https://wa.me/447510837225" onclick="if(window.gtag){gtag('event','whatsapp_click',{label:'footer_contact'});}" rel="noopener" target="_blank"><i class="bi bi-whatsapp"></i> Message us</a></span>
+<br/>
+</p>
+</div>
+</div>
+<div class="col-lg-3 col-md-6 d-flex">
+<i class="bi bi-clock icon">
+</i>
+<div>
+<h4>
+        Opening Hours
+       </h4>
+<p>
+<strong>
+         Mon-Sat:
+        </strong>
+<span>
+         9AM - 8PM
+        </span>
+<br/>
+<strong>
+         Sunday
+        </strong>
+        :
+        <span>
+         10AM - 5PM
+        </span>
+</p>
+</div>
+</div>
+<div class="col-lg-3 col-md-6">
+<h4>
+       Follow Us
+      </h4>
+<div class="social-links d-flex">
+<a aria-label="Follow Dreamy Cake on Facebook" class="facebook" href="https://www.facebook.com/DreamyCakeStudioLTD/">
+<i class="bi bi-facebook">
+</i>
+</a>
+<a aria-label="Follow Dreamy Cake on Instagram" class="instagram" href="https://www.instagram.com/dreamycake.bakery/">
+<i class="bi bi-instagram">
+</i>
+</a></div>
+</div>
+</div>
+</div>
+<div class="container copyright text-center mt-4">
+<a href="/Terms-and-Conditions/">
+     Terms &amp; Conditions
+    </a>
+<a href="/Privacy-Policy/">
+     Privacy Policy
+    </a>
+<br/>
+<p>
+     ©
+     <span>
+      Copyright
+     </span>
+<strong class="px-1 sitename">
+      Dreamy Cake Studio LTD
+     </strong>
+<span>
+      All Rights Reserved
+     </span>
+</p>
+<div class="credits">
+     Designed by
+     <a href="mailto:bogbond@gmail.com" onclick="if(window.gtag){gtag('event','email_click',{label:'contact'});}">
+      Bond
+     </a>
+</div>
+</div>
+</footer>
+<a class="scroll-top d-flex align-items-center justify-content-center" href="#" id="scroll-top">
+<i class="bi bi-arrow-up-short">
+</i>
+</a>
+<div id="preloader">
+</div>
+<!-- Vendor JS -->
+<script src="../../assets/vendor/aos/aos.js"></script>
+<script src="../../assets/vendor/swiper/swiper-bundle.min.js"></script>
+<script src="../../assets/vendor/glightbox/js/glightbox.min.js"></script>
+<script src="../../assets/js/main.js"></script><script src="../../assets/js/product.js"></script>
+<script src="../../assets/js/classic-cake-order.js"></script>
+<script src="/assets/js/navfix.js"></script>
+<!-- DC:CONSENT_BANNER_START -->
+<style>
+  .dc-consent-banner{
+    position:fixed; left:0; right:0; bottom:0;
+    z-index:2147483647;
+    background: rgba(255,255,255,0.98);
+    border-top: 1px solid rgba(0,0,0,.1);
+    box-shadow: 0 -8px 24px rgba(0,0,0,.08);
+    padding: 16px; display:flex; gap:16px; align-items: flex-start;
+    font-family: system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
+  }
+  .dc-consent-banner__text{ flex:1; font-size:14px; line-height:1.45; color:#222; }
+  .dc-consent-banner__btns{ display:flex; gap:8px; flex-wrap:wrap; }
+  .dc-btn{ border:1px solid #222; padding:8px 12px; border-radius:999px; background:#fff; cursor:pointer; font-size:14px; }
+  .dc-btn--primary{ background:#222; color:#fff; }
+  .dc-consent-manage{
+    left: 12px !important;
+    position:fixed;
+    right:auto !important; bottom: 6px;
+    z-index:2147483647;
+    border:1px solid #222; background:#fff; padding:6px 10px; border-radius:999px; font-size:12px; cursor:pointer; opacity:.85;
+    line-height:1; white-space:nowrap;
+    transition: bottom .2s ease, right .2s ease, left .2s ease, opacity .2s;
+  }
+  /* When we need to lift above another fixed button (e.g., back-to-top) */
+  /* Put it bottom-left on very small screens to avoid crowding */
+  @media (max-width: 480px) {
+    .dc-consent-manage{ left:16px; right:auto; }
+  }
+  .dc-consent-manage:hover{ opacity:1; }
+</style>
+<script>
+(function(){
+  try {
+    // Create "Manage cookies" floating button
+    var manage = document.createElement('button');
+    manage.className = 'dc-consent-manage';
+    manage.type = 'button';
+    manage.textContent = 'Cookies';
+    manage.setAttribute('aria-label','Manage cookies');
+    manage.addEventListener('click', function(){ showBanner(true); });
+
+    // Build banner
+    function showBanner(force) {
+      var saved = null;
+      try { saved = JSON.parse(localStorage.getItem('dc_consent') || '{}'); } catch(e){}
+      if(!force && saved && (saved.choice === 'accept' || saved.choice === 'reject')) return;
+      var wrap = document.createElement('div');
+      wrap.className = 'dc-consent-banner';
+      wrap.setAttribute('role','dialog');
+      wrap.setAttribute('aria-live','polite');
+      wrap.innerHTML = ''
+        + '<div class="dc-consent-banner__text">To keep things simple, we use essential cookies. If you’re happy, we’ll also use analytics to learn what’s working. You can update your choice anytime in “Cookies”.</div>'
+        + '<div class="dc-consent-banner__btns">'
+        +   '<button type="button" class="dc-btn" data-choice="reject">Reject non-essential</button>'
+        +   '<button type="button" class="dc-btn dc-btn--primary" data-choice="accept">Accept all</button>'
+        + '</div>';
+      document.body.appendChild(wrap);
+      wrap.querySelectorAll('button[data-choice]').forEach(function(btn){
+        btn.addEventListener('click', function(){ setChoice(this.getAttribute('data-choice')); });
+      });
+    }
+
+    function setChoice(choice) {
+      try { localStorage.setItem('dc_consent', JSON.stringify({choice: choice})); } catch(e){}
+      window.__dc_consent_choice = choice;
+
+      // Update Consent Mode in real-time
+      if (typeof gtag === 'function') {
+        if(choice === 'accept') {
+          gtag('consent', 'update', {
+            analytics_storage: 'granted',
+            ad_storage: 'granted',
+            ad_user_data: 'granted',
+            ad_personalization: 'granted'
+          });
+          // Load GA once (no duplicates)
+          if (typeof window.dcLoadGAOnce === 'function') {
+            window.dcLoadGAOnce();
+          }
+        } else {
+          gtag('consent', 'update', {
+            analytics_storage: 'denied',
+            ad_storage: 'denied',
+            ad_user_data: 'denied',
+            ad_personalization: 'denied'
+          });
+          // Best-effort cookie cleanup
+          if (typeof window.dcClearGACookies === 'function') {
+            window.dcClearGACookies();
+          }
+        }
+      }
+
+      var b = document.querySelector('.dc-consent-banner'); if(b) b.remove();
+    }
+
+    // Try to avoid overlap with existing fixed "back to top" buttons
+    function avoidOverlap() {
+      try {
+        var candidates = [
+          '.back-to-top', '.scroll-to-top', '.scroll-top', '.to-top', '.btn-to-top',
+          '#backToTop', '#toTop', '#totop', '[data-backtotop]', '[data-scroll-top]'
+        ];
+        var el = null;
+        for (var i=0; i<candidates.length; i++) {
+          var found = document.querySelector(candidates[i]);
+          if(found) { el = found; break; }
+        }
+        // Reset
+        manage.classList.remove('dc-lift');
+        manage.style.right = ''; manage.style.left = ''; manage.style.bottom = '';
+        // On small screens we already push left via CSS, skip overlap logic
+        if (window.matchMedia('(max-width: 480px)').matches) return;
+        if (!el) return;
+        var r = el.getBoundingClientRect();
+        // Heuristic: if the element sits bottom-right within 120px from the viewport edge, lift our button
+        var nearBottom = (window.innerHeight - r.bottom) <= 120;
+        var nearRight  = (window.innerWidth  - r.right)  <= 120;
+        var visible = r.width>0 && r.height>0;
+        if (visible && nearBottom && nearRight) {
+          // // manage.classList.add('dc-lift'); // disabled // disabled
+        }
+      } catch(e){}
+    }
+
+    document.addEventListener('DOMContentLoaded', function(){
+      document.body.appendChild(manage);
+      showBanner(false);
+      avoidOverlap();
+    });
+    window.addEventListener('scroll', avoidOverlap, {passive:true});
+    window.addEventListener('resize', avoidOverlap);
+
+    // Run a few times shortly after load to catch late-mounted widgets
+    setTimeout(avoidOverlap, 300);
+    setTimeout(avoidOverlap, 1000);
+  } catch(e){ console.error('Consent banner error', e); }
+})();
+</script>
+<!-- DC:CONSENT_BANNER_END -->
+</body>
+</html>

@@ -2468,7 +2468,16 @@ body.mobile-nav-active { overflow: hidden; }
   backdrop-filter: blur(4px);
   -webkit-backdrop-filter: blur(4px);
   z-index: 2147483646; /* below consent banner (2147483647) but we hide it while promo is open */
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 280ms ease;
 }
+
+.dc-promo-overlay.dc-is-visible {
+  opacity: 1;
+  pointer-events: auto;
+}
+
 
 .dc-promo-overlay[hidden] {
   display: none !important;
@@ -2483,14 +2492,18 @@ body.mobile-nav-active { overflow: hidden; }
   overflow: hidden;
   position: relative;
   opacity: 0;
-  transform: translateY(10px) scale(0.985);
+  transform: var(--dc-promo-transform, translateY(10px) scale(0.985));
   transition: opacity 280ms ease, transform 280ms ease;
   outline: none;
 }
 
 .dc-promo-overlay.dc-is-visible .dc-promo-modal {
   opacity: 1;
-  transform: translateY(0) scale(1);
+  transform: var(--dc-promo-transform-visible, translateY(0) scale(1));
+}
+
+.dc-promo-modal.dc-no-anim {
+  transition: none !important;
 }
 
 .dc-promo-close {
@@ -2650,12 +2663,16 @@ body.mobile-nav-active { overflow: hidden; }
     pointer-events: none; /* allow page interaction outside the sheet */
   }
 
+  .dc-promo-overlay.dc-is-visible {
+    pointer-events: none;
+  }
+
   .dc-promo-modal {
     pointer-events: auto;
     width: min(560px, 100%);
     border-radius: 22px;
     box-shadow: 0 18px 60px rgba(0, 0, 0, 0.22);
-    transform: translateY(14px) scale(0.995);
+    transform: var(--dc-promo-transform, translateY(14px) scale(0.995));
   }
 
   .dc-promo-header {
@@ -2686,6 +2703,50 @@ body.mobile-nav-active { overflow: hidden; }
   }
 }
 
+
+/* Promo launcher button (collapsed state) */
+.dc-promo-launcher {
+  position: fixed;
+  left: 16px;
+  /* Can be dynamically lifted above other fixed UI (e.g., cookie button/banner) */
+  bottom: calc(var(--dc-promo-launcher-bottom, 16px) + env(safe-area-inset-bottom, 0px));
+  z-index: 2147483645; /* just under the promo overlay */
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 14px;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  background: rgba(17, 17, 17, 0.92);
+  color: #fff;
+  font-weight: 700;
+  font-size: 13px;
+  letter-spacing: 0.01em;
+  box-shadow: 0 12px 36px rgba(0, 0, 0, 0.28);
+  cursor: pointer;
+  opacity: 0;
+  pointer-events: none;
+  transform: translateX(-8px);
+  transition: opacity 200ms ease, transform 200ms ease, filter 160ms ease;
+}
+
+.dc-promo-launcher.dc-is-visible {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateX(0);
+}
+
+.dc-promo-launcher:hover {
+  filter: brightness(0.96);
+  transform: translateX(0) translateY(-1px);
+}
+
+body.dc-promo-open .dc-promo-launcher {
+  opacity: 0 !important;
+  pointer-events: none !important;
+  transform: translateX(-8px) !important;
+}
+
 /* Hide cookie consent UI while promo is open (prevents overlap/confusion) */
 body.dc-promo-open .dc-consent-banner,
 body.dc-promo-open .dc-consent-manage {
@@ -2696,5 +2757,69 @@ body.dc-promo-open .dc-consent-manage {
 @media (min-width: 769px) {
   body.dc-promo-open {
     overflow: hidden;
+  }
+}
+
+
+/* === DC: Order dropdown – make injected "Seasonal Collections" toggle match dropdown link styles === */
+@media (min-width: 1200px) {
+  .navmenu .dropdown ul li.dc-seasonal-dropdown > a,
+  .navmenu .dropdown ul li.dc-seasonal-dropdown > button.nav-toggle {
+    padding: 10px 20px;
+    font-size: 15px;
+    text-transform: none;
+    color: var(--nav-dropdown-color);
+    width: 100%;
+    background: none;
+    border: 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-family: var(--nav-font);
+    font-weight: 400;
+  }
+  .navmenu .dropdown ul li.dc-seasonal-dropdown > a:hover,
+  .navmenu .dropdown ul li.dc-seasonal-dropdown:hover > a,
+  .navmenu .dropdown ul li.dc-seasonal-dropdown > button.nav-toggle:hover,
+  .navmenu .dropdown ul li.dc-seasonal-dropdown:hover > button.nav-toggle {
+    color: var(--nav-dropdown-hover-color);
+  }
+  .navmenu .dropdown ul li.dc-seasonal-dropdown > a i,
+  .navmenu .dropdown ul li.dc-seasonal-dropdown > button.nav-toggle i {
+    font-size: 12px;
+    width: auto;
+    height: auto;
+    margin-left: 5px;
+  }
+}
+
+@media (max-width: 1199px) {
+  .navmenu .dropdown ul li.dc-seasonal-dropdown > a,
+  .navmenu .dropdown ul li.dc-seasonal-dropdown > button.nav-toggle {
+    width: 100%;
+    padding: 18px 15px !important;
+    font-size: inherit !important;
+    font-weight: inherit !important;
+    color: var(--nav-color) !important;
+    line-height: inherit !important;
+    display: flex !important;
+    align-items: center;
+    justify-content: space-between;
+    background: none !important;
+    border: 0 !important;
+  }
+  .navmenu .dropdown ul li.dc-seasonal-dropdown > a:hover,
+  .navmenu .dropdown ul li.dc-seasonal-dropdown.open > a,
+  .navmenu .dropdown ul li.dc-seasonal-dropdown > button.nav-toggle:hover,
+  .navmenu .dropdown ul li.dc-seasonal-dropdown.open > button.nav-toggle {
+    color: var(--nav-hover-color) !important;
+  }
+  .navmenu .dropdown ul li.dc-seasonal-dropdown > a i,
+  .navmenu .dropdown ul li.dc-seasonal-dropdown > button.nav-toggle i {
+    width: auto !important;
+    height: auto !important;
+    background: transparent !important;
+    box-shadow: none !important;
+    border: 0 !important;
   }
 }

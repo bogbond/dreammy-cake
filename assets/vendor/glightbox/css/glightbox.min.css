@@ -1,0 +1,19 @@
+/* GLightbox (minimal local build for Dreamy Cake)
+   Provides basic lightbox overlay + gallery navigation.
+*/
+body.glightbox-open{overflow:hidden}
+.glightbox-container{position:fixed;inset:0;z-index:99999;display:flex;align-items:center;justify-content:center}
+.glightbox-container[hidden]{display:none}
+.glightbox-overlay{position:absolute;inset:0;background:rgba(0,0,0,.85)}
+.glightbox-content{position:relative;z-index:1;display:flex;flex-direction:column;align-items:center;justify-content:center;max-width:92vw;max-height:92vh;padding:16px}
+.glightbox-image{max-width:92vw;max-height:80vh;width:auto;height:auto;border-radius:14px;box-shadow:0 18px 46px rgba(0,0,0,.45);background:#111}
+.glightbox-caption{margin-top:10px;color:#fff;font-size:14px;line-height:1.35;text-align:center;max-width:92vw;opacity:.92}
+.glightbox-close,.glightbox-prev,.glightbox-next{position:absolute;z-index:2;display:inline-flex;align-items:center;justify-content:center;appearance:none;-webkit-appearance:none;border:1px solid rgba(255,255,255,.28);background:rgba(0,0,0,.35);color:#fff;border-radius:999px;cursor:pointer;user-select:none;backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);transition:transform .12s ease,background .12s ease,border-color .12s ease}
+.glightbox-close:hover{background:rgba(0,0,0,.5);border-color:rgba(255,255,255,.4);transform:scale(1.04)}.glightbox-prev:hover,.glightbox-next:hover{background:rgba(0,0,0,.5);border-color:rgba(255,255,255,.4);transform:translateY(-50%) scale(1.04)}
+.glightbox-close:focus,.glightbox-prev:focus,.glightbox-next:focus{outline:2px solid rgba(255,255,255,.65);outline-offset:2px}
+.glightbox-close{top:16px;right:16px;width:40px;height:40px;font-size:22px;line-height:1}
+.glightbox-prev,.glightbox-next{top:50%;transform:translateY(-50%);width:44px;height:44px;font-size:26px;line-height:1}
+.glightbox-prev{left:14px}
+.glightbox-next{right:14px}
+.glightbox-prev[disabled],.glightbox-next[disabled]{opacity:.35;cursor:default;transform:translateY(-50%);background:rgba(0,0,0,.25)}
+@media (max-width:576px){.glightbox-content{padding:12px}.glightbox-image{border-radius:12px;max-height:76vh}.glightbox-prev,.glightbox-next{width:40px;height:40px;font-size:24px}.glightbox-prev{left:10px}.glightbox-next{right:10px}.glightbox-close{width:38px;height:38px;font-size:20px}}

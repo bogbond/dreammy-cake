@@ -1,0 +1,157 @@
+/* Express Menu page scoped styles */
+
+.express-menu-page .page-title.express-hero{
+  background:
+    linear-gradient(180deg, rgba(0,0,0,.55), rgba(0,0,0,.25)),
+    url('/assets/img/items/mini-bento-cake-04.webp') center/cover no-repeat;
+  padding: 56px 0 46px;
+  /* Keep the page title aligned with product pages */
+  text-align: center;
+}
+
+.express-menu-page .page-title.express-hero h1{
+  color:#fff;
+  margin-bottom:.25rem;
+  font-size: clamp(1.65rem, 3.8vw, 2.4rem);
+}
+
+.express-menu-page .page-title.express-hero .subtitle{
+  color: rgba(255,255,255,.92);
+  font-size: .98rem;
+  /* max-width makes the block narrower on wide screens — center the block itself */
+  margin: 0 auto;
+  max-width: 62ch;
+}
+
+@media (min-width: 992px){
+  .express-menu-page .page-title.express-hero{
+    padding: 92px 0 72px;
+  }
+}
+
+/* Info band */
+.express-menu-page .express-band{
+  background: rgba(255,255,255,.92);
+  border: 1px solid rgba(0,0,0,.08);
+  border-radius: 20px;
+  padding: 16px 18px;
+  box-shadow: 0 10px 30px rgba(0,0,0,.04);
+}
+
+.express-menu-page .express-band .btn{
+  border-radius: 9999px;
+}
+
+/* Menu cards — pricing-card style but larger */
+.express-menu-page .menu-card{
+  position: relative;
+  height: 360px;
+  background: #000;
+}
+
+.express-menu-page .menu-card img{
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform .6s ease, filter .6s ease;
+}
+
+
+/* Classic Cake image: nudge framing down so the top isn't clipped */
+.express-menu-page .classic-cake-img{
+  object-position: center 24%;
+}
+.express-menu-page .menu-card .price-overlay{
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  background: linear-gradient(180deg, rgba(0,0,0,0) 35%, rgba(0,0,0,.58) 100%);
+  color: #fff;
+  padding-bottom: 14px;
+}
+
+.express-menu-page .menu-card .price-head{
+  margin-top: auto;
+  transition: transform .3s ease, padding .3s ease;
+}
+
+.express-menu-page .menu-card .price-title{
+  font-size: 1.45rem;
+  transition: font-size .2s ease, transform .3s ease;
+}
+
+.express-menu-page .menu-card .price-head p{ margin: 0; }
+
+.express-menu-page .menu-card .price-details{
+  opacity: 0;
+  visibility: hidden;
+  max-height: 0;
+  overflow: hidden;
+  transition: opacity .25s ease, max-height .3s ease;
+}
+
+.express-menu-page .menu-card .price-head .qty{
+  opacity: 0;
+  transition: opacity .2s ease;
+}
+
+@media (min-width: 992px){
+  .express-menu-page .menu-card:hover img{
+    transform: scale(1.04);
+    filter: brightness(.86);
+  }
+  .express-menu-page .menu-card:hover .price-head{
+    transform: translateY(-55%);
+  }
+  .express-menu-page .menu-card:hover .price-title{
+    font-size: 1.18rem;
+  }
+  .express-menu-page .menu-card:hover .price-details{
+    opacity: 1;
+    visibility: visible;
+    max-height: 260px;
+  }
+  .express-menu-page .menu-card:hover .price-head .qty{ opacity: 1; }
+}
+
+@media (max-width: 991.98px){
+  .express-menu-page .menu-card{ height: 340px; }
+  .express-menu-page .menu-card .price-details{
+    opacity: 1;
+    visibility: visible;
+    max-height: none;
+  }
+  .express-menu-page .menu-card .price-head .qty{ opacity: 1; }
+}
+
+/* Clickable titles */
+.express-menu-page .price-title a{
+  text-decoration: none;
+  border-bottom: 1px dashed transparent;
+  cursor: pointer;
+  transition: border-color .2s ease, opacity .2s ease;
+  color: inherit;
+}
+
+@media (min-width: 992px){
+  .express-menu-page .menu-card:hover .price-title a{ border-bottom-color: currentColor; }
+}
+
+.express-menu-page .price-title a:focus-visible{
+  outline: 2px solid var(--accent-color);
+  outline-offset: 2px;
+  border-bottom-color: currentColor;
+}
+
+/* Modal refinements */
+.express-menu-page .modal .modal-content{
+  border-radius: 18px;
+}
+
+.express-menu-page .modal .badge{
+  border: 1px solid rgba(0,0,0,.08);
+}

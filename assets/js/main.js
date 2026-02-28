@@ -500,17 +500,25 @@ function inferFull(src) {
   // Build our image list (src, alt, full)
   const IMAGES = (existing.length ? existing : [
     {src: 'assets/img/items/themed-cake-main.webp', alt: 'Themed cake — Cambridge', full: ''},{src: 'assets/img/items/cupcakes-main.webp', alt: 'Cupcakes — Cambridgeshire', full: ''},{src: 'assets/img/items/mini-bento-cake-main.webp', alt: 'Mini / Bento cake — Brampton', full: ''},
-    {src: 'assets/img/cakes/25-celebration-cupcakes.webp', alt: 'Celebration cupcakes — Cambridge area', full: ''},
-    {src: 'assets/img/cakes/22-cookie-cambridgeshire.webp', alt: 'Personalised postage cookie — Cambridgeshire', full: ''},
+    {src: 'assets/img/cakes/birthday-cake-buttercream-finish-huntingdon-cambridgeshire-025.webp', alt: 'Birthday cake — Huntingdon, Cambridgeshire', full: ''},
+    {src: 'assets/img/cakes/stacked-cake-with-sugar-flowers-ely-cambridgeshire-022.webp', alt: 'Stacked cake with sugar flowers — Ely, Cambridgeshire', full: ''},
   ]).map(obj => ({ src: obj.src, alt: obj.alt || '', full: obj.full || inferFull(obj.src) }));
 
   // Build gallery skeleton
-  const container = sec.querySelector('.container') || sec;
+  // IMPORTANT: Use the *content* container, not the section-title container.
+  // (index.html marks it as .portfolio-body)
+  const container =
+    sec.querySelector('.portfolio-body') ||
+    sec.querySelector('.container:not(.section-title)') ||
+    sec;
   let grid = sec.querySelector('.gallery');
   if (grid) grid.remove();
   grid = document.createElement('div');
   grid.className = 'gallery';
-  container.appendChild(grid);
+  // Keep gallery BEFORE the controls/CTA if they already exist in HTML.
+  const gridAnchor = container.querySelector('.load-more-wrap') || container.querySelector('.cta-after');
+  if (gridAnchor) container.insertBefore(grid, gridAnchor);
+  else container.appendChild(grid);
 
   // Lightbox
   let lb = document.querySelector('.dc-lightbox');
@@ -608,7 +616,13 @@ function inferFull(src) {
   let loadWrap = sec.querySelector('.load-more-wrap');
   if (!loadWrap) {
     loadWrap = document.createElement('div'); loadWrap.className = 'load-more-wrap';
-    container.appendChild(loadWrap);
+    const ctaAnchor = container.querySelector('.cta-after');
+    if (ctaAnchor) container.insertBefore(loadWrap, ctaAnchor);
+    else container.appendChild(loadWrap);
+  } else if (!container.contains(loadWrap)) {
+    const ctaAnchor = container.querySelector('.cta-after');
+    if (ctaAnchor) container.insertBefore(loadWrap, ctaAnchor);
+    else container.appendChild(loadWrap);
   }
   let loadBtn = loadWrap.querySelector('button');
   if (!loadBtn) {
@@ -626,6 +640,14 @@ function inferFull(src) {
     const _a2 = document.createElement('a'); _a2.href='#pricing'; _a2.className='btn btn-outline'; _a2.textContent='See Pricing';
     cta.append(_a1, _a2);
     container.appendChild(cta);
+  } else if (!container.contains(cta)) {
+    container.appendChild(cta);
+  }
+
+  // Ensure CTA is right after the "Load more" control (expected order: gallery → load more → CTA)
+  if (loadWrap && cta && container.contains(loadWrap) && container.contains(cta)) {
+    const afterLoadWrap = loadWrap.nextSibling;
+    if (afterLoadWrap !== cta) container.insertBefore(cta, afterLoadWrap);
   }
 
   // Initial render
@@ -780,3 +802,163 @@ function dcFlashHighlight(el, durationMs = 2600) {
   window.addEventListener('resize', resetMobileNav, { passive: true });
 })();
 
+
+// === DC: toggle postcode field for Delivery vs Collection/Pickup ===
+// Behaviour:
+// - Postcode field is shown + enabled + required only when a delivery-like option is selected.
+// - Postcode field is hidden + disabled + not required for collection/pickup (and cleared).
+// Supports both legacy names (delivery_option/postcode) and UI variants (delivery_option_ui/postcode_ui).
+(function(){
+  function norm(v){
+    return String(v || '').trim().toLowerCase();
+  }
+
+  function isDeliveryLike(v){
+    v = norm(v);
+    // delivery-like options used across the site
+    return v === 'delivery' || v === 'postage' || v === 'local delivery';
+  }
+
+  function isCollectionLike(v){
+    v = norm(v);
+    // collection-like options used across the site
+    return v === 'collection' || v === 'pickup';
+  }
+
+  function closestWrap(input){
+    if (!input || !input.closest) return input ? input.parentElement : null;
+    return (
+      input.closest('.col-12') ||
+      input.closest('.col-6') ||
+      input.closest('.col-md-6') ||
+      input.closest('.col-lg-6') ||
+      input.closest('.col-xl-6') ||
+      input.closest('.col-xxl-6') ||
+      input.closest('div')
+    );
+  }
+
+  function setVisible(wrap, show){
+    if (!wrap) return;
+    try {
+      wrap.classList.toggle('d-none', !show);
+      wrap.setAttribute('aria-hidden', (!show).toString());
+    } catch (e) {}
+  }
+
+  function findVisiblePostcodeInput(scope){
+    if (!scope || !scope.querySelectorAll) return null;
+
+    var nodes = null;
+    try {
+      nodes = scope.querySelectorAll('input[id*="postcode"], input[name*="postcode"]');
+    } catch (e) {
+      nodes = null;
+    }
+    if (!nodes || !nodes.length) return null;
+
+    var found = null;
+    nodes.forEach(function (inp) {
+      if (found) return;
+      if (!inp) return;
+      var type = norm(inp.getAttribute('type'));
+      if (type === 'hidden') return;
+      found = inp;
+    });
+
+    return found;
+  }
+
+  function updateForSelect(sel){
+    if (!sel) return;
+
+    // Work within the same form when possible
+    var form = sel.closest ? sel.closest('form') : null;
+    var scope = form || document;
+
+    var postcodeInput = findVisiblePostcodeInput(scope);
+    if (!postcodeInput) return;
+
+    var wrap = closestWrap(postcodeInput);
+
+    var val = sel.value || '';
+    var show = isDeliveryLike(val);
+
+    // If user hasn't chosen yet, keep hidden (better UX)
+    if (!val || isCollectionLike(val)) show = false;
+
+    setVisible(wrap, show);
+
+    try {
+      if (show) {
+        postcodeInput.disabled = false;
+        postcodeInput.setAttribute('required', '');
+      } else {
+        postcodeInput.removeAttribute('required');
+        postcodeInput.disabled = true;
+        postcodeInput.value = '';
+      }
+    } catch (e) {}
+  }
+
+  function isDeliverySelect(el){
+    if (!el || el.tagName !== 'SELECT') return false;
+    var name = el.getAttribute('name') || '';
+    var id = el.id || '';
+    return (
+      name === 'delivery_option' ||
+      name === 'delivery_option_ui' ||
+      id.indexOf('delivery-option') !== -1 ||
+      id.indexOf('delivery-option-ui') !== -1
+    );
+  }
+
+  function updateAll(){
+    var sels = [];
+    try {
+      sels = Array.prototype.slice.call(
+        document.querySelectorAll(
+          'select[name="delivery_option"], select[name="delivery_option_ui"], select[id*="delivery-option"]'
+        )
+      );
+    } catch (e) {
+      sels = [];
+    }
+
+    sels.forEach(function (sel) {
+      updateForSelect(sel);
+    });
+  }
+
+  function onAnyChange(e){
+    var t = e && e.target;
+    if (!t) return;
+    if (!isDeliverySelect(t)) return;
+    updateForSelect(t);
+  }
+
+  function init(){
+    document.addEventListener('change', onAnyChange);
+
+    // Initial state
+    updateAll();
+
+    // Keep in sync if product.js remounts the order card on breakpoint resize
+    if (!window.__dc_postcode_toggle_resize_bound) {
+      window.addEventListener(
+        'resize',
+        function () {
+          updateAll();
+        },
+        { passive: true }
+      );
+      window.__dc_postcode_toggle_resize_bound = true;
+    }
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', init);
+  } else {
+    init();
+  }
+})();

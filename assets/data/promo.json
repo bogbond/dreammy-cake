@@ -1,16 +1,149 @@
 {
-  "enabled": true,
-  "id": "mini-bento-spotlight",
-  "validFrom": null,
-  "validTo": "2026-02-14",
-  "headline": "Hot offer",
-  "title": "Mini / Bento Cake",
-  "subtitle": "A sweet surprise for your favourite person \u2014 limited slots this week.",
-  "image": "assets/img/promo/Elegant-Valentine's-Day-Sale.webp",
-  "imageAlt": "Mini bento cake with delicate decoration",
-  "href": "/Products/valentines-collection/",
-  "ctaLabel": "More details",
-  "dismissLabel": "Not now",
-  "cooldownHours": 24,
-  "triggerDelayMs": 6000
+  "version": 1,
+  "timezone": "Europe/London",
+  "menu": {
+    "seasonalLabel": "Seasonal Collections",
+    "featuredPrefix": "Order "
+  },
+  "popupDefaults": {
+    "dismissLabel": "Not now",
+    "ctaLabel": "More details",
+    "cooldownHours": 24,
+    "triggerDelayMs": 6000
+  },
+  "seasons": [
+    {
+      "id": "christmas",
+      "enabled": true,
+      "name": "Christmas Collection",
+      "href": "/Products/christmas-collection/",
+      "orderHref": "/Products/christmas-collection/#order",
+      "dateFrom": "11-10",
+      "dateTo": "01-01",
+      "popup": {
+        "enabled": true,
+        "id": "christmas-collection",
+        "headline": "Christmas",
+        "title": "Christmas Collection",
+        "subtitle": "Limited slots • Festive designs • Optional edible photo",
+        "ctaLabel": "View the collection",
+        "href": "/Products/christmas-collection/",
+        "image": "assets/img/promo/christmas-sale.webp",
+        "imageAlt": "Christmas Collection promo"
+      }
+    },
+    {
+      "id": "valentines",
+      "enabled": true,
+      "name": "Valentine’s Collection",
+      "href": "/Products/valentines-collection/",
+      "orderHref": "/Products/valentines-collection/#order",
+      "dateFrom": "01-02",
+      "dateTo": "02-14",
+      "popup": {
+        "enabled": true,
+        "id": "valentines-collection",
+        "headline": "Hot offer",
+        "title": "Valentine’s Collection",
+        "subtitle": "Limited slots • Two signature designs • Optional edible photo.",
+        "image": "assets/img/promo/Elegant-Valentine's-Day-Sale.webp",
+        "imageAlt": "Valentine’s bento cake and cupcakes",
+        "href": "/Products/valentines-collection/",
+        "ctaLabel": "More details",
+        "dismissLabel": "Not now",
+        "cooldownHours": 24,
+        "triggerDelayMs": 6000
+      }
+    },
+    {
+      "id": "mothers-day",
+      "enabled": true,
+      "name": "Mother’s Day Collection",
+      "href": "/Products/mothers-day-collection/",
+      "orderHref": "/Products/mothers-day-collection/#order",
+      "dateFrom": "02-15",
+      "dateTo": {
+        "rule": "motheringSunday"
+      },
+      "popup": {
+        "enabled": true,
+        "id": "mothers-day-collection",
+        "headline": "Mother’s Day",
+        "title": "Mother’s Day Collection",
+        "subtitle": "Limited slots • Soft, elegant designs • Optional edible photo",
+        "ctaLabel": "View the collection",
+        "href": "/Products/mothers-day-collection/",
+        "image": "assets/img/promo/mothers-day-sale.webp",
+        "imageAlt": "Mother’s Day Collection promo"
+      }
+    },
+    {
+      "id": "easter",
+      "enabled": true,
+      "name": "Easter Collection",
+      "href": "/Products/easter-collection/",
+      "orderHref": "/Products/easter-collection/#order",
+      "dateFrom": {
+        "rule": "motheringSunday",
+        "offsetDays": 1
+      },
+      "dateTo": {
+        "rule": "easterSunday",
+        "offsetDays": 1
+      },
+      "popup": {
+        "enabled": true,
+        "id": "easter-collection",
+        "headline": "Easter",
+        "title": "Easter Collection",
+        "subtitle": "Limited slots • Spring designs • Optional edible photo",
+        "ctaLabel": "View the collection",
+        "href": "/Products/easter-collection/",
+        "image": "assets/img/promo/easter-sale.webp",
+        "imageAlt": "Easter Collection promo"
+      }
+    },
+    {
+      "id": "fathers-day",
+      "enabled": true,
+      "name": "Father’s Day Collection",
+      "href": "/Products/fathers-day-collection/",
+      "orderHref": "/Products/fathers-day-collection/#order",
+      "dateFrom": "05-01",
+      "dateTo": {
+        "rule": "fathersDay"
+      },
+      "popup": {
+        "enabled": true,
+        "id": "fathers-day-collection",
+        "headline": "Father’s Day",
+        "title": "Father’s Day Collection",
+        "subtitle": "Limited slots • Bold, modern designs • Optional edible photo",
+        "ctaLabel": "View the collection",
+        "href": "/Products/fathers-day-collection/",
+        "image": "assets/img/promo/fathers-day-sale.webp",
+        "imageAlt": "Father’s Day Collection promo"
+      }
+    },
+    {
+      "id": "halloween",
+      "enabled": true,
+      "name": "Halloween Collection",
+      "href": "/Products/halloween-collection/",
+      "orderHref": "/Products/halloween-collection/#order",
+      "dateFrom": "09-16",
+      "dateTo": "10-31",
+      "popup": {
+        "enabled": true,
+        "id": "halloween-collection",
+        "headline": "Halloween",
+        "title": "Halloween Collection",
+        "subtitle": "Limited slots • Spooky-cute designs • Optional edible photo",
+        "ctaLabel": "View the collection",
+        "href": "/Products/halloween-collection/",
+        "image": "assets/img/promo/halloween-sale.webp",
+        "imageAlt": "Halloween Collection promo"
+      }
+    }
+  ]
 }

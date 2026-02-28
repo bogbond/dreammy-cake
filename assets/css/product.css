@@ -51,10 +51,18 @@
 .mobile-sticky-bar.hidden .bar{transform:translateY(18px);opacity:0;pointer-events:none}
 #scroll-top{bottom:92px ; right: 16px;}
 
-/* Mobile zebra backgrounds */
-@media (max-width:768px){
-  .product .section.alt-white{background:#ffffff }
-  .product .section.alt-cream{background:#fff8ef }
+/* Mobile zebra backgrounds (single-column layout) */
+@media (max-width: 991.98px){
+  .product .section.alt-white{background:#ffffff}
+  .product .section.alt-cream{background:#fff8ef}
+
+  /* Micro-divider between adjacent stripes (soft, premium) */
+  .product .section + .section{
+    border-style:solid;
+    border-width:1px 0 0;
+    border-color:rgba(0,0,0,.04);
+    border-image:linear-gradient(90deg, rgba(0,0,0,0), rgba(0,0,0,.06), rgba(0,0,0,0)) 1;
+  }
 }
 
 /* Accordion (micro-FAQ) */
@@ -69,11 +77,7 @@
 /* Utility */
 .mt-1{margin-top:.25rem}.mt-2{margin-top:.5rem}.mt-3{margin-top:1rem}
 
-@media (max-width:768px){
-  .product #mini-faq.alt-cream{background:#fff8ef }
-}
-
-@media (max-width:768px){
+@media (max-width: 991.98px){
   .product .gallery .swiper{max-width: 100%;}
   .product .gallery .swiper-button-prev,
   .product .gallery .swiper-button-next{display:none}
@@ -91,18 +95,12 @@
 .product-subtitle p{margin:0}
 
 /* Micro-FAQ spacing and button comfort on mobile */
-@media (max-width: 768px){
+@media (max-width: 991.98px){
   #mini-faq.section{padding-top:18px;padding-bottom:22px}
   #mini-faq .faq-accordion details{margin:0}
   #mini-faq .faq-accordion details + details{margin-top:8px}
   #mini-faq .faq-cta{margin-top:12px}
   #mini-faq .faq-cta .btn{padding:.5rem .9rem;border-radius:10px}
-}
-
-/* Keep zebra backgrounds consistent on mobile */
-@media (max-width: 768px){
-  .product .section.alt-cream{background:#fff8ef }
-  .product .section.alt-white{background:#ffffff }
 }
 
 /* Ensure last FAQ item has breathing room above CTA */
@@ -246,3 +244,48 @@
 /* Price + delivery notes (SEO-visible, subtle) */
 .page-title.product-hero .price-from{margin:0 0 .25rem; font-weight:700}
 .page-title.product-hero .delivery-note{margin:0 0 .75rem; opacity:.92; font-size:.95rem}
+
+/* === Inline WhatsApp prompt (product pages) === */
+.product-help-inline .help-band{
+  background:#fff;
+  border:1px solid #eee;
+  border-radius:16px;
+  padding:12px 14px;
+}
+.btn-whatsapp{
+  border-color:#25D366!important;
+  color:#1f9d53!important;
+}
+.btn-whatsapp i{ color:#25D366!important; }
+.btn-whatsapp:hover{ border-color:#25D366!important; color:#1f9d53!important; background:rgba(37,211,102,.10)!important; }
+.btn-whatsapp:hover i{ color:#25D366!important; }
+/* === end Inline WhatsApp prompt === */
+
+/* === R55.???: Mobile Sizes table – blend with cream stripe (no sharp white corners) === */
+@media (max-width: 991.98px){
+  .sizes-guide-table-wrap{
+    background:#fff8ef; /* match .product .section.alt-cream on mobile */
+    border:1px solid rgba(0,0,0,.06);
+    border-radius:16px;
+    padding:8px 10px;
+    overflow-x:auto;
+    overflow-y:hidden;
+    -webkit-overflow-scrolling:touch;
+  }
+  .sizes-guide-table-wrap .table{
+    margin-bottom:0;
+    --bs-table-bg: transparent;
+    --bs-table-accent-bg: transparent;
+    --bs-table-border-color: rgba(0,0,0,.08);
+  }
+  .sizes-guide-table-wrap .table > :not(caption) > * > *{
+    background-color:transparent;
+  }
+  .sizes-guide-table-wrap .table thead th{
+    border-bottom-color: rgba(0,0,0,.10);
+  }
+  .sizes-guide-table-wrap .table tbody tr:last-child td{
+    border-bottom-width:0;
+  }
+}
+/* === end R55.???: Mobile Sizes table === */
