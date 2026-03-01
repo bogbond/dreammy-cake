@@ -32,6 +32,13 @@
         form.classList.remove('was-validated');
         showModal(true);
         showAlert('', '', true);
+
+        if(window.gtag){ gtag('event','contact_submit_success',{ 
+          lead_type:'contact_form',
+          form_id:'contactFormEnhanced',
+          page_path: location.pathname
+        }); }
+
       }else{
         const data = await safeJson(res);
         const msg = data && data.message ? data.message : 'Something went wrong. Please try again or email us: dreamycake.info@gmail.com';
