@@ -2881,3 +2881,30 @@ body.dc-promo-open .dc-consent-manage {
   .contact-map-card{ border-radius:20px; }
   .contact-map-card .ratio{ --bs-aspect-ratio:78%; }
 }
+
+/* === Homepage mobile visibility + explicit zebra backgrounds (2026-03-16) === */
+/* Keep homepage section striping consistent on desktop and mobile.
+   Desktop order includes #highlights + #service-areas.
+   Mobile hides those two sections, so the remaining sections still alternate cream/white. */
+.index-page #features,
+.index-page #highlights,
+.index-page #how-it-works,
+.index-page #cta-links,
+.index-page #allergens{
+  background: var(--brand-cream) !important;
+}
+
+.index-page #pricing,
+.index-page #service-areas,
+.index-page #portfolio,
+.index-page #mini-faq,
+.index-page #contact{
+  background: #fff !important;
+}
+
+@media (max-width: 767.98px){
+  .index-page #highlights,
+  .index-page #service-areas{
+    display: none !important;
+  }
+}
