@@ -41,11 +41,11 @@
 
       }else{
         const data = await safeJson(res);
-        const msg = data && data.message ? data.message : 'Something went wrong. Please try again or email us: dreamycake.info@gmail.com';
+        const msg = data && data.message ? data.message : 'Something went wrong. Please try again or email us: contact@dreamycake.co.uk';
         showAlert(msg, 'alert-danger');
       }
     }).catch(()=>{
-      showAlert('Network error. Please try again or email us: dreamycake.info@gmail.com', 'alert-danger');
+      showAlert('Network error. Please try again or email us: contact@dreamycake.co.uk', 'alert-danger');
     }).finally(()=> setLoading(false));
   });
 

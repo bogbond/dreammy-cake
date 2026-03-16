@@ -1515,6 +1515,19 @@ section,
 .contact-modal__icon{ font-size:3rem; margin-bottom:.5rem; color:var(--accent); }
 .contact-modal__close{ position:absolute; top:.75rem; right:.75rem; border:0; background:transparent; font-size:1.1rem; opacity:.75; }
 .form-hint{ color:#6c757d; }
+.contact-form-card{ background:#fff; border-radius:24px; padding:1.25rem; box-shadow:var(--soft-shadow); }
+.contact .contact-enhanced .form-consent{ margin:0; max-width:24rem; font-size:.875rem; color:#6c757d; }
+.contact-map-card{ margin-top:32px; background:#fff; border-radius:24px; box-shadow:var(--soft-shadow); overflow:hidden; }
+.contact-map-card .ratio{ --bs-aspect-ratio:75%; }
+.contact-map-card iframe{ width:100%; height:100%; border:0; }
+.contact-map-card__body{ padding:1rem 1.1rem 1.15rem; }
+.contact-map-card__body h3{ margin:0 0 .35rem; font-size:1rem; font-weight:700; }
+.contact-map-card__body p{ margin:0 0 .75rem; font-size:.92rem; color:#6c757d; }
+.contact-map-card .btn{ border-radius:999px; }
+@media (max-width: 767.98px){
+  .contact-form-card{ padding:1rem; }
+  .contact .contact-enhanced .col-12.d-flex{ flex-direction:column; align-items:flex-start !important; }
+}
 
 /* === CTA Links Section (4 buttons) === */
 .cta-links{ background:#fffaf5; padding:60px 0; }
@@ -2822,4 +2835,49 @@ body.dc-promo-open .dc-consent-manage {
     box-shadow: none !important;
     border: 0 !important;
   }
+}
+
+
+/* === Contact layout refinement (v1.10) === */
+.contact-layout{ display:grid; gap:1.5rem; }
+.contact-info-grid > [class*="col-"]{ display:flex; }
+.contact-info-card{
+  width:100%;
+  margin-top:0 !important;
+  padding:1.15rem 1.2rem;
+  background:#fff;
+  border:1px solid rgba(0,0,0,.04);
+  border-radius:24px;
+  box-shadow:var(--soft-shadow);
+}
+.contact-info-card p{
+  font-size:.95rem;
+  line-height:1.55;
+}
+.contact-main-row > [class*="col-"]{ display:flex; }
+.contact-side-stack{
+  display:flex;
+  flex-direction:column;
+  gap:1.25rem;
+  width:100%;
+}
+.contact-side-stack .info-item.info-whatsapp{
+  margin-top:0 !important;
+  padding:1.15rem 1.2rem;
+  border-radius:24px;
+  box-shadow:var(--soft-shadow);
+}
+.contact-side-stack .contact-map-card{ margin-top:0; }
+.contact-main-row .contact-form-card{ width:100%; }
+.contact-map-card .ratio{ --bs-aspect-ratio:70%; }
+.contact-map-card__body h3{ font-size:1.05rem; }
+@media (max-width: 991.98px){
+  .contact-main-row > [class*="col-"]{ display:block; }
+}
+@media (max-width: 767.98px){
+  .contact-info-card,
+  .contact-side-stack .info-item.info-whatsapp,
+  .contact-form-card{ border-radius:20px; padding:1rem; }
+  .contact-map-card{ border-radius:20px; }
+  .contact-map-card .ratio{ --bs-aspect-ratio:78%; }
 }
