@@ -246,18 +246,18 @@
     var modalEl = document.getElementById('contactSuccessModal');
     if(!modalEl) return;
 
-    if(window.bootstrap && window.bootstrap.Modal){
-      var state = getState(document.getElementById('contactFormEnhanced'));
-      if(!state.modalInstance){
-        state.modalInstance = new window.bootstrap.Modal(modalEl);
-      }
-      state.modalInstance.show();
-      return;
-    }
-
     modalEl.classList.add('show');
     modalEl.setAttribute('aria-hidden', 'false');
     document.body.classList.add('modal-open');
+  }
+
+  function hideContactModal(){
+    var modalEl = document.getElementById('contactSuccessModal');
+    if(!modalEl) return;
+
+    modalEl.classList.remove('show');
+    modalEl.setAttribute('aria-hidden', 'true');
+    document.body.classList.remove('modal-open');
   }
 
   function completeProgress(form, message){
@@ -465,23 +465,33 @@
   function boot(){
     document.querySelectorAll('form[action*="formsubmit.co"]').forEach(initForm);
 
-    // Contact modal close helpers (Bootstrap fallback)
+    // Contact modal close helpers
     document.querySelectorAll('[data-close-modal]').forEach(function(btn){
       if(btn.dataset.dcModalBound === 'true') return;
       btn.dataset.dcModalBound = 'true';
       btn.addEventListener('click', function(){
-        var modalEl = document.getElementById('contactSuccessModal');
-        if(!modalEl) return;
-        if(window.bootstrap && window.bootstrap.Modal){
-          var instance = window.bootstrap.Modal.getInstance(modalEl);
-          if(instance) instance.hide();
-        } else {
-          modalEl.classList.remove('show');
-          modalEl.setAttribute('aria-hidden', 'true');
-          document.body.classList.remove('modal-open');
-        }
+        hideContactModal();
       });
     });
+
+    var contactModal = document.getElementById('contactSuccessModal');
+    if(contactModal && contactModal.dataset.dcModalOverlayBound !== 'true'){
+      contactModal.dataset.dcModalOverlayBound = 'true';
+      contactModal.addEventListener('click', function(event){
+        if(event.target === contactModal){
+          hideContactModal();
+        }
+      });
+    }
+
+    if(document.body && document.body.dataset.dcModalEscapeBound !== 'true'){
+      document.body.dataset.dcModalEscapeBound = 'true';
+      document.addEventListener('keydown', function(event){
+        if(event.key === 'Escape'){
+          hideContactModal();
+        }
+      });
+    }
   }
 
   if(document.readyState === 'loading'){
