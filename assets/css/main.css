@@ -1510,8 +1510,9 @@ section,
 .btn-spinner{ width:1.2rem;height:1.2rem;border:2px solid currentColor;border-right-color:transparent;border-radius:50%;display:inline-block;margin-left:.5rem;vertical-align:-2px;animation:spin .7s linear infinite;}
 @keyframes spin{to{transform:rotate(360deg);}}
 .contact-modal{ position:fixed; inset:0; display:none; place-items:center; background:rgba(0,0,0,.35); z-index:9999;}
+.contact-modal[aria-hidden="true"]{display:none !important;}
 .contact-modal[aria-hidden="false"]{display:grid;}
-.contact-modal__content{ background:#fff; border-radius:20px; padding:2rem; max-width:420px; width:min(92vw,420px); text-align:center; box-shadow:var(--soft-shadow);}
+.contact-modal__content{ position:relative; background:#fff; border-radius:20px; padding:2rem; max-width:420px; width:min(92vw,420px); text-align:center; box-shadow:var(--soft-shadow);}
 .contact-modal__icon{ font-size:3rem; margin-bottom:.5rem; color:var(--accent); }
 .contact-modal__close{ position:absolute; top:.75rem; right:.75rem; border:0; background:transparent; font-size:1.1rem; opacity:.75; }
 .form-hint{ color:#6c757d; }

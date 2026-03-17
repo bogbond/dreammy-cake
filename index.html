@@ -902,15 +902,15 @@
 </form>
 </div>
 </div>
-<div aria-hidden="true" aria-labelledby="contactSuccessTitle" aria-modal="true" class="contact-modal" id="contactSuccessModal" role="dialog">
+<div aria-hidden="true" aria-labelledby="contactSuccessTitle" aria-modal="true" class="contact-modal" id="contactSuccessModal" role="dialog" onclick="if(event.target===this&&window.dcCloseContactModal){window.dcCloseContactModal();}">
 <div class="contact-modal__content">
-<button aria-label="Close" class="contact-modal__close" data-close-modal="" type="button">
+<button aria-label="Close" class="contact-modal__close" data-close-modal="" onclick="if(window.dcCloseContactModal){window.dcCloseContactModal();} return false;" type="button">
 <i class="bi bi-x-lg"></i>
 </button>
 <div aria-hidden="true" class="contact-modal__icon"><i class="bi bi-check2-circle"></i></div>
 <h3 class="mb-2" id="contactSuccessTitle">Message sent!</h3>
 <p>Thank you — we’ll get back to you shortly.</p>
-<button class="btn btn-accent mt-2" data-close-modal="" type="button">Great</button>
+<button class="btn btn-accent mt-2" data-close-modal="" onclick="if(window.dcCloseContactModal){window.dcCloseContactModal();} return false;" type="button">Great</button>
 </div>
 </div>
 </div>
@@ -1204,5 +1204,40 @@
 </script>
 <!-- DC:CONSENT_BANNER_END -->
 <script src="/assets/js/ga-funnel.js"></script>
-<script src="/assets/js/form-attachment-validation.js"></script><script src="/assets/js/form-upload-progress.js"></script></body>
+<script src="/assets/js/form-attachment-validation.js"></script><script src="/assets/js/form-upload-progress.js"></script>
+<script>
+(function(){
+  function closeContactModal(){
+    var modal = document.getElementById('contactSuccessModal');
+    if(!modal) return;
+    modal.setAttribute('aria-hidden', 'true');
+    modal.classList.remove('show');
+    document.body.classList.remove('modal-open');
+    document.body.style.overflow = '';
+  }
+  function openContactModal(){
+    var modal = document.getElementById('contactSuccessModal');
+    if(!modal) return;
+    modal.setAttribute('aria-hidden', 'false');
+    modal.classList.add('show');
+  }
+  window.dcCloseContactModal = closeContactModal;
+  window.dcOpenContactModal = openContactModal;
+  document.addEventListener('keydown', function(event){
+    if(event.key === 'Escape') closeContactModal();
+  });
+  document.addEventListener('DOMContentLoaded', function(){
+    var modal = document.getElementById('contactSuccessModal');
+    if(!modal) return;
+    var buttons = modal.querySelectorAll('[data-close-modal]');
+    buttons.forEach(function(btn){
+      btn.addEventListener('click', function(event){
+        event.preventDefault();
+        event.stopPropagation();
+        closeContactModal();
+      });
+    });
+  });
+})();
+</script></body>
 </html>
