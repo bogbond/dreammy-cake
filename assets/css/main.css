@@ -1258,18 +1258,59 @@ section,
   transform: rotate(90deg);
 }
 
-.images-row {
+.certifications-row {
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 10px; /* Расстояние между картинками */
+  flex-wrap: wrap;
+  gap: 18px 28px;
 }
 
-.small-image {
+.certification-item {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: 0 1 auto;
+}
 
-  height: 50px; /* Укажите размер изображения */
-  object-fit: cover; /* Чтобы изображения не искажались */
-  border-radius: 5px; /* Радиус углов (если нужно) */
+.certification-image {
+  display: block;
+  width: auto;
+  max-width: 100%;
+  height: auto;
+  object-fit: contain;
+}
+
+.certification-item--fsa .certification-image,
+.certification-item--one .certification-image {
+  max-height: 58px;
+}
+
+.certification-item--rating .certification-image {
+  max-height: 108px;
+}
+
+@media (max-width: 767.98px) {
+  .certifications-row {
+    gap: 16px 18px;
+  }
+
+  .certification-item {
+    flex: 0 1 calc(50% - 9px);
+  }
+
+  .certification-item--rating {
+    flex-basis: 100%;
+  }
+
+  .certification-item--fsa .certification-image,
+  .certification-item--one .certification-image {
+    max-height: 42px;
+  }
+
+  .certification-item--rating .certification-image {
+    max-height: 92px;
+  }
 }
 #show-more-btn:hover {
   background-color: #d4a700;
@@ -2907,5 +2948,68 @@ body.dc-promo-open .dc-consent-manage {
   .index-page #highlights,
   .index-page #service-areas{
     display: none !important;
+  }
+}
+
+/* === Contact section hard fixes (2026-03-18) === */
+/* 1) Desktop: stretch the contact form card so it finishes level with the map stack. */
+@media (min-width: 992px){
+  .contact-main-row{
+    align-items: stretch !important;
+  }
+  .contact-main-row > [class*="col-"]{
+    display: flex;
+    align-items: stretch;
+  }
+  .contact-main-row .contact-form-card{
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+  }
+  .contact-main-row .contact-form-card > .row{
+    flex: 1 1 auto;
+    align-content: start;
+  }
+}
+
+/* 2) Make the bottom actions row deterministic, so the privacy copy never drifts or overflows. */
+#contactFormEnhanced .col-12.d-flex.align-items-center.justify-content-between.gap-3.mt-2{
+  display: grid !important;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: .75rem 1rem;
+  align-items: center !important;
+}
+
+#contactFormEnhanced .col-12.d-flex.align-items-center.justify-content-between.gap-3.mt-2 > .d-flex.align-items-center.gap-2.small.text-muted{
+  min-width: 0;
+}
+
+#contactFormEnhanced .col-12.d-flex.align-items-center.justify-content-between.gap-3.mt-2 > .d-flex.align-items-center.gap-2.small.text-muted span,
+#contactFormEnhanced .form-consent{
+  overflow-wrap: anywhere;
+}
+
+#contactFormEnhanced #contactSubmitBtn{
+  justify-self: end;
+}
+
+#contactFormEnhanced .form-consent{
+  width: 100%;
+  max-width: none;
+  margin: 0;
+  grid-column: 1 / -1;
+}
+
+@media (max-width: 767.98px){
+  #contactFormEnhanced .col-12.d-flex.align-items-center.justify-content-between.gap-3.mt-2{
+    grid-template-columns: 1fr;
+    align-items: start !important;
+  }
+  #contactFormEnhanced #contactSubmitBtn{
+    justify-self: start;
+  }
+  #contactFormEnhanced .form-consent{
+    font-size: .75rem;
+    line-height: 1.35;
   }
 }
