@@ -333,7 +333,7 @@ document.addEventListener('DOMContentLoaded', function(){
             item_category: c.dataset.itemCategory || 'cakes',
             price: c.dataset.itemPrice || ''
           }));
-          window.gtag('event', 'view_item_list', { item_list_name: 'Pricing', items });
+          window.gtag('event', 'view_item_list', { item_list_name: 'Cake Menu', items });
         }
         listObserver.disconnect();
       }
@@ -345,7 +345,7 @@ document.addEventListener('DOMContentLoaded', function(){
     const card = e.currentTarget.closest('.price-card');
     if (!card || !window.gtag) return;
     window.gtag('event', 'select_item', {
-      item_list_name: 'Pricing',
+      item_list_name: 'Cake Menu',
       items: [{
         item_id: card.dataset.itemId || '',
         item_name: card.dataset.itemName || '',
@@ -404,7 +404,7 @@ document.addEventListener('DOMContentLoaded', function () {
   })).filter(x => x.src);
 
   // CONFIG: You can define explicit hi-res mapping here if filenames differ.
-  // Example: const HIRES = { "assets/img/items/themed-cake-main.webp": "assets/img/cakes/hi/12-birthday-cake-huntingdon.webp", ... };
+  // Example: const HIRES = { "assets/img/cakes/preview/custom-buttercream-cake-pink-petals-001.webp": "assets/img/cakes/custom-buttercream-cake-pink-petals-001.webp", ... };
   const HIRES = window.DC_PORTFOLIO_HIRES || {};
 
   // When we don't have data-full or HIRES mapping, try a few common filename patterns.
@@ -439,11 +439,30 @@ function inferFull(src) {
 
   // Build our image list (src, alt, full)
   const IMAGES = (existing.length ? existing : [
-    {src: 'assets/img/items/themed-cake-main.webp', alt: 'Birthday cake — Huntingdon, Cambridgeshire', full: ''},
-    {src: 'assets/img/items/celebration-cake-main.webp', alt: 'Graduation cake — Cambridgeshire', full: ''},
-    {src: 'assets/img/items/mini-bento-cake-main.webp', alt: 'Mini / Bento cake — Brampton', full: ''},
-    {src: 'assets/img/cakes/25-celebration-cupcakes.webp', alt: 'Celebration cupcakes — Cambridge area', full: ''},
-    {src: 'assets/img/cakes/22-cookie-cambridgeshire.webp', alt: 'Personalised postage cookie — Cambridgeshire', full: ''},
+    {src: 'assets/img/cakes/preview/custom-buttercream-cake-pink-petals-001.webp', alt: 'Custom ivory buttercream cake with pink petals and pearl details', full: 'assets/img/cakes/custom-buttercream-cake-pink-petals-001.webp'},
+    {src: 'assets/img/cakes/preview/blue-teddy-bear-birthday-cake-002.webp', alt: 'Pastel blue teddy bear birthday cake with clouds and gold topper', full: 'assets/img/cakes/blue-teddy-bear-birthday-cake-002.webp'},
+    {src: 'assets/img/cakes/preview/mothers-day-cupcakes-gold-toppers-003.webp', alt: "Mother's Day cupcakes with gold toppers and pastel buttercream swirls", full: 'assets/img/cakes/mothers-day-cupcakes-gold-toppers-003.webp'},
+    {src: 'assets/img/cakes/preview/mothers-day-cupcakes-purple-yellow-floral-004.webp', alt: "Close-up of Mother's Day cupcakes with purple and yellow swirls, pearls and a fondant flower", full: 'assets/img/cakes/mothers-day-cupcakes-purple-yellow-floral-004.webp'},
+    {src: 'assets/img/cakes/preview/two-tier-drip-cake-grapes-gold-leaf-005.webp', alt: 'Two-tier ivory drip cake with green grapes, edible gold leaf and Forever topper', full: 'assets/img/cakes/two-tier-drip-cake-grapes-gold-leaf-005.webp'},
+    {src: 'assets/img/cakes/preview/birthday-cupcakes-mini-heart-cake-gift-set-006.webp', alt: 'Birthday cupcakes with edible image toppers and a red mini heart cake gift set', full: 'assets/img/cakes/birthday-cupcakes-mini-heart-cake-gift-set-006.webp'},
+    {src: 'assets/img/cakes/preview/mini-cake-gift-boxes-ribbon-bows-007.webp', alt: 'Mini celebration cakes in clear gift boxes with ribbon bows', full: 'assets/img/cakes/mini-cake-gift-boxes-ribbon-bows-007.webp'},
+    {src: 'assets/img/cakes/preview/romantic-cake-red-roses-calendar-plaque-008.webp', alt: 'Romantic celebration cake with red roses, calendar plaque and LOVE lettering', full: 'assets/img/cakes/romantic-cake-red-roses-calendar-plaque-008.webp'},
+    {src: 'assets/img/cakes/preview/pastel-second-birthday-cake-personalised-009.webp', alt: 'Pastel second birthday cake with personalised name and number topper', full: 'assets/img/cakes/pastel-second-birthday-cake-personalised-009.webp'},
+    {src: 'assets/img/cakes/preview/bee-themed-birthday-cake-daisies-010.webp', alt: 'Bee-themed birthday cake with yellow daisies and bee toppers', full: 'assets/img/cakes/bee-themed-birthday-cake-daisies-010.webp'},
+    {src: 'assets/img/cakes/preview/mermaid-under-the-sea-birthday-cake-011.webp', alt: 'Mermaid under-the-sea birthday cake with coral, shells and pastel sea colours', full: 'assets/img/cakes/mermaid-under-the-sea-birthday-cake-011.webp'},
+    {src: 'assets/img/cakes/preview/gender-reveal-cake-boy-or-girl-012.webp', alt: 'Gender reveal cake with pastel balloons and Boy or Girl topper', full: 'assets/img/cakes/gender-reveal-cake-boy-or-girl-012.webp'},
+    {src: 'assets/img/cakes/preview/luxury-green-gold-monogram-cupcakes-013.webp', alt: 'Luxury green and gold cupcakes with personalised monogram toppers', full: 'assets/img/cakes/luxury-green-gold-monogram-cupcakes-013.webp'},
+    {src: 'assets/img/cakes/preview/luxury-cupcake-gift-box-white-ribbon-014.webp', alt: 'Assorted luxury cupcakes in a white gift box tied with a ribbon', full: 'assets/img/cakes/luxury-cupcake-gift-box-white-ribbon-014.webp'},
+    {src: 'assets/img/cakes/preview/vintage-buttercream-cake-black-ribbon-bows-015.webp', alt: 'Vintage buttercream cake with black ribbon bows and pearl piping', full: 'assets/img/cakes/vintage-buttercream-cake-black-ribbon-bows-015.webp'},
+    {src: 'assets/img/cakes/preview/blue-baby-photo-buttercream-cake-016.webp', alt: 'Light blue buttercream cake with a baby edible image topper and pearl details', full: 'assets/img/cakes/blue-baby-photo-buttercream-cake-016.webp'},
+    {src: 'assets/img/cakes/preview/pink-pop-star-birthday-cake-disco-balls-017.webp', alt: 'Pink pop-star themed birthday cake with disco balls and star decorations', full: 'assets/img/cakes/pink-pop-star-birthday-cake-disco-balls-017.webp'},
+    {src: 'assets/img/cakes/preview/black-vintage-buttercream-cake-018.webp', alt: 'Black vintage buttercream cake with ornate piping', full: 'assets/img/cakes/black-vintage-buttercream-cake-018.webp'},
+    {src: 'assets/img/cakes/preview/fortnite-themed-birthday-cake-019.webp', alt: 'Fortnite themed birthday cake with llama topper and gaming decorations', full: 'assets/img/cakes/fortnite-themed-birthday-cake-019.webp'},
+    {src: 'assets/img/cakes/preview/colourful-birthday-cupcakes-number-eight-020.webp', alt: 'Colourful birthday cupcakes with pink, purple and neon buttercream swirls', full: 'assets/img/cakes/colourful-birthday-cupcakes-number-eight-020.webp'},
+    {src: 'assets/img/cakes/preview/blush-buttercream-cake-pearls-butterflies-021.webp', alt: 'Blush buttercream cake with pearl details and white butterflies', full: 'assets/img/cakes/blush-buttercream-cake-pearls-butterflies-021.webp'},
+    {src: 'assets/img/cakes/preview/elegant-ivory-cake-gold-leaf-022.webp', alt: 'Elegant ivory cake with edible gold leaf and gold pearl details', full: 'assets/img/cakes/elegant-ivory-cake-gold-leaf-022.webp'},
+    {src: 'assets/img/cakes/preview/pink-vintage-message-cake-023.webp', alt: 'Pink vintage buttercream message cake with ribbon details', full: 'assets/img/cakes/pink-vintage-message-cake-023.webp'},
+    {src: 'assets/img/cakes/preview/branded-monogram-cupcake-gift-box-024.webp', alt: 'Branded cupcake gift box with personalised monogram toppers', full: 'assets/img/cakes/branded-monogram-cupcake-gift-box-024.webp'},
   ]).map(obj => ({ src: obj.src, alt: obj.alt || '', full: obj.full || inferFull(obj.src) }));
 
   // Build gallery skeleton
@@ -526,7 +545,7 @@ function inferFull(src) {
   item.className = 'gallery-item';
   const img = document.createElement('img');
   img.src = obj.src; img.alt = obj.alt;
-  img.loading = 'lazy'; img.decoding = 'async';
+  img.loading = 'lazy'; img.decoding = 'async'; img.width = 400; img.height = 533;
   img.dataset.full = obj.full;
   img.dataset.index = String(index);
   item.appendChild(img);
@@ -560,7 +579,7 @@ function inferFull(src) {
     cta = document.createElement('div'); cta.className = 'cta-after';
     cta.replaceChildren();
     const _a1 = document.createElement('a'); _a1.href='/#contact'; _a1.className='btn btn-primary'; _a1.textContent='Inspired? Start an order →';
-    const _a2 = document.createElement('a'); _a2.href='#pricing'; _a2.className='btn btn-outline'; _a2.textContent='See Pricing';
+    const _a2 = document.createElement('a'); _a2.href='#pricing'; _a2.className='btn btn-outline'; _a2.textContent='See menu';
     cta.append(_a1, _a2);
     container.appendChild(cta);
   }

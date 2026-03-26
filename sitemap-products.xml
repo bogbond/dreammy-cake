@@ -2,7 +2,7 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://dreamycake.co.uk/Products/celebration-cake/</loc>
-    <lastmod>2026-02-02</lastmod>
+    <lastmod>2026-03-25</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
     </url>
@@ -14,7 +14,7 @@
     </url>
   <url>
     <loc>https://dreamycake.co.uk/Products/mini-bento-cake/</loc>
-    <lastmod>2026-02-02</lastmod>
+    <lastmod>2026-03-25</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
     </url>
@@ -26,7 +26,7 @@
     </url>
   <url>
     <loc>https://dreamycake.co.uk/Products/themed-cake/</loc>
-    <lastmod>2026-02-02</lastmod>
+    <lastmod>2026-03-25</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
     </url>
@@ -34,25 +34,25 @@
     <loc>https://dreamycake.co.uk/Products/valentines-collection/</loc>
     <lastmod>2026-02-04</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
+    <priority>0.6</priority>
     </url>
   <url>
     <loc>https://dreamycake.co.uk/Products/mothers-day-collection/</loc>
     <lastmod>2026-02-19</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
+    <priority>0.6</priority>
     </url>
   <url>
     <loc>https://dreamycake.co.uk/Products/fathers-day-collection/</loc>
     <lastmod>2026-02-19</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
+    <priority>0.6</priority>
     </url>
   <url>
     <loc>https://dreamycake.co.uk/Products/easter-collection/</loc>
     <lastmod>2026-02-19</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
+    <priority>0.6</priority>
     </url>
   <url>
     <loc>https://dreamycake.co.uk/Products/halloween-collection/</loc>
@@ -64,17 +64,17 @@
     <loc>https://dreamycake.co.uk/Products/christmas-collection/</loc>
     <lastmod>2026-02-19</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
+    <priority>0.6</priority>
     </url>
   <url>
     <loc>https://dreamycake.co.uk/Products/express-bento-cake/</loc>
-    <lastmod>2026-02-27</lastmod>
+    <lastmod>2026-03-25</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
     </url>
   <url>
     <loc>https://dreamycake.co.uk/Products/express-cupcakes/</loc>
-    <lastmod>2026-02-27</lastmod>
+    <lastmod>2026-03-25</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
     </url>
@@ -87,6 +87,12 @@
     <url>
     <loc>https://dreamycake.co.uk/Products/classic-cake/</loc>
     <lastmod>2026-02-28</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    </url>
+  <url>
+    <loc>https://dreamycake.co.uk/Products/wedding-cake/</loc>
+    <lastmod>2026-03-25</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
     </url>

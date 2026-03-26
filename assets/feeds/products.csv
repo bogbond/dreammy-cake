@@ -1,6 +1,7 @@
 id,title,link,price,availability,condition,image_link,brand,identifier_exists
-DC-001,Celebration Cake,https://dreamycake.co.uk/Products/celebration-cake/,£65 GBP,in_stock,new,https://dreamycake.co.uk/assets/img/cakes/birthday-cake-hand-piped-details-peterborough-016.webp,Dreamy Cake,no
-DC-002,Themed Cake,https://dreamycake.co.uk/Products/themed-cake/,£75 GBP,in_stock,new,https://dreamycake.co.uk/assets/img/cakes/themed-cake-personalised-topper-cambridge-cambridgeshire-032.webp,Dreamy Cake,no
-DC-003,Mini / Bento Cake,https://dreamycake.co.uk/Products/mini-bento-cake/,£24 GBP,in_stock,new,https://dreamycake.co.uk/assets/img/cakes/buttercream-cake-pistachio-with-edible-gold-hemingford-grey-cambridgeshire-003.webp,Dreamy Cake,no
+DC-001,Celebration Cake,https://dreamycake.co.uk/Products/celebration-cake/,£65 GBP,in_stock,new,https://dreamycake.co.uk/assets/img/items/celebration-cake-main-blue-bear-cloud-birthday-cake.webp,Dreamy Cake,no
+DC-002,Themed Cake,https://dreamycake.co.uk/Products/themed-cake/,£75 GBP,in_stock,new,https://dreamycake.co.uk/assets/img/items/themed-cake-main-rose-bouquet-gift-box-cake.webp,Dreamy Cake,no
+DC-003,Mini / Bento Cake,https://dreamycake.co.uk/Products/mini-bento-cake/,£24 GBP,in_stock,new,https://dreamycake.co.uk/assets/img/items/mini-bento-cake-main-white-black-bow-lambeth-cake.webp,Dreamy Cake,no
 DC-004,Cupcakes,https://dreamycake.co.uk/Products/cupcakes/,£24 GBP,in_stock,new,https://dreamycake.co.uk/assets/img/cakes/drip-cake-hand-piped-details-chatteris-cambridgeshire-011.webp,Dreamy Cake,no
 DC-005,Postage Cookies (4-pack),https://dreamycake.co.uk/Products/postage-cookie/,£12 GBP,in_stock,new,https://dreamycake.co.uk/assets/img/items/postage-cookie-main.webp,Dreamy Cake,no
+DC-006,Wedding Cakes,https://dreamycake.co.uk/Products/wedding-cake/,£150 GBP,in_stock,new,https://dreamycake.co.uk/assets/img/items/wedding-cake-main-mr-and-mrs-black-bow-tiered-cake.webp,Dreamy Cake,no

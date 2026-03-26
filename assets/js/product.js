@@ -293,5 +293,93 @@
   }
 })();
 
+// r55.26: Floating Express Menu shortcut on regular product pages
+(function(){
+  var STORAGE_KEY = 'dc_express_shortcut_state';
 
+  function getProductSlug(){
+    var path = (window.location.pathname || '').replace(/index\.html$/, '').replace(/\/+$/, '');
+    var match = path.match(/^\/Products\/([^/]+)$/);
+    return match ? match[1] : '';
+  }
+
+  function shouldShowExpressShortcut(){
+    var slug = getProductSlug();
+    if(!slug) return false;
+    if(slug.indexOf('express-') === 0) return false;
+    if(/-collection$/.test(slug)) return false;
+    return true;
+  }
+
+  function getSavedState(){
+    try {
+      return localStorage.getItem(STORAGE_KEY);
+    } catch(e){
+      return null;
+    }
+  }
+
+  function saveState(value){
+    try {
+      localStorage.setItem(STORAGE_KEY, value);
+    } catch(e){}
+  }
+
+  function createExpressShortcut(){
+    if(!shouldShowExpressShortcut()) return;
+    if(document.querySelector('.express-shortcut')) return;
+
+    var root = document.createElement('aside');
+    root.className = 'express-shortcut';
+    root.setAttribute('aria-label', 'Express Menu shortcut');
+    root.innerHTML = ''
+      + '<button type="button" class="express-shortcut__peek" aria-label="Open Express Menu shortcut" aria-expanded="false">'
+      +   '<i class="bi bi-lightning-charge-fill" aria-hidden="true"></i>'
+      +   '<span>Express</span>'
+      + '</button>'
+      + '<div class="express-shortcut__card" role="complementary">'
+      +   '<button type="button" class="express-shortcut__close" aria-label="Collapse Express Menu shortcut">'
+      +     '<i class="bi bi-x-lg" aria-hidden="true"></i>'
+      +   '</button>'
+      +   '<div class="express-shortcut__eyebrow"><i class="bi bi-lightning-charge-fill" aria-hidden="true"></i><span>Need it sooner?</span></div>'
+      +   '<p class="express-shortcut__text">See the Express Menu for selected cakes and desserts available today or tomorrow.</p>'
+      +   '<div class="express-shortcut__actions">'
+      +     '<a class="express-shortcut__cta" href="/Express-Menu/">View Express Menu</a>'
+      +   '</div>'
+      + '</div>';
+
+    document.body.appendChild(root);
+
+    var peek = root.querySelector('.express-shortcut__peek');
+    var closeBtn = root.querySelector('.express-shortcut__close');
+
+    function setCollapsed(collapsed, persist){
+      root.classList.toggle('is-collapsed', collapsed);
+      peek.setAttribute('aria-expanded', collapsed ? 'false' : 'true');
+      document.body.classList.toggle('dc-express-shortcut-open', !collapsed);
+      document.body.classList.toggle('dc-express-shortcut-collapsed', collapsed);
+      if(persist){
+        saveState(collapsed ? 'collapsed' : 'open');
+      }
+    }
+
+    var saved = getSavedState();
+    var defaultCollapsed = window.matchMedia && window.matchMedia('(max-width: 767.98px)').matches;
+    setCollapsed(saved ? saved === 'collapsed' : defaultCollapsed, false);
+
+    closeBtn.addEventListener('click', function(){
+      setCollapsed(true, true);
+    });
+
+    peek.addEventListener('click', function(){
+      setCollapsed(false, true);
+    });
+  }
+
+  if(document.readyState === 'loading'){
+    document.addEventListener('DOMContentLoaded', createExpressShortcut);
+  } else {
+    createExpressShortcut();
+  }
+})();
 
