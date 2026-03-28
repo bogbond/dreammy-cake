@@ -3650,3 +3650,28 @@ body.home-hero-active #header .logo .sitename{
     text-shadow: 0 1px 8px rgba(0,0,0,.22);
   }
 }
+
+/* === 2026-03-28: Mobile nav overlay fix ===
+   The frosted header uses backdrop-filter, which creates a containing block for
+   fixed-position descendants in mobile browsers. That traps .navmenu inside the
+   header height, so the burger menu appears not to open. While the mobile menu
+   is active, remove that containing block and force the nav overlay to cover
+   the viewport. */
+@media (max-width: 1199.98px) {
+  body.mobile-nav-active #header.header,
+  body.mobile-nav-active #header.header .container-fluid.container-xl {
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+    filter: none !important;
+  }
+
+  body.mobile-nav-active .navmenu {
+    position: fixed !important;
+    inset: 0 !important;
+    min-height: 100dvh;
+  }
+
+  body.mobile-nav-active .navmenu > ul {
+    inset: 60px 20px 20px !important;
+  }
+}
