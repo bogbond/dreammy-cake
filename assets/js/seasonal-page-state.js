@@ -60,7 +60,7 @@
       "hero-note": "Collection in Brampton + local delivery around Huntingdon &amp; nearby areas.",
       "status-heading": "Easter pre-orders are open 🌷",
       "intro-1": "A seasonal Easter collection made to order — traditional Paska, soft spring cupcakes and elegant gift-ready presentation for family visits and holiday tables.",
-      "intro-2": "Share which Easter bake you would like, add a short message if needed, and I’ll confirm your collection or delivery slot by email.",
+      "intro-2": "Choose your Easter bakes and quantities, and I’ll confirm your collection or delivery slot by email.",
       "order-title": "Join the Pre-Order List",
       "submit-label": "Join the Pre-Order List",
       "sticky-label": "Join the Pre-Order List",
