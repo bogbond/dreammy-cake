@@ -1021,3 +1021,85 @@ function dcFlashHighlight(el, durationMs = 2600) {
     init();
   }
 })();
+
+
+// === DC: add contextual helper links in order forms ===
+(function(){
+  function careConfig(val){
+    var v = String(val || '').trim().toLowerCase();
+    if (v === 'collection' || v === 'pickup') {
+      return { href: '/Delivery/#cake-care-collection', text: 'Cake Care After Pickup' };
+    }
+    if (v === 'delivery' || v === 'local delivery' || v === 'postage') {
+      return { href: '/Delivery/#cake-care-delivery', text: 'Cake Care After Delivery' };
+    }
+    return { href: '/Delivery/#cake-care', text: 'Cake Care & Transport Guide' };
+  }
+
+  function ensureCareHelper(selectEl){
+    if (!selectEl || !selectEl.parentElement) return;
+    var wrap = selectEl.parentElement;
+    var helper = wrap.querySelector('.order-care-link');
+    if (!helper) {
+      helper = document.createElement('div');
+      helper.className = 'order-care-link';
+      helper.innerHTML = '<a class="care-link" href="/Delivery/#cake-care">Cake Care & Transport Guide</a>';
+      selectEl.insertAdjacentElement('afterend', helper);
+    }
+    var cfg = careConfig(selectEl.value);
+    var a = helper.querySelector('.care-link');
+    if (a) {
+      a.href = cfg.href;
+      a.textContent = cfg.text;
+    }
+  }
+
+  function ensureDesignHelper(inputEl){
+    if (!inputEl || !inputEl.parentElement) return;
+    var wrap = inputEl.parentElement;
+    var helper = wrap.querySelector('.order-reference-link');
+    if (!helper) {
+      helper = document.createElement('div');
+      helper.className = 'order-reference-link';
+      helper.innerHTML = '<a class="design-link" href="/How-it-works/#design-references">How inspiration photos are used</a>';
+      inputEl.insertAdjacentElement('afterend', helper);
+    }
+  }
+
+  function refreshHelpers(scope){
+    var root = scope || document;
+    var deliverySelectors = 'select[name="delivery_option"], select[name="delivery_option_ui"], select[id*="delivery-option"]';
+    var refSelectors = 'input[name="reference_links"]';
+    var deliveryNodes = [];
+    var refNodes = [];
+    try { deliveryNodes = Array.prototype.slice.call(root.querySelectorAll(deliverySelectors)); } catch (e) { deliveryNodes = []; }
+    try { refNodes = Array.prototype.slice.call(root.querySelectorAll(refSelectors)); } catch (e) { refNodes = []; }
+    deliveryNodes.forEach(ensureCareHelper);
+    refNodes.forEach(ensureDesignHelper);
+  }
+
+  function onChange(e){
+    var t = e && e.target;
+    if (!t || t.tagName !== 'SELECT') return;
+    var name = t.getAttribute('name') || '';
+    var id = t.id || '';
+    if (name === 'delivery_option' || name === 'delivery_option_ui' || id.indexOf('delivery-option') !== -1) {
+      ensureCareHelper(t);
+    }
+  }
+
+  function init(){
+    document.addEventListener('change', onChange);
+    refreshHelpers(document);
+    if (!window.__dc_care_link_bound) {
+      window.addEventListener('resize', function(){ refreshHelpers(document); }, { passive:true });
+      window.__dc_care_link_bound = true;
+    }
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', init);
+  } else {
+    init();
+  }
+})();

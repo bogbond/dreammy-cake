@@ -163,3 +163,22 @@ main{ padding-top: 96px; }
 /* === DC: ensure active link color visible on info pages === */
 #header .navmenu a.active,
 #header .navmenu li.active > a{ color:#F0B400 ; }
+
+
+/* --- Design references section --- */
+.design-reference-section{background:linear-gradient(180deg,rgba(248,239,232,.62),rgba(255,255,255,0) 90%)}
+.design-reference-wrap{display:grid;grid-template-columns:1.2fr .8fr;gap:16px;align-items:stretch}
+.design-reference-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:16px}
+.design-intro,.design-side,.design-note,.feature-card{background:#fff;border:1px solid var(--dc-border);border-radius:18px;box-shadow:0 10px 30px rgba(0,0,0,.04)}
+.design-intro h2{margin:.2rem 0 .8rem;font-size:clamp(26px,3vw,34px)}
+.design-intro p,.design-side p,.feature-card p,.design-note p{color:var(--dc-muted)}
+.eyebrow{display:inline-flex;align-items:center;gap:.45rem;margin:0 0 .75rem;color:var(--dc-accent);font-weight:700;letter-spacing:.06em;text-transform:uppercase;font-size:.78rem}
+.check-list{list-style:none;margin:0;padding:0;display:grid;gap:.75rem}
+.check-list li{position:relative;padding-left:1.6rem;color:var(--dc-ink)}
+.check-list li::before{content:"✓";position:absolute;left:0;top:0;color:var(--dc-accent);font-weight:700}
+.feature-card h3,.design-side h3,.design-note h3{display:flex;align-items:center;gap:.55rem;margin:.1rem 0 .55rem;font-size:1.08rem}
+.feature-card i{color:var(--dc-accent)}
+#design-references{scroll-margin-top:120px}
+@media (max-width: 1000px){
+  .design-reference-wrap,.design-reference-grid{grid-template-columns:1fr}
+}
