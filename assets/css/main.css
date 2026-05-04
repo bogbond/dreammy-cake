@@ -1281,6 +1281,42 @@ section,
   object-fit: contain;
 }
 
+.certification-link {
+  display: block;
+  border-radius: 12px;
+  text-decoration: none;
+}
+
+.certification-link:focus-visible {
+  outline: 3px solid var(--accent-color);
+  outline-offset: 4px;
+}
+
+.certification-link .certification-image {
+  transition: transform .18s ease, filter .18s ease;
+}
+
+.certification-link:hover .certification-image {
+  transform: translateY(-1px);
+  filter: saturate(1.05);
+}
+
+.certifications-note {
+  margin: 14px 0 0;
+  font-size: .95rem;
+}
+
+.certifications-official-link {
+  color: var(--accent-color);
+  font-weight: 600;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.certifications-official-link:hover {
+  color: var(--heading-color);
+}
+
 .certification-item--fsa .certification-image,
 .certification-item--one .certification-image {
   max-height: 58px;
@@ -2016,6 +2052,22 @@ h2.section-title::after {
 .trust-item i{
   flex:0 0 auto;
   font-size:1.05em;
+}
+
+a.trust-item {
+  color: inherit;
+  text-decoration: none;
+}
+
+a.trust-item:hover {
+  color: inherit;
+  border-color: rgba(17, 17, 17, .16);
+  box-shadow: 0 8px 22px rgba(17, 17, 17, .06);
+}
+
+a.trust-item:focus-visible {
+  outline: 3px solid var(--accent-color);
+  outline-offset: 3px;
 }
 
 /* Permit text wrap only on ultra-narrow screens, keep one-row layout */
