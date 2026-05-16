@@ -199,6 +199,26 @@
     return nextInput && nextInput.value ? nextInput.value : '';
   }
 
+  function syncNextUrlToCurrentOrigin(form){
+    var nextInput = form ? form.querySelector('input[name="_next"]') : null;
+    if(!nextInput) return;
+
+    try {
+      var currentValue = nextInput.value || '/Thank-You/';
+      var parsed = new URL(currentValue, window.location.href);
+      var path = parsed.pathname.replace(/\/+$/, '') || '/';
+
+      // The deployed preview/domain can differ from dreamycake.co.uk.
+      // Keep FormSubmit's _next URL on the current origin so the hidden iframe
+      // can detect the success redirect instead of waiting at 92%.
+      if(path === '/Thank-You' && window.location.origin && window.location.protocol !== 'file:'){
+        nextInput.value = new URL('/Thank-You/', window.location.origin).href;
+      }
+    } catch(err) {
+      // Leave the original value untouched if URL parsing is not available.
+    }
+  }
+
   function ensureIframe(form){
     var state = getState(form);
     if(state.iframe) return state.iframe;
@@ -437,6 +457,7 @@
     if(!isFormSubmitForm(form)) return;
     form.dataset.uploadProgressManaged = 'true';
     normaliseContactAction(form);
+    syncNextUrlToCurrentOrigin(form);
     var fileInput = getFileInput(form);
     if(fileInput) getUi(form);
     ensureIframe(form);
@@ -468,6 +489,7 @@
       return;
     }
 
+    syncNextUrlToCurrentOrigin(form);
     state.pending = true;
     state.submitAt = Date.now();
     var iframe = ensureIframe(form);
