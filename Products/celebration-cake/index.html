@@ -112,11 +112,9 @@
 <title>Celebration Cakes in Huntingdon | Dreamy Cake Bakery</title>
 <meta content="Order elegant celebration cakes in Huntingdon for birthdays, baby showers and milestones. Personalised buttercream designs from £55." name="description"/>
 <link href="../../assets/img/site.webmanifest" rel="manifest"/>
-<link href="https://fonts.googleapis.com" rel="preconnect"/>
-<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
 <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&amp;family=Raleway:wght@600;700;800&amp;family=Open+Sans:wght@400;600&amp;display=swap" rel="stylesheet"/>
 <link href="../../assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet"/>
-<link href="../../assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet"/>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet"/>
 <link href="../../assets/vendor/aos/aos.css" rel="stylesheet"/>
 <link href="../../assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet"/>
 <link href="../../assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet"/>
@@ -223,8 +221,7 @@
 
 
 "><span>Order</span> <i aria-hidden="true" class="bi bi-chevron-down chev"></i></button>
-<ul id="order-submenu"><li><a href="/Products/celebration-cake/#order">Order Celebration Cake</a></li><li><a href="/Products/themed-cake/#order">Order Themed Cake</a></li><li><a href="/Products/mini-bento-cake/#order">Order Mini / Bento Cake</a></li><li><a href="/Products/wedding-cake/#order">Order Wedding Cakes</a></li><li><a href="/Products/cupcakes/#order">Order Cupcakes</a></li><li><a href="/Products/postage-cookie/#order">Order Postage Cookie</a></li>
-<li><a href="/#contact">Bespoke Request</a></li></ul>
+<ul id="order-submenu"><li><a class="nav-bespoke-order" href="/Bespoke-Order/"><span>Bespoke Order</span><span class="nav-bespoke-order__arrow" aria-hidden="true">&rarr;</span></a></li><li><a href="/Products/celebration-cake/#order">Order Celebration Cake</a></li><li><a href="/Products/themed-cake/#order">Order Themed Cake</a></li><li><a href="/Products/mini-bento-cake/#order">Order Mini / Bento Cake</a></li><li><a href="/Products/wedding-cake/#order">Order Wedding Cakes</a></li><li><a href="/Products/cupcakes/#order">Order Cupcakes</a></li><li><a href="/Products/postage-cookie/#order">Order Postage Cookie</a></li></ul>
 </li>
 <!-- <li><a href="/#how-it-works">Services</a></li> -->
 <li class="dropdown">
@@ -670,11 +667,11 @@
 <textarea autocomplete="off" class="form-control" id="products-celebration-cake-index-f1-message" name="message" placeholder="Tell me about colours, mood, toppers... Need a printed card too? Mention image/text here." rows="3"></textarea>
 </div>
 <div class="col-12">
-<label class="form-label" for="products-celebration-cake-index-html-delivery-option">Delivery or pickup?</label>
+<label class="form-label" for="products-celebration-cake-index-html-delivery-option">Delivery or collection?</label>
 <select autocomplete="off" class="form-control" id="products-celebration-cake-index-html-delivery-option" name="delivery_option" required="">
 <option disabled="" selected="" value="">Choose option</option>
 <option value="delivery">Delivery</option>
-<option value="pickup">Pickup</option>
+<option value="pickup">Collection</option>
 </select>
 </div>
 <div class="col-12">
@@ -686,7 +683,7 @@
 <input autocomplete="off" class="form-control" id="products-celebration-cake-index-f1-budget" min="0" name="budget_from" placeholder="e.g., 60" step="5" type="number"/>
 </div>
 <div class="col-12 small text-muted">
-                  By clicking the button, I agree with the <a href="/Privacy-Policy/">Privacy Policy</a>.
+                  By sending this request, you agree to the <a href="/Privacy-Policy/">Privacy Policy</a>. We use your details only to reply and manage your order.
                 </div>
 <div class="col-12"><label class="form-label" for="products-celebration-cake-index-attachment-1">Inspiration image / PDF (optional)</label><input accept=".jpg,.jpeg,.png,.webp,.gif,.bmp,.heic,.heif,.pdf,.tif,.tiff,image/jpeg,image/png,image/webp,image/gif,image/bmp,image/heic,image/heif,application/pdf,image/tiff" class="form-control" data-file-attachment="true" data-max-bytes="10485760" id="products-celebration-cake-index-attachment-1" name="attachment" type="file"/><div class="form-text">Attach one photo, screenshot or PDF (max 10 MB).</div><div class="invalid-feedback">Please upload a JPG, PNG, WEBP, HEIC or PDF file up to 10 MB.</div></div><div class="col-12 text-end mt-2">
 <button class="btn btn-primary" type="submit">Get a quote</button>
@@ -766,10 +763,10 @@
         Address
        </h4>
 <p>
-        Brampton
+        14 Elizabethan Way, Brampton
        </p>
 <p>
-        Huntingdon, PE28 4SU
+        Huntingdon, Cambridgeshire PE28 4SU
        </p>
 <p>
 </p>
@@ -870,7 +867,7 @@
 </div>
 </div>
 </footer>
-<a class="scroll-top d-flex align-items-center justify-content-center" href="#" id="scroll-top">
+<a class="scroll-top d-flex align-items-center justify-content-center" href="#" id="scroll-top" aria-label="Back to top" title="Back to top">
 <i class="bi bi-arrow-up-short">
 </i>
 </a>

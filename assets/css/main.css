@@ -3727,3 +3727,44 @@ body.home-hero-active #header .logo .sitename{
     inset: 60px 20px 20px !important;
   }
 }
+
+
+/* Promoted Bespoke Order CTA in the Order dropdown. */
+.navmenu .dropdown ul a.nav-bespoke-order,
+.navmenu .dropdown ul li > a.nav-bespoke-order{
+  display:flex !important;
+  align-items:center;
+  justify-content:space-between;
+  gap:.85rem;
+  font-weight:800 !important;
+  letter-spacing:.01em;
+  color:#fff !important;
+  background:linear-gradient(90deg, rgba(247,189,0,.24), rgba(231,184,201,.18)) !important;
+  border-left:3px solid var(--accent-color);
+}
+.navmenu .dropdown ul a.nav-bespoke-order:hover,
+.navmenu .dropdown ul li:hover > a.nav-bespoke-order,
+.navmenu .dropdown ul a.nav-bespoke-order.active{
+  color:var(--accent-color) !important;
+  background:linear-gradient(90deg, rgba(247,189,0,.32), rgba(255,255,255,.12)) !important;
+}
+.nav-bespoke-order__arrow{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  min-width:1.25rem;
+  font-size:1.05rem;
+  line-height:1;
+  transition:transform .2s ease;
+}
+.navmenu .dropdown ul a.nav-bespoke-order:hover .nav-bespoke-order__arrow,
+.navmenu .dropdown ul li:hover > a.nav-bespoke-order .nav-bespoke-order__arrow{
+  transform:translateX(3px);
+}
+@media (max-width:1199px){
+  .navmenu .dropdown ul li > a.nav-bespoke-order{
+    border-left:0;
+    border-radius:14px;
+    padding:18px 15px !important;
+  }
+}

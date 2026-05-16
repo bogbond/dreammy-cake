@@ -19,6 +19,32 @@
     return false;
   }
 
+  function formatBytes(bytes){
+    bytes = Number(bytes) || 0;
+    if(bytes >= 1024 * 1024){
+      var mb = bytes / (1024 * 1024);
+      return (Math.abs(mb - Math.round(mb)) < 0.05 ? Math.round(mb) : mb.toFixed(1)) + ' MB';
+    }
+    return Math.max(1, Math.round(bytes / 1024)) + ' KB';
+  }
+
+  function feedbackElement(input){
+    if(!input) return null;
+    var id = input.getAttribute('data-file-feedback-id');
+    if(id){
+      var explicit = document.getElementById(id);
+      if(explicit) return explicit;
+    }
+    if(input.id === 'boAttachments') return document.getElementById('boFileFeedback');
+    return null;
+  }
+
+  function setFieldMessage(input, message){
+    input.setCustomValidity(message || '');
+    var feedback = feedbackElement(input);
+    if(feedback) feedback.textContent = message || '';
+  }
+
   function updateFieldState(input){
     if(!input) return;
     input.classList.remove('is-invalid');
@@ -33,7 +59,7 @@
     var maxBytes = parseInt(input.getAttribute('data-max-bytes') || '', 10);
     if(!Number.isFinite(maxBytes) || maxBytes <= 0) maxBytes = MAX_BYTES_DEFAULT;
 
-    input.setCustomValidity('');
+    setFieldMessage(input, '');
 
     var files = input.files;
     if(!files || !files.length){
@@ -41,15 +67,33 @@
       return true;
     }
 
-    var file = files[0];
-    if(file.size > maxBytes){
-      input.setCustomValidity('Please upload a file up to 10 MB.');
+    var maxFiles = parseInt(input.getAttribute('data-max-files') || '', 10);
+    if(Number.isFinite(maxFiles) && maxFiles > 0 && files.length > maxFiles){
+      setFieldMessage(input, 'Please upload up to ' + maxFiles + ' files.');
       updateFieldState(input);
       return false;
     }
 
-    if(!isAllowedFile(file)){
-      input.setCustomValidity('Please upload JPG, PNG, WEBP, GIF, BMP, HEIC, TIFF or PDF.');
+    var maxTotalBytes = parseInt(input.getAttribute('data-max-total-bytes') || '', 10);
+    var totalBytes = 0;
+    for(var i = 0; i < files.length; i++){
+      var file = files[i];
+      totalBytes += file.size || 0;
+      if(file.size > maxBytes){
+        setFieldMessage(input, 'Each file must be up to ' + formatBytes(maxBytes) + '.');
+        updateFieldState(input);
+        return false;
+      }
+
+      if(!isAllowedFile(file)){
+        setFieldMessage(input, 'Please upload JPG, PNG, WEBP, GIF, BMP, HEIC, TIFF or PDF.');
+        updateFieldState(input);
+        return false;
+      }
+    }
+
+    if(Number.isFinite(maxTotalBytes) && maxTotalBytes > 0 && totalBytes > maxTotalBytes){
+      setFieldMessage(input, 'Please keep all uploads within ' + formatBytes(maxTotalBytes) + ' total.');
       updateFieldState(input);
       return false;
     }

@@ -1,0 +1,957 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+<!-- DC:GA4_CONSENT_HEAD_START -->
+<!-- Google Analytics 4 + Consent Mode v2 (UK/EU) -->
+<script>
+  // GA4 Measurement ID (change here if needed)
+  window.GA_MEASUREMENT_ID = window.GA_MEASUREMENT_ID || 'G-CC2NRDSRQ9';
+
+  // Consent state: 'accept' | 'reject' | null
+  window.__dc_consent_choice = window.__dc_consent_choice || null;
+
+  // GA load guard
+  window.__ga_loaded = window.__ga_loaded || false;
+
+  // DataLayer + gtag wrapper:
+  // - Always allow Consent Mode commands
+  // - Block analytics/events until user accepts
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){
+    try {
+      if (arguments && arguments.length && arguments[0] === 'consent') {
+        window.dataLayer.push(arguments);
+        return;
+      }
+      if (window.__dc_consent_choice === 'accept') {
+        window.dataLayer.push(arguments);
+      }
+    } catch(e) {}
+  }
+  window.gtag = window.gtag || gtag;
+
+  // Helper: load GA script once (only call after consent 'accept')
+  window.dcLoadGAOnce = window.dcLoadGAOnce || function() {
+    var id = window.GA_MEASUREMENT_ID;
+    if (window.__ga_loaded) return;
+    if(!id || id === 'G-XXXXXXXXXX') {
+      console.warn('GA4 ID is placeholder. Set window.GA_MEASUREMENT_ID to your real GA4 ID.');
+      return;
+    }
+    // Avoid duplicate script tags
+    if (!document.querySelector('script[src^="https://www.googletagmanager.com/gtag/js?id="]')) {
+      var s = document.createElement('script');
+      s.async = true;
+      s.src = 'https://www.googletagmanager.com/gtag/js?id=' + id;
+      document.head.appendChild(s);
+    }
+    window.__ga_loaded = true;
+    gtag('js', new Date());
+    gtag('config', id, { anonymize_ip: true });
+  };
+
+  // Helper: attempt to clear GA cookies on "reject" (best-effort)
+  window.dcClearGACookies = window.dcClearGACookies || function() {
+    try {
+      var expires = 'Thu, 01 Jan 1970 00:00:00 GMT';
+      var domains = [location.hostname, '.' + location.hostname];
+      function del(name) {
+        // Host-only
+        document.cookie = name + '=; expires=' + expires + '; path=/';
+        // Explicit domains
+        for (var i=0; i<domains.length; i++) {
+          document.cookie = name + '=; expires=' + expires + '; path=/; domain=' + domains[i];
+        }
+      }
+      document.cookie.split(';').forEach(function(c){
+        var name = c.split('=')[0].trim();
+        if(name === '_ga' || name === '_gid' || name.indexOf('_ga_') === 0 || name.indexOf('_gat') === 0) {
+          del(name);
+        }
+      });
+    } catch(e) {}
+  };
+
+  // Read saved consent and set defaults (Consent Mode v2)
+  (function() {
+    try {
+      var saved = JSON.parse(localStorage.getItem('dc_consent') || '{}');
+      var choice = (saved && (saved.choice === 'accept' || saved.choice === 'reject')) ? saved.choice : null;
+      window.__dc_consent_choice = choice;
+
+      var base = {
+        ad_user_data: 'denied',
+        ad_personalization: 'denied',
+        ad_storage: 'denied',
+        analytics_storage: 'denied',
+        functionality_storage: 'granted',
+        security_storage: 'granted'
+      };
+
+      var consent = Object.assign({}, base, (choice === 'accept') ? {
+        analytics_storage: 'granted',
+        ad_storage: 'granted',
+        ad_user_data: 'granted',
+        ad_personalization: 'granted'
+      } : {});
+
+      gtag('consent', 'default', consent);
+
+      // Load GA only if user already accepted previously
+      if (choice === 'accept') {
+        window.dcLoadGAOnce();
+      }
+    } catch(e) { console.warn('Consent read failed', e); }
+  })();
+</script>
+<!-- DC:GA4_CONSENT_HEAD_END -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Bespoke Cake &amp; Cupcake Order | Dreamy Cake Bakery</title>
+<meta content="Request a bespoke cake, cupcakes or matching dessert set in Huntingdon. Get a starting estimate, upload inspiration and choose collection or delivery." name="description"/>
+<link href="https://dreamycake.co.uk/Bespoke-Order/" rel="canonical"/>
+<link href="/assets/img/site.webmanifest" rel="manifest"/>
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&amp;family=Raleway:wght@600;700;800&amp;family=Open+Sans:wght@400;600&amp;display=swap" rel="stylesheet"/>
+<link href="/assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet"/>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet"/>
+<link href="/assets/vendor/aos/aos.css" rel="stylesheet"/>
+<link href="/assets/css/main.css" rel="stylesheet"/>
+<link href="/assets/css/pages/bespoke-order.css" rel="stylesheet"/>
+<meta content="website" property="og:type"/>
+<meta content="Bespoke Cake &amp; Cupcake Order | Dreamy Cake Bakery" property="og:title"/>
+<meta content="Request custom cakes, cupcakes and matching dessert sets in Huntingdon with a guided quote form." property="og:description"/>
+<meta content="https://dreamycake.co.uk/assets/img/og/custom-cakes-cambridgeshire-1200x630.jpg" property="og:image"/>
+<meta content="1200" property="og:image:width"/>
+<meta content="630" property="og:image:height"/>
+<meta content="Dreamy Cake Bakery bespoke cakes and cupcakes in Cambridgeshire" property="og:image:alt"/>
+<meta content="https://dreamycake.co.uk/Bespoke-Order/" property="og:url"/>
+<meta content="Dreamy Cake Bakery" property="og:site_name"/>
+<meta content="en_GB" property="og:locale"/>
+<meta content="summary_large_image" name="twitter:card"/>
+<meta content="Bespoke Cake &amp; Cupcake Order | Dreamy Cake Bakery" name="twitter:title"/>
+<meta content="Request a bespoke cake, cupcakes or matching dessert set with a starting-price estimate." name="twitter:description"/>
+<meta content="https://dreamycake.co.uk/assets/img/og/custom-cakes-cambridgeshire-1200x630.jpg" name="twitter:image"/>
+<meta content="Dreamy Cake Bakery bespoke cakes and cupcakes in Cambridgeshire" name="twitter:image:alt"/>
+<link href="/assets/img/favicon.svg" rel="icon" type="image/svg+xml"/>
+<link href="/assets/img/favicon.ico" rel="icon" sizes="any"/>
+<link href="/apple-touch-icon.png" rel="apple-touch-icon"/>
+<link color="#F9F6EC" href="/safari-pinned-tab.svg" rel="mask-icon"/>
+<meta content="#F9F6EC" name="theme-color"/>
+<meta content="index,follow,max-image-preview:large" name="robots"/>
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"WebPage","@id":"https://dreamycake.co.uk/Bespoke-Order/#webpage","url":"https://dreamycake.co.uk/Bespoke-Order/","name":"Bespoke Cake and Cupcake Order Request","description":"Guided bespoke order request form for custom cakes, cupcakes and matching dessert sets by Dreamy Cake Bakery in Huntingdon and Cambridgeshire.","isPartOf":{"@id":"https://dreamycake.co.uk/#website"},"inLanguage":"en-GB","about":{"@id":"https://dreamycake.co.uk/#localbusiness","address":{"@type":"PostalAddress","streetAddress":"14 Elizabethan Way, Brampton","addressLocality":"Huntingdon","addressRegion":"Cambridgeshire","postalCode":"PE28 4SU","addressCountry":"GB"},"geo":{"@type":"GeoCoordinates","latitude":52.3242487,"longitude":-0.2406139},"hasMap":"https://maps.app.goo.gl/psW7oL2LAus7vUWy5"},"primaryImageOfPage":{"@type":"ImageObject","url":"https://dreamycake.co.uk/assets/img/og/custom-cakes-cambridgeshire-1200x630.jpg","width":1200,"height":630},"breadcrumb":{"@id":"https://dreamycake.co.uk/Bespoke-Order/#breadcrumb"}},{"@type":"BreadcrumbList","@id":"https://dreamycake.co.uk/Bespoke-Order/#breadcrumb","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://dreamycake.co.uk/"},{"@type":"ListItem","position":2,"name":"Bespoke Order","item":"https://dreamycake.co.uk/Bespoke-Order/"}]},{"@type":"Service","@id":"https://dreamycake.co.uk/Bespoke-Order/#service","name":"Bespoke cake and cupcake order request","serviceType":"Custom cake and cupcake enquiry","description":"Custom cakes, mini bento cakes, themed cakes, wedding-style cakes and cupcake boxes made to order with collection or local delivery by arrangement.","provider":{"@id":"https://dreamycake.co.uk/#localbusiness","address":{"@type":"PostalAddress","streetAddress":"14 Elizabethan Way, Brampton","addressLocality":"Huntingdon","addressRegion":"Cambridgeshire","postalCode":"PE28 4SU","addressCountry":"GB"},"geo":{"@type":"GeoCoordinates","latitude":52.3242487,"longitude":-0.2406139},"hasMap":"https://maps.app.goo.gl/psW7oL2LAus7vUWy5"},"areaServed":["Huntingdon","Brampton","Cambridgeshire","Cambridge","Peterborough","St Ives","St Neots","Ely"],"availableChannel":{"@type":"ServiceChannel","serviceUrl":"https://dreamycake.co.uk/Bespoke-Order/","availableLanguage":"en-GB"},"offers":{"@type":"AggregateOffer","priceCurrency":"GBP","lowPrice":"24","highPrice":"300","offerCount":"5","availability":"https://schema.org/PreOrder","offers":[{"@type":"Offer","name":"Mini / Bento Cake","priceCurrency":"GBP","price":"35","url":"https://dreamycake.co.uk/Products/mini-bento-cake/","availability":"https://schema.org/PreOrder"},{"@type":"Offer","name":"Celebration Cake","priceCurrency":"GBP","price":"55","url":"https://dreamycake.co.uk/Products/celebration-cake/","availability":"https://schema.org/PreOrder"},{"@type":"Offer","name":"Themed Cake","priceCurrency":"GBP","price":"65","url":"https://dreamycake.co.uk/Products/themed-cake/","availability":"https://schema.org/PreOrder"},{"@type":"Offer","name":"Wedding / Tiered Cake","priceCurrency":"GBP","price":"150","url":"https://dreamycake.co.uk/Products/wedding-cake/","availability":"https://schema.org/PreOrder"},{"@type":"Offer","name":"Cupcakes","priceCurrency":"GBP","price":"24","url":"https://dreamycake.co.uk/Products/cupcakes/","availability":"https://schema.org/PreOrder"}]}}]}</script>
+</head>
+<body class="index-page bespoke-order-page">
+<header class="header d-flex align-items-center fixed-top" id="header">
+<div class="container-fluid container-xl position-relative d-flex align-items-center justify-content-between">
+<a class="logo d-flex align-items-center" href="/">
+<!-- Uncomment the line below if you also wish to use an image logo -->
+<!-- <img src="/assets/img/logo.png" alt="Dreamy Cake Bakery" width="32" height="32" decoding="async" fetchpriority="high"> -->
+<p class="sitename">Dreamy Cake Bakery</p>
+</a>
+<nav class="navmenu" id="navmenu">
+<ul>
+<li>
+<a href="/#hero">
+        Home
+       </a>
+</li>
+<li><a href="/#pricing">Cake Menu</a></li>
+<li>
+<a aria-label="Go to Portfolio section" href="/#portfolio">
+        Portfolio
+       </a>
+</li>
+<li>
+<a href="/#contact">
+        Contact
+       </a>
+</li><li>
+<a href="/About/">
+        About
+       </a>
+</li><li class="dropdown">
+<button aria-controls="order-submenu" aria-expanded="false" aria-label="Toggle order submenu" class="nav-toggle" type="button"><span>Order</span> <i class="bi bi-chevron-down"></i></button>
+<ul id="order-submenu"><li><a aria-current="page" class="active nav-bespoke-order" href="/Bespoke-Order/"><span>Bespoke Order</span><span class="nav-bespoke-order__arrow" aria-hidden="true">&rarr;</span></a></li><li><a href="/Products/celebration-cake/#order">Order Celebration Cake</a></li><li><a href="/Products/themed-cake/#order">Order Themed Cake</a></li><li><a href="/Products/mini-bento-cake/#order">Order Mini / Bento Cake</a></li><li><a href="/Products/wedding-cake/#order">Order Wedding Cakes</a></li><li><a href="/Products/cupcakes/#order">Order Cupcakes</a></li><li><a href="/Products/postage-cookie/#order">Order Postage Cookie</a></li></ul>
+</li>
+<!-- <li><a href="#how-it-works">Services</a></li> -->
+<li class="dropdown">
+<button aria-controls="info-submenu" aria-expanded="false" aria-label="Toggle info submenu" class="nav-toggle" type="button"><span>Info</span> <i class="bi bi-chevron-down"></i></button>
+<ul id="info-submenu">
+<li><a href="/Delivery/">Delivery</a></li>
+<li><a href="/Allergens/">Allergens</a></li>
+<li><a href="/How-it-works/">How it works</a></li>
+<li><a href="/QA/">Q&amp;A</a></li>
+</ul>
+</li>
+<li>
+<a href="https://shop.dreamycake.co.uk">Shop</a>
+</li></ul>
+<i class="mobile-nav-toggle d-xl-none bi bi-list">
+</i>
+</nav>
+</div>
+</header>
+<main class="main bespoke-main" id="main">
+  <section class="bespoke-hero" id="hero" aria-labelledby="bespoke-hero-title">
+    <div class="bespoke-hero__wash"></div>
+    <div class="container position-relative">
+      <div class="row align-items-center g-4 g-xl-5">
+        <div class="col-12 col-lg-7" data-aos="fade-up">
+          <p class="bespoke-kicker">Custom order request</p>
+          <h1 id="bespoke-hero-title">Bespoke cakes, cupcakes and matching dessert sets</h1>
+          <p class="bespoke-hero__lead">Share your date, style, flavours and delivery details. I will confirm availability and send a personalised quote before any payment is taken.</p>
+          <div class="bespoke-hero__actions">
+            <a class="btn btn-primary" href="#bespoke-form"><i class="bi bi-stars"></i> Start my request</a>
+            <a class="btn btn-outline" href="#starting-prices"><i class="bi bi-card-list"></i> View starting prices</a>
+          </div>
+          <div class="bespoke-trust-row" aria-label="Trust highlights">
+            <a class="bespoke-trust-pill" href="https://ratings.food.gov.uk/business/1856524" rel="noopener" target="_blank"><i class="bi bi-shield-check"></i> 5-star Food Hygiene Rating</a>
+            <span class="bespoke-trust-pill"><i class="bi bi-heart"></i> Made fresh to order</span>
+            <span class="bespoke-trust-pill"><i class="bi bi-truck"></i> Collection or local delivery</span>
+          </div>
+        </div>
+        <div class="col-12 col-lg-5" data-aos="fade-up" data-aos-delay="100">
+          <div class="hero-collage" aria-hidden="true">
+            <div class="hero-collage__item hero-collage__item--large"><img src="/assets/img/items/themed-cake-main-rose-bouquet-gift-box-cake.webp" alt="" loading="eager" decoding="async"/></div>
+            <div class="hero-collage__item"><img src="/assets/img/items/cupcakes-main.webp" alt="" loading="lazy" decoding="async"/></div>
+            <div class="hero-collage__item"><img src="/assets/img/items/celebration-cake-main-blue-bear-cloud-birthday-cake.webp" alt="" loading="lazy" decoding="async"/></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section class="section bespoke-prices" id="starting-prices" aria-labelledby="starting-prices-title">
+    <div class="container">
+      <div class="bespoke-section-heading" data-aos="fade-up">
+        <p class="bespoke-kicker">Price guide</p>
+        <h2 id="starting-prices-title">Starting prices used in this request form</h2>
+        <p>These are guide prices for standard decoration. Complex themes, sculpted toppers, fresh florals, edible images, venue setup and delivery can change the final quote.</p>
+      </div>
+      <div class="price-guide-grid" data-aos="fade-up" data-aos-delay="80">
+        <article class="price-guide-card"><span>Mini / Bento Cake</span><strong>From &pound;35</strong><small>Gift-size cake for 2-4 servings.</small></article>
+        <article class="price-guide-card"><span>Celebration Cake</span><strong>From &pound;55</strong><small>5-inch regular; larger sizes are estimated below.</small></article>
+        <article class="price-guide-card"><span>Themed Cake</span><strong>From &pound;65</strong><small>5-inch regular; bespoke details quoted after review.</small></article>
+        <article class="price-guide-card"><span>Wedding / Tiered Cake</span><strong>From &pound;150</strong><small>Venue delivery and setup quoted separately.</small></article>
+        <article class="price-guide-card"><span>Cupcakes</span><strong>From &pound;24</strong><small>Box of 6; larger quantities estimated below.</small></article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section bespoke-order-section" id="bespoke-form" aria-labelledby="bespoke-form-title">
+    <div class="container">
+      <h2 class="visually-hidden" id="bespoke-form-title">Bespoke order form</h2>
+      <form action="https://formsubmit.co/3deee887f1c54c32d3d284847ccc8dcd" autocomplete="on" class="bespoke-form" data-form="bespoke-order" enctype="multipart/form-data" id="bespokeOrderForm" method="POST" novalidate>
+        <input name="_subject" type="hidden" value="Dreamy Cake Bakery - Bespoke order request"/>
+        <input name="_honey" type="hidden" value=""/>
+        <input name="_captcha" type="hidden" value="false"/>
+        <input name="_template" type="hidden" value="table"/>
+        <input name="_next" type="hidden" value="https://dreamycake.co.uk/Thank-You/"/>
+        <input name="product_name" type="hidden" value="Bespoke Order Request"/>
+        <input name="page_url" type="hidden" value="/Bespoke-Order/"/>
+        <input id="boHiddenProducts" name="selected_products" type="hidden"/>
+        <input id="boHiddenCakeEstimate" name="cake_estimate" type="hidden"/>
+        <input id="boHiddenCupcakeEstimate" name="cupcake_estimate" type="hidden"/>
+        <input id="boHiddenBundleDiscount" name="bundle_discount" type="hidden"/>
+        <input id="boHiddenEstimatedTotal" name="estimated_total" type="hidden"/>
+        <input id="boHiddenDeliverySummary" name="delivery_summary" type="hidden"/>
+        <input id="boHiddenRequestSummary" name="request_summary" type="hidden"/>
+
+        <div class="bespoke-form-grid">
+          <div class="bespoke-form-main">
+            <section class="form-panel" aria-labelledby="contact-details-title" data-aos="fade-up">
+              <div class="panel-heading">
+                <div class="panel-icon"><svg class="panel-svg" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="7" r="4"></circle><path d="M4 21a8 8 0 0 1 16 0"></path></svg></div>
+                <div><p class="panel-step">Step 1</p><h2 id="contact-details-title">Contact Details</h2></div>
+              </div>
+              <div class="row g-3">
+                <div class="col-12 col-md-6">
+                  <label class="form-label" for="boName">Full Name *</label>
+                  <input autocomplete="name" class="form-control" id="boName" name="name" placeholder="Jane Doe" required type="text"/>
+                </div>
+                <div class="col-12 col-md-6">
+                  <label class="form-label" for="boEmail">Email Address *</label>
+                  <input autocomplete="email" class="form-control" id="boEmail" name="email" placeholder="jane@example.com" required type="email"/>
+                </div>
+                <div class="col-12 col-md-6">
+                  <label class="form-label" for="boPhone">Phone Number *</label>
+                  <input autocomplete="tel" class="form-control" id="boPhone" name="phone" placeholder="+44 7000 000000" required type="tel"/>
+                </div>
+                <div class="col-12 col-md-6">
+                  <label class="form-label" for="boInstagram">Instagram Handle</label>
+                  <input autocomplete="off" class="form-control" id="boInstagram" name="instagram_handle" placeholder="@yourhandle" type="text"/>
+                  <div class="form-text">Optional - helpful if you messaged me on Instagram.</div>
+                </div>
+              </div>
+            </section>
+
+            <section class="form-panel" aria-labelledby="order-details-title" data-aos="fade-up">
+              <div class="panel-heading">
+                <div class="panel-icon"><i class="bi bi-cake2"></i></div>
+                <div><p class="panel-step">Step 2</p><h2 id="order-details-title">Order Details</h2></div>
+              </div>
+              <div class="bundle-banner" role="note" id="bundleHint">
+                <i class="bi bi-stars"></i>
+                <div><strong>Bundle treat:</strong> switch on both cake and cupcakes to get 20% off the cupcake portion of the starting estimate.</div>
+              </div>
+              <fieldset class="mb-4" id="productSelectionField">
+                <legend class="form-label form-legend">What would you like to order? *</legend>
+                <div class="choice-grid choice-grid--two product-toggle-grid" data-choice-group="order_type">
+                  <label class="choice-card product-toggle-card">
+                    <input type="checkbox" id="boProductCake" name="order_type[]" value="Custom Cake" data-product-toggle="cake"/>
+                    <span class="choice-card__body"><span class="choice-card__icon"><i class="bi bi-cake2"></i></span><span><strong>Custom Cake</strong><small>Celebration, themed, bento or wedding-style cake.</small></span><span class="switch-pill" aria-hidden="true">On</span></span>
+                  </label>
+                  <label class="choice-card product-toggle-card">
+                    <input type="checkbox" id="boProductCupcakes" name="order_type[]" value="Cupcakes" data-product-toggle="cupcakes"/>
+                    <span class="choice-card__body"><span class="choice-card__icon choice-card__icon--emoji" aria-hidden="true">🧁</span><span><strong>Cupcakes</strong><small>Gift boxes, party sets or corporate/logo cupcakes.</small></span><span class="switch-pill" aria-hidden="true">On</span></span>
+                  </label>
+                </div>
+                <input id="boOrderSelection" name="order_selection" type="hidden"/>
+                <div class="invalid-feedback d-block product-choice-feedback" id="boProductFeedback" hidden>Please choose cake, cupcakes or both.</div>
+              </fieldset>
+<div class="row g-3">
+                <div class="col-12 col-md-6">
+                  <label class="form-label" for="boOccasion">Occasion *</label>
+                  <select class="form-select" id="boOccasion" name="occasion" required>
+                    <option disabled selected value="">Select an occasion</option>
+                    <option>Birthday</option>
+                    <option>Baby shower</option>
+                    <option>Wedding</option>
+                    <option>Anniversary</option>
+                    <option>Corporate</option>
+                    <option>Graduation</option>
+                    <option>Christening</option>
+                    <option>Gender reveal</option>
+                    <option>Gift / surprise delivery</option>
+                    <option>Other</option>
+                  </select>
+                </div>
+                <div class="col-12 col-md-6">
+                  <label class="form-label" for="boDate">Event Date *</label>
+                  <input autocomplete="off" class="form-control" id="boDate" name="event_date" required type="date"/>
+                </div>
+                <div class="col-12 col-md-6">
+                  <label class="form-label" for="boTime">Preferred time / delivery window</label>
+                  <input autocomplete="off" class="form-control" id="boTime" name="preferred_time" type="text" placeholder="e.g. morning, 2-4pm, flexible"/>
+                </div>
+                <div class="col-12 col-md-6">
+                  <label class="form-label" for="boGuests">Guests / servings</label>
+                  <input class="form-control" id="boGuests" min="1" name="guest_count" placeholder="e.g. 20 guests" type="number"/>
+                </div>
+              </div>
+            </section>
+
+            <section class="form-panel dynamic-panel" id="cakeDetailsPanel" aria-labelledby="cake-details-title" data-aos="fade-up" hidden>
+              <div class="panel-heading">
+                <div class="panel-icon"><i class="bi bi-cake2"></i></div>
+                <div><p class="panel-step">Cake details</p><h2 id="cake-details-title">Cake Details</h2></div>
+              </div>
+              <fieldset class="mb-4">
+                <legend class="form-label form-legend">Cake type *</legend>
+                <div class="choice-grid choice-grid--two">
+                  <label class="mini-choice"><input type="radio" name="cake_category" value="Celebration Cake" data-base-price="55" data-required-if-visible="true"/><span>Celebration Cake <small>from &pound;55</small></span></label>
+                  <label class="mini-choice"><input type="radio" name="cake_category" value="Themed Cake" data-base-price="65" data-required-if-visible="true"/><span>Themed Cake <small>from &pound;65</small></span></label>
+                  <label class="mini-choice"><input type="radio" name="cake_category" value="Mini / Bento Cake" data-base-price="35" data-required-if-visible="true"/><span>Mini / Bento <small>from &pound;35</small></span></label>
+                  <label class="mini-choice"><input type="radio" name="cake_category" value="Wedding / Tiered Cake" data-base-price="150" data-required-if-visible="true"/><span>Wedding / Tiered <small>from &pound;150</small></span></label>
+                </div>
+              </fieldset>
+              <div class="row g-3">
+                <div class="col-12">
+                  <label class="form-label" for="boCakeSize">Cake size / style *</label>
+                  <select class="form-select" id="boCakeSize" name="cake_size" data-required-if-visible="true">
+                    <option value="" data-price="0" data-label="Not selected">Select a cake size / style</option>
+                    <option value="Mini / Bento Cake - 2-4 servings" data-price="35" data-label="Mini / Bento Cake - 2-4 servings">Mini / Bento Cake - 2-4 servings - from &pound;35</option>
+                    <option value="5-inch regular - serves 8" data-price="55" data-label="5-inch regular - serves 8">5-inch regular - serves 8 - from &pound;55 (themed from &pound;65)</option>
+                    <option value="6-inch regular - serves 12" data-price="70" data-label="6-inch regular - serves 12">6-inch regular - serves 12 - from &pound;70</option>
+                    <option value="6-inch tall - serves 20" data-price="100" data-label="6-inch tall - serves 20">6-inch tall - serves 20 - from &pound;100</option>
+                    <option value="8-inch regular - serves 24" data-price="90" data-label="8-inch regular - serves 24">8-inch regular - serves 24 - from &pound;90</option>
+                    <option value="8-inch tall - serves 40" data-price="130" data-label="8-inch tall - serves 40">8-inch tall - serves 40 - from &pound;130</option>
+                    <option value="10-inch regular - serves 38" data-price="140" data-label="10-inch regular - serves 38">10-inch regular - serves 38 - from &pound;140</option>
+                    <option value="Mini 2-tier 6 inch + 4 inch - up to 18 servings" data-price="120" data-label="Mini 2-tier 6 inch + 4 inch - up to 18 servings">Mini 2-tier (6 inch + 4 inch) - up to 18 - from &pound;120</option>
+                    <option value="2-tier classic 8 inch + 6 inch - up to 36 servings" data-price="190" data-label="2-tier classic 8 inch + 6 inch - up to 36 servings">2-tier classic (8 inch + 6 inch) - up to 36 - from &pound;190</option>
+                    <option value="Wedding / tiered cake - quote after design" data-price="150" data-label="Wedding / tiered cake - quote after design">Wedding / tiered cake - from &pound;150</option>
+                  </select>
+                  <div class="form-text">Base prices only. Final quote depends on finish, toppers, florals, flavour and delivery.</div>
+                </div>
+                <div class="col-12 col-md-6">
+                  <label class="form-label" for="boCakeShape">Shape / format</label>
+                  <select class="form-select" id="boCakeShape" name="cake_shape">
+                    <option value="">No preference</option>
+                    <option>Round</option>
+                    <option>Heart</option>
+                    <option>Tall cake</option>
+                    <option>Tiered cake</option>
+                    <option>Lunchbox / bento style</option>
+                  </select>
+                </div>
+                <div class="col-12 col-md-6">
+                  <label class="form-label" for="boDietary">Dietary preference</label>
+                  <select class="form-select" id="boDietary" name="dietary_preference">
+                    <option selected>Standard</option>
+                    <option>Gluten-free request</option>
+                    <option>Dairy-free request</option>
+                    <option>Other dietary request</option>
+                  </select>
+                  <div class="form-text dietary-note" id="boDietaryNote" hidden>I will confirm whether this is possible for your date and design. Not suitable for severe allergies unless confirmed directly.</div>
+                </div>
+                <div class="col-12">
+                  <div class="label-action-row">
+                    <label class="form-label" for="boFlavour">Cake flavour *</label>
+                    <a class="flavour-guide-link" href="#flavour-guide"><i class="bi bi-journal-text"></i> View Flavour Guide</a>
+                  </div>
+                  <select class="form-select" id="boFlavour" name="cake_flavour" data-required-if-visible="true">
+                    <option disabled selected value="">Choose your cake flavour</option>
+                    <optgroup label="Classic Flavours — included in the base price">
+                      <option value="Vanilla Classic" data-flavour-tier="classic" data-price-add="0">Vanilla Classic</option>
+                      <option value="Double Chocolate" data-flavour-tier="classic" data-price-add="0">Double Chocolate</option>
+                      <option value="Red Velvet" data-flavour-tier="classic" data-price-add="0">Red Velvet</option>
+                      <option value="Classic Lemon" data-flavour-tier="classic" data-price-add="0">Classic Lemon</option>
+                    </optgroup>
+                    <optgroup label="Premium Flavours — from +£5">
+                      <option value="Strawberry Ice Cream" data-flavour-tier="premium" data-price-add="5">Strawberry Ice Cream (contains Mascarpone cheese)</option>
+                      <option value="Biscoff Caramel" data-flavour-tier="premium" data-price-add="5">Biscoff Caramel</option>
+                      <option value="Chocolate Dulce de Leche" data-flavour-tier="premium" data-price-add="5">Chocolate Dulce de Leche</option>
+                      <option value="Pistachio Raspberry" data-flavour-tier="premium" data-price-add="5">Pistachio Raspberry (contains Mascarpone cheese)</option>
+                      <option value="Lemon Elderflower Blueberry" data-flavour-tier="premium" data-price-add="5">Lemon Elderflower Blueberry (contains Mascarpone cheese)</option>
+                      <option value="Cookies &amp; Cream" data-flavour-tier="premium" data-price-add="5">Cookies &amp; Cream</option>
+                    </optgroup>
+                  </select>
+                  <div class="form-text">Classic flavours are included in the base cake price. Premium flavours add from &pound;5 depending on cake size.</div>
+                </div>
+              </div>
+              <div class="row g-3 mt-1">
+                <div class="col-12">
+                  <label class="form-label" for="boCakeMessage">Message / wording on cake</label>
+                  <input class="form-control" id="boCakeMessage" maxlength="80" name="cake_message" placeholder="e.g. Happy Birthday Ava, 21, Congratulations" type="text"/>
+                </div>
+              </div>
+            </section>
+
+            <section class="form-panel dynamic-panel" id="cupcakeDetailsPanel" aria-labelledby="cupcake-details-title" data-aos="fade-up" hidden>
+              <div class="panel-heading">
+                <div class="panel-icon panel-icon--emoji" aria-hidden="true">🧁</div>
+                <div><p class="panel-step">Cupcake details</p><h2 id="cupcake-details-title">Cupcake Details</h2></div>
+              </div>
+              <div class="unlock-banner" id="bundleUnlocked" hidden><i class="bi bi-patch-check-fill"></i><span>You have unlocked 20% off cupcakes with your cake request.</span></div>
+              <div class="row g-3">
+                <div class="col-12 col-md-6">
+                  <label class="form-label" for="boCupcakeQty">Box size / quantity *</label>
+                  <select class="form-select" id="boCupcakeQty" name="cupcake_quantity" data-required-if-visible="true">
+                    <option disabled selected value="">Choose your box</option>
+                    <option value="6 cupcakes" data-price="24" data-label="6 cupcakes">6 cupcakes - from &pound;24</option>
+                    <option value="12 cupcakes" data-price="42" data-label="12 cupcakes">12 cupcakes - from &pound;42</option>
+                    <option value="18 cupcakes" data-price="63" data-label="18 cupcakes">18 cupcakes - from &pound;63</option>
+                    <option value="24 cupcakes" data-price="80" data-label="24 cupcakes">24 cupcakes - from &pound;80</option>
+                    <option value="36 cupcakes" data-price="120" data-label="36 cupcakes">36 cupcakes - from &pound;120</option>
+                    <option value="48 cupcakes" data-price="155" data-label="48 cupcakes">48 cupcakes - from &pound;155</option>
+                    <option value="96 cupcakes" data-price="300" data-label="96 cupcakes">96 cupcakes - from &pound;300</option>
+                    <option value="Custom quantity" data-price="24" data-label="Custom cupcake quantity">Custom quantity - quote after review</option>
+                  </select>
+                  <div class="form-text">Cupcake estimate uses a starting-price guide. Branded, fondant or edible-image toppers may increase the quote.</div>
+                </div>
+                <div class="col-12">
+                  <div class="label-action-row">
+                    <label class="form-label">Cupcake flavour</label>
+                    <a class="flavour-guide-link" href="#cupcake-flavour-guide"><i class="bi bi-journal-text"></i> View Cupcake Flavour Guide</a>
+                  </div>
+                  <div class="flavour-rule-card" id="cupcakeFlavourRule"><strong>Box flavour guide:</strong> Box of 6 — 1 flavour only. Box of 12 — up to 2 flavours. Box of 24+ — up to 3 flavours.</div>
+                  <div class="cupcake-flavour-grid" id="cupcakeFlavourGrid" aria-describedby="cupcakeFlavourRule">
+                    <div class="flavour-group">
+                      <p>Classic</p>
+                      <label><input type="checkbox" name="cupcake_flavours[]" value="Vanilla Classic" data-cupcake-flavour/> <span>Vanilla Classic</span></label>
+                      <label><input type="checkbox" name="cupcake_flavours[]" value="Double Chocolate" data-cupcake-flavour/> <span>Double Chocolate</span></label>
+                      <label><input type="checkbox" name="cupcake_flavours[]" value="Red Velvet" data-cupcake-flavour/> <span>Red Velvet</span></label>
+                      <label><input type="checkbox" name="cupcake_flavours[]" value="Classic Lemon" data-cupcake-flavour/> <span>Classic Lemon</span></label>
+                    </div>
+                    <div class="flavour-group flavour-group--premium">
+                      <p>Premium</p>
+                      <label><input type="checkbox" name="cupcake_flavours[]" value="Biscoff Caramel" data-cupcake-flavour/> <span>Biscoff Caramel</span></label>
+                      <label><input type="checkbox" name="cupcake_flavours[]" value="Strawberry Ice Cream" data-cupcake-flavour/> <span>Strawberry Ice Cream</span></label>
+                      <label><input type="checkbox" name="cupcake_flavours[]" value="Pistachio Raspberry" data-cupcake-flavour/> <span>Pistachio Raspberry</span></label>
+                      <label><input type="checkbox" name="cupcake_flavours[]" value="Cookies &amp; Cream" data-cupcake-flavour/> <span>Cookies &amp; Cream</span></label>
+                    </div>
+                  </div>
+                  <div class="invalid-feedback d-block" id="cupcakeFlavourFeedback" hidden></div>
+                  <div class="form-text">For best freshness and consistency, cupcake boxes are usually made in one flavour. Mixed flavours may be available for boxes of 12 or more.</div>
+                </div>
+                <div class="col-12 col-md-6">
+                  <label class="form-label" for="boCupcakeDietary">Cupcake dietary preference</label>
+                  <select class="form-select" id="boCupcakeDietary" name="cupcake_dietary_preference">
+                    <option selected>Standard</option>
+                    <option>Gluten-free request</option>
+                    <option>Dairy-free request</option>
+                    <option>Other dietary request</option>
+                  </select>
+                  <div class="form-text dietary-note" id="boCupcakeDietaryNote" hidden>I will confirm whether this is possible for your date and design. Not suitable for severe allergies unless confirmed directly.</div>
+                </div>
+                <div class="col-12 col-md-6">
+                  <label class="form-label" for="boCupcakeFrosting">Frosting type</label>
+                  <select class="form-select" id="boCupcakeFrosting" name="cupcake_frosting">
+                    <option value="">Choose frosting</option>
+                    <option>Buttercream</option>
+                    <option>Cream cheese frosting</option>
+                    <option>Match the cake</option>
+                  </select>
+                </div>
+                <div class="col-12 col-md-6">
+                  <label class="form-label" for="boCupcakeStyle">Decoration style</label>
+                  <select class="form-select" id="boCupcakeStyle" name="cupcake_decoration_style">
+                    <option value="">Choose style</option>
+                    <option>Simple swirls</option>
+                    <option>Colour-matched to cake</option>
+                    <option>Personalised toppers</option>
+                    <option>Edible image / logo</option>
+                    <option>Luxury gift box</option>
+                    <option>Corporate / branded</option>
+                  </select>
+                </div>
+              </div>
+            </section>
+
+            <section class="form-panel" aria-labelledby="design-title" data-aos="fade-up">
+              <div class="panel-heading">
+                <div class="panel-icon"><svg class="panel-svg" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M15.5 4.5l4 4L9 19l-5 1 1-5 10.5-10.5z"></path><path d="M13.5 6.5l4 4"></path></svg></div>
+                <div><p class="panel-step">Step 3</p><h2 id="design-title">Your Design</h2></div>
+              </div>
+              <div class="included-card"><i class="bi bi-fire"></i><span><strong>Included as standard:</strong> Every cake comes with a beautiful colour-matched candle.</span></div>
+              <div class="row g-3">
+                <div class="col-12 col-md-6"><label class="form-label" for="boColours">Colour palette</label><input class="form-control" id="boColours" name="colour_palette" placeholder="e.g. blush pink, ivory, gold" type="text"/></div>
+                <div class="col-12 col-md-6"><label class="form-label" for="boTheme">Theme / design vibe</label><input class="form-control" id="boTheme" name="theme_or_vibe" placeholder="e.g. vintage bows, mermaid, elegant florals" type="text"/></div>
+                <div class="col-12"><label class="form-label" for="boPersonalisation">Personalisation *</label><textarea class="form-control" id="boPersonalisation" name="personalisation" placeholder="Names, messages, ages, colours, themes, design vibe... the more detail the better." required rows="4"></textarea></div>
+                <div class="col-12">
+                  <fieldset>
+                    <legend class="form-label form-legend">Add-ons &amp; extras</legend>
+                    <div class="addon-grid">
+                      <label><input type="checkbox" name="addons[]" value="Fresh florals"/> Fresh florals</label>
+                      <label><input type="checkbox" name="addons[]" value="Fondant toppers"/> Fondant toppers</label>
+                      <label><input type="checkbox" name="addons[]" value="Edible images"/> Edible images</label>
+                      <label><input type="checkbox" name="addons[]" value="Extra candles"/> Extra candles</label>
+                      <label><input type="checkbox" name="addons[]" value="Number topper"/> Number topper</label>
+                      <label><input type="checkbox" name="addons[]" value="Ribbon / bows"/> Ribbon / bows</label>
+                      <label><input type="checkbox" name="addons[]" value="Gold leaf"/> Gold leaf</label>
+                      <label><input type="checkbox" name="addons[]" value="Personalised card"/> Personalised card</label>
+                      <label><input type="checkbox" name="addons[]" value="Corporate logo"/> Corporate logo</label>
+                    </div>
+                    <div class="form-text">Selected extras are noted for the quote. Some extras are quoted after reviewing your design.</div>
+                  </fieldset>
+                </div>
+                <div class="col-12 col-md-6"><label class="form-label" for="boBudget">Budget guide</label><input class="form-control" id="boBudget" min="0" name="budget_from" placeholder="e.g. 80" step="5" type="number"/></div>
+                <div class="col-12 col-md-6"><label class="form-label" for="boReferenceLinks">Reference links</label><input class="form-control" id="boReferenceLinks" name="reference_links" placeholder="Pinterest, Instagram, Drive or TikTok link" type="url"/></div>
+                <div class="col-12"><label class="form-label" for="boExtraNotes">Anything else?</label><textarea class="form-control" id="boExtraNotes" name="anything_else" placeholder="Dietary notes, special requests, venue details, surprise/gift notes or other helpful information..." rows="3"></textarea></div>
+              </div>
+            </section>
+
+            <section class="form-panel" aria-labelledby="delivery-title" data-aos="fade-up">
+              <div class="panel-heading">
+                <div class="panel-icon"><i class="bi bi-geo-alt"></i></div>
+                <div><p class="panel-step">Step 4</p><h2 id="delivery-title">Collection &amp; Delivery</h2></div>
+              </div>
+              <fieldset class="mb-3">
+                <legend class="form-label form-legend">How would you like to receive your order? *</legend>
+                <div class="choice-grid choice-grid--two">
+                  <label class="choice-card"><input checked name="fulfilment" type="radio" value="collection" required/><span class="choice-card__body"><span class="choice-card__icon"><i class="bi bi-house-heart"></i></span><span><strong>Collection</strong><small>Preferred — Brampton, Huntingdon.</small></span></span></label>
+                  <label class="choice-card"><input name="fulfilment" type="radio" value="delivery" required/><span class="choice-card__body"><span class="choice-card__icon"><i class="bi bi-truck"></i></span><span><strong>Delivery</strong><small>Available depending on date, distance and order type.</small></span></span></label>
+                </div>
+              </fieldset>
+              <div class="delivery-panel" id="collectionPanel">
+                <div class="soft-note"><i class="bi bi-info-circle"></i><span>Collection is from Brampton, Huntingdon. Exact collection details and time are confirmed after your request is accepted.</span></div>
+                <label class="form-label" for="boCollectionTime">Preferred collection time</label>
+                <input class="form-control" id="boCollectionTime" name="preferred_collection_time" placeholder="e.g. Saturday morning, after 5pm, flexible" type="text"/>
+              </div>
+              <div class="delivery-panel dynamic-panel-inner" id="deliveryPanel" hidden>
+                <div class="soft-note"><i class="bi bi-truck"></i><span>Free local delivery within 5 km; beyond that, the delivery fee is distance-based and confirmed with your quote.</span></div>
+                <div class="row g-3">
+                  <div class="col-12"><label class="form-label" for="boDeliveryAddress">Full delivery address *</label><textarea autocomplete="street-address" class="form-control" data-required-if-delivery="true" id="boDeliveryAddress" name="delivery_address" rows="3" placeholder="House number, street, town and any access notes"></textarea></div>
+                  <div class="col-12 col-md-6"><label class="form-label" for="boPostcode">Delivery postcode *</label><input autocomplete="postal-code" class="form-control" data-required-if-delivery="true" id="boPostcode" name="delivery_postcode" placeholder="e.g. PE28 4SU" type="text"/></div>
+                  <div class="col-12 col-md-6"><label class="form-label" for="boDeliveryWindow">Preferred delivery window</label><input class="form-control" id="boDeliveryWindow" name="delivery_window" placeholder="e.g. 10am-12pm" type="text"/></div>
+                </div>
+                <fieldset class="mt-3">
+                  <legend class="form-label form-legend">Who will receive the order?</legend>
+                  <div class="choice-grid choice-grid--two choice-grid--compact">
+                    <label class="mini-choice"><input checked name="delivery_recipient" type="radio" value="I will receive it"/><span>I will receive it</span></label>
+                    <label class="mini-choice"><input name="delivery_recipient" type="radio" value="Someone else will receive it"/><span>Someone else</span></label>
+                  </div>
+                </fieldset>
+                <div class="row g-3 mt-1 dynamic-panel-inner" id="recipientPanel" hidden>
+                  <div class="col-12 col-md-6"><label class="form-label" for="boRecipientName">Recipient full name *</label><input class="form-control" data-required-if-recipient="true" id="boRecipientName" name="recipient_name" type="text"/></div>
+                  <div class="col-12 col-md-6"><label class="form-label" for="boRecipientPhone">Recipient phone *</label><input class="form-control" data-required-if-recipient="true" id="boRecipientPhone" name="recipient_phone" type="tel"/></div>
+                  <div class="col-12"><label class="form-label" for="boGiftMessage">Gift message</label><textarea class="form-control" id="boGiftMessage" name="gift_message" rows="2" placeholder="Optional note if this is a surprise delivery"></textarea></div>
+                </div>
+                <label class="policy-check mt-3"><input data-required-if-delivery="true" id="boDeliveryAgreement" name="delivery_availability_agreement" type="checkbox" value="I understand the recipient must be available during the agreed delivery window"/> <span>I understand the recipient must be available at the delivery address during the agreed time window. Redelivery, waiting time or address changes may incur an additional fee.</span></label>
+              </div>
+            </section>
+
+            <section class="form-panel allergen-panel" aria-labelledby="allergen-title" data-aos="fade-up">
+              <div class="panel-heading panel-heading--compact">
+                <div class="panel-icon panel-icon--warning"><i class="bi bi-exclamation-triangle"></i></div>
+                <div><h2 id="allergen-title">Allergen Information</h2></div>
+              </div>
+              <p>I handle all major allergens including nuts, gluten, dairy, eggs and soya in my kitchen. I cannot guarantee no cross-contamination for severe or life-threatening allergies. Please contact me before ordering if you have specific requirements.</p>
+              <label class="policy-check"><input id="boAllergenCheck" name="allergen_information_acknowledged" required type="checkbox" value="Yes"/> <span>I have read the allergen information and will mention any dietary requirements in this form.</span></label>
+            </section>
+
+            <section class="form-panel" aria-labelledby="inspo-title" data-aos="fade-up">
+              <div class="panel-heading">
+                <div class="panel-icon"><svg class="panel-svg" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="3"></rect><circle cx="8.5" cy="10" r="1.5"></circle><path d="M21 15l-4.5-4.5L8 19"></path></svg></div>
+                <div><p class="panel-step">Step 5</p><h2 id="inspo-title">Inspo Photos</h2></div>
+              </div>
+              <label class="upload-drop" for="boAttachments" id="boUploadDrop">
+                <span class="upload-drop__icon"><i class="bi bi-cloud-arrow-up"></i></span>
+                <strong id="boFileLabel">Drop your inspo pics here or click to browse</strong>
+                <small>Up to 5 images or PDFs, 10 MB each, 25 MB total. You can also paste links above.</small>
+                <input accept=".jpg,.jpeg,.png,.webp,.gif,.bmp,.heic,.heif,.pdf,.tif,.tiff,image/jpeg,image/png,image/webp,image/gif,image/bmp,image/heic,image/heif,application/pdf,image/tiff" class="visually-hidden" data-file-attachment="true" data-max-bytes="10485760" data-max-files="5" data-max-total-bytes="26214400" id="boAttachments" multiple name="attachments[]" type="file"/>
+              </label>
+              <ul class="upload-file-list" id="boFileList" aria-live="polite" hidden></ul>
+              <div class="invalid-feedback d-block" id="boFileFeedback" aria-live="polite"></div>
+              <p class="small text-muted mb-0">No payment is taken now. Your booking is only confirmed after availability, final quote and payment/deposit are agreed.</p>
+            </section>
+
+            <section class="form-panel submit-panel bottom-submit-panel" aria-labelledby="bottom-submit-title" data-aos="fade-up">
+              <div class="submit-panel__copy">
+                <p class="panel-step">Ready to send?</p>
+                <h2 id="bottom-submit-title">Send your bespoke request</h2>
+                <p>No payment is taken now. I will confirm availability, final price and next steps before your booking is secured.</p>
+              </div>
+              <button class="btn btn-primary" id="boSubmitBottomButton" type="submit"><span class="btn-label">Send My Cake Request</span><span class="btn-spinner spinner-border spinner-border-sm d-none" aria-hidden="true"></span></button>
+              <p class="privacy-note mb-0">By sending this request, you agree to the <a href="/Privacy-Policy/">Privacy Policy</a>. We use your details only to reply and manage your order.</p>
+            </section>
+          </div>
+
+          <aside class="estimate-aside" aria-labelledby="estimate-title" data-aos="fade-up" data-aos-delay="120">
+            <div class="estimate-card">
+              <p class="estimate-eyebrow">Live estimate</p>
+              <h2 id="estimate-title">Your request</h2>
+              <div class="estimate-lines">
+                <div class="estimate-line"><span>Products</span><strong id="summaryProducts">Choose cake, cupcakes or both</strong></div>
+                <div class="estimate-line" id="summaryCakeRow"><span>Cake</span><strong id="summaryCake">Not selected</strong></div>
+                <div class="estimate-line" id="summaryCupcakeRow"><span>Cupcakes</span><strong id="summaryCupcakes">Not selected</strong></div>
+                <div class="estimate-line estimate-line--discount" id="summaryDiscountRow" hidden><span>Bundle discount</span><strong id="summaryDiscount">-&pound;0</strong></div>
+                <div class="estimate-line"><span>Delivery</span><strong id="summaryDelivery">Collection preferred</strong></div>
+              </div>
+              <div class="estimate-total">
+                <span>Estimated from</span>
+                <div><strong id="summaryTotal">&pound;0</strong><small id="summaryTotalNote">Select an option to see a guide price.</small></div>
+              </div>
+              <div class="estimate-note"><i class="bi bi-info-circle"></i><span>This is not a checkout price. Final quote may change after design review, custom extras and postcode.</span></div>
+              <button class="btn btn-primary w-100" id="boSubmitButton" type="submit"><span class="btn-label">Send My Cake Request</span><span class="btn-spinner spinner-border spinner-border-sm d-none" aria-hidden="true"></span></button>
+              <p class="privacy-note">By sending this request, you agree to the <a href="/Privacy-Policy/">Privacy Policy</a>. We use your details only to reply and manage your order.</p>
+            </div>
+          </aside>
+        </div>
+      </form>
+    </div>
+  </section>
+
+
+  <section class="section flavour-guide-section" id="flavour-guide" aria-labelledby="flavour-guide-title">
+    <div class="container">
+      <div class="bespoke-section-heading" data-aos="fade-up">
+        <p class="bespoke-kicker">Flavour guide</p>
+        <h2 id="flavour-guide-title">Cake Flavour Menu</h2>
+        <p>Our cakes are made with soft sponge layers, smooth creams and carefully chosen fillings. Classic flavours are included in the base cake price, while Premium flavours are available for an additional charge depending on cake size.</p>
+      </div>
+      <div class="flavour-guide-grid" data-aos="fade-up" data-aos-delay="80">
+        <div class="flavour-guide-column">
+          <div class="flavour-column-heading"><span>Classic Flavours</span><small>Included in the base cake price.</small></div>
+          <article class="flavour-card"><h3>Vanilla Classic</h3><p>Soft vanilla sponge layered with smooth vanilla buttercream. Raspberry or strawberry compote can be added at no extra cost.</p></article>
+          <article class="flavour-card"><h3>Double Chocolate</h3><p>Rich chocolate sponge layered with smooth chocolate buttercream.</p></article>
+          <article class="flavour-card"><h3>Red Velvet</h3><p>Velvety buttermilk sponge with a hint of cocoa, layered with smooth cream cheese frosting.</p></article>
+          <article class="flavour-card"><h3>Classic Lemon</h3><p>Zesty lemon sponge layered with lemon buttercream and lemon curd.</p></article>
+        </div>
+        <div class="flavour-guide-column flavour-guide-column--premium">
+          <div class="flavour-column-heading"><span>Premium Flavours</span><small>Available from +&pound;5 depending on cake size.</small></div>
+          <article class="flavour-card"><h3>Strawberry Ice Cream</h3><p>Soft vanilla sponge layered with creamy strawberry mousse, strawberry-berry confit and smooth white chocolate mascarpone cream.</p></article>
+          <article class="flavour-card"><h3>Biscoff Caramel</h3><p>Soft brown sugar sponge layered with Biscoff buttercream, Biscoff spread and biscuit crumb.</p></article>
+          <article class="flavour-card"><h3>Chocolate Dulce de Leche</h3><p>Rich chocolate sponge layered with silky chocolate ganache, chocolate cream and dulce de leche.</p></article>
+          <article class="flavour-card"><h3>Pistachio Raspberry</h3><p>Soft pistachio sponge layered with raspberry compote and silky pistachio cream cheese frosting.</p></article>
+          <article class="flavour-card"><h3>Lemon Elderflower Blueberry</h3><p>Zesty lemon sponge layered with elderflower mascarpone cream, lemon curd and blueberry compote.</p></article>
+          <article class="flavour-card"><h3>Cookies &amp; Cream</h3><p>Marbled vanilla and chocolate sponge layered with Oreo buttercream and crushed Oreo pieces.</p></article>
+        </div>
+      </div>
+      <div class="cupcake-guide-card" id="cupcake-flavour-guide" data-aos="fade-up">
+        <div>
+          <p class="bespoke-kicker">Cupcakes</p>
+          <h2>Cupcake Flavours</h2>
+          <p>Classic cupcake flavours: Vanilla Classic, Double Chocolate, Red Velvet and Classic Lemon. Premium cupcake flavours: Biscoff Caramel, Strawberry Ice Cream, Pistachio Raspberry and Cookies &amp; Cream.</p>
+        </div>
+        <div class="cupcake-guide-rules">
+          <span><strong>Box of 6</strong>1 flavour only</span>
+          <span><strong>Box of 12</strong>up to 2 flavours</span>
+          <span><strong>Box of 24+</strong>up to 3 flavours</span>
+        </div>
+        <p class="small mb-0">For best freshness and consistency, cupcake boxes are usually made in one flavour. Mixed flavours may be available for boxes of 12 or more.</p>
+      </div>
+      <div class="text-center mt-4"><a class="btn btn-outline" href="#bespoke-form"><i class="bi bi-arrow-up-short"></i> Back to request form</a></div>
+    </div>
+  </section>
+</main>
+
+<a class="scroll-top d-flex align-items-center justify-content-center" href="#" id="scroll-top" aria-label="Back to top" title="Back to top"><i class="bi bi-arrow-up-short"></i></a>
+<div id="preloader"></div>
+<footer class="footer dark-background" id="footer">
+<div class="container">
+<div class="row gy-3">
+<div class="col-lg-3 col-md-6 d-flex">
+<i class="bi bi-geo-alt icon">
+</i>
+<div class="address">
+<h4>
+        Address
+       </h4>
+<p>
+        14 Elizabethan Way, Brampton
+       </p>
+<p>
+        Huntingdon, Cambridgeshire PE28 4SU
+       </p>
+<p>
+</p>
+</div>
+</div>
+<div class="col-lg-3 col-md-6 d-flex">
+<i class="bi bi-telephone icon">
+</i>
+<div>
+<h4>
+        Contact
+       </h4>
+<p>
+<strong>
+         Phone:
+        </strong>
+<span><a class="link" href="tel:+447510837225">+44 7510 837225</a></span>
+<br/>
+<strong>
+          Email:
+         </strong>
+<span><a class="link" href="mailto:contact@dreamycake.co.uk">contact@dreamycake.co.uk</a></span>
+<br/>
+<strong>
+          WhatsApp:
+         </strong>
+<span><a aria-label="Chat on WhatsApp" class="link" href="https://wa.me/447510837225" onclick="if(window.gtag){gtag('event','whatsapp_click',{label:'footer_contact'});}" rel="noopener" target="_blank"><i class="bi bi-whatsapp"></i> Message us</a></span>
+<br/>
+</p>
+</div>
+</div>
+<div class="col-lg-3 col-md-6 d-flex">
+<i class="bi bi-clock icon">
+</i>
+<div>
+<h4>
+        Opening Hours
+       </h4>
+<p>
+<strong>
+         Mon-Sat:
+        </strong>
+<span>
+         9AM - 8PM
+        </span>
+<br/>
+<strong>
+         Sunday
+        </strong>
+        :
+        <span>
+         10AM - 5PM
+        </span>
+</p>
+</div>
+</div>
+<div class="col-lg-3 col-md-6">
+<h4>
+       Follow Us
+      </h4>
+<div class="social-links d-flex">
+<a aria-label="Follow Dreamy Cake Bakery on Facebook" class="facebook" href="https://www.facebook.com/DreamyCakeBakery">
+<i class="bi bi-facebook">
+</i>
+</a>
+<a aria-label="Follow Dreamy Cake Bakery on Instagram" class="instagram" href="https://www.instagram.com/dreamycake.bakery">
+<i class="bi bi-instagram">
+</i>
+</a></div>
+</div>
+</div>
+</div>
+<div class="container copyright text-center mt-4">
+<a href="/Terms-and-Conditions/">
+     Terms &amp; Conditions
+    </a>
+<a href="/Privacy-Policy/">
+     Privacy Policy
+    </a>
+<br/>
+<p>
+     ©
+     <span>
+      Copyright
+     </span>
+<strong class="px-1 sitename">
+      Dreamy Cake Bakery
+     </strong>
+<span>
+      All Rights Reserved
+     </span>
+</p>
+<div class="credits">
+     Designed by
+     <a href="mailto:bogbond@gmail.com" onclick="if(window.gtag){gtag('event','designer_email_click',{label:'contact'});}">
+      Bond
+     </a>
+</div>
+</div>
+</footer>
+<script src="/assets/vendor/aos/aos.js"></script>
+<script src="/assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script src="/assets/js/main.js"></script>
+<script src="/assets/js/navfix.js"></script>
+<!-- DC:CONSENT_BANNER_START -->
+<style>
+  .dc-consent-banner{
+    position:fixed; left:0; right:0; bottom:0;
+    z-index:2147483647;
+    background: rgba(255,255,255,0.98);
+    border-top: 1px solid rgba(0,0,0,.1);
+    box-shadow: 0 -8px 24px rgba(0,0,0,.08);
+    padding: 16px; display:flex; gap:16px; align-items: flex-start;
+    font-family: system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
+  }
+  .dc-consent-banner__text{ flex:1; font-size:14px; line-height:1.45; color:#222; }
+  .dc-consent-banner__btns{ display:flex; gap:8px; flex-wrap:wrap; }
+  .dc-btn{ border:1px solid #222; padding:8px 12px; border-radius:999px; background:#fff; cursor:pointer; font-size:14px; }
+  .dc-btn--primary{ background:#222; color:#fff; }
+  .dc-consent-manage{
+    left: 12px !important;
+    position:fixed;
+    right:auto !important; bottom: 6px;
+    z-index:2147483647;
+    border:1px solid #222; background:#fff; padding:6px 10px; border-radius:999px; font-size:12px; cursor:pointer; opacity:.85;
+    line-height:1; white-space:nowrap;
+    transition: bottom .2s ease, right .2s ease, left .2s ease, opacity .2s;
+  }
+  /* When we need to lift above another fixed button (e.g., back-to-top) */
+  /* Put it bottom-left on very small screens to avoid crowding */
+  @media (max-width: 480px) {
+    .dc-consent-manage{ left:16px; right:auto; }
+  }
+  .dc-consent-manage:hover{ opacity:1; }
+</style>
+<script>
+(function(){
+  try {
+    // Create "Manage cookies" floating button
+    var manage = document.createElement('button');
+    manage.className = 'dc-consent-manage';
+    manage.type = 'button';
+    manage.textContent = 'Cookies';
+    manage.setAttribute('aria-label','Manage cookies');
+    manage.addEventListener('click', function(){ showBanner(true); });
+
+    // Build banner
+    function showBanner(force) {
+      var saved = null;
+      try { saved = JSON.parse(localStorage.getItem('dc_consent') || '{}'); } catch(e){}
+      if(!force && saved && (saved.choice === 'accept' || saved.choice === 'reject')) return;
+      var wrap = document.createElement('div');
+      wrap.className = 'dc-consent-banner';
+      wrap.setAttribute('role','dialog');
+      wrap.setAttribute('aria-live','polite');
+      wrap.innerHTML = ''
+        + '<div class="dc-consent-banner__text">To keep things simple, we use essential cookies. If you’re happy, we’ll also use analytics to learn what’s working. You can update your choice anytime in “Cookies”.</div>'
+        + '<div class="dc-consent-banner__btns">'
+        +   '<button type="button" class="dc-btn" data-choice="reject">Reject non-essential</button>'
+        +   '<button type="button" class="dc-btn dc-btn--primary" data-choice="accept">Accept all</button>'
+        + '</div>';
+      document.body.appendChild(wrap);
+      wrap.querySelectorAll('button[data-choice]').forEach(function(btn){
+        btn.addEventListener('click', function(){ setChoice(this.getAttribute('data-choice')); });
+      });
+    }
+
+    function setChoice(choice) {
+      try { localStorage.setItem('dc_consent', JSON.stringify({choice: choice})); } catch(e){}
+      window.__dc_consent_choice = choice;
+
+      // Update Consent Mode in real-time
+      if (typeof gtag === 'function') {
+        if(choice === 'accept') {
+          gtag('consent', 'update', {
+            analytics_storage: 'granted',
+            ad_storage: 'granted',
+            ad_user_data: 'granted',
+            ad_personalization: 'granted'
+          });
+          // Load GA once (no duplicates)
+          if (typeof window.dcLoadGAOnce === 'function') {
+            window.dcLoadGAOnce();
+          }
+        } else {
+          gtag('consent', 'update', {
+            analytics_storage: 'denied',
+            ad_storage: 'denied',
+            ad_user_data: 'denied',
+            ad_personalization: 'denied'
+          });
+          // Best-effort cookie cleanup
+          if (typeof window.dcClearGACookies === 'function') {
+            window.dcClearGACookies();
+          }
+        }
+      }
+
+      var b = document.querySelector('.dc-consent-banner'); if(b) b.remove();
+    }
+
+    // Try to avoid overlap with existing fixed "back to top" buttons
+    function avoidOverlap() {
+      try {
+        var candidates = [
+          '.back-to-top', '.scroll-to-top', '.scroll-top', '.to-top', '.btn-to-top',
+          '#backToTop', '#toTop', '#totop', '[data-backtotop]', '[data-scroll-top]'
+        ];
+        var el = null;
+        for (var i=0; i<candidates.length; i++) {
+          var found = document.querySelector(candidates[i]);
+          if(found) { el = found; break; }
+        }
+        // Reset
+        manage.classList.remove('dc-lift');
+        manage.style.right = ''; manage.style.left = ''; manage.style.bottom = '';
+        // On small screens we already push left via CSS, skip overlap logic
+        if (window.matchMedia('(max-width: 480px)').matches) return;
+        if (!el) return;
+        var r = el.getBoundingClientRect();
+        // Heuristic: if the element sits bottom-right within 120px from the viewport edge, lift our button
+        var nearBottom = (window.innerHeight - r.bottom) <= 120;
+        var nearRight  = (window.innerWidth  - r.right)  <= 120;
+        var visible = r.width>0 && r.height>0;
+        if (visible && nearBottom && nearRight) {
+          // // manage.classList.add('dc-lift'); // disabled // disabled
+        }
+      } catch(e){}
+    }
+
+    document.addEventListener('DOMContentLoaded', function(){
+      document.body.appendChild(manage);
+      showBanner(false);
+      avoidOverlap();
+    });
+    window.addEventListener('scroll', avoidOverlap, {passive:true});
+    window.addEventListener('resize', avoidOverlap);
+
+    // Run a few times shortly after load to catch late-mounted widgets
+    setTimeout(avoidOverlap, 300);
+    setTimeout(avoidOverlap, 1000);
+  } catch(e){ console.error('Consent banner error', e); }
+})();
+</script>
+<!-- DC:CONSENT_BANNER_END -->
+<script src="/assets/js/ga-funnel.js"></script>
+<script src="/assets/js/form-attachment-validation.js"></script>
+<script src="/assets/js/form-upload-progress.js"></script>
+<script src="/assets/js/bespoke-order.js"></script>
+</body>
+</html>

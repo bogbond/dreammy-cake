@@ -17,15 +17,15 @@
     },
     "inactive": {
       "hero-highlights": "Romantic designs • Optional edible photo • Gift-ready finish",
-      "hero-note": "<strong>From £25</strong> — seasonal collection available closer to Valentine’s Day.",
-      "status-heading": "Valentine’s collection is seasonal 💌",
-      "intro-1": "This collection returns in the run-up to Valentine’s Day, with gift-ready bento cakes and cupcakes made to order.",
-      "intro-2": "You’re welcome to send an early enquiry now — I’ll let you know about the next release, availability and custom options.",
-      "order-title": "Send an early enquiry",
+      "hero-note": "<strong>From £25</strong> — available to order year-round; featured seasonally around Valentine’s Day.",
+      "status-heading": "Valentine’s collection is available to order year-round 💌",
+      "intro-1": "Valentine’s bento cakes and cupcakes can be requested year-round, with seasonal promo slots highlighted closer to Valentine’s Day.",
+      "intro-2": "Send an enquiry with your date, servings, style ideas and delivery details — I’ll confirm availability, price and the best options for your occasion.",
+      "order-title": "Send an enquiry",
       "submit-label": "Send an enquiry",
       "sticky-label": "Send an enquiry",
-      "faq-cutoff-question": "When will Valentine’s orders open?",
-      "faq-cutoff-answer": "This collection is seasonal. Pre-orders usually open from {openDate}. You’re welcome to send an early enquiry any time."
+      "faq-cutoff-question": "Can I order the Valentine’s collection outside the seasonal promo window?",
+      "faq-cutoff-answer": "Yes — these designs can be requested year-round. The collection is promoted more actively from {openDate}, but early enquiries are welcome any time."
     }
   },
   "mothers-day": {
@@ -44,14 +44,14 @@
     "inactive": {
       "hero-highlights": "Gift-ready treats • Soft pastel styling • Optional edible photo",
       "hero-note": "Collection in Brampton + local delivery around Huntingdon &amp; nearby areas.",
-      "status-heading": "Mother’s Day collection is seasonal ✨",
-      "intro-1": "This collection returns in the run-up to Mother’s Day, with gift-ready cupcakes, bento cakes and sweet treats made to order.",
-      "intro-2": "You’re welcome to send an early enquiry now — I’ll let you know about the next release, availability and custom options.",
-      "order-title": "Send an early enquiry",
+      "status-heading": "Mother’s Day collection is available to order year-round ✨",
+      "intro-1": "Mother’s Day cupcakes, bento cakes and sweet treats can be requested year-round, with seasonal promo slots highlighted closer to Mother’s Day.",
+      "intro-2": "Send an enquiry with your date, servings, style ideas and delivery details — I’ll confirm availability, price and the best options for your occasion.",
+      "order-title": "Send an enquiry",
       "submit-label": "Send an enquiry",
       "sticky-label": "Send an enquiry",
-      "faq-cutoff-question": "When will Mother’s Day orders open?",
-      "faq-cutoff-answer": "This collection is seasonal. Pre-orders usually open from {openDate}. You’re welcome to send an early enquiry any time."
+      "faq-cutoff-question": "Can I order the Mother’s Day collection outside the seasonal promo window?",
+      "faq-cutoff-answer": "Yes — these designs can be requested year-round. The collection is promoted more actively from {openDate}, but early enquiries are welcome any time."
     }
   },
   "easter": {
@@ -70,14 +70,14 @@
     "inactive": {
       "hero-highlights": "Traditional Easter Paska • Spring gift boxes • Made to order",
       "hero-note": "Collection in Brampton + local delivery around Huntingdon &amp; nearby areas.",
-      "status-heading": "Easter collection is seasonal 🌷",
-      "intro-1": "This collection returns in the run-up to Easter, with traditional Paska and spring cupcakes made to order.",
-      "intro-2": "You’re welcome to send an early enquiry now — I’ll let you know about the next release, availability and custom options.",
-      "order-title": "Send an early enquiry",
+      "status-heading": "Easter collection is available to order year-round 🌷",
+      "intro-1": "Easter Paska, spring cakes and cupcakes can be requested year-round, with seasonal promo slots highlighted closer to Easter.",
+      "intro-2": "Send an enquiry with your date, servings, style ideas and delivery details — I’ll confirm availability, price and the best options for your occasion.",
+      "order-title": "Send an enquiry",
       "submit-label": "Send an enquiry",
       "sticky-label": "Send an enquiry",
-      "faq-cutoff-question": "When will Easter orders open?",
-      "faq-cutoff-answer": "This collection is seasonal. Pre-orders usually open from {openDate}. You’re welcome to send an early enquiry any time."
+      "faq-cutoff-question": "Can I order the Easter collection outside the seasonal promo window?",
+      "faq-cutoff-answer": "Yes — these designs can be requested year-round. The collection is promoted more actively from {openDate}, but early enquiries are welcome any time."
     }
   },
   "fathers-day": {
@@ -96,14 +96,14 @@
     "inactive": {
       "hero-highlights": "Bold modern designs • Optional edible photo • Gift-ready finish",
       "hero-note": "Collection in Brampton + local delivery around Huntingdon &amp; nearby areas.",
-      "status-heading": "Father’s Day collection is seasonal 👔",
-      "intro-1": "This collection returns in the run-up to Father’s Day, with bold gift-ready bakes made to order.",
-      "intro-2": "You’re welcome to send an early enquiry now — I’ll let you know about the next release, availability and custom options.",
-      "order-title": "Send an early enquiry",
+      "status-heading": "Father’s Day collection is available to order year-round 👔",
+      "intro-1": "Father’s Day bento cakes, cupcakes and fondant cookies can be requested year-round, with seasonal promo slots highlighted closer to Father’s Day.",
+      "intro-2": "Send an enquiry with your date, servings, style ideas and delivery details — I’ll confirm availability, price and the best options for your occasion.",
+      "order-title": "Send an enquiry",
       "submit-label": "Send an enquiry",
       "sticky-label": "Send an enquiry",
-      "faq-cutoff-question": "When will Father’s Day orders open?",
-      "faq-cutoff-answer": "This collection is seasonal. Pre-orders usually open from {openDate}. You’re welcome to send an early enquiry any time."
+      "faq-cutoff-question": "Can I order the Father’s Day collection outside the seasonal promo window?",
+      "faq-cutoff-answer": "Yes — these designs can be requested year-round. The collection is promoted more actively from {openDate}, but early enquiries are welcome any time."
     }
   },
   "halloween": {
@@ -122,14 +122,14 @@
     "inactive": {
       "hero-highlights": "Spooky-cute designs • Optional edible photo • Made to order",
       "hero-note": "Collection in Brampton + local delivery around Huntingdon &amp; nearby areas.",
-      "status-heading": "Halloween collection is seasonal 🎃",
-      "intro-1": "This collection returns in the run-up to Halloween, with spooky-cute bakes made to order for parties, gifts and weekend treats.",
-      "intro-2": "You’re welcome to send an early enquiry now — I’ll let you know about the next release, availability and custom options.",
-      "order-title": "Send an early enquiry",
+      "status-heading": "Halloween collection is available to order year-round 🎃",
+      "intro-1": "Halloween bento cakes, cupcakes and fondant cookies can be requested year-round, with seasonal promo slots highlighted closer to Halloween.",
+      "intro-2": "Send an enquiry with your date, servings, style ideas and delivery details — I’ll confirm availability, price and the best options for your occasion.",
+      "order-title": "Send an enquiry",
       "submit-label": "Send an enquiry",
       "sticky-label": "Send an enquiry",
-      "faq-cutoff-question": "When will Halloween orders open?",
-      "faq-cutoff-answer": "This collection is seasonal. Pre-orders usually open from {openDate}. You’re welcome to send an early enquiry any time."
+      "faq-cutoff-question": "Can I order the Halloween collection outside the seasonal promo window?",
+      "faq-cutoff-answer": "Yes — these designs can be requested year-round. The collection is promoted more actively from {openDate}, but early enquiries are welcome any time."
     }
   },
   "christmas": {
@@ -148,17 +148,19 @@
     "inactive": {
       "hero-highlights": "Festive designs • Optional edible photo • Gift-ready finish",
       "hero-note": "Collection in Brampton + local delivery around Huntingdon &amp; nearby areas.",
-      "status-heading": "Christmas collection is seasonal ✨",
-      "intro-1": "This collection returns in the run-up to Christmas, with gift-ready festive bakes made to order.",
-      "intro-2": "You’re welcome to send an early enquiry now — I’ll let you know about the next release, availability and custom options.",
-      "order-title": "Send an early enquiry",
+      "status-heading": "Christmas collection is available to order year-round ✨",
+      "intro-1": "Christmas bento cakes, cupcakes and fondant cookies can be requested year-round, with seasonal promo slots highlighted closer to Christmas.",
+      "intro-2": "Send an enquiry with your date, servings, style ideas and delivery details — I’ll confirm availability, price and the best options for your occasion.",
+      "order-title": "Send an enquiry",
       "submit-label": "Send an enquiry",
       "sticky-label": "Send an enquiry",
-      "faq-cutoff-question": "When will Christmas orders open?",
-      "faq-cutoff-answer": "This collection is seasonal. Pre-orders usually open from {openDate}. You’re welcome to send an early enquiry any time."
+      "faq-cutoff-question": "Can I order the Christmas collection outside the seasonal promo window?",
+      "faq-cutoff-answer": "Yes — these designs can be requested year-round. The collection is promoted more actively from {openDate}, but early enquiries are welcome any time."
     }
   }
 };
+  var FALLBACK_SEASONS = [{"id":"christmas","enabled":true,"name":"Christmas Collection","href":"/Products/christmas-collection/","orderHref":"/Products/christmas-collection/#order","dateFrom":"11-10","dateTo":"01-01","popup":{"enabled":true,"id":"christmas-collection","headline":"Christmas","title":"Christmas Collection","subtitle":"Limited slots • Festive designs • Optional edible photo","ctaLabel":"View the collection","href":"/Products/christmas-collection/","image":"assets/img/promo/christmas-sale.webp","imageAlt":"Christmas Collection promo"}},{"id":"valentines","enabled":true,"name":"Valentine’s Collection","href":"/Products/valentines-collection/","orderHref":"/Products/valentines-collection/#order","dateFrom":"01-02","dateTo":"02-14","popup":{"enabled":true,"id":"valentines-collection","headline":"Hot offer","title":"Valentine’s Collection","subtitle":"Limited slots • Two signature designs • Optional edible photo.","image":"assets/img/promo/Elegant-Valentine's-Day-Sale.webp","imageAlt":"Valentine’s bento cake and cupcakes","href":"/Products/valentines-collection/","ctaLabel":"More details","dismissLabel":"Not now","cooldownHours":24,"triggerDelayMs":6000}},{"id":"mothers-day","enabled":true,"name":"Mother’s Day Collection","href":"/Products/mothers-day-collection/","orderHref":"/Products/mothers-day-collection/#order","dateFrom":"02-15","dateTo":{"rule":"motheringSunday"},"popup":{"enabled":true,"id":"mothers-day-collection","headline":"Mother’s Day","title":"Mother’s Day Collection","subtitle":"Pre-orders now open • Gift cupcakes & sweet treats","ctaLabel":"View the collection","href":"/Products/mothers-day-collection/","image":"assets/img/promo/mothers-day-collection-gift-cupcakes-preview.webp","imageAlt":"Mother’s Day collection preview with pastel gift cupcakes"}},{"id":"easter","enabled":true,"name":"Easter Collection","href":"/Products/easter-collection/","orderHref":"/Products/easter-collection/#order","dateFrom":{"rule":"motheringSunday","offsetDays":1},"dateTo":{"rule":"easterSunday","offsetDays":1},"popup":{"enabled":true,"id":"easter-collection","headline":"Easter","title":"Easter Collection","subtitle":"Traditional Easter Paska • Spring cupcakes • Limited pre-orders","ctaLabel":"View the collection","href":"/Products/easter-collection/","image":"assets/img/promo/easter-paska-traditional-ukrainian-easter-bread-preview.webp","imageAlt":"Easter collection preview featuring traditional Easter Paska"}},{"id":"fathers-day","enabled":true,"name":"Father’s Day Collection","href":"/Products/fathers-day-collection/","orderHref":"/Products/fathers-day-collection/#order","dateFrom":"05-01","dateTo":{"rule":"fathersDay"},"popup":{"enabled":true,"id":"fathers-day-collection","headline":"Father’s Day","title":"Father’s Day Collection","subtitle":"Limited slots • Bold, modern designs • Optional edible photo","ctaLabel":"View the collection","href":"/Products/fathers-day-collection/","image":"assets/img/promo/fathers-day-sale.webp","imageAlt":"Father’s Day Collection promo"}},{"id":"halloween","enabled":true,"name":"Halloween Collection","href":"/Products/halloween-collection/","orderHref":"/Products/halloween-collection/#order","dateFrom":"09-16","dateTo":"10-31","popup":{"enabled":true,"id":"halloween-collection","headline":"Halloween","title":"Halloween Collection","subtitle":"Limited slots • Spooky-cute designs • Optional edible photo","ctaLabel":"View the collection","href":"/Products/halloween-collection/","image":"assets/img/promo/halloween-sale.webp","imageAlt":"Halloween Collection promo"}}];
+
   var CONFIG_URL = (function(){
     try {
       var cs = document.currentScript;
@@ -319,27 +321,34 @@
     var copy = COPY_CONFIG[seasonId];
     if (!copy) return;
 
+    function applySeasonFromConfig(cfg) {
+      if (!cfg || !Array.isArray(cfg.seasons)) return false;
+      var season = null;
+      for (var i = 0; i < cfg.seasons.length; i++) {
+        if (cfg.seasons[i] && cfg.seasons[i].id === seasonId) {
+          season = cfg.seasons[i];
+          break;
+        }
+      }
+      if (!season) return false;
+      var timeline = getSeasonTimeline(season, cfg.timezone || 'Europe/London');
+      var vars = {
+        openDate: formatDate(timeline.nextRange ? timeline.nextRange.start : null),
+        endDate: formatDate(timeline.activeRange ? timeline.activeRange.end : null)
+      };
+      applyCopy(timeline.activeRange ? copy.active : copy.inactive, vars);
+      return true;
+    }
+
     fetch(CONFIG_URL, { cache: 'no-store' })
       .then(function(res){ if (!res.ok) throw new Error('HTTP ' + res.status); return res.json(); })
       .then(function(cfg){
-        if (!cfg || !Array.isArray(cfg.seasons)) return null;
-        var season = null;
-        for (var i = 0; i < cfg.seasons.length; i++) {
-          if (cfg.seasons[i] && cfg.seasons[i].id === seasonId) {
-            season = cfg.seasons[i];
-            break;
-          }
-        }
-        if (!season) return null;
-        var timeline = getSeasonTimeline(season, cfg.timezone || 'Europe/London');
-        var vars = {
-          openDate: formatDate(timeline.nextRange ? timeline.nextRange.start : null),
-          endDate: formatDate(timeline.activeRange ? timeline.activeRange.end : null)
-        };
-        applyCopy(timeline.activeRange ? copy.active : copy.inactive, vars);
+        if (!applySeasonFromConfig(cfg)) throw new Error('Missing season config');
       })
       .catch(function(){
-        applyCopy(copy.inactive, { openDate: 'the seasonal opening date', endDate: '' });
+        if (!applySeasonFromConfig({ seasons: FALLBACK_SEASONS, timezone: 'Europe/London' })) {
+          applyCopy(copy.inactive, { openDate: 'the seasonal opening date', endDate: '' });
+        }
       });
   });
 })();

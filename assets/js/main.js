@@ -862,10 +862,10 @@ function dcFlashHighlight(el, durationMs = 2600) {
 })();
 
 
-// === DC: toggle postcode field for Delivery vs Collection/Pickup ===
+// === DC: toggle postcode field for Delivery vs Collection ===
 // Behaviour:
 // - Postcode field is shown + enabled + required only when a delivery-like option is selected.
-// - Postcode field is hidden + disabled + not required for collection/pickup (and cleared).
+// - Postcode field is hidden + disabled + not required for collection (and cleared).
 // Supports both legacy names (delivery_option/postcode) and UI variants (delivery_option_ui/postcode_ui).
 (function(){
   function norm(v){
@@ -1028,7 +1028,7 @@ function dcFlashHighlight(el, durationMs = 2600) {
   function careConfig(val){
     var v = String(val || '').trim().toLowerCase();
     if (v === 'collection' || v === 'pickup') {
-      return { href: '/Delivery/#cake-care-collection', text: 'Cake Care After Pickup' };
+      return { href: '/Delivery/#cake-care-collection', text: 'Cake Care After Collection' };
     }
     if (v === 'delivery' || v === 'local delivery' || v === 'postage') {
       return { href: '/Delivery/#cake-care-delivery', text: 'Cake Care After Delivery' };

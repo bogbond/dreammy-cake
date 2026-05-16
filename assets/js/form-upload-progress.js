@@ -223,6 +223,22 @@
       if(!s.pending) return;
       // Guard against any immediate about:blank load that might race with setup
       if(Date.now() - s.submitAt < 250) return;
+
+      var nextUrl = getNextUrl(form);
+      if(nextUrl){
+        try {
+          var href = iframe.contentWindow && iframe.contentWindow.location ? iframe.contentWindow.location.href : '';
+          if(!href || href === 'about:blank') return;
+          var expected = new URL(nextUrl, window.location.href).href;
+          var current = new URL(href, window.location.href).href;
+          if(current.indexOf(expected) !== 0 && current.indexOf('/Thank-You/') === -1) return;
+        } catch(err) {
+          // Cross-origin FormSubmit pages are not a reliable success signal.
+          // Wait for the same-origin _next redirect or let the timeout show an error.
+          return;
+        }
+      }
+
       finishSuccess(form);
     });
 
@@ -398,16 +414,20 @@
   function onFileChange(input){
     var form = input && input.form;
     if(!isFormSubmitForm(form)) return;
-    var file = input.files && input.files[0];
+    var files = input.files;
+    var file = files && files[0];
     if(!file){
       hideStatus(form);
       return;
     }
-    var sizeMb = file.size ? (file.size / (1024 * 1024)) : 0;
+    var totalBytes = 0;
+    Array.prototype.slice.call(files).forEach(function(f){ totalBytes += f.size || 0; });
+    var sizeMb = totalBytes ? (totalBytes / (1024 * 1024)) : 0;
     var sizeLabel = sizeMb > 0 ? ' (' + sizeMb.toFixed(1) + ' MB)' : '';
+    var label = files.length > 1 ? (files.length + ' files') : file.name;
     setStatus(form, {
       percent: 0,
-      message: 'Selected: ' + file.name + sizeLabel + '. It will upload when you send the form.',
+      message: 'Selected: ' + label + sizeLabel + '. It will upload when you send the form.',
       percentLabel: 'Ready',
       state: 'ready'
     });
