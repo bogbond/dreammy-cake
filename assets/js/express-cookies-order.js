@@ -22,7 +22,7 @@
     // UI display
     estimateDisplay: 'products-freshly-made-cookies-index-f1-estimate-display',
 
-    // Hidden fields for email (formsubmit)
+    // Hidden fields for email submission
     hiddenPack: 'products-freshly-made-cookies-index-f1-pack-size-hidden',
     hiddenBase: 'products-freshly-made-cookies-index-f1-base-price',
     hiddenEstimate: 'products-freshly-made-cookies-index-f1-estimated-price',

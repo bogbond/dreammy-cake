@@ -153,7 +153,7 @@
     var frostingSel = q(form, IDS.frostingSelect);
     var frostingValue = frostingSel ? (frostingSel.value || "Buttercream") : "Buttercream";
 
-    // Hidden fields for email (formsubmit)
+    // Hidden fields for email submission
     var hiddenQty = q(form, IDS.hiddenQty);
     if (hiddenQty) hiddenQty.value = String(qtyInfo.qty);
 

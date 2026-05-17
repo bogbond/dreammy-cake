@@ -30,7 +30,7 @@
 
     estimateDisplay: "products-classic-cake-index-f1-estimate-display",
 
-    // Hidden fields for formsubmit
+    // Hidden fields for email submission
     hiddenSize: "products-classic-cake-index-f1-size-hidden",
     hiddenStyle: "products-classic-cake-index-f1-style-hidden",
     hiddenBase: "products-classic-cake-index-f1-base-price",

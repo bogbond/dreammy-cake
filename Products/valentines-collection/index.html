@@ -220,7 +220,7 @@
 </li>
 <li class="dropdown">
 <button aria-controls="order-submenu" aria-expanded="false" aria-label="Toggle order submenu" class="nav-toggle" type="button"><span>Order</span> <i aria-hidden="true" class="bi bi-chevron-down chev"></i></button>
-<ul id="order-submenu"><li><a class="nav-bespoke-order" href="/Bespoke-Order/"><span>Bespoke Order</span><span class="nav-bespoke-order__arrow" aria-hidden="true">&rarr;</span></a></li><li><a href="/Products/celebration-cake/#order">Order Celebration Cake</a></li><li><a href="/Products/themed-cake/#order">Order Themed Cake</a></li><li><a href="/Products/mini-bento-cake/#order">Order Mini / Bento Cake</a></li><li><a href="/Products/wedding-cake/#order">Order Wedding Cakes</a></li><li><a href="/Products/cupcakes/#order">Order Cupcakes</a></li><li><a href="/Products/postage-cookie/#order">Order Postage Cookie</a></li></ul>
+<ul id="order-submenu"><li><a class="nav-bespoke-order" href="/Bespoke-Order/"><span>Bespoke Order</span><span aria-hidden="true" class="nav-bespoke-order__arrow">→</span></a></li><li><a href="/Products/celebration-cake/#order">Order Celebration Cake</a></li><li><a href="/Products/themed-cake/#order">Order Themed Cake</a></li><li><a href="/Products/mini-bento-cake/#order">Order Mini / Bento Cake</a></li><li><a href="/Products/wedding-cake/#order">Order Wedding Cakes</a></li><li><a href="/Products/cupcakes/#order">Order Cupcakes</a></li><li><a href="/Products/postage-cookie/#order">Order Postage Cookie</a></li></ul>
 </li>
 <!-- <li><a href="/#how-it-works">Services</a></li> -->
 <li class="dropdown">
@@ -318,12 +318,12 @@
 </details>
 </div></div></div></section><section class="section alt-cream d-none d-lg-block"><div class="container"><div class="row g-4"><div class="mx-auto col-12 col-lg-12 col-xl-10 col-xxl-9"><div data-order-slot="desktop" id="order-desktop"><div class="order-card" data-order-card="1">
 <h3 class="h5" data-season-copy="order-title">Send an enquiry</h3>
-<form action="https://formsubmit.co/3deee887f1c54c32d3d284847ccc8dcd" class="product-form" data-form="f1" enctype="multipart/form-data" id="order" method="POST">
-<input name="_subject" type="hidden" value="Dreamy Cake Bakery — Order request — Valentine’s Collection"/>
-<input name="_honey" type="hidden" value=""/>
-<input name="_captcha" type="hidden" value="false"/>
-<input name="_template" type="hidden" value="table"/>
-<input name="_next" type="hidden" value="https://dreamycake.co.uk/Thank-You/"/>
+<form action="https://formly.email/submit" class="product-form" data-form="f1" enctype="multipart/form-data" id="order" method="POST"><input aria-hidden="true" autocomplete="off" name="website" style="display:none" tabindex="-1" type="text"/><input name="access_key" type="hidden" value="8c20c8e2b11242a586b585700f820946"/><input name="honeypot" type="hidden" value="website"/><input name="from_name" type="hidden" value="Dreamy Cake website"/><input name="form_type" type="hidden" value="Product order — Valentine’s Day Collection"/><input name="source_page_url" type="hidden" value=""/><input name="source_page_title" type="hidden" value=""/><input name="submitted_at" type="hidden" value=""/>
+<input name="subject" type="hidden" value="Dreamy Cake Bakery — Order request — Valentine’s Collection"/>
+
+
+
+<input name="redirect" type="hidden" value="https://dreamycake.co.uk/Thank-You/"/>
 <input name="product_name" type="hidden" value="Valentine’s Day Collection"/>
 <input name="page_url" type="hidden" value="/Products/valentines-collection/"/>
 <div class="row g-3">
@@ -375,8 +375,7 @@
 <input class="form-control" id="products-valentines-collection-index-f1-postcode" name="postcode" placeholder="e.g., PE28" type="text"/>
 <div class="form-text">Required for local delivery.</div>
 </div>
-<div class="col-12"><label class="form-label" for="products-valentines-collection-index-attachment-1">Inspiration image / PDF (optional)</label><input accept=".jpg,.jpeg,.png,.webp,.gif,.bmp,.heic,.heif,.pdf,.tif,.tiff,image/jpeg,image/png,image/webp,image/gif,image/bmp,image/heic,image/heif,application/pdf,image/tiff" class="form-control" data-file-attachment="true" data-max-bytes="10485760" id="products-valentines-collection-index-attachment-1" name="attachment" type="file"/><div class="form-text">Attach one photo, screenshot or PDF (max 10 MB).</div><div class="invalid-feedback">Please upload a JPG, PNG, WEBP, HEIC or PDF file up to 10 MB.</div></div><div class="col-12 text-end mt-2">
-
+<div class="col-12"><label class="form-label" for="products-valentines-collection-index-attachment-1">Inspiration image / PDF (optional)</label><input accept=".jpg,.jpeg,.png,.webp,.gif,.bmp,.heic,.heif,.pdf,.tif,.tiff,image/jpeg,image/png,image/webp,image/gif,image/bmp,image/heic,image/heif,application/pdf,image/tiff" class="form-control" data-file-attachment="true" data-max-bytes="9961472" data-max-files="1" data-max-label="10 MB" data-max-total-bytes="9961472" id="products-valentines-collection-index-attachment-1" name="attachment" type="file"/><div class="form-text">Attach one photo, screenshot, brief or PDF (max 10 MB).</div><div class="invalid-feedback">Please upload one JPG, PNG, WEBP, HEIC, TIFF or PDF file up to 10 MB.</div></div><div class="col-12 text-end mt-2">
 <div class="col-12 small text-muted privacy-note">By sending this request, you agree to the <a href="/Privacy-Policy/">Privacy Policy</a>. We use your details only to reply and manage your order.</div>
 <button class="btn btn-primary" data-season-copy="submit-label" type="submit">Send an enquiry</button>
 </div>
@@ -568,7 +567,7 @@
 </div>
 </div>
 </footer>
-<a class="scroll-top d-flex align-items-center justify-content-center" href="#" id="scroll-top" aria-label="Back to top" title="Back to top">
+<a aria-label="Back to top" class="scroll-top d-flex align-items-center justify-content-center" href="#" id="scroll-top" title="Back to top">
 <i class="bi bi-arrow-up-short">
 </i>
 </a>
@@ -722,5 +721,5 @@
 </script>
 <!-- DC:CONSENT_BANNER_END -->
 <script src="/assets/js/seasonal-page-state.js"></script><script src="/assets/js/ga-funnel.js"></script>
-<script src="/assets/js/form-attachment-validation.js"></script><script src="/assets/js/form-upload-progress.js"></script></body>
+<script src="/assets/js/form-attachment-validation.js"></script><script src="/assets/js/formly-config.js"></script></body>
 </html>

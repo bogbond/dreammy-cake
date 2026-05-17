@@ -262,7 +262,7 @@
 </li>
 <li class="dropdown">
 <button aria-controls="order-submenu" aria-expanded="false" aria-label="Toggle order submenu" class="nav-toggle" type="button"><span>Order</span> <i aria-hidden="true" class="bi bi-chevron-down chev"></i></button>
-<ul id="order-submenu"><li><a class="nav-bespoke-order" href="/Bespoke-Order/"><span>Bespoke Order</span><span class="nav-bespoke-order__arrow" aria-hidden="true">&rarr;</span></a></li><li><a href="/Products/celebration-cake/#order">Order Celebration Cake</a></li><li><a href="/Products/themed-cake/#order">Order Themed Cake</a></li><li><a href="/Products/mini-bento-cake/#order">Order Mini / Bento Cake</a></li><li><a href="/Products/wedding-cake/#order">Order Wedding Cakes</a></li><li><a href="/Products/cupcakes/#order">Order Cupcakes</a></li><li><a href="/Products/postage-cookie/#order">Order Postage Cookie</a></li></ul>
+<ul id="order-submenu"><li><a class="nav-bespoke-order" href="/Bespoke-Order/"><span>Bespoke Order</span><span aria-hidden="true" class="nav-bespoke-order__arrow">→</span></a></li><li><a href="/Products/celebration-cake/#order">Order Celebration Cake</a></li><li><a href="/Products/themed-cake/#order">Order Themed Cake</a></li><li><a href="/Products/mini-bento-cake/#order">Order Mini / Bento Cake</a></li><li><a href="/Products/wedding-cake/#order">Order Wedding Cakes</a></li><li><a href="/Products/cupcakes/#order">Order Cupcakes</a></li><li><a href="/Products/postage-cookie/#order">Order Postage Cookie</a></li></ul>
 </li>
 <!-- <li><a href="/#how-it-works">Services</a></li> -->
 <li class="dropdown">
@@ -365,12 +365,12 @@
 </details>
 </div></div></div></section><section class="section alt-cream d-none d-lg-block"><div class="container"><div class="row g-4"><div class="mx-auto col-12 col-lg-12 col-xl-10 col-xxl-9"><div data-order-slot="desktop" id="order-desktop"><div class="order-card" data-order-card="1">
 <h3 class="h5" data-season-copy="order-title">Send an enquiry</h3>
-<form action="https://formsubmit.co/3deee887f1c54c32d3d284847ccc8dcd" class="product-form" data-form="f1" id="order" method="POST">
-<input name="_subject" type="hidden" value="Dreamy Cake Bakery — Order request — Easter Collection"/>
-<input name="_honey" type="hidden" value=""/>
-<input name="_captcha" type="hidden" value="false"/>
-<input name="_template" type="hidden" value="table"/>
-<input name="_next" type="hidden" value="https://dreamycake.co.uk/Thank-You/"/>
+<form action="https://formly.email/submit" class="product-form" data-form="f1" enctype="multipart/form-data" id="order" method="POST"><input aria-hidden="true" autocomplete="off" name="website" style="display:none" tabindex="-1" type="text"/><input name="access_key" type="hidden" value="8c20c8e2b11242a586b585700f820946"/><input name="honeypot" type="hidden" value="website"/><input name="from_name" type="hidden" value="Dreamy Cake website"/><input name="form_type" type="hidden" value="Product order — Easter Collection"/><input name="source_page_url" type="hidden" value=""/><input name="source_page_title" type="hidden" value=""/><input name="submitted_at" type="hidden" value=""/>
+<input name="subject" type="hidden" value="Dreamy Cake Bakery — Order request — Easter Collection"/>
+
+
+
+<input name="redirect" type="hidden" value="https://dreamycake.co.uk/Thank-You/"/>
 <input name="product_name" type="hidden" value="Easter Collection"/>
 <input name="page_url" type="hidden" value="/Products/easter-collection/"/>
 <input id="products-easter-collection-index-f1-total-items" name="total_items" type="hidden" value="0"/>
@@ -413,7 +413,7 @@
 </div>
 <div aria-label="Quantity for Cranberry and Orange Easter Cake" class="easter-qty">
 <button aria-label="Decrease Cranberry and Orange Easter Cake quantity" data-qty-action="minus" data-target="products-easter-collection-index-f1-qty-cranberry-orange" type="button">−</button>
-<input id="products-easter-collection-index-f1-qty-cranberry-orange" min="0" name="cranberry_orange_easter_cake_qty" readonly="" type="number" value="0"/ aria-label="Cranberry and Orange Easter Cake quantity">
+<input aria-label="Cranberry and Orange Easter Cake quantity" id="products-easter-collection-index-f1-qty-cranberry-orange" min="0" name="cranberry_orange_easter_cake_qty" readonly="" type="number" value="0"/>
 <button aria-label="Increase Cranberry and Orange Easter Cake quantity" data-qty-action="plus" data-target="products-easter-collection-index-f1-qty-cranberry-orange" type="button">+</button>
 </div>
 </div>
@@ -424,7 +424,7 @@
 </div>
 <div aria-label="Quantity for Vanilla and Pistachio Easter Cake" class="easter-qty">
 <button aria-label="Decrease Vanilla and Pistachio Easter Cake quantity" data-qty-action="minus" data-target="products-easter-collection-index-f1-qty-vanilla-pistachio" type="button">−</button>
-<input id="products-easter-collection-index-f1-qty-vanilla-pistachio" min="0" name="vanilla_pistachio_easter_cake_qty" readonly="" type="number" value="0"/ aria-label="Vanilla and Pistachio Easter Cake quantity">
+<input aria-label="Vanilla and Pistachio Easter Cake quantity" id="products-easter-collection-index-f1-qty-vanilla-pistachio" min="0" name="vanilla_pistachio_easter_cake_qty" readonly="" type="number" value="0"/>
 <button aria-label="Increase Vanilla and Pistachio Easter Cake quantity" data-qty-action="plus" data-target="products-easter-collection-index-f1-qty-vanilla-pistachio" type="button">+</button>
 </div>
 </div>
@@ -435,7 +435,7 @@
 </div>
 <div aria-label="Quantity for Easter Cupcakes" class="easter-qty">
 <button aria-label="Decrease Easter Cupcakes quantity" data-qty-action="minus" data-target="products-easter-collection-index-f1-qty-cupcakes" type="button">−</button>
-<input id="products-easter-collection-index-f1-qty-cupcakes" min="0" name="easter_cupcakes_qty" readonly="" type="number" value="0"/ aria-label="Easter Cupcakes quantity">
+<input aria-label="Easter Cupcakes quantity" id="products-easter-collection-index-f1-qty-cupcakes" min="0" name="easter_cupcakes_qty" readonly="" type="number" value="0"/>
 <button aria-label="Increase Easter Cupcakes quantity" data-qty-action="plus" data-target="products-easter-collection-index-f1-qty-cupcakes" type="button">+</button>
 </div>
 </div>
@@ -472,9 +472,9 @@
 </div>
 <div class="col-12 col-md-6">
 <label class="form-label" for="products-easter-collection-index-f1-postcode">Postcode / area</label>
-<input class="form-control" id="products-easter-collection-index-f1-postcode" name="postcode" placeholder="e.g., PE28" type="text"/>
+<input class="form-control" id="products-easter-collection-index-f1-postcode" name="postcode" placeholder="e.g., PE28" type="text">
 <div class="form-text">Required for local delivery.</div>
-</div>
+</input></div>
 <div class="col-12 text-end mt-2">
 <div class="easter-submit-row">
 <div aria-live="polite" class="easter-estimate-compact">
@@ -482,7 +482,6 @@
 <strong class="easter-estimate-compact__value" id="products-easter-collection-index-f1-compact-total">£0.00</strong>
 <span class="easter-estimate-compact__meta" id="products-easter-collection-index-f1-compact-meta">0 items selected • no discount yet</span>
 </div>
-
 <div class="col-12 small text-muted privacy-note">By sending this request, you agree to the <a href="/Privacy-Policy/">Privacy Policy</a>. We use your details only to reply and manage your order.</div>
 <button class="btn btn-primary" data-season-copy="submit-label" type="submit">Send an enquiry</button>
 </div>
@@ -810,7 +809,7 @@
 </div>
 </div>
 </footer>
-<a class="scroll-top d-flex align-items-center justify-content-center" href="#" id="scroll-top" aria-label="Back to top" title="Back to top">
+<a aria-label="Back to top" class="scroll-top d-flex align-items-center justify-content-center" href="#" id="scroll-top" title="Back to top">
 <i class="bi bi-arrow-up-short">
 </i>
 </a>
@@ -964,5 +963,5 @@
 </script>
 <!-- DC:CONSENT_BANNER_END -->
 <script src="/assets/js/seasonal-page-state.js"></script><script src="/assets/js/ga-funnel.js"></script>
-</body>
+<script src="/assets/js/formly-config.js"></script></body>
 </html>

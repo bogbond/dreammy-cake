@@ -356,7 +356,7 @@
     applyFileQueue();
     updateFileLabel();
     if(trimmed){
-      setFileFeedback('You can upload up to ' + max + ' files. Extra files were not added.');
+      setFileFeedback(max === 1 ? 'You can upload one file only. Extra files were not added.' : 'You can upload up to ' + max + ' files. Extra files were not added.');
     }
   }
 
@@ -407,7 +407,7 @@
     if(!els.fileInput || !els.fileLabel || !els.uploadDrop) return;
     var files = currentFiles();
     if(!files.length){
-      els.fileLabel.textContent = 'Drop your inspo pics here or click to browse';
+      els.fileLabel.textContent = 'Drop one inspo pic here or click to browse';
       els.uploadDrop.classList.remove('has-files');
       renderFileList([]);
       setFileFeedback('');
@@ -417,7 +417,7 @@
     if(files.length === 1){
       els.fileLabel.textContent = 'Selected: ' + files[0].name;
     } else {
-      els.fileLabel.textContent = 'Selected: ' + files.length + ' files';
+      els.fileLabel.textContent = files.length === 1 ? 'Selected: ' + files[0].name : 'Selected: ' + files.length + ' files';
     }
     renderFileList(files);
     if(!els.fileInput.validationMessage) setFileFeedback('');

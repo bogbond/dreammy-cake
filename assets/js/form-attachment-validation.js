@@ -1,5 +1,5 @@
 (function(){
-  var MAX_BYTES_DEFAULT = 10 * 1024 * 1024;
+  var MAX_BYTES_DEFAULT = Math.floor(9.5 * 1024 * 1024);
   var allowedExtensions = ['jpg','jpeg','png','webp','gif','bmp','heic','heif','pdf','tif','tiff'];
   var allowedMimeTypes = [
     'image/jpeg','image/png','image/webp','image/gif','image/bmp','image/heic','image/heif','application/pdf','image/tiff'
@@ -58,6 +58,7 @@
 
     var maxBytes = parseInt(input.getAttribute('data-max-bytes') || '', 10);
     if(!Number.isFinite(maxBytes) || maxBytes <= 0) maxBytes = MAX_BYTES_DEFAULT;
+    var maxLabel = input.getAttribute('data-max-label') || formatBytes(maxBytes);
 
     setFieldMessage(input, '');
 
@@ -69,7 +70,7 @@
 
     var maxFiles = parseInt(input.getAttribute('data-max-files') || '', 10);
     if(Number.isFinite(maxFiles) && maxFiles > 0 && files.length > maxFiles){
-      setFieldMessage(input, 'Please upload up to ' + maxFiles + ' files.');
+      setFieldMessage(input, maxFiles === 1 ? 'Please upload one file only.' : 'Please upload up to ' + maxFiles + ' files.');
       updateFieldState(input);
       return false;
     }
@@ -80,7 +81,7 @@
       var file = files[i];
       totalBytes += file.size || 0;
       if(file.size > maxBytes){
-        setFieldMessage(input, 'Each file must be up to ' + formatBytes(maxBytes) + '.');
+        setFieldMessage(input, 'Please upload one file up to ' + maxLabel + '.');
         updateFieldState(input);
         return false;
       }
@@ -93,7 +94,7 @@
     }
 
     if(Number.isFinite(maxTotalBytes) && maxTotalBytes > 0 && totalBytes > maxTotalBytes){
-      setFieldMessage(input, 'Please keep all uploads within ' + formatBytes(maxTotalBytes) + ' total.');
+      setFieldMessage(input, 'Please keep the upload within ' + (input.getAttribute('data-max-total-label') || maxLabel) + ' total.');
       updateFieldState(input);
       return false;
     }
