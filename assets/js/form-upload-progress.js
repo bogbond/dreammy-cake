@@ -1,2 +1,2 @@
-/* v3.25: Legacy upload progress disabled intentionally.
-   Forms are submitted natively to Formly.email. */
+/* v3.26 no-op. Forms submit natively to Formly.email. */
+(function(){ 'use strict'; })();
