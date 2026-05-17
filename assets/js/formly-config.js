@@ -1,8 +1,10 @@
-/* v3.28 Formly relay mode.
-   Formly's minimal name/email/message form works, while the full styled forms can be
-   flagged by server-side bot detection. This script keeps the visible site forms intact,
-   then submits a clean minimal relay form to Formly:
-   access_key + name + email + message (+ one optional file).
+/* v3.29 Formly relay mode.
+   Formly accepts a minimal name/email/message form reliably. The visible site forms
+   stay unchanged, then this script sends a clean relay request:
+   access_key + name + email + structured message (+ one optional file).
+
+   The message uses Unicode hard line separators (U+2028) plus bullet markers because
+   Formly's email template collapses ordinary \n newlines into one paragraph.
 */
 (function(){
   'use strict';
@@ -11,8 +13,76 @@
   var ACCESS_KEY = '8c20c8e2b11242a586b585700f820946';
   var MAX_BYTES = Math.floor(9.5 * 1024 * 1024);
   var MAX_LABEL = '10 MB';
+  var HARD_BREAK = '\u2028';
   var allowedExtensions = ['jpg','jpeg','png','webp','gif','bmp','heic','heif','pdf','tif','tiff'];
   var allowedMimeTypes = ['image/jpeg','image/png','image/webp','image/gif','image/bmp','image/heic','image/heif','application/pdf','image/tiff'];
+
+  var SKIP_NAMES = {
+    access_key: true,
+    redirect: true,
+    honeypot: true,
+    website: true,
+    request_summary: true
+  };
+
+  var FRIENDLY_LABELS = {
+    product_name: 'Product name',
+    selected_products: 'Selected products',
+    order_selection: 'Selected products',
+    cake_estimate: 'Cake estimate',
+    cupcake_estimate: 'Cupcake estimate',
+    bundle_discount: 'Bundle discount',
+    estimated_total: 'Estimated starting total',
+    delivery_summary: 'Delivery summary',
+    name: 'Full name',
+    full_name: 'Full name',
+    customer_name: 'Full name',
+    email: 'Email address',
+    phone: 'Phone number',
+    instagram_handle: 'Instagram handle',
+    event_date: 'Event date',
+    preferred_time: 'Preferred time / delivery window',
+    guest_count: 'Guests / servings',
+    occasion: 'Occasion',
+    cake_category: 'Cake type',
+    cake_size: 'Cake size / style',
+    cake_shape: 'Shape / format',
+    dietary_preference: 'Dietary preference',
+    cake_flavour: 'Cake flavour',
+    cake_message: 'Message / wording on cake',
+    cupcake_quantity: 'Cupcake box size / quantity',
+    cupcake_flavour: 'Cupcake flavour',
+    cupcake_flavours: 'Cupcake flavours',
+    cupcake_dietary_preference: 'Cupcake dietary preference',
+    cupcake_frosting: 'Frosting type',
+    cupcake_decoration_style: 'Decoration style',
+    colour_palette: 'Colour palette',
+    theme_or_vibe: 'Theme / design vibe',
+    personalisation: 'Personalisation',
+    budget_from: 'Budget guide',
+    reference_links: 'Reference links',
+    anything_else: 'Anything else',
+    fulfilment: 'Collection / delivery',
+    preferred_collection_time: 'Preferred collection time',
+    delivery_address: 'Full delivery address',
+    delivery_postcode: 'Delivery postcode',
+    delivery_window: 'Preferred delivery window',
+    delivery_recipient: 'Who will receive the order',
+    recipient_name: 'Recipient full name',
+    recipient_phone: 'Recipient phone',
+    gift_message: 'Gift message',
+    allergen_information_acknowledged: 'Allergen information acknowledged',
+    subject: 'Subject',
+    message: 'Message',
+    notes: 'Notes / design ideas',
+    date: 'Event date',
+    time: 'Time',
+    quantity: 'Quantity',
+    flavour: 'Flavour',
+    emboss_text: 'Text to emboss',
+    delivery_option: 'Delivery or collection',
+    postcode: 'Postcode / area'
+  };
 
   function isFormlyForm(form){
     return form instanceof HTMLFormElement && (form.getAttribute('action') || '').replace(/\/+$/, '') === FORMLY_ENDPOINT.replace(/\/+$/, '');
@@ -27,8 +97,25 @@
     return input;
   }
 
-  function normalizeText(value){
-    return String(value == null ? '' : value).replace(/\s+$/g, '').replace(/^\s+/g, '');
+  function collapseWhitespace(value){
+    return String(value == null ? '' : value)
+      .replace(/\u00a0/g, ' ')
+      .replace(/[\t\r\n ]+/g, ' ')
+      .replace(/\s+$/g, '')
+      .replace(/^\s+/g, '');
+  }
+
+  function cleanForEmail(value){
+    return String(value == null ? '' : value)
+      .replace(/\u00a0/g, ' ')
+      .replace(/[<>]/g, function(ch){ return ch === '<' ? '‹' : '›'; })
+      .replace(/[\t ]+/g, ' ')
+      .replace(/\r\n?/g, '\n')
+      .split('\n')
+      .map(function(line){ return collapseWhitespace(line); })
+      .filter(Boolean)
+      .join(HARD_BREAK + '  ')
+      .trim();
   }
 
   function titleCaseName(name){
@@ -40,26 +127,97 @@
       .replace(/\b\w/g, function(ch){ return ch.toUpperCase(); });
   }
 
-  function labelFor(control){
-    if(!control) return '';
+  function friendlyLabel(name){
+    name = String(name || '');
+    return FRIENDLY_LABELS[name] || titleCaseName(name || 'Field');
+  }
+
+  function textFromElement(el){
+    if(!el) return '';
+    try {
+      if(typeof el.innerText === 'string' && el.innerText.trim()) return collapseWhitespace(el.innerText);
+    } catch(err) {}
+
+    function walk(node){
+      if(!node) return '';
+      if(node.nodeType === 3) return node.nodeValue || '';
+      if(node.nodeType !== 1) return '';
+      var parts = [];
+      Array.prototype.forEach.call(node.childNodes || [], function(child){
+        var text = walk(child);
+        if(text) parts.push(text);
+      });
+      return parts.join(' ');
+    }
+
+    return collapseWhitespace(walk(el));
+  }
+
+  function labelElementFor(control){
+    if(!control) return null;
+    if(control.labels && control.labels.length) return control.labels[0];
     var id = control.id;
     if(id){
-      try {
-        var label = document.querySelector('label[for="' + CSS.escape(id) + '"]');
-        if(label) return normalizeText(label.textContent).replace(/\*+$/, '').trim();
-      } catch(err) {}
+      var labels = document.getElementsByTagName('label');
+      for(var i = 0; i < labels.length; i++){
+        if(labels[i].getAttribute('for') === id) return labels[i];
+      }
+    }
+    return control.closest && control.closest('label');
+  }
+
+  function legendFor(control){
+    var fieldset = control && control.closest && control.closest('fieldset');
+    if(!fieldset) return '';
+    var legend = fieldset.querySelector('legend');
+    return legend ? textFromElement(legend).replace(/\*+$/g, '').trim() : '';
+  }
+
+  function optionTextForControl(control){
+    var label = labelElementFor(control);
+    if(label){
+      var strong = label.querySelector && label.querySelector('strong');
+      var strongText = strong ? textFromElement(strong) : '';
+      if(strongText) return strongText.replace(/\*+$/g, '').trim();
+
+      var text = textFromElement(label)
+        .replace(/\s+On$/i, '')
+        .replace(/\*+$/g, '')
+        .trim();
+      if(text) return text;
+    }
+    return collapseWhitespace(control && control.value ? control.value : 'Yes');
+  }
+
+  function labelForControl(control){
+    if(!control) return '';
+    var name = control.name || '';
+    var type = (control.type || '').toLowerCase();
+
+    if(type === 'hidden') return friendlyLabel(name);
+
+    if(type === 'radio'){
+      return legendFor(control) || friendlyLabel(name);
     }
 
-    var parentLabel = control.closest && control.closest('label');
-    if(parentLabel) return normalizeText(parentLabel.textContent).replace(/\*+$/, '').trim();
-
-    var fieldset = control.closest && control.closest('fieldset');
-    if(fieldset){
-      var legend = fieldset.querySelector('legend');
-      if(legend) return normalizeText(legend.textContent).replace(/\*+$/, '').trim();
+    if(type === 'checkbox'){
+      var group = control.form ? control.form.querySelectorAll('input[type="checkbox"][name="' + cssValue(name) + '"]') : [];
+      if(group.length > 1) return legendFor(control) || friendlyLabel(name);
+      var checkboxLabel = optionTextForControl(control);
+      return checkboxLabel || friendlyLabel(name);
     }
 
-    return titleCaseName(control.name || control.id || 'Field');
+    var label = labelElementFor(control);
+    if(label){
+      var text = textFromElement(label).replace(/\*+$/g, '').trim();
+      if(text) return text;
+    }
+
+    return legendFor(control) || friendlyLabel(name || control.id);
+  }
+
+  function cssValue(value){
+    return String(value || '').replace(/\\/g, '\\\\').replace(/"/g, '\\"');
   }
 
   function selectedOptionText(select){
@@ -67,60 +225,119 @@
     if(select.multiple){
       var vals = [];
       Array.prototype.forEach.call(select.options, function(opt){
-        if(opt.selected && opt.value !== '') vals.push(normalizeText(opt.textContent || opt.value));
+        if(opt.selected && opt.value !== '') vals.push(collapseWhitespace(opt.textContent || opt.value));
       });
       return vals.join(', ');
     }
     var opt = select.options[select.selectedIndex];
     if(!opt) return select.value || '';
     if(opt.disabled && opt.value === '') return '';
-    return normalizeText(opt.textContent || opt.value || '');
+    var dataLabel = opt.getAttribute && opt.getAttribute('data-label');
+    return collapseWhitespace(dataLabel || opt.textContent || opt.value || '');
+  }
+
+  function hiddenValueShouldBeIncluded(name, value){
+    if(!value) return false;
+    if(name === 'access_key' || name === 'redirect') return false;
+    if(/^_/.test(name)) return false;
+    var lower = String(value).toLowerCase().trim();
+    if(lower === 'not selected' || lower === 'not applied' || lower === 'not calculated') return false;
+    return true;
   }
 
   function controlValue(control){
     if(!control || !control.name) return null;
+    if(control.disabled) return null;
+
     var tag = control.tagName ? control.tagName.toLowerCase() : '';
     var type = (control.type || '').toLowerCase();
+    var name = control.name || '';
 
     if(type === 'file' || type === 'submit' || type === 'button' || type === 'reset' || type === 'image') return null;
-    if(control.name === 'access_key') return null;
-    if(control.name === 'honeypot' || control.name === 'website') return null;
-    if(type === 'hidden' && (/^_/.test(control.name) || control.name === 'redirect')) return null;
+    if(SKIP_NAMES[name]) return null;
 
-    if(type === 'radio' || type === 'checkbox'){
-      if(!control.checked) return null;
-      return normalizeText(control.value || 'Yes');
+    if(type === 'hidden'){
+      var hiddenValue = cleanForEmail(control.value || '');
+      return hiddenValueShouldBeIncluded(name, hiddenValue) ? hiddenValue : null;
     }
-    if(tag === 'select') return selectedOptionText(control);
-    return normalizeText(control.value || '');
+
+    if(type === 'radio'){
+      if(!control.checked) return null;
+      return cleanForEmail(optionTextForControl(control) || control.value || 'Selected');
+    }
+
+    if(type === 'checkbox'){
+      if(!control.checked) return null;
+      return cleanForEmail(optionTextForControl(control) || control.value || 'Yes');
+    }
+
+    if(tag === 'select') return cleanForEmail(selectedOptionText(control));
+    return cleanForEmail(control.value || '');
+  }
+
+  function groupValues(form, selector, name){
+    var values = [];
+    var controls = form.querySelectorAll(selector + '[name="' + cssValue(name) + '"]');
+    Array.prototype.forEach.call(controls, function(control){
+      if(control.disabled) return;
+      var type = (control.type || '').toLowerCase();
+      if((type === 'radio' || type === 'checkbox') && !control.checked) return;
+      var val = controlValue(control);
+      if(val != null && val !== '') values.push(val);
+    });
+    return values;
+  }
+
+  function addRow(rows, seenRows, label, name, value, hidden){
+    label = collapseWhitespace(label || friendlyLabel(name)).replace(/\*+$/g, '').trim();
+    value = cleanForEmail(value || '');
+    if(!label || !value) return;
+
+    var key = label.toLowerCase() + '::' + value.toLowerCase();
+    if(seenRows[key]) return;
+    seenRows[key] = true;
+
+    rows.push({ label: label, name: name || '', value: value, hidden: !!hidden });
   }
 
   function collectFields(form){
     var rows = [];
-    var seen = Object.create(null);
+    var seenControls = Object.create(null);
+    var seenRows = Object.create(null);
     var controls = form.querySelectorAll('input, select, textarea');
 
     Array.prototype.forEach.call(controls, function(control){
-      var value = controlValue(control);
-      if(value == null || value === '') return;
-
+      if(!control || !control.name || control.disabled) return;
       var type = (control.type || '').toLowerCase();
       var name = control.name || '';
-      var key = name || control.id || labelFor(control);
-      var label = labelFor(control) || titleCaseName(name);
+
+      if(type === 'file' || type === 'submit' || type === 'button' || type === 'reset' || type === 'image') return;
+      if(SKIP_NAMES[name]) return;
 
       if(type === 'radio'){
-        if(seen['radio:' + name]) return;
-        seen['radio:' + name] = true;
+        var radioKey = 'radio:' + name;
+        if(seenControls[radioKey]) return;
+        seenControls[radioKey] = true;
+        var radioValues = groupValues(form, 'input[type="radio"]', name);
+        if(radioValues.length) addRow(rows, seenRows, labelForControl(control), name, radioValues.join(', '), false);
+        return;
       }
 
       if(type === 'checkbox'){
-        if(seen['checkbox-label:' + name]){
-          // Append multiple checked checkboxes with the same label on separate lines.
+        var checkboxGroup = form.querySelectorAll('input[type="checkbox"][name="' + cssValue(name) + '"]');
+        if(checkboxGroup.length > 1){
+          var checkboxKey = 'checkbox:' + name;
+          if(seenControls[checkboxKey]) return;
+          seenControls[checkboxKey] = true;
+          var checkboxValues = groupValues(form, 'input[type="checkbox"]', name);
+          if(checkboxValues.length) addRow(rows, seenRows, labelForControl(control), name, checkboxValues.join(', '), false);
+          return;
         }
       }
 
-      rows.push({ label: label, name: name, value: value, hidden: type === 'hidden' });
+      var value = controlValue(control);
+      if(value == null || value === '') return;
+      addRow(rows, seenRows, labelForControl(control), name, value, type === 'hidden');
     });
 
     return rows;
@@ -128,8 +345,8 @@
 
   function firstValue(form, names){
     for(var i = 0; i < names.length; i++){
-      var field = form.querySelector('[name="' + names[i] + '"]');
-      if(field && normalizeText(field.value || '')) return normalizeText(field.value || '');
+      var field = form.querySelector('[name="' + cssValue(names[i]) + '"]');
+      if(field && cleanForEmail(field.value || '')) return cleanForEmail(field.value || '');
     }
     return '';
   }
@@ -191,38 +408,48 @@
     return dataForm ? ('Website form — ' + dataForm) : ('Website form — ' + humanPageTitle());
   }
 
+  function addMessageLine(lines, text){
+    lines.push(cleanForEmail(text));
+  }
+
+  function addBlankLine(lines){
+    lines.push('');
+  }
+
   function buildMessage(form){
     var lines = [];
     var rows = collectFields(form);
     var fileInput = findSelectedFileInput(form);
 
-    lines.push('New Dreamy Cake website submission');
-    lines.push('');
-    lines.push('Form: ' + formLabel(form));
-    lines.push('Page title: ' + humanPageTitle());
-    lines.push('Page URL: ' + window.location.href);
-    lines.push('Submitted at: ' + new Date().toISOString());
-    lines.push('');
-    lines.push('Submitted details:');
+    addMessageLine(lines, 'New Dreamy Cake website submission');
+    addBlankLine(lines);
+    addMessageLine(lines, 'Form: ' + formLabel(form));
+    addMessageLine(lines, 'Page title: ' + humanPageTitle());
+    addMessageLine(lines, 'Page URL: ' + window.location.href);
+    addMessageLine(lines, 'Submitted at: ' + new Date().toISOString());
+    addBlankLine(lines);
+    addMessageLine(lines, 'Submitted details:');
 
     rows.forEach(function(row){
-      var label = row.label || titleCaseName(row.name);
+      var label = row.label || friendlyLabel(row.name);
       var value = row.value;
-      if(row.name === 'message' || row.name === 'notes' || row.name === 'description' || /message|notes|idea|brief|details/i.test(row.name)){
-        lines.push('');
-        lines.push(label + ':');
-        lines.push(value);
+      var isLongText = row.name === 'message' || row.name === 'notes' || row.name === 'description' || /message|notes|idea|brief|details|personalisation|anything_else|address/i.test(row.name);
+      if(isLongText && value.indexOf(HARD_BREAK) !== -1){
+        addMessageLine(lines, '• ' + label + ':');
+        value.split(HARD_BREAK).forEach(function(part){
+          if(part) addMessageLine(lines, '  ' + part);
+        });
       } else {
-        lines.push(label + ': ' + value);
+        addMessageLine(lines, '• ' + label + ': ' + value);
       }
     });
 
     if(fileInput && fileInput.files && fileInput.files.length){
-      lines.push('');
-      lines.push('Attachment selected: ' + fileInput.files[0].name + ' (' + Math.round(fileInput.files[0].size / 1024) + ' KB)');
+      addBlankLine(lines);
+      addMessageLine(lines, 'Attachment selected: ' + fileInput.files[0].name + ' (' + Math.round(fileInput.files[0].size / 1024) + ' KB)');
     }
 
-    return lines.join('\n');
+    return lines.join(HARD_BREAK);
   }
 
   function submitRelayForm(form, fileInput){
