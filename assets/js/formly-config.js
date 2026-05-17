@@ -1,4 +1,4 @@
-/* v3.27 Formly relay mode.
+/* v3.28 Formly relay mode.
    Formly's minimal name/email/message form works, while the full styled forms can be
    flagged by server-side bot detection. This script keeps the visible site forms intact,
    then submits a clean minimal relay form to Formly:
