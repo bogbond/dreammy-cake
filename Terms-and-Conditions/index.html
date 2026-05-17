@@ -1,0 +1,507 @@
+<!DOCTYPE html>
+
+<html lang="en-GB">
+<head>
+<!-- DC:GA4_CONSENT_HEAD_START -->
+<!-- Google Analytics 4 + Consent Mode v2 (UK/EU) -->
+<script>
+  // GA4 Measurement ID (change here if needed)
+  window.GA_MEASUREMENT_ID = window.GA_MEASUREMENT_ID || 'G-CC2NRDSRQ9';
+
+  // Consent state: 'accept' | 'reject' | null
+  window.__dc_consent_choice = window.__dc_consent_choice || null;
+
+  // GA load guard
+  window.__ga_loaded = window.__ga_loaded || false;
+
+  // DataLayer + gtag wrapper:
+  // - Always allow Consent Mode commands
+  // - Block analytics/events until user accepts
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){
+    try {
+      if (arguments && arguments.length && arguments[0] === 'consent') {
+        window.dataLayer.push(arguments);
+        return;
+      }
+      if (window.__dc_consent_choice === 'accept') {
+        window.dataLayer.push(arguments);
+      }
+    } catch(e) {}
+  }
+  window.gtag = window.gtag || gtag;
+
+  // Helper: load GA script once (only call after consent 'accept')
+  window.dcLoadGAOnce = window.dcLoadGAOnce || function() {
+    var id = window.GA_MEASUREMENT_ID;
+    if (window.__ga_loaded) return;
+    if(!id || id === 'G-XXXXXXXXXX') {
+      console.warn('GA4 ID is placeholder. Set window.GA_MEASUREMENT_ID to your real GA4 ID.');
+      return;
+    }
+    // Avoid duplicate script tags
+    if (!document.querySelector('script[src^="https://www.googletagmanager.com/gtag/js?id="]')) {
+      var s = document.createElement('script');
+      s.async = true;
+      s.src = 'https://www.googletagmanager.com/gtag/js?id=' + id;
+      document.head.appendChild(s);
+    }
+    window.__ga_loaded = true;
+    gtag('js', new Date());
+    gtag('config', id, { anonymize_ip: true });
+  };
+
+  // Helper: attempt to clear GA cookies on "reject" (best-effort)
+  window.dcClearGACookies = window.dcClearGACookies || function() {
+    try {
+      var expires = 'Thu, 01 Jan 1970 00:00:00 GMT';
+      var domains = [location.hostname, '.' + location.hostname];
+      function del(name) {
+        // Host-only
+        document.cookie = name + '=; expires=' + expires + '; path=/';
+        // Explicit domains
+        for (var i=0; i<domains.length; i++) {
+          document.cookie = name + '=; expires=' + expires + '; path=/; domain=' + domains[i];
+        }
+      }
+      document.cookie.split(';').forEach(function(c){
+        var name = c.split('=')[0].trim();
+        if(name === '_ga' || name === '_gid' || name.indexOf('_ga_') === 0 || name.indexOf('_gat') === 0) {
+          del(name);
+        }
+      });
+    } catch(e) {}
+  };
+
+  // Read saved consent and set defaults (Consent Mode v2)
+  (function() {
+    try {
+      var saved = JSON.parse(localStorage.getItem('dc_consent') || '{}');
+      var choice = (saved && (saved.choice === 'accept' || saved.choice === 'reject')) ? saved.choice : null;
+      window.__dc_consent_choice = choice;
+
+      var base = {
+        ad_user_data: 'denied',
+        ad_personalization: 'denied',
+        ad_storage: 'denied',
+        analytics_storage: 'denied',
+        functionality_storage: 'granted',
+        security_storage: 'granted'
+      };
+
+      var consent = Object.assign({}, base, (choice === 'accept') ? {
+        analytics_storage: 'granted',
+        ad_storage: 'granted',
+        ad_user_data: 'granted',
+        ad_personalization: 'granted'
+      } : {});
+
+      gtag('consent', 'default', consent);
+
+      // Load GA only if user already accepted previously
+      if (choice === 'accept') {
+        window.dcLoadGAOnce();
+      }
+    } catch(e) { console.warn('Consent read failed', e); }
+  })();
+</script>
+<!-- DC:GA4_CONSENT_HEAD_END -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Terms &amp; Conditions | Dreamy Cake Bakery</title>
+<link href="/assets/img/site.webmanifest" rel="manifest"/>
+<!-- Meta Description -->
+<meta content="Read Dreamy Cake Bakery's terms for custom orders, deposits, delivery, collection, cake care, inspiration photos and cancellations before you book." name="description"/>
+<!-- Meta Keywords -->
+<meta content="Dreamy Cake, terms and conditions Cambridgeshire, custom cakes Huntingdon, cake orders Cambridge, cupcakes Peterborough, Dreamy Cake Studio Ltd, cake delivery policy" name="keywords"/>
+<!-- Open Graph Meta Tags for Social Media -->
+<meta content="Terms &amp; Conditions | Dreamy Cake Bakery" property="og:title">
+<meta content="Read Dreamy Cake Bakery's terms for custom orders, deposits, delivery, collection, cake care, inspiration photos and cancellations before you book." property="og:description"/>
+<meta content="https://dreamycake.co.uk/assets/img/og/home-hero-1200x630.jpg" property="og:image"/>
+<meta content="1200" property="og:image:width"/>
+<meta content="630" property="og:image:height">
+<meta content="https://dreamycake.co.uk/Terms-and-Conditions/" property="og:url">
+<meta content="website" property="og:type"/>
+<!-- Twitter Card Meta Tags -->
+<meta content="summary_large_image" name="twitter:card"/>
+<meta content="Terms &amp; Conditions | Dreamy Cake Bakery" name="twitter:title"/>
+<meta content="Read Dreamy Cake Bakery's terms for custom orders, deposits, delivery, collection, cake care, inspiration photos and cancellations before you book." name="twitter:description"/>
+<meta content="https://dreamycake.co.uk/assets/img/og/home-hero-1200x630.jpg" name="twitter:image"/>
+<meta content="https://dreamycake.co.uk/Terms-and-Conditions/" name="twitter:url"/>
+<meta content="@dreamy_cakess" name="twitter:site">
+<!-- Favicons -->
+<meta content="Dreamy Cake Bakery" name="apple-mobile-web-app-title">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","name":"Terms and Conditions","url":"https://dreamycake.co.uk/Terms-and-Conditions/","description":"Terms and Conditions for custom cakes and cupcakes from Dreamy Cake Bakery, including deposits, delivery, collection, cake care, inspiration photos and cancellations.","publisher":{"@type":"Organization","name":"Dreamy Cake Bakery","url":"https://dreamycake.co.uk/","logo":"https://dreamycake.co.uk/assets/img/og/home-hero-1200x630.jpg","sameAs":["https://www.instagram.com/dreamycake.bakery","https://www.facebook.com/DreamyCakeBakery","https://ratings.food.gov.uk/business/1856524"],"address":{"@type":"PostalAddress","streetAddress":"14 Elizabethan Way, Brampton","addressLocality":"Huntingdon","addressRegion":"Cambridgeshire","postalCode":"PE28 4SU","addressCountry":"GB"},"contactPoint":{"@type":"ContactPoint","telephone":"+447510837225","contactType":"Customer Service","areaServed":"GB","availableLanguage":["English","Russian","Polish","Ukrainian"]},"areaServed":["Cambridgeshire","Huntingdon","Cambridge","Peterborough","St Neots","Bedford"],"@id":"https://dreamycake.co.uk/#localbusiness","email":"contact@dreamycake.co.uk","hasMap":"https://maps.app.goo.gl/psW7oL2LAus7vUWy5","legalName":"Dreamy Cake Studio Ltd","geo":{"@type":"GeoCoordinates","latitude":52.3242487,"longitude":-0.2406139}},"dateModified":"2026-04-09"}</script>
+<!-- Fonts -->
+<link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&amp;family=Open+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,300;1,400;1,500;1,600;1,700;1,800&amp;family=Raleway:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&amp;display=swap" rel="stylesheet"/>
+<!-- Vendor CSS Files -->
+<!-- Main CSS File -->
+<!-- Inline Styles (retained from original) -->
+<style>
+      body {
+        font-family: Arial, sans-serif;
+        line-height: 1.6;
+        margin: 0;
+        padding: 0;
+        background-color: #f9f9f9;
+        color: #333;
+      }
+      header {
+        background: #ffcccb;
+        padding: 20px 0;
+        text-align: center;
+      }
+      header h1 {
+        margin: 0;
+        font-size: 2.5em;
+        color: #333;
+      }
+      header p {
+        margin: 5px 0;
+        font-size: 1.2em;
+        color: #555;
+      }
+      main {
+        max-width: 800px;
+        margin: 20px auto;
+        padding: 20px;
+        background: #fff;
+        border-radius: 8px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      }
+      h2 {
+        border-bottom: 2px solid #ffcccb;
+        padding-bottom: 5px;
+        margin-bottom: 15px;
+        color: #333;
+      }
+      ul {
+        margin: 10px 0 20px 20px;
+        padding: 0;
+      }
+      ul li {
+        margin-bottom: 10px;
+      }
+      footer {
+        text-align: center;
+        padding: 10px 0;
+        background: #333;
+        color: #fff;
+      }
+      footer a {
+        color: #ffcccb;
+        text-decoration: none;
+      }
+      footer a:hover {
+        text-decoration: underline;
+      }
+    </style>
+<link href="/assets/img/favicon.svg" rel="icon" type="image/svg+xml"/>
+<link href="/assets/img/favicon.ico" rel="icon" sizes="any"/>
+<link href="/apple-touch-icon.png" rel="apple-touch-icon"/>
+<link color="#F9F6EC" href="/safari-pinned-tab.svg" rel="mask-icon"/>
+<meta content="#F9F6EC" name="theme-color"/>
+<style>
+/* dc-consent mobile refined */
+@media (max-width: 576px){
+  .dc-consent-banner{
+    position: fixed !important;
+    top: auto !important;
+    left: 10px !important;
+    right: 10px !important;
+    bottom: 10px !important;
+    width: auto !important;
+    max-width: none !important;
+    max-height: 44vh !important;
+    overflow: auto !important;
+    padding: 12px 12px 14px !important;
+    border-radius: 16px !important;
+    box-shadow: 0 8px 24px rgba(0,0,0,.18) !important;
+    background: #fff !important;
+    display: block !important;
+  }
+  .dc-consent-banner__text{
+    width: 100% !important;
+    font-size: 12.5px !important;
+    line-height: 1.5 !important;
+    margin: 0 0 12px 0 !important;
+  }
+  .dc-consent-banner__btns{
+    display: flex !important;
+    width: 100% !important;
+    gap: 8px !important;
+    justify-content: space-between !important;
+  }
+  /* Make reject smaller than accept */
+  .dc-consent-banner__btns .dc-btn[data-choice="reject"]{
+    flex: 0 0 46% !important;
+    font-size: 12px !important;
+    padding: 9px 10px !important;
+  }
+  .dc-consent-banner__btns .dc-btn[data-choice="accept"],
+  .dc-consent-banner__btns .dc-btn.dc-btn--primary{
+    flex: 1 1 auto !important;
+    font-size: 13.5px !important;
+    padding: 11px 12px !important;
+  }
+}
+</style>
+<link href="https://dreamycake.co.uk/Terms-and-Conditions/" rel="canonical"/></head>
+<body>
+<header>
+<h1>Dreamy Cake Studio Ltd</h1>
+<p>Terms and Conditions</p>
+<p>Dreamy Cake Bakery is the trading name of Dreamy Cake Studio Ltd.</p>
+<p>Last updated: 9 April 2026</p></header>
+<main>
+<h2>Welcome to Dreamy Cake Studio Ltd!</h2>
+<p>
+        This website, along with all the information and services it provides, is
+        offered to you by Dreamy Cake Studio Ltd, a company registered in England and Wales (Company No. 16145675). By visiting our website and placing an
+        order, you agree to abide by the terms and conditions outlined here.
+      </p>
+<p>
+        We encourage you to read these Terms and Conditions carefully before
+        using our website. By continuing to browse or interact with the site,
+        you confirm your acceptance of these terms. If you do not agree with any
+        part of these terms, we kindly ask that you refrain from using the
+        website or our services.
+      </p>
+<p>
+        Dreamy Cake Studio Ltd reserves the right to revise these terms at any time by
+        updating this page. Changes take effect immediately upon posting, and by
+        continuing to use the website, you agree to any updates.
+      </p><p>Nothing in these Terms affects your statutory rights.</p>
+<h2>Deposits and Payments</h2>
+<ul>
+<li>
+          To secure your order and the agreed pick-up or delivery date, a 50%
+          deposit is required at the time of booking. Deposits are non-refundable
+          except where the cancellation terms below expressly allow a partial goodwill refund.
+        </li>
+<li>
+          The remaining balance must be paid in full prior to the pick-up or
+          delivery of your order. Payments can be made via bank transfer, cash, or other agreed-upon methods.
+        </li>
+<li>
+          If the deposit is not paid within 48 hours of receiving the invoice,
+          the date may no longer be available, and the order will not be
+          processed.
+        </li>
+<li>
+          Quotes for bespoke cakes will be provided after discussing and
+          finalising all details.
+        </li>
+</ul>
+<h2>Delivery and Pick-Up</h2>
+<ul>
+<li>Orders may be collected at a pre-agreed time or delivered to a pre-agreed address and time slot.</li>
+<li>Customers are welcome to inspect the exterior and visible condition of the cake at handover. If there is an obvious issue, please raise it with us straight away while we are still present.</li>
+<li>Where Dreamy Cake Studio Ltd provides the delivery, the order remains our responsibility until it is handed to you or to a person you have identified to receive it.</li>
+<li>Once an order has been collected by you or your nominated person, responsibility for safe transport, storage and handling passes to you.</li>
+<li>If you arrange your own third-party courier, taxi, ride-share driver or other carrier that is not offered by us as a delivery option, risk passes to you when the order is handed to that carrier.</li>
+<li>Fresh cakes can be sensitive to heat, sunlight, movement, vibrations and uneven surfaces, especially if they include buttercream, ganache, fondant details, toppers or tiered construction. They should be transported level, kept cool and handled with care.</li>
+<li>Unless cake-specific instructions are provided, cakes should be refrigerated promptly after collection or delivery and allowed to settle for at least 2 hours before serving.</li>
+</ul>
+
+<h2>Reference Images and Design Interpretation</h2>
+<ul>
+<li>Customers are welcome to share inspiration photos, Pinterest boards, links and mood boards as part of the design brief.</li>
+<li>These references are used to guide the overall style, colour palette, shape and key decorative elements of the order.</li>
+<li>Because each cake is made to order and tailored to the agreed size, servings, flavours, fillings, finish and structure, exact line-by-line duplication of another cake artist’s work is not offered.</li>
+<li>The finished cake will be created in line with the agreed brief rather than as a guaranteed photographic replica, and may include reasonable artistic adjustments to proportions, decorative placement, texture and detail scale.</li>
+<li>If certain details are essential — such as wording, colours, bows, cherries, pearls, florals or a topper — these should be clearly identified before the order is finalised.</li>
+</ul>
+<h2>Order Modifications</h2>
+<ul>
+<li>
+          Flavour changes for bespoke cakes can be made up to 1 week before the
+          pick-up or delivery date.
+        </li>
+<li>
+          Design changes for bespoke cakes must be requested at least 2 weeks
+          prior to the pick-up or delivery date.
+        </li>
+<li>
+          Agreed pick-up or delivery dates may be rescheduled depending on
+          availability.
+        </li>
+<li>
+          Any additional charges for modifications will be communicated and must be agreed upon before changes are made.
+        </li>
+</ul>
+<h2>Cancellations and Refunds</h2>
+<ul>
+<li>Deposits are non-refundable because they reserve your date and cover planning, admin and preparation costs.</li>
+<li>If you cancel 14 days or more before the scheduled pick-up or delivery date, Dreamy Cake Studio Ltd may, at its discretion, refund up to 50% of the deposit, provided no bespoke work has started and no specific ingredients, toppers, materials or third-party services have been purchased for your order.</li>
+<li>Cancellations made within 14 days of the scheduled pick-up or delivery date are not eligible for a deposit refund and may require full payment where work has already started or perishable/custom materials have been committed.</li>
+<li>Cancellations for cupcakes, cookies, and smaller treats can be made up to 1 week before the agreed date; any refund depends on work already completed and materials committed.</li>
+<li>Because our products are made to order, often personalised, and are perishable food items, the standard 14-day cooling-off cancellation period for distance sales does not apply to confirmed orders.</li>
+<li>Refunds for cancellations due to exceptional circumstances may be considered at the sole discretion of Dreamy Cake Studio Ltd.</li>
+<li>This does not affect your statutory rights if a product is faulty, not as described, or was already damaged at the point of handover.</li>
+</ul>
+<h2>Allergies and Dietary Information</h2>
+<p>
+        We operate from a home kitchen that handles common allergens, including
+        gluten, eggs, milk, nuts, and soya. While every effort is made to reduce
+        cross-contamination, we cannot guarantee allergen-free products.
+      </p>
+<p>
+        Customers are responsible for informing us of any allergies or dietary restrictions when placing their order. Dreamy Cake Studio Ltd cannot be held liable for any adverse reactions caused by allergens.
+      </p>
+<h2>Contact Information</h2>
+<p>
+        For any queries, please contact us at <a class="link" href="mailto:contact@dreamycake.co.uk">contact@dreamycake.co.uk</a> or call us at <a class="link" href="tel:+447510837225">+44 7510 837225</a>.
+      </p>
+</main>
+<footer>
+<p>
+        © 2026 Dreamy Cake Bakery (Dreamy Cake Studio Ltd) — 14 Elizabethan Way, Brampton, Huntingdon, Cambridgeshire PE28 4SU. All Rights Reserved. | <a href="/Privacy-Policy/">Privacy Policy</a>
+</p></footer>
+<script src="/assets/js/navfix.js"></script>
+<!-- DC:CONSENT_BANNER_START -->
+<style>
+  .dc-consent-banner{
+    position:fixed; left:0; right:0; bottom:0;
+    z-index:2147483647;
+    background: rgba(255,255,255,0.98);
+    border-top: 1px solid rgba(0,0,0,.1);
+    box-shadow: 0 -8px 24px rgba(0,0,0,.08);
+    padding: 16px; display:flex; gap:16px; align-items: flex-start;
+    font-family: system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
+  }
+  .dc-consent-banner__text{ flex:1; font-size:14px; line-height:1.45; color:#222; }
+  .dc-consent-banner__btns{ display:flex; gap:8px; flex-wrap:wrap; }
+  .dc-btn{ border:1px solid #222; padding:8px 12px; border-radius:999px; background:#fff; cursor:pointer; font-size:14px; }
+  .dc-btn--primary{ background:#222; color:#fff; }
+  .dc-consent-manage{
+    left: 12px !important;
+    position:fixed;
+    right:auto !important; bottom: 6px;
+    z-index:2147483647;
+    border:1px solid #222; background:#fff; padding:6px 10px; border-radius:999px; font-size:12px; cursor:pointer; opacity:.85;
+    line-height:1; white-space:nowrap;
+    transition: bottom .2s ease, right .2s ease, left .2s ease, opacity .2s;
+  }
+  /* When we need to lift above another fixed button (e.g., back-to-top) */
+  /* Put it bottom-left on very small screens to avoid crowding */
+  @media (max-width: 480px) {
+    .dc-consent-manage{ left:16px; right:auto; }
+  }
+  .dc-consent-manage:hover{ opacity:1; }
+</style>
+<script>
+(function(){
+  try {
+    // Create "Manage cookies" floating button
+    var manage = document.createElement('button');
+    manage.className = 'dc-consent-manage';
+    manage.type = 'button';
+    manage.textContent = 'Cookies';
+    manage.setAttribute('aria-label','Manage cookies');
+    manage.addEventListener('click', function(){ showBanner(true); });
+
+    // Build banner
+    function showBanner(force) {
+      var saved = null;
+      try { saved = JSON.parse(localStorage.getItem('dc_consent') || '{}'); } catch(e){}
+      if(!force && saved && (saved.choice === 'accept' || saved.choice === 'reject')) return;
+      var wrap = document.createElement('div');
+      wrap.className = 'dc-consent-banner';
+      wrap.setAttribute('role','dialog');
+      wrap.setAttribute('aria-live','polite');
+      wrap.innerHTML = ''
+        + '<div class="dc-consent-banner__text">To keep things simple, we use essential cookies. If you’re happy, we’ll also use analytics to learn what’s working. You can update your choice anytime in “Cookies”.</div>'
+        + '<div class="dc-consent-banner__btns">'
+        +   '<button type="button" class="dc-btn" data-choice="reject">Reject non-essential</button>'
+        +   '<button type="button" class="dc-btn dc-btn--primary" data-choice="accept">Accept all</button>'
+        + '</div>';
+      document.body.appendChild(wrap);
+      wrap.querySelectorAll('button[data-choice]').forEach(function(btn){
+        btn.addEventListener('click', function(){ setChoice(this.getAttribute('data-choice')); });
+      });
+    }
+
+    function setChoice(choice) {
+      try { localStorage.setItem('dc_consent', JSON.stringify({choice: choice})); } catch(e){}
+      window.__dc_consent_choice = choice;
+
+      // Update Consent Mode in real-time
+      if (typeof gtag === 'function') {
+        if(choice === 'accept') {
+          gtag('consent', 'update', {
+            analytics_storage: 'granted',
+            ad_storage: 'granted',
+            ad_user_data: 'granted',
+            ad_personalization: 'granted'
+          });
+          // Load GA once (no duplicates)
+          if (typeof window.dcLoadGAOnce === 'function') {
+            window.dcLoadGAOnce();
+          }
+        } else {
+          gtag('consent', 'update', {
+            analytics_storage: 'denied',
+            ad_storage: 'denied',
+            ad_user_data: 'denied',
+            ad_personalization: 'denied'
+          });
+          // Best-effort cookie cleanup
+          if (typeof window.dcClearGACookies === 'function') {
+            window.dcClearGACookies();
+          }
+        }
+      }
+
+      var b = document.querySelector('.dc-consent-banner'); if(b) b.remove();
+    }
+
+    // Try to avoid overlap with existing fixed "back to top" buttons
+    function avoidOverlap() {
+      try {
+        var candidates = [
+          '.back-to-top', '.scroll-to-top', '.scroll-top', '.to-top', '.btn-to-top',
+          '#backToTop', '#toTop', '#totop', '[data-backtotop]', '[data-scroll-top]'
+        ];
+        var el = null;
+        for (var i=0; i<candidates.length; i++) {
+          var found = document.querySelector(candidates[i]);
+          if(found) { el = found; break; }
+        }
+        // Reset
+        manage.classList.remove('dc-lift');
+        manage.style.right = ''; manage.style.left = ''; manage.style.bottom = '';
+        // On small screens we already push left via CSS, skip overlap logic
+        if (window.matchMedia('(max-width: 480px)').matches) return;
+        if (!el) return;
+        var r = el.getBoundingClientRect();
+        // Heuristic: if the element sits bottom-right within 120px from the viewport edge, lift our button
+        var nearBottom = (window.innerHeight - r.bottom) <= 120;
+        var nearRight  = (window.innerWidth  - r.right)  <= 120;
+        var visible = r.width>0 && r.height>0;
+        if (visible && nearBottom && nearRight) {
+          // // manage.classList.add('dc-lift'); // disabled // disabled
+        }
+      } catch(e){}
+    }
+
+    document.addEventListener('DOMContentLoaded', function(){
+      document.body.appendChild(manage);
+      showBanner(false);
+      avoidOverlap();
+    });
+    window.addEventListener('scroll', avoidOverlap, {passive:true});
+    window.addEventListener('resize', avoidOverlap);
+
+    // Run a few times shortly after load to catch late-mounted widgets
+    setTimeout(avoidOverlap, 300);
+    setTimeout(avoidOverlap, 1000);
+  } catch(e){ console.error('Consent banner error', e); }
+})();
+</script>
+<!-- DC:CONSENT_BANNER_END -->
+<script src="/assets/js/ga-funnel.js"></script>
+</body>
+</html>

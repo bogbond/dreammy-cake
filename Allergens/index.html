@@ -1,0 +1,588 @@
+<!DOCTYPE html>
+
+<html lang="en-GB">
+<head>
+<!-- DC:GA4_CONSENT_HEAD_START -->
+<!-- Google Analytics 4 + Consent Mode v2 (UK/EU) -->
+<script>
+  // GA4 Measurement ID (change here if needed)
+  window.GA_MEASUREMENT_ID = window.GA_MEASUREMENT_ID || 'G-CC2NRDSRQ9';
+
+  // Consent state: 'accept' | 'reject' | null
+  window.__dc_consent_choice = window.__dc_consent_choice || null;
+
+  // GA load guard
+  window.__ga_loaded = window.__ga_loaded || false;
+
+  // DataLayer + gtag wrapper:
+  // - Always allow Consent Mode commands
+  // - Block analytics/events until user accepts
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){
+    try {
+      if (arguments && arguments.length && arguments[0] === 'consent') {
+        window.dataLayer.push(arguments);
+        return;
+      }
+      if (window.__dc_consent_choice === 'accept') {
+        window.dataLayer.push(arguments);
+      }
+    } catch(e) {}
+  }
+  window.gtag = window.gtag || gtag;
+
+  // Helper: load GA script once (only call after consent 'accept')
+  window.dcLoadGAOnce = window.dcLoadGAOnce || function() {
+    var id = window.GA_MEASUREMENT_ID;
+    if (window.__ga_loaded) return;
+    if(!id || id === 'G-XXXXXXXXXX') {
+      console.warn('GA4 ID is placeholder. Set window.GA_MEASUREMENT_ID to your real GA4 ID.');
+      return;
+    }
+    // Avoid duplicate script tags
+    if (!document.querySelector('script[src^="https://www.googletagmanager.com/gtag/js?id="]')) {
+      var s = document.createElement('script');
+      s.async = true;
+      s.src = 'https://www.googletagmanager.com/gtag/js?id=' + id;
+      document.head.appendChild(s);
+    }
+    window.__ga_loaded = true;
+    gtag('js', new Date());
+    gtag('config', id, { anonymize_ip: true });
+  };
+
+  // Helper: attempt to clear GA cookies on "reject" (best-effort)
+  window.dcClearGACookies = window.dcClearGACookies || function() {
+    try {
+      var expires = 'Thu, 01 Jan 1970 00:00:00 GMT';
+      var domains = [location.hostname, '.' + location.hostname];
+      function del(name) {
+        // Host-only
+        document.cookie = name + '=; expires=' + expires + '; path=/';
+        // Explicit domains
+        for (var i=0; i<domains.length; i++) {
+          document.cookie = name + '=; expires=' + expires + '; path=/; domain=' + domains[i];
+        }
+      }
+      document.cookie.split(';').forEach(function(c){
+        var name = c.split('=')[0].trim();
+        if(name === '_ga' || name === '_gid' || name.indexOf('_ga_') === 0 || name.indexOf('_gat') === 0) {
+          del(name);
+        }
+      });
+    } catch(e) {}
+  };
+
+  // Read saved consent and set defaults (Consent Mode v2)
+  (function() {
+    try {
+      var saved = JSON.parse(localStorage.getItem('dc_consent') || '{}');
+      var choice = (saved && (saved.choice === 'accept' || saved.choice === 'reject')) ? saved.choice : null;
+      window.__dc_consent_choice = choice;
+
+      var base = {
+        ad_user_data: 'denied',
+        ad_personalization: 'denied',
+        ad_storage: 'denied',
+        analytics_storage: 'denied',
+        functionality_storage: 'granted',
+        security_storage: 'granted'
+      };
+
+      var consent = Object.assign({}, base, (choice === 'accept') ? {
+        analytics_storage: 'granted',
+        ad_storage: 'granted',
+        ad_user_data: 'granted',
+        ad_personalization: 'granted'
+      } : {});
+
+      gtag('consent', 'default', consent);
+
+      // Load GA only if user already accepted previously
+      if (choice === 'accept') {
+        window.dcLoadGAOnce();
+      }
+    } catch(e) { console.warn('Consent read failed', e); }
+  })();
+</script>
+<!-- DC:GA4_CONSENT_HEAD_END -->
+
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/><meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<title>Allergens | Dreamy Cake Bakery</title>
+<link href="/assets/img/site.webmanifest" rel="manifest"/>
+<meta content="Allergen and ingredient information for Dreamy Cake Bakery products. Please share dietary requirements before ordering." name="description">
+<link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&amp;family=Open+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,300;1,400;1,500;1,600;1,700;1,800&amp;family=Raleway:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&amp;display=swap" rel="stylesheet"/>
+<link href="../assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet"/>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet"/><link href="../assets/css/main.css" rel="stylesheet"><link href="../assets/css/pages/allergens.css" rel="stylesheet">
+<meta content="Allergens | Dreamy Cake Bakery" property="og:title"><meta content="Allergen and ingredient information for Dreamy Cake Bakery products. Please share dietary requirements before ordering." property="og:description"><meta content="website" property="og:type"/><meta content="https://dreamycake.co.uk/Allergens/" property="og:url"/><meta content="https://dreamycake.co.uk/assets/img/og/home-hero-1200x630.jpg" property="og:image"/><meta content="summary_large_image" name="twitter:card"/><meta content="Allergens | Dreamy Cake Bakery" name="twitter:title"><meta content="Allergen and ingredient information for Dreamy Cake Bakery products. Please share dietary requirements before ordering." name="twitter:description"><meta content="https://dreamycake.co.uk/assets/img/og/home-hero-1200x630.jpg" name="twitter:image"/><meta content="en_GB" property="og:locale"/>
+<link href="/assets/img/favicon.svg" rel="icon" type="image/svg+xml"/>
+<link href="/assets/img/favicon.ico" rel="icon" sizes="any"/>
+<link href="/apple-touch-icon.png" rel="apple-touch-icon"/>
+<link color="#F9F6EC" href="/safari-pinned-tab.svg" rel="mask-icon"/>
+<meta content="#F9F6EC" name="theme-color"/>
+<style>
+/* dc-consent mobile refined */
+@media (max-width: 576px){
+  .dc-consent-banner{
+    position: fixed !important;
+    top: auto !important;
+    left: 10px !important;
+    right: 10px !important;
+    bottom: 10px !important;
+    width: auto !important;
+    max-width: none !important;
+    max-height: 44vh !important;
+    overflow: auto !important;
+    padding: 12px 12px 14px !important;
+    border-radius: 16px !important;
+    box-shadow: 0 8px 24px rgba(0,0,0,.18) !important;
+    background: #fff !important;
+    display: block !important;
+  }
+  .dc-consent-banner__text{
+    width: 100% !important;
+    font-size: 12.5px !important;
+    line-height: 1.5 !important;
+    margin: 0 0 12px 0 !important;
+  }
+  .dc-consent-banner__btns{
+    display: flex !important;
+    width: 100% !important;
+    gap: 8px !important;
+    justify-content: space-between !important;
+  }
+  /* Make reject smaller than accept */
+  .dc-consent-banner__btns .dc-btn[data-choice="reject"]{
+    flex: 0 0 46% !important;
+    font-size: 12px !important;
+    padding: 9px 10px !important;
+  }
+  .dc-consent-banner__btns .dc-btn[data-choice="accept"],
+  .dc-consent-banner__btns .dc-btn.dc-btn--primary{
+    flex: 1 1 auto !important;
+    font-size: 13.5px !important;
+    padding: 11px 12px !important;
+  }
+}
+</style>
+<link href="https://dreamycake.co.uk/Allergens/" rel="canonical"/>
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"WebPage","@id":"https://dreamycake.co.uk/Allergens/#webpage","url":"https://dreamycake.co.uk/Allergens/","name":"Allergens & Ingredients","description":"Allergen and ingredient information for our cakes and cupcakes. We bake in a home kitchen where traces of allergens may be present. Tell us your requirements before ordering.","about":{"@type":"Thing","name":"Food allergens and ingredient handling"},"isPartOf":{"@type":"WebSite","@id":"https://dreamycake.co.uk/#website","name":"Dreamy Cake Bakery"},"breadcrumb":{"@id":"https://dreamycake.co.uk/Allergens/#breadcrumb"}},{"@type":"BreadcrumbList","@id":"https://dreamycake.co.uk/Allergens/#breadcrumb","itemListElement":[{"@type":"ListItem","position":1,"item":{"@id":"https://dreamycake.co.uk/","name":"Home"}},{"@type":"ListItem","position":2,"item":{"@id":"https://dreamycake.co.uk/Allergens/","name":"Allergens & Ingredients"}}]},{"@type":"FAQPage","@id":"https://dreamycake.co.uk/Allergens/#faq","mainEntity":[{"@type":"Question","name":"Can you make a nut‑free cake?","acceptedAnswer":{"@type":"Answer","text":"We can avoid adding nuts, but traces are possible as the kitchen handles nuts. Please tell us your requirements before ordering."}},{"@type":"Question","name":"Do you offer gluten‑free options?","acceptedAnswer":{"@type":"Answer","text":"Sometimes on request; cross‑contact is possible. We cannot guarantee a trace‑free environment."}},{"@type":"Question","name":"Where can I read more?","acceptedAnswer":{"@type":"Answer","text":"See the full Q&A and Delivery pages for details, or message us with your specific needs."}}]}]}</script>
+</head>
+<body>
+<header class="header d-flex align-items-center fixed-top" id="header">
+<div class="container-fluid container-xl position-relative d-flex align-items-center justify-content-between">
+<a class="logo d-flex align-items-center" href="/">
+<!-- Uncomment the line below if you also wish to use an image logo -->
+<!-- <img src="../assets/img/logo.png" alt="Dreamy Cake Bakery"> -->
+<p class="sitename">
+      Dreamy Cake Bakery
+     </p>
+</a>
+<nav class="navmenu" id="navmenu">
+<ul>
+<li>
+<a aria-current="page" class="active" href="/#hero">
+        Home
+       </a>
+</li>
+<li><a href="/#pricing">Cake Menu</a></li>
+<li>
+<a aria-label="Go to Portfolio section" href="/#portfolio">
+        Portfolio
+       </a>
+</li>
+<li>
+<a href="/#contact">
+        Contact
+       </a>
+</li><li>
+<a href="/About/">
+        About
+       </a>
+</li><li class="dropdown">
+<button aria-controls="order-submenu" aria-expanded="false" aria-label="Toggle order submenu" class="nav-toggle" type="button"><span>Order</span> <i aria-hidden="true" class="bi bi-chevron-down chev"></i></button>
+<ul id="order-submenu"><li><a class="nav-bespoke-order" href="/Bespoke-Order/"><span>Bespoke Order</span><span class="nav-bespoke-order__arrow" aria-hidden="true">&rarr;</span></a></li><li><a href="/Products/celebration-cake/#order">Order Celebration Cake</a></li><li><a href="/Products/themed-cake/#order">Order Themed Cake</a></li><li><a href="/Products/mini-bento-cake/#order">Order Mini / Bento Cake</a></li><li><a href="/Products/wedding-cake/#order">Order Wedding Cakes</a></li><li><a href="/Products/cupcakes/#order">Order Cupcakes</a></li><li><a href="/Products/postage-cookie/#order">Order Postage Cookie</a></li></ul>
+</li>
+<!-- <li><a href="/#how-it-works">Services</a></li> -->
+<li class="dropdown">
+<button aria-controls="info-submenu" aria-expanded="false" aria-label="Toggle info submenu" class="nav-toggle" type="button"><span>Info</span> <i aria-hidden="true" class="bi bi-chevron-down chev"></i></button>
+<ul id="info-submenu">
+<li><a href="/Delivery/">Delivery</a></li>
+<li><a href="/Allergens/">Allergens</a></li>
+<li><a href="/How-it-works/">How it works</a></li>
+<li><a href="/QA/">Q&amp;A</a></li>
+</ul>
+</li>
+<li>
+<a href="https://shop.dreamycake.co.uk">Shop</a>
+</li></ul>
+<i class="mobile-nav-toggle d-xl-none bi bi-list">
+</i>
+</nav>
+</div>
+</header>
+<main>
+<section class="hero">
+<div class="dc-container">
+<h1>Allergens &amp; Food Safety</h1>
+<p class="lead">All bakes are made with care in a registered home kitchen. We are transparent about ingredients so you can order with confidence.</p>
+<div class="callout mt-2 small">
+<strong>Important:</strong> While we take great care to avoid cross‑contact, our kitchen <em>does handle</em> the major allergens listed below. Therefore, we cannot guarantee any product is completely free from traces.
+        </div>
+</div>
+</section>
+<section class="section">
+<div class="dc-container grid">
+<div class="card">
+<h3><i class="bi bi-list-check"></i> Major allergens we handle</h3>
+<ul class="list">
+<li>Gluten (wheat)</li>
+<li>Eggs</li>
+<li>Milk (dairy)</li>
+<li>Nuts (e.g. almonds, hazelnuts)</li>
+<li>Peanuts</li>
+<li>Soya</li>
+<li>Sesame</li>
+</ul>
+<p class="small mt-1">Some bakes can be adapted (e.g. without nuts) — ask us before ordering.</p>
+</div>
+<div class="card">
+<h3><i class="bi bi-shield-check"></i> Our handling practices</h3>
+<ul class="list">
+<li>Separate storage for key allergens where feasible</li>
+<li>Dedicated utensils where practical and thorough sanitising between tasks</li>
+<li>Ingredient labelling and batch tracking</li>
+<li>Hand‑washing and surface disinfection protocols</li>
+<li>Allergen‑aware packaging &amp; clear labels</li>
+</ul>
+</div>
+</div>
+</section>
+<section class="section">
+<div class="dc-container grid">
+<div class="card">
+<h3><i class="bi bi-archive"></i> Storage &amp; serving</h3>
+<p>Keep flat and cool. Refrigerate promptly after collection or delivery, keep at 0–5°C where possible, and enjoy within 48–72 hours. Let chilled buttercream cakes stand 30–60 minutes at room temperature before serving.</p>
+</div>
+<div class="card faq">
+<div class="item">
+<div class="head" data-accordion="">
+<h3>Can you make a nut‑free cake?</h3>
+<i class="bi bi-chevron-down"></i>
+</div>
+<div class="acc-body"><div>We can avoid adding nuts to your recipe; however, as our kitchen handles nuts, we cannot guarantee a nut‑free environment. Please consider this carefully.</div></div>
+</div>
+<div class="item mt-2">
+<div class="head" data-accordion="">
+<h3>Do you offer gluten‑free options?</h3>
+<i class="bi bi-chevron-down"></i>
+</div>
+<div class="acc-body"><div>We occasionally bake using gluten‑free ingredients on request. Cross‑contact is still possible as wheat flour is present in the kitchen.</div></div>
+</div>
+<div class="item mt-2">
+<div class="head" data-accordion="">
+<h3>Where can I read more?</h3>
+<i class="bi bi-chevron-down"></i>
+</div>
+<div class="acc-body"><div>See the full <a href="/QA/">Q&amp;A page</a> for more details, or message us — we’ll happily answer specific questions.</div></div>
+</div>
+</div>
+</div>
+<div class="dc-container">
+<div class="cta" style="justify-content:center; margin-top:14px;">
+<a class="btn" href="/QA/"><i class="bi bi-question-circle"></i> Read the full Q&amp;A</a>
+</div>
+</div>
+<div class="dc-container small mt-2">
+        * This page is for general guidance only and is not medical advice. If you have a severe allergy, please contact us before ordering.
+      </div>
+</section>
+<section class="section alt-white" id="uk-14-allergens">
+<div class="container">
+<h2 class="h4 mb-3">UK list of 14 allergens</h2>
+<p class="mb-2">By UK law, the following must be declared when used as ingredients:</p>
+<ul class="list-unstyled row row-cols-1 row-cols-sm-2 g-1 small">
+<li>Celery</li>
+<li>Cereals containing gluten (wheat, rye, barley, oats)</li>
+<li>Crustaceans</li>
+<li>Eggs</li>
+<li>Fish</li>
+<li>Lupin</li>
+<li>Milk</li>
+<li>Molluscs</li>
+<li>Mustard</li>
+<li>Peanuts</li>
+<li>Sesame</li>
+<li>Soybeans</li>
+<li>Sulphur dioxide/sulphites (&gt;10 ppm)</li>
+<li>Tree nuts (almond, hazelnut, walnut, cashew, pecan, pistachio, Brazil, macadamia)</li>
+</ul>
+<p class="text-muted small">Guidance: UK Food Standards Agency. Always check labels and tell us your requirements before ordering.</p>
+<p class="mt-3 small">Related: <a href="/Delivery/">Delivery</a> · <a href="/QA/">Full Q&amp;A</a></p>
+</div>
+</section>
+</main>
+<footer class="footer dark-background" id="footer">
+<div class="container">
+<div class="row gy-3">
+<div class="col-lg-3 col-md-6 d-flex">
+<i class="bi bi-geo-alt icon">
+</i>
+<div class="address">
+<h4>
+        Address
+       </h4>
+<p>
+        14 Elizabethan Way, Brampton
+       </p>
+<p>
+        Huntingdon, Cambridgeshire PE28 4SU
+       </p>
+<p>
+</p>
+</div>
+</div>
+<div class="col-lg-3 col-md-6 d-flex">
+<i class="bi bi-telephone icon">
+</i>
+<div>
+<h4>
+        Contact
+       </h4>
+<p>
+<strong>
+         Phone:
+        </strong>
+<span><a class="link" href="tel:+447510837225">+44 7510 837225</a></span>
+<br/>
+<strong>
+          Email:
+         </strong>
+<span><a class="link" href="mailto:contact@dreamycake.co.uk">contact@dreamycake.co.uk</a></span>
+<br/>
+<strong>
+          WhatsApp:
+         </strong>
+<span><a aria-label="Chat on WhatsApp" class="link" href="https://wa.me/447510837225" onclick="if(window.gtag){gtag('event','whatsapp_click',{label:'footer_contact'});}" rel="noopener" target="_blank"><i class="bi bi-whatsapp"></i> Message us</a></span>
+<br/>
+</p>
+</div>
+</div>
+<div class="col-lg-3 col-md-6 d-flex">
+<i class="bi bi-clock icon">
+</i>
+<div>
+<h4>
+        Opening Hours
+       </h4>
+<p>
+<strong>
+         Mon-Sat:
+        </strong>
+<span>
+         9AM - 8PM
+        </span>
+<br/>
+<strong>
+         Sunday
+        </strong>
+        :
+        <span>
+         10AM - 5PM
+        </span>
+</p>
+</div>
+</div>
+<div class="col-lg-3 col-md-6">
+<h4>
+       Follow Us
+      </h4>
+<div class="social-links d-flex">
+<a aria-label="Follow Dreamy Cake Bakery on Facebook" class="facebook" href="https://www.facebook.com/DreamyCakeBakery">
+<i class="bi bi-facebook">
+</i>
+</a>
+<a aria-label="Follow Dreamy Cake Bakery on Instagram" class="instagram" href="https://www.instagram.com/dreamycake.bakery">
+<i class="bi bi-instagram">
+</i>
+</a></div>
+</div>
+</div>
+</div>
+<div class="container copyright text-center mt-4">
+<a href="/Terms-and-Conditions/">
+     Terms &amp; Conditions
+    </a>
+<a href="/Privacy-Policy/">
+     Privacy Policy
+    </a>
+<br/>
+<p>
+     ©
+     <span>
+      Copyright
+     </span>
+<strong class="px-1 sitename">
+      Dreamy Cake Bakery
+     </strong>
+<span>
+      All Rights Reserved
+     </span>
+</p>
+<div class="credits">
+     Designed by
+     <a href="mailto:bogbond@gmail.com" onclick="if(window.gtag){gtag('event','designer_email_click',{label:'contact'});}">
+      Bond
+     </a>
+</div>
+</div></footer>
+<script defer="" src="../assets/js/pages/info-pages.js"></script>
+<script src="/assets/js/navfix.js"></script>
+
+<!-- DC:CONSENT_BANNER_START -->
+<style>
+  .dc-consent-banner{
+    position:fixed; left:0; right:0; bottom:0;
+    z-index:2147483647;
+    background: rgba(255,255,255,0.98);
+    border-top: 1px solid rgba(0,0,0,.1);
+    box-shadow: 0 -8px 24px rgba(0,0,0,.08);
+    padding: 16px; display:flex; gap:16px; align-items: flex-start;
+    font-family: system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
+  }
+  .dc-consent-banner__text{ flex:1; font-size:14px; line-height:1.45; color:#222; }
+  .dc-consent-banner__btns{ display:flex; gap:8px; flex-wrap:wrap; }
+  .dc-btn{ border:1px solid #222; padding:8px 12px; border-radius:999px; background:#fff; cursor:pointer; font-size:14px; }
+  .dc-btn--primary{ background:#222; color:#fff; }
+  .dc-consent-manage{
+    left: 12px !important;
+    position:fixed;
+    right:auto !important; bottom: 6px;
+    z-index:2147483647;
+    border:1px solid #222; background:#fff; padding:6px 10px; border-radius:999px; font-size:12px; cursor:pointer; opacity:.85;
+    line-height:1; white-space:nowrap;
+    transition: bottom .2s ease, right .2s ease, left .2s ease, opacity .2s;
+  }
+  /* When we need to lift above another fixed button (e.g., back-to-top) */
+  /* Put it bottom-left on very small screens to avoid crowding */
+  @media (max-width: 480px) {
+    .dc-consent-manage{ left:16px; right:auto; }
+  }
+  .dc-consent-manage:hover{ opacity:1; }
+</style>
+<script>
+(function(){
+  try {
+    // Create "Manage cookies" floating button
+    var manage = document.createElement('button');
+    manage.className = 'dc-consent-manage';
+    manage.type = 'button';
+    manage.textContent = 'Cookies';
+    manage.setAttribute('aria-label','Manage cookies');
+    manage.addEventListener('click', function(){ showBanner(true); });
+
+    // Build banner
+    function showBanner(force) {
+      var saved = null;
+      try { saved = JSON.parse(localStorage.getItem('dc_consent') || '{}'); } catch(e){}
+      if(!force && saved && (saved.choice === 'accept' || saved.choice === 'reject')) return;
+      var wrap = document.createElement('div');
+      wrap.className = 'dc-consent-banner';
+      wrap.setAttribute('role','dialog');
+      wrap.setAttribute('aria-live','polite');
+      wrap.innerHTML = ''
+        + '<div class="dc-consent-banner__text">To keep things simple, we use essential cookies. If you’re happy, we’ll also use analytics to learn what’s working. You can update your choice anytime in “Cookies”.</div>'
+        + '<div class="dc-consent-banner__btns">'
+        +   '<button type="button" class="dc-btn" data-choice="reject">Reject non-essential</button>'
+        +   '<button type="button" class="dc-btn dc-btn--primary" data-choice="accept">Accept all</button>'
+        + '</div>';
+      document.body.appendChild(wrap);
+      wrap.querySelectorAll('button[data-choice]').forEach(function(btn){
+        btn.addEventListener('click', function(){ setChoice(this.getAttribute('data-choice')); });
+      });
+    }
+
+    function setChoice(choice) {
+      try { localStorage.setItem('dc_consent', JSON.stringify({choice: choice})); } catch(e){}
+      window.__dc_consent_choice = choice;
+
+      // Update Consent Mode in real-time
+      if (typeof gtag === 'function') {
+        if(choice === 'accept') {
+          gtag('consent', 'update', {
+            analytics_storage: 'granted',
+            ad_storage: 'granted',
+            ad_user_data: 'granted',
+            ad_personalization: 'granted'
+          });
+          // Load GA once (no duplicates)
+          if (typeof window.dcLoadGAOnce === 'function') {
+            window.dcLoadGAOnce();
+          }
+        } else {
+          gtag('consent', 'update', {
+            analytics_storage: 'denied',
+            ad_storage: 'denied',
+            ad_user_data: 'denied',
+            ad_personalization: 'denied'
+          });
+          // Best-effort cookie cleanup
+          if (typeof window.dcClearGACookies === 'function') {
+            window.dcClearGACookies();
+          }
+        }
+      }
+
+      var b = document.querySelector('.dc-consent-banner'); if(b) b.remove();
+    }
+
+    // Try to avoid overlap with existing fixed "back to top" buttons
+    function avoidOverlap() {
+      try {
+        var candidates = [
+          '.back-to-top', '.scroll-to-top', '.scroll-top', '.to-top', '.btn-to-top',
+          '#backToTop', '#toTop', '#totop', '[data-backtotop]', '[data-scroll-top]'
+        ];
+        var el = null;
+        for (var i=0; i<candidates.length; i++) {
+          var found = document.querySelector(candidates[i]);
+          if(found) { el = found; break; }
+        }
+        // Reset
+        manage.classList.remove('dc-lift');
+        manage.style.right = ''; manage.style.left = ''; manage.style.bottom = '';
+        // On small screens we already push left via CSS, skip overlap logic
+        if (window.matchMedia('(max-width: 480px)').matches) return;
+        if (!el) return;
+        var r = el.getBoundingClientRect();
+        // Heuristic: if the element sits bottom-right within 120px from the viewport edge, lift our button
+        var nearBottom = (window.innerHeight - r.bottom) <= 120;
+        var nearRight  = (window.innerWidth  - r.right)  <= 120;
+        var visible = r.width>0 && r.height>0;
+        if (visible && nearBottom && nearRight) {
+          // // manage.classList.add('dc-lift'); // disabled // disabled
+        }
+      } catch(e){}
+    }
+
+    document.addEventListener('DOMContentLoaded', function(){
+      document.body.appendChild(manage);
+      showBanner(false);
+      avoidOverlap();
+    });
+    window.addEventListener('scroll', avoidOverlap, {passive:true});
+    window.addEventListener('resize', avoidOverlap);
+
+    // Run a few times shortly after load to catch late-mounted widgets
+    setTimeout(avoidOverlap, 300);
+    setTimeout(avoidOverlap, 1000);
+  } catch(e){ console.error('Consent banner error', e); }
+})();
+</script>
+<!-- DC:CONSENT_BANNER_END -->
+
+<script src="/assets/js/ga-funnel.js"></script>
+</body>
+</html>

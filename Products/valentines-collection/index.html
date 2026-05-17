@@ -1,0 +1,725 @@
+<!DOCTYPE html>
+
+<html lang="en-GB">
+<head>
+<!-- DC:GA4_CONSENT_HEAD_START -->
+<!-- Google Analytics 4 + Consent Mode v2 (UK/EU) -->
+<script>
+  // GA4 Measurement ID (change here if needed)
+  window.GA_MEASUREMENT_ID = window.GA_MEASUREMENT_ID || 'G-CC2NRDSRQ9';
+
+  // Consent state: 'accept' | 'reject' | null
+  window.__dc_consent_choice = window.__dc_consent_choice || null;
+
+  // GA load guard
+  window.__ga_loaded = window.__ga_loaded || false;
+
+  // DataLayer + gtag wrapper:
+  // - Always allow Consent Mode commands
+  // - Block analytics/events until user accepts
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){
+    try {
+      if (arguments && arguments.length && arguments[0] === 'consent') {
+        window.dataLayer.push(arguments);
+        return;
+      }
+      if (window.__dc_consent_choice === 'accept') {
+        window.dataLayer.push(arguments);
+      }
+    } catch(e) {}
+  }
+  window.gtag = window.gtag || gtag;
+
+  // Helper: load GA script once (only call after consent 'accept')
+  window.dcLoadGAOnce = window.dcLoadGAOnce || function() {
+    var id = window.GA_MEASUREMENT_ID;
+    if (window.__ga_loaded) return;
+    if(!id || id === 'G-XXXXXXXXXX') {
+      console.warn('GA4 ID is placeholder. Set window.GA_MEASUREMENT_ID to your real GA4 ID.');
+      return;
+    }
+    // Avoid duplicate script tags
+    if (!document.querySelector('script[src^="https://www.googletagmanager.com/gtag/js?id="]')) {
+      var s = document.createElement('script');
+      s.async = true;
+      s.src = 'https://www.googletagmanager.com/gtag/js?id=' + id;
+      document.head.appendChild(s);
+    }
+    window.__ga_loaded = true;
+    gtag('js', new Date());
+    gtag('config', id, { anonymize_ip: true });
+  };
+
+  // Helper: attempt to clear GA cookies on "reject" (best-effort)
+  window.dcClearGACookies = window.dcClearGACookies || function() {
+    try {
+      var expires = 'Thu, 01 Jan 1970 00:00:00 GMT';
+      var domains = [location.hostname, '.' + location.hostname];
+      function del(name) {
+        // Host-only
+        document.cookie = name + '=; expires=' + expires + '; path=/';
+        // Explicit domains
+        for (var i=0; i<domains.length; i++) {
+          document.cookie = name + '=; expires=' + expires + '; path=/; domain=' + domains[i];
+        }
+      }
+      document.cookie.split(';').forEach(function(c){
+        var name = c.split('=')[0].trim();
+        if(name === '_ga' || name === '_gid' || name.indexOf('_ga_') === 0 || name.indexOf('_gat') === 0) {
+          del(name);
+        }
+      });
+    } catch(e) {}
+  };
+
+  // Read saved consent and set defaults (Consent Mode v2)
+  (function() {
+    try {
+      var saved = JSON.parse(localStorage.getItem('dc_consent') || '{}');
+      var choice = (saved && (saved.choice === 'accept' || saved.choice === 'reject')) ? saved.choice : null;
+      window.__dc_consent_choice = choice;
+
+      var base = {
+        ad_user_data: 'denied',
+        ad_personalization: 'denied',
+        ad_storage: 'denied',
+        analytics_storage: 'denied',
+        functionality_storage: 'granted',
+        security_storage: 'granted'
+      };
+
+      var consent = Object.assign({}, base, (choice === 'accept') ? {
+        analytics_storage: 'granted',
+        ad_storage: 'granted',
+        ad_user_data: 'granted',
+        ad_personalization: 'granted'
+      } : {});
+
+      gtag('consent', 'default', consent);
+
+      // Load GA only if user already accepted previously
+      if (choice === 'accept') {
+        window.dcLoadGAOnce();
+      }
+    } catch(e) { console.warn('Consent read failed', e); }
+  })();
+</script>
+<!-- DC:GA4_CONSENT_HEAD_END -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Valentine's Cakes &amp; Cupcakes | Dreamy Cake Bakery</title>
+<meta content="Order made-to-order Valentine's bento cakes and cupcake boxes in Huntingdon. Limited romantic designs with collection or delivery." name="description"/>
+<link href="../../assets/img/site.webmanifest" rel="manifest"/>
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&amp;family=Raleway:wght@600;700;800&amp;family=Open+Sans:wght@400;600&amp;display=swap" rel="stylesheet"/>
+<link href="../../assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet"/>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet"/>
+<link href="../../assets/vendor/aos/aos.css" rel="stylesheet"/>
+<link href="../../assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet"/>
+<link href="../../assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet"/>
+<link href="../../assets/css/main.css" rel="stylesheet"/><link href="../../assets/css/product.css" rel="stylesheet"/>
+<meta content="product" property="og:type"/>
+<meta content="Valentine's Cakes &amp; Cupcakes | Dreamy Cake Bakery" property="og:title"/>
+<meta content="Order made-to-order Valentine's bento cakes and cupcake boxes in Huntingdon. Limited romantic designs with collection or delivery." property="og:description"/>
+<meta content="https://dreamycake.co.uk/assets/img/og/valentines-collection-cambridgeshire-1200x630.jpg" property="og:image"/>
+<meta content="Valentine’s Day Collection by Dreamy Cake Bakery with product preview" property="og:image:alt"/>
+<meta content="630" property="og:image:height"/>
+<meta content="1200" property="og:image:width"/>
+<meta content="https://dreamycake.co.uk/Products/valentines-collection/" property="og:url"/>
+<meta content="summary_large_image" name="twitter:card"/>
+<meta content="Valentine's Cakes &amp; Cupcakes | Dreamy Cake Bakery" name="twitter:title"/>
+<meta content="Order made-to-order Valentine's bento cakes and cupcake boxes in Huntingdon. Limited romantic designs with collection or delivery." name="twitter:description"/>
+<meta content="https://dreamycake.co.uk/assets/img/og/valentines-collection-cambridgeshire-1200x630.jpg" name="twitter:image"/>
+<meta content="Valentine’s Day Collection by Dreamy Cake Bakery with product preview" name="twitter:image:alt"/>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Can I order the Valentine’s collection outside the seasonal promo window?","acceptedAnswer":{"@type":"Answer","text":"Yes — these designs can be requested year-round. The collection is promoted more actively closer to Valentine’s Day, but early enquiries are welcome any time."}},{"@type":"Question","name":"How do I send the photo?","acceptedAnswer":{"@type":"Answer","text":"Attach your photo below or email it after submitting the form — I’ll confirm the best format."}},{"@type":"Question","name":"Is payment required to secure my order?","acceptedAnswer":{"@type":"Answer","text":"Yes — your slot is confirmed once payment is received (bank transfer)."}},{"@type":"Question","name":"Can I choose flavours?","acceptedAnswer":{"@type":"Answer","text":"Yes — flavour options are available on request / in the form."}}]}</script><script type="application/ld+json">{"@context":"https://schema.org","@type":"ProductGroup","name":"Valentine’s Day Collection — Bento Cakes & Cupcakes","description":"Order made-to-order Valentine’s bento cakes and cupcake boxes in Huntingdon & Cambridgeshire. Two limited designs + optional edible photo. Collection or local delivery.","image":["https://dreamycake.co.uk/assets/img/og/home-hero-1200x630.jpg"],"sku":"valentines-collection","category":"Seasonal","url":"https://dreamycake.co.uk/Products/valentines-collection/","brand":{"@type":"Brand","name":"Dreamy Cake Bakery"},"areaServed":["Huntingdon","Cambridgeshire",{"@type":"DefinedRegion","addressCountry":"GB"}],"offers":{"@type":"AggregateOffer","priceCurrency":"GBP","lowPrice":"25","highPrice":"25","offerCount":4,"offers":[{"@type":"Offer","priceCurrency":"GBP","price":"25","availability":"https://schema.org/InStock","url":"https://dreamycake.co.uk/Products/valentines-collection/","hasMerchantReturnPolicy":{"@type":"MerchantReturnPolicy","applicableCountry":"GB","returnPolicyCategory":"https://schema.org/MerchantReturnNotPermitted"},"itemCondition":"https://schema.org/NewCondition","name":"Bento Cake — Design 1 “Love Note”"},{"@type":"Offer","priceCurrency":"GBP","price":"25","availability":"https://schema.org/InStock","url":"https://dreamycake.co.uk/Products/valentines-collection/","hasMerchantReturnPolicy":{"@type":"MerchantReturnPolicy","applicableCountry":"GB","returnPolicyCategory":"https://schema.org/MerchantReturnNotPermitted"},"itemCondition":"https://schema.org/NewCondition","name":"Bento Cake — Design 2 “Photo Heart”"},{"@type":"Offer","priceCurrency":"GBP","price":"25","availability":"https://schema.org/InStock","url":"https://dreamycake.co.uk/Products/valentines-collection/","hasMerchantReturnPolicy":{"@type":"MerchantReturnPolicy","applicableCountry":"GB","returnPolicyCategory":"https://schema.org/MerchantReturnNotPermitted"},"itemCondition":"https://schema.org/NewCondition","name":"Cupcakes — Box of 6"},{"@type":"Offer","priceCurrency":"GBP","price":"25","availability":"https://schema.org/InStock","url":"https://dreamycake.co.uk/Products/valentines-collection/","hasMerchantReturnPolicy":{"@type":"MerchantReturnPolicy","applicableCountry":"GB","returnPolicyCategory":"https://schema.org/MerchantReturnNotPermitted"},"itemCondition":"https://schema.org/NewCondition","name":"Bundle: Bento + 6 Cupcakes"}],"hasMerchantReturnPolicy":{"@type":"MerchantReturnPolicy","applicableCountry":"GB","returnPolicyCategory":"https://schema.org/MerchantReturnNotPermitted"}},"hasVariant":[{"@type":"Product","name":"Bento Cake — Design 1 “Love Note”","sku":"valentines-collection-love-note","offers":{"@type":"Offer","priceCurrency":"GBP","price":"25","availability":"https://schema.org/InStock","url":"https://dreamycake.co.uk/Products/valentines-collection/","hasMerchantReturnPolicy":{"@type":"MerchantReturnPolicy","applicableCountry":"GB","returnPolicyCategory":"https://schema.org/MerchantReturnNotPermitted"},"itemCondition":"https://schema.org/NewCondition"}},{"@type":"Product","name":"Bento Cake — Design 2 “Photo Heart”","sku":"valentines-collection-photo-heart","offers":{"@type":"Offer","priceCurrency":"GBP","price":"25","availability":"https://schema.org/InStock","url":"https://dreamycake.co.uk/Products/valentines-collection/","hasMerchantReturnPolicy":{"@type":"MerchantReturnPolicy","applicableCountry":"GB","returnPolicyCategory":"https://schema.org/MerchantReturnNotPermitted"},"itemCondition":"https://schema.org/NewCondition"}},{"@type":"Product","name":"Cupcakes — Box of 6","sku":"valentines-collection-cupcakes-6","offers":{"@type":"Offer","priceCurrency":"GBP","price":"25","availability":"https://schema.org/InStock","url":"https://dreamycake.co.uk/Products/valentines-collection/","hasMerchantReturnPolicy":{"@type":"MerchantReturnPolicy","applicableCountry":"GB","returnPolicyCategory":"https://schema.org/MerchantReturnNotPermitted"},"itemCondition":"https://schema.org/NewCondition"}},{"@type":"Product","name":"Bundle: Bento + 6 Cupcakes","sku":"valentines-collection-bundle","offers":{"@type":"Offer","priceCurrency":"GBP","price":"25","availability":"https://schema.org/InStock","url":"https://dreamycake.co.uk/Products/valentines-collection/","hasMerchantReturnPolicy":{"@type":"MerchantReturnPolicy","applicableCountry":"GB","returnPolicyCategory":"https://schema.org/MerchantReturnNotPermitted"},"itemCondition":"https://schema.org/NewCondition"}}]}</script>
+<link href="/assets/img/favicon.svg" rel="icon" type="image/svg+xml"/>
+<link href="/assets/img/favicon.ico" rel="icon" sizes="any"/>
+<link href="/apple-touch-icon.png" rel="apple-touch-icon"/>
+<link color="#F9F6EC" href="/safari-pinned-tab.svg" rel="mask-icon"/>
+<meta content="#F9F6EC" name="theme-color"/>
+<style>
+/* dc-consent mobile refined */
+@media (max-width: 576px){
+  .dc-consent-banner{
+    position: fixed !important;
+    top: auto !important;
+    left: 10px !important;
+    right: 10px !important;
+    bottom: 10px !important;
+    width: auto !important;
+    max-width: none !important;
+    max-height: 44vh !important;
+    overflow: auto !important;
+    padding: 12px 12px 14px !important;
+    border-radius: 16px !important;
+    box-shadow: 0 8px 24px rgba(0,0,0,.18) !important;
+    background: #fff !important;
+    display: block !important;
+  }
+  .dc-consent-banner__text{
+    width: 100% !important;
+    font-size: 12.5px !important;
+    line-height: 1.5 !important;
+    margin: 0 0 12px 0 !important;
+  }
+  .dc-consent-banner__btns{
+    display: flex !important;
+    width: 100% !important;
+    gap: 8px !important;
+    justify-content: space-between !important;
+  }
+  /* Make reject smaller than accept */
+  .dc-consent-banner__btns .dc-btn[data-choice="reject"]{
+    flex: 0 0 46% !important;
+    font-size: 12px !important;
+    padding: 9px 10px !important;
+  }
+  .dc-consent-banner__btns .dc-btn[data-choice="accept"],
+  .dc-consent-banner__btns .dc-btn.dc-btn--primary{
+    flex: 1 1 auto !important;
+    font-size: 13.5px !important;
+    padding: 11px 12px !important;
+  }
+}
+</style>
+<link href="https://dreamycake.co.uk/Products/valentines-collection/" rel="canonical"/>
+</head>
+<body class="index-page">
+<header class="header d-flex align-items-center fixed-top" id="header">
+<div class="container-fluid container-xl position-relative d-flex align-items-center justify-content-between">
+<a class="logo d-flex align-items-center" href="/">
+<!-- Uncomment the line below if you also wish to use an image logo -->
+<!-- <img src="/assets/img/logo.png" alt="Dreamy Cake Bakery" width="32" height="32" decoding="async" fetchpriority="high"> -->
+<p class="sitename">
+      Dreamy Cake Bakery
+     </p>
+</a>
+<nav class="navmenu" id="navmenu">
+<ul>
+<li>
+<a aria-current="page" class="active" href="/#hero">
+        Home
+       </a>
+</li>
+<li><a href="/#pricing">Cake Menu</a></li>
+<li>
+<a aria-label="Go to Portfolio section" href="/#portfolio">
+        Portfolio
+       </a>
+</li>
+<li>
+<a href="/#contact">
+        Contact
+       </a>
+</li><li>
+<a href="/About/">
+        About
+       </a>
+</li>
+<li class="dropdown">
+<button aria-controls="order-submenu" aria-expanded="false" aria-label="Toggle order submenu" class="nav-toggle" type="button"><span>Order</span> <i aria-hidden="true" class="bi bi-chevron-down chev"></i></button>
+<ul id="order-submenu"><li><a class="nav-bespoke-order" href="/Bespoke-Order/"><span>Bespoke Order</span><span aria-hidden="true" class="nav-bespoke-order__arrow">→</span></a></li><li><a href="/Products/celebration-cake/#order">Order Celebration Cake</a></li><li><a href="/Products/themed-cake/#order">Order Themed Cake</a></li><li><a href="/Products/mini-bento-cake/#order">Order Mini / Bento Cake</a></li><li><a href="/Products/wedding-cake/#order">Order Wedding Cakes</a></li><li><a href="/Products/cupcakes/#order">Order Cupcakes</a></li><li><a href="/Products/postage-cookie/#order">Order Postage Cookie</a></li></ul>
+</li>
+<!-- <li><a href="/#how-it-works">Services</a></li> -->
+<li class="dropdown">
+<button aria-controls="info-submenu" aria-expanded="false" aria-label="Toggle info submenu" class="nav-toggle" type="button"><span>Info</span> <i aria-hidden="true" class="bi bi-chevron-down chev"></i></button>
+<ul id="info-submenu">
+<li><a href="/Delivery/">Delivery</a></li>
+<li><a href="/Allergens/">Allergens</a></li>
+<li><a href="/How-it-works/">How it works</a></li>
+<li><a href="/QA/">Q&amp;A</a></li>
+</ul>
+</li>
+<li>
+<a href="https://shop.dreamycake.co.uk">Shop</a>
+</li></ul>
+<i class="mobile-nav-toggle d-xl-none bi bi-list">
+</i>
+</nav>
+</div>
+</header>
+<main class="main product" data-season-page="valentines">
+<!-- Hero -->
+<div class="page-title product-hero" style="--hero-img:url('../../assets/img/items/valentines-collection-main.webp')">
+<div class="container position-relative">
+<h1>Valentine’s Day Collection — Bento Cakes &amp; Cupcakes</h1>
+<p data-season-copy="hero-highlights">Romantic designs • Optional edible photo • Gift-ready finish</p>
+<p class="delivery-note" data-season-copy="hero-note"><strong>From £25</strong> — available to order year-round; featured seasonally around Valentine’s Day.</p>
+<div class="chipbar">
+<a class="chip" href="/Delivery/"><i class="bi bi-truck"></i> Delivery</a>
+<a class="chip" href="/Allergens/"><i class="bi bi-exclamation-triangle"></i> Allergens</a>
+<a class="chip" href="/How-it-works/"><i class="bi bi-calendar-event"></i> How it works</a>
+</div>
+</div>
+</div>
+<section class="product-trust section alt-white">
+<div class="container">
+<div class="trust-grid">
+<a aria-label="View Dreamy Cake Bakery official Food Hygiene Rating 5 - Very Good on the Food Standards Agency website" class="trust-item trust-item--official-rating" href="https://ratings.food.gov.uk/business/1856524" rel="noopener" target="_blank"><i class="bi bi-shield-check"></i> 5★ Food Hygiene Rating</a>
+<div class="trust-item"><i class="bi bi-heart"></i> Made fresh to order</div>
+<div class="trust-item"><i class="bi bi-truck"></i> Free local delivery</div>
+</div>
+</div>
+</section>
+<!-- Gallery & About -->
+<section class="section alt-white">
+<div class="container">
+<div class="row gy-4">
+<div class="col-12 col-lg-5 gallery" data-aos="fade-up">
+<div class="swiper product-swiper">
+<div class="swiper-wrapper"><div class="swiper-slide"><a class="glightbox" data-gallery="product" href="../../assets/img/items/valentines-collection-main.webp"><img alt="Valentine’s Day collection — bento cakes and cupcakes — hero view" decoding="async" fetchpriority="high" height="1066" loading="eager" src="../../assets/img/items/valentines-collection-main.webp" width="800"/></a></div><div class="swiper-slide"><a class="glightbox" data-gallery="product" href="../../assets/img/items/valentines-collection-02.webp"><img alt="Valentine’s Day collection — bento cake design “Love Note”" decoding="async" height="1066" loading="lazy" sizes="(max-width: 991px) 100vw, 460px" src="../../assets/img/items/valentines-collection-02-480w.webp" srcset="../../assets/img/items/valentines-collection-02-480w.webp 480w, ../../assets/img/items/valentines-collection-02.webp 800w" width="800"/></a></div><div class="swiper-slide"><a class="glightbox" data-gallery="product" href="../../assets/img/items/valentines-collection-03.webp"><img alt="Valentine’s Day collection — bento cake design “Photo Heart”" decoding="async" height="1066" loading="lazy" sizes="(max-width: 991px) 100vw, 460px" src="../../assets/img/items/valentines-collection-03-480w.webp" srcset="../../assets/img/items/valentines-collection-03-480w.webp 480w, ../../assets/img/items/valentines-collection-03.webp 800w" width="800"/></a></div><div class="swiper-slide"><a class="glightbox" data-gallery="product" href="../../assets/img/items/valentines-collection-04.webp"><img alt="Valentine’s Day collection — cupcakes box of 6" decoding="async" height="1066" loading="lazy" sizes="(max-width: 991px) 100vw, 460px" src="../../assets/img/items/valentines-collection-04-480w.webp" srcset="../../assets/img/items/valentines-collection-04-480w.webp 480w, ../../assets/img/items/valentines-collection-04.webp 800w" width="800"/></a></div><div class="swiper-slide"><a class="glightbox" data-gallery="product" href="../../assets/img/items/valentines-collection-05.webp"><img alt="Valentine’s Day collection — packaging and details" decoding="async" height="1066" loading="lazy" sizes="(max-width: 991px) 100vw, 460px" src="../../assets/img/items/valentines-collection-05-480w.webp" srcset="../../assets/img/items/valentines-collection-05-480w.webp 480w, ../../assets/img/items/valentines-collection-05.webp 800w" width="800"/></a></div><div class="swiper-slide"><a class="glightbox" data-gallery="product" href="../../assets/img/items/valentines-collection-06.webp"><img alt="Valentine’s Day collection — close-up details" decoding="async" height="1066" loading="lazy" sizes="(max-width: 991px) 100vw, 460px" src="../../assets/img/items/valentines-collection-06-480w.webp" srcset="../../assets/img/items/valentines-collection-06-480w.webp 480w, ../../assets/img/items/valentines-collection-06.webp 800w" width="800"/></a></div></div>
+<div class="swiper-pagination"></div>
+<div class="swiper-button-prev"></div>
+<div class="swiper-button-next"></div>
+</div>
+</div>
+<div class="col-12 col-lg-7" data-aos="fade-up" data-aos-delay="100">
+<h2 class="h4" data-season-copy="status-heading">Valentine’s collection is available to order year-round 💌</h2>
+<p data-season-copy="intro-1">Valentine’s bento cakes and cupcakes can be requested year-round, with seasonal promo slots highlighted closer to Valentine’s Day.</p>
+<p data-season-copy="intro-2">Send an enquiry with your date, servings, style ideas and delivery details — I’ll confirm availability, price and the best options for your occasion.</p>
+<div><h3 class="h6 mb-2">Why Dreamy Cake Bakery</h3>
+<ul class="bullets">
+<li><i class="bi bi-check2-circle"></i> Made to order — every box is personalised for your occasion</li>
+<li><i class="bi bi-check2-circle"></i> Photo-ready finish — clean, delicate details (perfect for gifting)</li>
+<li><i class="bi bi-check2-circle"></i> Collection / local delivery around Huntingdon &amp; nearby areas</li>
+</ul></div>
+<div class="product-help-inline mt-3">
+<div class="help-band d-flex flex-column flex-md-row align-items-start align-items-md-center justify-content-between gap-2">
+<div><strong>Prefer WhatsApp?</strong> Send your date + servings + postcode + style ideas — I’ll reply with availability and a quote.</div>
+<div class="d-flex gap-2 flex-wrap">
+<a class="btn btn-outline btn-whatsapp" href="https://wa.me/447510837225"><i class="bi bi-whatsapp"></i> WhatsApp</a>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Sizes & Servings + Flavours -->
+<!-- Related -->
+<section class="section alt-cream d-lg-none" id="order-mobile"><div class="container"><div data-order-slot="mobile"></div></div></section><section class="section alt-white d-lg-none"><div class="container"><div class="mt-3"><div class="overflow-hidden faq-accordion mt-2">
+<details>
+<summary><span data-season-copy="faq-cutoff-question">Can I order the Valentine’s collection outside the seasonal promo window?</span><i class="bi bi-chevron-down chev"></i></summary>
+<div class="answer" data-season-copy="faq-cutoff-answer">Yes — these designs can be requested year-round. The collection is promoted more actively closer to Valentine’s Day, but early enquiries are welcome any time.</div>
+</details>
+<details>
+<summary><span>How do I send the photo?</span><i class="bi bi-chevron-down chev"></i></summary>
+<div class="answer">Attach your photo below or email it after submitting the form — I’ll confirm the best format.</div>
+</details>
+<details>
+<summary><span>Is payment required to secure my order?</span><i class="bi bi-chevron-down chev"></i></summary>
+<div class="answer">Yes — your slot is confirmed once payment is received (bank transfer).</div>
+</details>
+<details>
+<summary><span>Can I choose flavours?</span><i class="bi bi-chevron-down chev"></i></summary>
+<div class="answer">Yes — flavour options are available on request / in the form.</div>
+</details>
+</div></div></div></section><section class="section alt-cream d-none d-lg-block"><div class="container"><div class="row g-4"><div class="mx-auto col-12 col-lg-12 col-xl-10 col-xxl-9"><div data-order-slot="desktop" id="order-desktop"><div class="order-card" data-order-card="1">
+<h3 class="h5" data-season-copy="order-title">Send an enquiry</h3>
+<form action="https://formly.email/submit" class="product-form" data-form="f1" enctype="multipart/form-data" id="order" method="POST"><input name="access_key" type="hidden" value="8c20c8e2b11242a586b585700f820946"/><input name="from_name" type="hidden" value="Dreamy Cake website"/><input name="form_type" type="hidden" value="Product order — Valentine’s Day Collection"/><input name="source_page_url" type="hidden" value=""/><input name="source_page_title" type="hidden" value=""/><input name="submitted_at" type="hidden" value=""/>
+<input name="subject" type="hidden" value="Dreamy Cake Bakery — Order request — Valentine’s Collection"/>
+
+
+
+<input name="redirect" type="hidden" value="https://dreamycake.co.uk/Thank-You/"/>
+<input name="product_name" type="hidden" value="Valentine’s Day Collection"/>
+<input name="page_url" type="hidden" value="/Products/valentines-collection/"/>
+<div class="row g-3">
+<div class="col-12 col-md-6">
+<label class="form-label" for="products-valentines-collection-index-f1-name">Full name</label>
+<input autocomplete="name" class="form-control" id="products-valentines-collection-index-f1-name" name="name" placeholder="Jane Doe" required="" type="text"/>
+</div>
+<div class="col-12 col-md-6">
+<label class="form-label" for="products-valentines-collection-index-f1-email">Email</label>
+<input autocomplete="email" class="form-control" id="products-valentines-collection-index-f1-email" name="email" placeholder="you@example.com" required="" type="email"/>
+</div>
+<div class="col-12 col-md-6">
+<label class="form-label" for="products-valentines-collection-index-f1-phone">Phone <span class="small text-muted">(optional, but helpful)</span></label>
+<input autocomplete="tel" class="form-control" id="products-valentines-collection-index-f1-phone" name="phone" placeholder="+44 ..." type="tel"/>
+</div>
+<div class="col-12 col-md-6">
+<label class="form-label" for="products-valentines-collection-index-f1-date">Date needed</label>
+<input autocomplete="off" class="form-control" id="products-valentines-collection-index-f1-date" name="date" required="" type="date"/>
+</div>
+<div class="col-12">
+<label class="form-label" for="products-valentines-collection-index-f1-product">Product selection</label>
+<select class="form-select" id="products-valentines-collection-index-f1-product" name="product_selection" required="">
+<option disabled="" selected="" value="">Choose an option</option>
+<option value="Bento Cake — Design 1 “Love Note”">Bento Cake — Design 1 “Love Note”</option>
+<option value="Bento Cake — Design 2 “Photo Heart”">Bento Cake — Design 2 “Photo Heart”</option>
+<option value="Cupcakes — Box of 6">Cupcakes — Box of 6</option>
+<option value="Bundle: Bento + 6 Cupcakes">Bundle: Bento + 6 Cupcakes</option>
+</select>
+<div class="form-text">If you choose “Photo Heart”, attach your photo below or email it after submitting — I’ll confirm the best format.</div>
+</div>
+<div class="col-12 col-md-6">
+<label class="form-label" for="products-valentines-collection-index-f1-flavour">Flavour</label>
+<select class="form-select" id="products-valentines-collection-index-f1-flavour" name="flavour" required="">
+<option disabled="" selected="" value="">Choco / Vanilla</option>
+<option value="Vanilla">Vanilla</option>
+<option value="Chocolate">Chocolate</option>
+</select>
+</div>
+<div class="col-12 col-md-6">
+<label class="form-label" for="products-valentines-collection-index-html-delivery-option">Collection or delivery?</label>
+<select autocomplete="off" class="form-control" id="products-valentines-collection-index-html-delivery-option" name="delivery_option" required="">
+<option disabled="" selected="" value="">Choose option</option>
+<option value="collection">Collection</option>
+<option value="delivery">Local delivery</option>
+</select>
+</div>
+<div class="col-12">
+<label class="form-label" for="products-valentines-collection-index-f1-postcode">Postcode / area</label>
+<input class="form-control" id="products-valentines-collection-index-f1-postcode" name="postcode" placeholder="e.g., PE28" type="text"/>
+<div class="form-text">Required for local delivery.</div>
+</div>
+<div class="col-12"><label class="form-label" for="products-valentines-collection-index-attachment-1">Inspiration image / PDF (optional)</label><input accept=".jpg,.jpeg,.png,.webp,.gif,.bmp,.heic,.heif,.pdf,.tif,.tiff,image/jpeg,image/png,image/webp,image/gif,image/bmp,image/heic,image/heif,application/pdf,image/tiff" class="form-control" data-file-attachment="true" data-max-bytes="9961472" data-max-files="1" data-max-label="10 MB" data-max-total-bytes="9961472" id="products-valentines-collection-index-attachment-1" name="attachment" type="file"/><div class="form-text">Attach one photo, screenshot, brief or PDF (max 10 MB).</div><div class="invalid-feedback">Please upload one JPG, PNG, WEBP, HEIC, TIFF or PDF file up to 10 MB.</div></div><div class="col-12 text-end mt-2">
+<div class="col-12 small text-muted privacy-note">By sending this request, you agree to the <a href="/Privacy-Policy/">Privacy Policy</a>. We use your details only to reply and manage your order.</div>
+<button class="btn btn-primary" data-season-copy="submit-label" type="submit">Send an enquiry</button>
+</div>
+</div>
+</form>
+</div></div><div class="product-subtitle mt-4"><h2 class="h4 m-0">Quick questions</h2><div class="caption">BEFORE YOU ORDER</div></div><div class="mt-3" id="quick-questions-desktop"><div class="overflow-hidden faq-accordion mt-2">
+<details>
+<summary><span data-season-copy="faq-cutoff-question">Can I order the Valentine’s collection outside the seasonal promo window?</span><i class="bi bi-chevron-down chev"></i></summary>
+<div class="answer" data-season-copy="faq-cutoff-answer">Yes — these designs can be requested year-round. The collection is promoted more actively closer to Valentine’s Day, but early enquiries are welcome any time.</div>
+</details>
+<details>
+<summary><span>How do I send the photo?</span><i class="bi bi-chevron-down chev"></i></summary>
+<div class="answer">Attach your photo below or email it after submitting the form — I’ll confirm the best format.</div>
+</details>
+<details>
+<summary><span>Is payment required to secure my order?</span><i class="bi bi-chevron-down chev"></i></summary>
+<div class="answer">Yes — your slot is confirmed once payment is received (bank transfer).</div>
+</details>
+<details>
+<summary><span>Can I choose flavours?</span><i class="bi bi-chevron-down chev"></i></summary>
+<div class="answer">Yes — flavour options are available on request / in the form.</div>
+</details>
+</div></div><div class="mt-2"><a class="btn btn-outline" href="/QA/" role="button">See full Q&amp;A →</a></div></div></div></div></section><section class="alt-1 section product-help alt-cream" id="help">
+<div class="container">
+<div class="help-band d-flex flex-column flex-md-row align-items-start align-items-md-center justify-content-between gap-2">
+<div><strong>Questions?</strong> I reply quickly on WhatsApp and email.</div>
+<div class="d-flex gap-2 flex-wrap">
+<a class="btn btn-outline" href="https://wa.me/447510837225"><i class="bi bi-whatsapp"></i> WhatsApp</a>
+<a class="btn btn-outline" href="mailto:contact@dreamycake.co.uk"><i class="bi bi-envelope"></i> Email</a>
+</div>
+</div>
+</div>
+</section>
+<section class="section related alt-white" id="related-section">
+<div class="container">
+<h3 class="h5 mb-3">You may also like</h3>
+<div class="row g-3 row-cols-2 row-cols-md-3 row-cols-xl-4">
+<div class="col-6 col-md-3"><a class="card text-decoration-none h-100 overflow-hidden rounded-3" href="/Products/celebration-cake/"><div class="related-thumb"><img alt="Blue celebration cake with teddy bear topper" decoding="async" height="1066" loading="lazy" sizes="(max-width: 767px) 50vw, (max-width: 1199px) 33vw, 25vw" src="../../assets/img/items/celebration-cake-main-blue-bear-cloud-birthday-cake-480w.webp" srcset="../../assets/img/items/celebration-cake-main-blue-bear-cloud-birthday-cake-480w.webp 480w, ../../assets/img/items/celebration-cake-main-blue-bear-cloud-birthday-cake.webp 800w" width="800"/></div><div class="p-2 text-center"><strong>Celebration Cake</strong></div></a></div><div class="col-6 col-md-3"><a class="card text-decoration-none h-100 overflow-hidden rounded-3" href="/Products/themed-cake/"><div class="related-thumb"><img alt="Rose bouquet gift box themed cake" decoding="async" height="1066" loading="lazy" sizes="(max-width: 767px) 50vw, (max-width: 1199px) 33vw, 25vw" src="../../assets/img/items/themed-cake-main-rose-bouquet-gift-box-cake-480w.webp" srcset="../../assets/img/items/themed-cake-main-rose-bouquet-gift-box-cake-480w.webp 480w, ../../assets/img/items/themed-cake-main-rose-bouquet-gift-box-cake.webp 800w" width="800"/></div><div class="p-2 text-center"><strong>Themed Cake</strong></div></a></div><div class="col-6 col-md-3"><a class="card text-decoration-none h-100 overflow-hidden rounded-3" href="/Products/mini-bento-cake/"><div class="related-thumb"><img alt="White mini bento cake with black ribbon bows" decoding="async" height="1066" loading="lazy" sizes="(max-width: 767px) 50vw, (max-width: 1199px) 33vw, 25vw" src="../../assets/img/items/mini-bento-cake-main-white-black-bow-lambeth-cake-480w.webp" srcset="../../assets/img/items/mini-bento-cake-main-white-black-bow-lambeth-cake-480w.webp 480w, ../../assets/img/items/mini-bento-cake-main-white-black-bow-lambeth-cake.webp 800w" width="800"/></div><div class="p-2 text-center"><strong>Mini / Bento Cake</strong></div></a></div><div class="col-6 col-md-3"><a class="card text-decoration-none h-100 overflow-hidden rounded-3" href="/Products/cupcakes/"><div class="related-thumb"><img alt="Cupcakes" decoding="async" height="1066" loading="lazy" sizes="(max-width: 767px) 50vw, (max-width: 1199px) 33vw, 25vw" src="../../assets/img/items/cupcakes-main-480w.webp" srcset="../../assets/img/items/cupcakes-main-480w.webp 480w, ../../assets/img/items/cupcakes-main.webp 800w" width="800"/></div><div class="p-2 text-center"><strong>Cupcakes</strong></div></a></div></div>
+</div>
+</section>
+<script>
+(function(){
+  var delivery = document.getElementById('products-valentines-collection-index-html-delivery-option');
+  var postcode = document.getElementById('products-valentines-collection-index-f1-postcode');
+  var date = document.getElementById('products-valentines-collection-index-f1-date');
+
+  function setMinDate(){
+    if(!date) return;
+    try {
+      var d = new Date();
+      var iso = d.toISOString().split('T')[0];
+      date.setAttribute('min', iso);
+    } catch(e) {}
+  }
+
+  function updatePostcode(){
+    if(!delivery || !postcode) return;
+    var req = (delivery.value === 'delivery');
+    if(req){ postcode.setAttribute('required',''); }
+    else { postcode.removeAttribute('required'); }
+  }
+
+  if(delivery){
+    delivery.addEventListener('change', updatePostcode);
+  }
+  setMinDate();
+  updatePostcode();
+})();
+</script>
+</main>
+<div aria-hidden="false" class="mobile-sticky-bar">
+<div class="bar">
+<a class="btn btn-primary" data-season-copy="sticky-label" href="#order-desktop" id="btn-order-sticky">Send an enquiry</a>
+<a class="btn btn-outline" href="/#contact" id="btn-help-sticky">Ask a question</a>
+</div>
+</div>
+<footer class="footer dark-background" id="footer">
+<div class="container">
+<div class="row gy-3">
+<div class="col-lg-3 col-md-6 d-flex">
+<i class="bi bi-geo-alt icon">
+</i>
+<div class="address">
+<h4>
+        Address
+       </h4>
+<p>
+        14 Elizabethan Way, Brampton
+       </p>
+<p>
+        Huntingdon, Cambridgeshire PE28 4SU
+       </p>
+<p>
+</p>
+</div>
+</div>
+<div class="col-lg-3 col-md-6 d-flex">
+<i class="bi bi-telephone icon">
+</i>
+<div>
+<h4>
+        Contact
+       </h4>
+<p>
+<strong>
+         Phone:
+        </strong>
+<span><a class="link" href="tel:+447510837225">+44 7510 837225</a></span>
+<br/>
+<strong>
+          Email:
+         </strong>
+<span><a class="link" href="mailto:contact@dreamycake.co.uk">contact@dreamycake.co.uk</a></span>
+<br/>
+<strong>
+          WhatsApp:
+         </strong>
+<span><a aria-label="Chat on WhatsApp" class="link" href="https://wa.me/447510837225" onclick="if(window.gtag){gtag('event','whatsapp_click',{label:'footer_contact'});}" rel="noopener" target="_blank"><i class="bi bi-whatsapp"></i> Message us</a></span>
+<br/>
+</p>
+</div>
+</div>
+<div class="col-lg-3 col-md-6 d-flex">
+<i class="bi bi-clock icon">
+</i>
+<div>
+<h4>
+        Opening Hours
+       </h4>
+<p>
+<strong>
+         Mon-Sat:
+        </strong>
+<span>
+         9AM - 8PM
+        </span>
+<br/>
+<strong>
+         Sunday
+        </strong>
+        :
+        <span>
+         10AM - 5PM
+        </span>
+</p>
+</div>
+</div>
+<div class="col-lg-3 col-md-6">
+<h4>
+       Follow Us
+      </h4>
+<div class="social-links d-flex">
+<a aria-label="Follow Dreamy Cake Bakery on Facebook" class="facebook" href="https://www.facebook.com/DreamyCakeBakery">
+<i class="bi bi-facebook">
+</i>
+</a>
+<a aria-label="Follow Dreamy Cake Bakery on Instagram" class="instagram" href="https://www.instagram.com/dreamycake.bakery">
+<i class="bi bi-instagram">
+</i>
+</a></div>
+</div>
+</div>
+</div>
+<div class="container copyright text-center mt-4">
+<a href="/Terms-and-Conditions/">
+     Terms &amp; Conditions
+    </a>
+<a href="/Privacy-Policy/">
+     Privacy Policy
+    </a>
+<br/>
+<p>
+     ©
+     <span>
+      Copyright
+     </span>
+<strong class="px-1 sitename">
+      Dreamy Cake Bakery
+     </strong>
+<span>
+      All Rights Reserved
+     </span>
+</p>
+<div class="credits">
+     Designed by
+     <a href="mailto:bogbond@gmail.com" onclick="if(window.gtag){gtag('event','designer_email_click',{label:'contact'});}">
+      Bond
+     </a>
+</div>
+</div>
+</footer>
+<a aria-label="Back to top" class="scroll-top d-flex align-items-center justify-content-center" href="#" id="scroll-top" title="Back to top">
+<i class="bi bi-arrow-up-short">
+</i>
+</a>
+<div id="preloader">
+</div>
+<!-- Vendor JS -->
+<script src="../../assets/vendor/aos/aos.js"></script>
+<script src="../../assets/vendor/swiper/swiper-bundle.min.js"></script>
+<script src="../../assets/vendor/glightbox/js/glightbox.min.js"></script>
+<script src="../../assets/js/main.js"></script><script src="../../assets/js/product.js"></script>
+<script src="/assets/js/navfix.js"></script>
+<!-- DC:CONSENT_BANNER_START -->
+<style>
+  .dc-consent-banner{
+    position:fixed; left:0; right:0; bottom:0;
+    z-index:2147483647;
+    background: rgba(255,255,255,0.98);
+    border-top: 1px solid rgba(0,0,0,.1);
+    box-shadow: 0 -8px 24px rgba(0,0,0,.08);
+    padding: 16px; display:flex; gap:16px; align-items: flex-start;
+    font-family: system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
+  }
+  .dc-consent-banner__text{ flex:1; font-size:14px; line-height:1.45; color:#222; }
+  .dc-consent-banner__btns{ display:flex; gap:8px; flex-wrap:wrap; }
+  .dc-btn{ border:1px solid #222; padding:8px 12px; border-radius:999px; background:#fff; cursor:pointer; font-size:14px; }
+  .dc-btn--primary{ background:#222; color:#fff; }
+  .dc-consent-manage{
+    left: 12px !important;
+    position:fixed;
+    right:auto !important; bottom: 6px;
+    z-index:2147483647;
+    border:1px solid #222; background:#fff; padding:6px 10px; border-radius:999px; font-size:12px; cursor:pointer; opacity:.85;
+    line-height:1; white-space:nowrap;
+    transition: bottom .2s ease, right .2s ease, left .2s ease, opacity .2s;
+  }
+  /* When we need to lift above another fixed button (e.g., back-to-top) */
+  /* Put it bottom-left on very small screens to avoid crowding */
+  @media (max-width: 480px) {
+    .dc-consent-manage{ left:16px; right:auto; }
+  }
+  .dc-consent-manage:hover{ opacity:1; }
+</style>
+<script>
+(function(){
+  try {
+    // Create "Manage cookies" floating button
+    var manage = document.createElement('button');
+    manage.className = 'dc-consent-manage';
+    manage.type = 'button';
+    manage.textContent = 'Cookies';
+    manage.setAttribute('aria-label','Manage cookies');
+    manage.addEventListener('click', function(){ showBanner(true); });
+
+    // Build banner
+    function showBanner(force) {
+      var saved = null;
+      try { saved = JSON.parse(localStorage.getItem('dc_consent') || '{}'); } catch(e){}
+      if(!force && saved && (saved.choice === 'accept' || saved.choice === 'reject')) return;
+      var wrap = document.createElement('div');
+      wrap.className = 'dc-consent-banner';
+      wrap.setAttribute('role','dialog');
+      wrap.setAttribute('aria-live','polite');
+      wrap.innerHTML = ''
+        + '<div class="dc-consent-banner__text">To keep things simple, we use essential cookies. If you’re happy, we’ll also use analytics to learn what’s working. You can update your choice anytime in “Cookies”.</div>'
+        + '<div class="dc-consent-banner__btns">'
+        +   '<button type="button" class="dc-btn" data-choice="reject">Reject non-essential</button>'
+        +   '<button type="button" class="dc-btn dc-btn--primary" data-choice="accept">Accept all</button>'
+        + '</div>';
+      document.body.appendChild(wrap);
+      wrap.querySelectorAll('button[data-choice]').forEach(function(btn){
+        btn.addEventListener('click', function(){ setChoice(this.getAttribute('data-choice')); });
+      });
+    }
+
+    function setChoice(choice) {
+      try { localStorage.setItem('dc_consent', JSON.stringify({choice: choice})); } catch(e){}
+      window.__dc_consent_choice = choice;
+
+      // Update Consent Mode in real-time
+      if (typeof gtag === 'function') {
+        if(choice === 'accept') {
+          gtag('consent', 'update', {
+            analytics_storage: 'granted',
+            ad_storage: 'granted',
+            ad_user_data: 'granted',
+            ad_personalization: 'granted'
+          });
+          // Load GA once (no duplicates)
+          if (typeof window.dcLoadGAOnce === 'function') {
+            window.dcLoadGAOnce();
+          }
+        } else {
+          gtag('consent', 'update', {
+            analytics_storage: 'denied',
+            ad_storage: 'denied',
+            ad_user_data: 'denied',
+            ad_personalization: 'denied'
+          });
+          // Best-effort cookie cleanup
+          if (typeof window.dcClearGACookies === 'function') {
+            window.dcClearGACookies();
+          }
+        }
+      }
+
+      var b = document.querySelector('.dc-consent-banner'); if(b) b.remove();
+    }
+
+    // Try to avoid overlap with existing fixed "back to top" buttons
+    function avoidOverlap() {
+      try {
+        var candidates = [
+          '.back-to-top', '.scroll-to-top', '.scroll-top', '.to-top', '.btn-to-top',
+          '#backToTop', '#toTop', '#totop', '[data-backtotop]', '[data-scroll-top]'
+        ];
+        var el = null;
+        for (var i=0; i<candidates.length; i++) {
+          var found = document.querySelector(candidates[i]);
+          if(found) { el = found; break; }
+        }
+        // Reset
+        manage.classList.remove('dc-lift');
+        manage.style.right = ''; manage.style.left = ''; manage.style.bottom = '';
+        // On small screens we already push left via CSS, skip overlap logic
+        if (window.matchMedia('(max-width: 480px)').matches) return;
+        if (!el) return;
+        var r = el.getBoundingClientRect();
+        // Heuristic: if the element sits bottom-right within 120px from the viewport edge, lift our button
+        var nearBottom = (window.innerHeight - r.bottom) <= 120;
+        var nearRight  = (window.innerWidth  - r.right)  <= 120;
+        var visible = r.width>0 && r.height>0;
+        if (visible && nearBottom && nearRight) {
+          // // manage.classList.add('dc-lift'); // disabled // disabled
+        }
+      } catch(e){}
+    }
+
+    document.addEventListener('DOMContentLoaded', function(){
+      document.body.appendChild(manage);
+      showBanner(false);
+      avoidOverlap();
+    });
+    window.addEventListener('scroll', avoidOverlap, {passive:true});
+    window.addEventListener('resize', avoidOverlap);
+
+    // Run a few times shortly after load to catch late-mounted widgets
+    setTimeout(avoidOverlap, 300);
+    setTimeout(avoidOverlap, 1000);
+  } catch(e){ console.error('Consent banner error', e); }
+})();
+</script>
+<!-- DC:CONSENT_BANNER_END -->
+<script src="/assets/js/seasonal-page-state.js"></script><script src="/assets/js/ga-funnel.js"></script>
+<script src="/assets/js/form-attachment-validation.js?v=3.25.0"></script><script src="/assets/js/formly-config.js?v=3.25.0"></script></body>
+</html>
