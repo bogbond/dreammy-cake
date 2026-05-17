@@ -1,6 +1,8 @@
 (function(){
   'use strict';
 
+  // v3.25: no custom honeypot fields; Formly server-side spam checks still apply.
+
   var FORMLY_ENDPOINT_PATTERN = /formly\.email\/submit/i;
   var THANK_YOU_PATH = '/Thank-You/';
 
