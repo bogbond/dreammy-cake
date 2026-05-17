@@ -1,2 +1,2 @@
-/* v3.26 no-op. Forms submit natively to Formly.email. */
+/* v3.27 no-op. Legacy artificial upload progress is disabled. */
 (function(){ 'use strict'; })();

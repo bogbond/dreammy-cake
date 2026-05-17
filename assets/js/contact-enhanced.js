@@ -1,5 +1,4 @@
 (function(){
   'use strict';
-  // v3.25: Do not intercept contact form submission.
-  // Formly.email receives a native multipart/form-data POST.
+  // v3.27 no-op: Formly submission is handled by formly-config.js relay mode.
 })();
