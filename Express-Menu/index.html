@@ -1,0 +1,609 @@
+<!DOCTYPE html>
+
+<html lang="en-GB">
+<head>
+<!-- DC:GA4_CONSENT_HEAD_START -->
+<!-- Google Analytics 4 + Consent Mode v2 (UK/EU) -->
+<script>
+  // GA4 Measurement ID (change here if needed)
+  window.GA_MEASUREMENT_ID = window.GA_MEASUREMENT_ID || 'G-CC2NRDSRQ9';
+
+  // Consent state: 'accept' | 'reject' | null
+  window.__dc_consent_choice = window.__dc_consent_choice || null;
+
+  // GA load guard
+  window.__ga_loaded = window.__ga_loaded || false;
+
+  // DataLayer + gtag wrapper:
+  // - Always allow Consent Mode commands
+  // - Block analytics/events until user accepts
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){
+    try {
+      if (arguments && arguments.length && arguments[0] === 'consent') {
+        window.dataLayer.push(arguments);
+        return;
+      }
+      if (window.__dc_consent_choice === 'accept') {
+        window.dataLayer.push(arguments);
+      }
+    } catch(e) {}
+  }
+  window.gtag = window.gtag || gtag;
+
+  // Helper: load GA script once (only call after consent 'accept')
+  window.dcLoadGAOnce = window.dcLoadGAOnce || function() {
+    var id = window.GA_MEASUREMENT_ID;
+    if (window.__ga_loaded) return;
+    if(!id || id === 'G-XXXXXXXXXX') {
+      console.warn('GA4 ID is placeholder. Set window.GA_MEASUREMENT_ID to your real GA4 ID.');
+      return;
+    }
+    // Avoid duplicate script tags
+    if (!document.querySelector('script[src^="https://www.googletagmanager.com/gtag/js?id="]')) {
+      var s = document.createElement('script');
+      s.async = true;
+      s.src = 'https://www.googletagmanager.com/gtag/js?id=' + id;
+      document.head.appendChild(s);
+    }
+    window.__ga_loaded = true;
+    gtag('js', new Date());
+    gtag('config', id, { anonymize_ip: true });
+  };
+
+  // Helper: attempt to clear GA cookies on "reject" (best-effort)
+  window.dcClearGACookies = window.dcClearGACookies || function() {
+    try {
+      var expires = 'Thu, 01 Jan 1970 00:00:00 GMT';
+      var domains = [location.hostname, '.' + location.hostname];
+      function del(name) {
+        // Host-only
+        document.cookie = name + '=; expires=' + expires + '; path=/';
+        // Explicit domains
+        for (var i=0; i<domains.length; i++) {
+          document.cookie = name + '=; expires=' + expires + '; path=/; domain=' + domains[i];
+        }
+      }
+      document.cookie.split(';').forEach(function(c){
+        var name = c.split('=')[0].trim();
+        if(name === '_ga' || name === '_gid' || name.indexOf('_ga_') === 0 || name.indexOf('_gat') === 0) {
+          del(name);
+        }
+      });
+    } catch(e) {}
+  };
+
+  // Read saved consent and set defaults (Consent Mode v2)
+  (function() {
+    try {
+      var saved = JSON.parse(localStorage.getItem('dc_consent') || '{}');
+      var choice = (saved && (saved.choice === 'accept' || saved.choice === 'reject')) ? saved.choice : null;
+      window.__dc_consent_choice = choice;
+
+      var base = {
+        ad_user_data: 'denied',
+        ad_personalization: 'denied',
+        ad_storage: 'denied',
+        analytics_storage: 'denied',
+        functionality_storage: 'granted',
+        security_storage: 'granted'
+      };
+
+      var consent = Object.assign({}, base, (choice === 'accept') ? {
+        analytics_storage: 'granted',
+        ad_storage: 'granted',
+        ad_user_data: 'granted',
+        ad_personalization: 'granted'
+      } : {});
+
+      gtag('consent', 'default', consent);
+
+      // Load GA only if user already accepted previously
+      if (choice === 'accept') {
+        window.dcLoadGAOnce();
+      }
+    } catch(e) { console.warn('Consent read failed', e); }
+  })();
+</script>
+<!-- DC:GA4_CONSENT_HEAD_END -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Express Cakes in Huntingdon | Dreamy Cake Bakery</title>
+<link href="/assets/img/site.webmanifest" rel="manifest"/>
+<!-- Meta Description -->
+<meta content="Need a cake quickly? Browse ready-today or next-day cakes, cupcakes and postal cookie gifts from Dreamy Cake Bakery for collection or local delivery." name="description">
+<!-- Meta Keywords -->
+<meta content="Dreamy Cake express menu, same day cake, next day cake, last minute cake Cambridgeshire, bento cake, cupcakes, dessert boxes, cake delivery Huntingdon, postage cookies, letterbox cookie gift" name="keywords"/>
+<!-- Open Graph Meta Tags for Social Media -->
+<meta content="Express Cakes in Huntingdon | Dreamy Cake Bakery" property="og:title">
+<meta content="Need a cake quickly? Browse ready-today or next-day cakes, cupcakes and postal cookie gifts from Dreamy Cake Bakery for collection or local delivery." property="og:description">
+<meta content="https://dreamycake.co.uk/assets/img/og/home-hero-1200x630.jpg" property="og:image"/>
+<meta content="1200" property="og:image:width"/>
+<meta content="630" property="og:image:height"/>
+<meta content="https://dreamycake.co.uk/Express-Menu/" property="og:url"/>
+<meta content="website" property="og:type"/>
+<!-- Twitter Card Meta Tags -->
+<meta content="summary_large_image" name="twitter:card"/>
+<meta content="Express Cakes in Huntingdon | Dreamy Cake Bakery" name="twitter:title">
+<meta content="Need a cake quickly? Browse ready-today or next-day cakes, cupcakes and postal cookie gifts from Dreamy Cake Bakery for collection or local delivery." name="twitter:description">
+<meta content="https://dreamycake.co.uk/assets/img/og/home-hero-1200x630.jpg" name="twitter:image"/>
+<meta content="https://dreamycake.co.uk/Express-Menu/" name="twitter:url"/>
+<meta content="@dreamy_cakess" name="twitter:site"/>
+<!-- Favicons -->
+<meta content="Dreamy Cake Bakery" name="apple-mobile-web-app-title"/>
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"WebPage","@id":"https://dreamycake.co.uk/Express-Menu/#webpage","name":"Express Menu","url":"https://dreamycake.co.uk/Express-Menu/","description":"Limited express selection of cakes & desserts available today or tomorrow, plus a UK‑postable cookie gift option. Fast confirmation within 59 minutes.","isPartOf":{"@type":"WebSite","@id":"https://dreamycake.co.uk/#website","name":"Dreamy Cake Bakery","url":"https://dreamycake.co.uk/"},"inLanguage":"en-GB"},{"@type":"ItemList","@id":"https://dreamycake.co.uk/Express-Menu/#express-selection","name":"Express selection","itemListElement":[{"@type":"ListItem","position":1,"item":{"@id":"https://dreamycake.co.uk/Products/express-bento-cake/#product"}},{"@type":"ListItem","position":2,"item":{"@id":"https://dreamycake.co.uk/Products/classic-cake/#product"}},{"@type":"ListItem","position":3,"item":{"@id":"https://dreamycake.co.uk/Products/express-cupcakes/#product"}},{"@type":"ListItem","position":4,"item":{"@id":"https://dreamycake.co.uk/Products/freshly-made-cookies/#product"}},{"@type":"ListItem","position":5,"item":{"@id":"https://dreamycake.co.uk/Products/postage-cookie/#product"}}]},{"@type":"Product","@id":"https://dreamycake.co.uk/Products/express-bento-cake/#product","name":"Express Bento Cake","image":["https://dreamycake.co.uk/assets/img/items/express-bento-cake-main.webp"],"url":"https://dreamycake.co.uk/Products/express-bento-cake/","brand":{"@type":"Brand","name":"Dreamy Cake Bakery"},"offers":{"@type":"Offer","price":"30.00","priceCurrency":"GBP","availability":"https://schema.org/InStock","url":"https://dreamycake.co.uk/Products/express-bento-cake/"},"category":"Cakes","description":"Clean buttercream bento with a short message — the safest “today” option."},{"@type":"Product","@id":"https://dreamycake.co.uk/Products/classic-cake/#product","name":"Classic Cake","image":["https://dreamycake.co.uk/assets/img/items/express-cake-02.webp"],"url":"https://dreamycake.co.uk/Products/classic-cake/","brand":{"@type":"Brand","name":"Dreamy Cake Bakery"},"offers":{"@type":"Offer","price":"60.00","priceCurrency":"GBP","availability":"https://schema.org/InStock","url":"https://dreamycake.co.uk/Products/classic-cake/"},"category":"Cakes","description":"Two signature styles: Chocolate & Biscoff Drip or White & Gold Teddy — a premium finish with fast turnaround."},{"@type":"Product","@id":"https://dreamycake.co.uk/Products/express-cupcakes/#product","name":"Express Cupcakes","image":["https://dreamycake.co.uk/assets/img/items/express-cupcakes-main.webp"],"url":"https://dreamycake.co.uk/Products/express-cupcakes/","brand":{"@type":"Brand","name":"Dreamy Cake Bakery"},"offers":{"@type":"Offer","price":"18.00","priceCurrency":"GBP","availability":"https://schema.org/InStock","url":"https://dreamycake.co.uk/Products/express-cupcakes/"},"category":"Cupcakes","description":"Express cupcake boxes — ready today / tomorrow (subject to availability). Choose your box size and frosting style."},{"@type":"Product","@id":"https://dreamycake.co.uk/Products/freshly-made-cookies/#product","name":"Freshly Made Cookies","image":["https://dreamycake.co.uk/assets/img/items/express-cookies-main.webp"],"url":"https://dreamycake.co.uk/Products/freshly-made-cookies/","brand":{"@type":"Brand","name":"Dreamy Cake Bakery"},"offers":{"@type":"Offer","price":"14.00","priceCurrency":"GBP","availability":"https://schema.org/InStock","url":"https://dreamycake.co.uk/Products/freshly-made-cookies/"},"category":"Cookies","description":"Freshly baked cookie sets — quick, gift‑ready and available today / tomorrow (subject to availability)."},{"@type":"Product","@id":"https://dreamycake.co.uk/Products/postage-cookie/#product","name":"Postage Cookie","image":["https://dreamycake.co.uk/assets/img/items/postage-cookie-main.webp"],"url":"https://dreamycake.co.uk/Products/postage-cookie/","brand":{"@type":"Brand","name":"Dreamy Cake Bakery"},"offers":{"@type":"Offer","price":"12.00","priceCurrency":"GBP","availability":"https://schema.org/InStock","url":"https://dreamycake.co.uk/Products/postage-cookie/"},"category":"Cookies","description":"Personalised message cookie — gift‑ready, letterbox‑friendly and available for UK‑wide post or local collection."}]}</script>
+<!-- Fonts -->
+<link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&amp;family=Open+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,300;1,400;1,500;1,600;1,700;1,800&amp;family=Raleway:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&amp;display=swap" rel="stylesheet"/><link href="/assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet"><link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet"><link href="/assets/vendor/aos/aos.css" rel="stylesheet"/><link href="/assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet"/><link href="/assets/css/main.css" rel="stylesheet"/><link href="/assets/css/pages/express-menu.css" rel="stylesheet"/>
+<!-- Vendor CSS Files -->
+<!-- Main CSS File -->
+<meta content="Express Menu — cakes ready today / tomorrow" property="og:image:alt"/>
+<link href="/assets/img/favicon.svg" rel="icon" type="image/svg+xml"/>
+<link href="/assets/img/favicon.ico" rel="icon" sizes="any"/>
+<link href="/apple-touch-icon.png" rel="apple-touch-icon"/>
+<link color="#F9F6EC" href="/safari-pinned-tab.svg" rel="mask-icon"/>
+<meta content="#F9F6EC" name="theme-color"/>
+<style>
+/* dc-consent mobile refined */
+@media (max-width: 576px){
+  .dc-consent-banner{
+    position: fixed !important;
+    top: auto !important;
+    left: 10px !important;
+    right: 10px !important;
+    bottom: 10px !important;
+    width: auto !important;
+    max-width: none !important;
+    max-height: 44vh !important;
+    overflow: auto !important;
+    padding: 12px 12px 14px !important;
+    border-radius: 16px !important;
+    box-shadow: 0 8px 24px rgba(0,0,0,.18) !important;
+    background: #fff !important;
+    display: block !important;
+  }
+  .dc-consent-banner__text{
+    width: 100% !important;
+    font-size: 12.5px !important;
+    line-height: 1.5 !important;
+    margin: 0 0 12px 0 !important;
+  }
+  .dc-consent-banner__btns{
+    display: flex !important;
+    width: 100% !important;
+    gap: 8px !important;
+    justify-content: space-between !important;
+  }
+  /* Make reject smaller than accept */
+  .dc-consent-banner__btns .dc-btn[data-choice="reject"]{
+    flex: 0 0 46% !important;
+    font-size: 12px !important;
+    padding: 9px 10px !important;
+  }
+  .dc-consent-banner__btns .dc-btn[data-choice="accept"],
+  .dc-consent-banner__btns .dc-btn.dc-btn--primary{
+    flex: 1 1 auto !important;
+    font-size: 13.5px !important;
+    padding: 11px 12px !important;
+  }
+}
+</style>
+<link href="https://dreamycake.co.uk/Express-Menu/" rel="canonical"/></head>
+<body class="express-menu-page">
+<header class="header d-flex align-items-center fixed-top" id="header">
+<div class="container-fluid container-xl position-relative d-flex align-items-center justify-content-between">
+<a class="logo d-flex align-items-center" href="/">
+<!-- Uncomment the line below if you also wish to use an image logo -->
+<!-- <img src="/assets/img/logo.png" alt="Dreamy Cake Bakery" width="32" height="32" decoding="async" fetchpriority="high"> -->
+<p class="sitename">Dreamy Cake Bakery</p>
+</a>
+<nav class="navmenu" id="navmenu">
+<ul>
+<li><a href="/">Home</a></li>
+<li><a href="/#pricing">Cake Menu</a></li>
+<li><a href="/#portfolio">Portfolio</a></li>
+<li><a href="/#contact">Contact</a></li><li><a href="/About/">About</a></li>
+<li class="dropdown">
+<button aria-controls="order-submenu" aria-expanded="false" aria-label="Toggle order submenu" class="nav-toggle" type="button"><span>Order</span> <i aria-hidden="true" class="bi bi-chevron-down chev"></i></button>
+<ul id="order-submenu"><li><a class="nav-bespoke-order" href="/Bespoke-Order/"><span>Bespoke Order</span><span class="nav-bespoke-order__arrow" aria-hidden="true">&rarr;</span></a></li><li><a href="/Products/celebration-cake/#order">Order Celebration Cake</a></li><li><a href="/Products/themed-cake/#order">Order Themed Cake</a></li><li><a href="/Products/mini-bento-cake/#order">Order Mini / Bento Cake</a></li><li><a href="/Products/wedding-cake/#order">Order Wedding Cakes</a></li><li><a href="/Products/cupcakes/#order">Order Cupcakes</a></li><li><a href="/Products/postage-cookie/#order">Order Postage Cookie</a></li></ul>
+</li>
+<!-- <li><a href="/#how-it-works">Services</a></li> -->
+<li class="dropdown">
+<button aria-controls="info-submenu" aria-expanded="false" aria-label="Toggle info submenu" class="nav-toggle" type="button"><span>Info</span> <i aria-hidden="true" class="bi bi-chevron-down chev"></i></button>
+<ul id="info-submenu">
+<li><a href="/Delivery/">Delivery</a></li>
+<li><a href="/Allergens/">Allergens</a></li>
+<li><a href="/How-it-works/">How it works</a></li>
+<li><a href="/QA/">Q&amp;A</a></li>
+</ul>
+</li>
+<li><a href="https://shop.dreamycake.co.uk">Shop</a></li></ul>
+<i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
+</nav>
+</div>
+</header>
+<main class="main">
+<!-- Page Title / Hero -->
+<div class="page-title express-hero dark-background">
+<div class="container position-relative">
+<h1>Express Menu</h1>
+<p class="subtitle">Limited selection of ready‑to‑decorate cakes &amp; desserts — available <strong>today</strong> or <strong>tomorrow</strong> (subject to availability).</p>
+</div>
+</div>
+<section class="section py-5" id="express-intro">
+<div class="container section-title" data-aos="fade-up">
+<h2>Get your cake fast</h2>
+<p class="section-subtitle">Perfect for last‑minute birthdays, surprises or “we forgot!” moments — without compromising on taste or style.</p>
+</div>
+<div class="container">
+<div class="row g-4">
+<div class="col-12 col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="0">
+<article class="usp-card d-flex align-items-start gap-3 p-3 rounded-4 shadow-sm h-100">
+<div class="usp-icon flex-shrink-0 rounded-3">⚡</div>
+<div class="usp-content">
+<h3 class="h6 mb-1"><strong>Choose</strong> from the express selection</h3>
+<p class="mb-0 small text-body-secondary">A small rotating menu with pre‑prepped components, so we can bake &amp; finish quickly.</p>
+</div>
+</article>
+</div>
+<div class="col-12 col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="50">
+<article class="usp-card d-flex align-items-start gap-3 p-3 rounded-4 shadow-sm h-100">
+<div class="usp-icon flex-shrink-0 rounded-3">🗓️</div>
+<div class="usp-content">
+<h3 class="h6 mb-1"><strong>Reserve</strong> your slot</h3>
+<p class="mb-0 small text-body-secondary">Pick collection or delivery and your preferred time window — we’ll confirm what’s available.</p>
+</div>
+</article>
+</div>
+<div class="col-12 col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="100">
+<article class="usp-card d-flex align-items-start gap-3 p-3 rounded-4 shadow-sm h-100">
+<div class="usp-icon flex-shrink-0 rounded-3">🎀</div>
+<div class="usp-content">
+<h3 class="h6 mb-1"><strong>Add</strong> personalisation</h3>
+<p class="mb-0 small text-body-secondary">Name on the cake, topper, photo print — simple add‑ons to make it feel bespoke.</p>
+</div>
+</article>
+</div>
+</div>
+<div class="express-band mt-4" data-aos="fade-up" data-aos-delay="120">
+<div class="d-flex flex-column flex-lg-row gap-3 align-items-start justify-content-between">
+<div>
+<h3 class="h5 mb-1">Instant quote + 59‑minute confirmation</h3>
+<p class="text-body-secondary small mb-0">Send your request and preferred slot. We’ll confirm availability within <strong>59 minutes</strong> (during working hours) and send payment details. Once paid, the slot is reserved.</p>
+</div>
+<div class="d-flex gap-2 flex-wrap">
+<a class="btn btn-primary" href="/Bespoke-Order/">Request now</a>
+<a aria-label="Chat on WhatsApp" class="btn btn-outline" href="https://wa.me/447510837225" rel="noopener" target="_blank"><i class="bi bi-whatsapp"></i> WhatsApp</a>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section class="section py-5" id="express-menu">
+<div class="container section-title" data-aos="fade-up">
+<h2>Express selection</h2>
+<p class="section-subtitle">Need something last-minute? Choose from the express selection below — plus a UK‑postable cookie gift option — and send a request. I’ll confirm availability shortly.</p>
+</div>
+<div class="container">
+<div class="row g-4">
+<div class="col-12 col-md-6" data-aos="fade-up" data-aos-delay="0">
+<article class="price-card menu-card position-relative rounded-4 overflow-hidden shadow-sm" data-item-category="express" data-item-id="express-bento" data-item-name="Express Bento Cake" data-item-price="30">
+<img alt="Express Bento Cake — ready today or tomorrow" class="w-100 h-100 object-fit-cover" decoding="async" height="1066" loading="lazy" src="/assets/img/items/express-bento-cake-main.webp" width="800"/>
+<div class="price-overlay d-flex flex-column justify-content-end p-3">
+<div class="price-head d-flex align-items-center justify-content-between gap-2">
+<h3 class="h5 mb-2 price-title"><a href="/Products/express-bento-cake/">Express Bento Cake</a></h3>
+<p class="mb-0 fw-semibold">From £30 <span class="qty">· 2–4 servings</span></p>
+</div>
+<div class="price-details mt-1">
+<p class="mb-2 small">Clean buttercream bento with a short message — the safest “today” option.</p>
+<div class="d-flex gap-2 justify-content-end">
+
+<a class="btn btn-accent btn-sm" href="/Products/express-bento-cake/">Request</a>
+</div>
+</div>
+</div>
+</article>
+</div>
+<div class="col-12 col-md-6" data-aos="fade-up" data-aos-delay="60">
+<article class="price-card menu-card position-relative rounded-4 overflow-hidden shadow-sm" data-item-category="express" data-item-id="classic-cake" data-item-name="Classic Cake" data-item-price="60">
+<img alt="Classic Cake — express menu cake ready today or tomorrow" class="w-100 h-100 object-fit-cover classic-cake-img" decoding="async" height="1066" loading="lazy" src="/assets/img/items/express-cake-02.webp" width="800"/>
+<div class="price-overlay d-flex flex-column justify-content-end p-3">
+<div class="price-head d-flex align-items-center justify-content-between gap-2">
+<h3 class="h5 mb-2 price-title"><a href="/Products/classic-cake/">Classic Cake</a></h3>
+<p class="mb-0 fw-semibold">From £60 <span class="qty">· 6″ / 8″ sizes</span></p>
+</div>
+<div class="price-details mt-1">
+<p class="mb-2 small">Two signature styles: Chocolate &amp; Biscoff Drip or White &amp; Gold Teddy — a premium finish with fast turnaround.</p>
+<div class="d-flex gap-2 justify-content-end">
+
+<a class="btn btn-accent btn-sm" href="/Products/classic-cake/">Request</a>
+</div>
+</div>
+</div>
+</article>
+</div>
+<div class="col-12 col-md-6" data-aos="fade-up" data-aos-delay="120">
+<article class="price-card menu-card position-relative rounded-4 overflow-hidden shadow-sm" data-item-category="express" data-item-id="express-cupcakes" data-item-name="Express Cupcakes" data-item-price="18">
+<img alt="Express Cupcakes — express option" class="w-100 h-100 object-fit-cover" decoding="async" height="1066" loading="lazy" src="/assets/img/items/express-cupcakes-main.webp" width="800"/>
+<div class="price-overlay d-flex flex-column justify-content-end p-3">
+<div class="price-head d-flex align-items-center justify-content-between gap-2">
+<h3 class="h5 mb-2 price-title"><a href="/Products/express-cupcakes/">Express Cupcakes</a></h3>
+<p class="mb-0 fw-semibold">From £18 <span class="qty">· 6 cupcakes</span></p>
+</div>
+<div class="price-details mt-1">
+<p class="mb-2 small">Express cupcake boxes — ready today / tomorrow (subject to availability). Choose your box size (6–48) and frosting style.</p>
+<div class="d-flex gap-2 justify-content-end">
+
+<a class="btn btn-accent btn-sm" href="/Products/express-cupcakes/">Request</a>
+</div>
+</div>
+</div>
+</article>
+</div>
+<div class="col-12 col-md-6" data-aos="fade-up" data-aos-delay="180">
+<article class="price-card menu-card position-relative rounded-4 overflow-hidden shadow-sm" data-item-category="express" data-item-id="freshly-made-cookies" data-item-name="Freshly Made Cookies" data-item-price="14">
+<img alt="Freshly Made Cookies — express option" class="w-100 h-100 object-fit-cover" decoding="async" height="1066" loading="lazy" src="/assets/img/items/express-cookies-main.webp" width="800"/>
+<div class="price-overlay d-flex flex-column justify-content-end p-3">
+<div class="price-head d-flex align-items-center justify-content-between gap-2">
+<h3 class="h5 mb-2 price-title"><a href="/Products/freshly-made-cookies/">Freshly Made Cookies</a></h3>
+<p class="mb-0 fw-semibold">From £14 <span class="qty">· 4 / 6 / 12 cookies</span></p>
+</div>
+<div class="price-details mt-1">
+<p class="mb-2 small">Freshly baked cookie sets — quick, gift‑ready and available today / tomorrow (subject to availability).</p>
+<div class="d-flex gap-2 justify-content-end">
+
+<a class="btn btn-accent btn-sm" href="/Products/freshly-made-cookies/">Request</a>
+</div>
+</div>
+</div>
+</article>
+</div>
+<div class="col-12 col-md-6 mx-md-auto" data-aos="fade-up" data-aos-delay="240">
+<article class="price-card menu-card position-relative rounded-4 overflow-hidden shadow-sm" data-item-category="express" data-item-id="postage-cookie" data-item-name="Postage Cookie" data-item-price="12">
+<img alt="Postage Cookie — letterbox-friendly cookie gift for UK delivery" class="w-100 h-100 object-fit-cover" decoding="async" height="1066" loading="lazy" src="/assets/img/items/postage-cookie-main.webp" width="800"/>
+<div class="price-overlay d-flex flex-column justify-content-end p-3">
+<div class="price-head d-flex align-items-center justify-content-between gap-2">
+<h3 class="h5 mb-2 price-title"><a href="/Products/postage-cookie/">Postage Cookie</a></h3>
+<p class="mb-0 fw-semibold">From £12 <span class="qty">· 4-pack</span></p>
+</div>
+<div class="price-details mt-1">
+<p class="mb-2 small">Personalised message cookie — gift‑ready, letterbox‑friendly and available for UK‑wide post or local collection.</p>
+<div class="d-flex gap-2 justify-content-end">
+
+<a class="btn btn-accent btn-sm" href="/Products/postage-cookie/">Request</a>
+</div>
+</div>
+</div>
+</article>
+</div>
+</div>
+<div class="mt-4 text-body-secondary small" data-aos="fade-up" data-aos-delay="200">
+<p class="mb-1"><strong>Note:</strong> Express items are limited and depend on daily workload. Custom complex designs still need 7–14 days.</p>
+<p class="mb-1">Postage Cookies are the letterbox‑friendly option on this page and still need mailing time for UK delivery.</p>
+<p class="mb-0">Prices shown are starting points and may change with add‑ons (name, topper, photo print, delivery).</p>
+</div>
+</div>
+</section>
+<!-- Modals (template placeholders) -->
+
+
+
+
+</main>
+<footer class="footer dark-background" id="footer">
+<div class="container">
+<div class="row gy-3">
+<div class="col-lg-3 col-md-6 d-flex">
+<i class="bi bi-geo-alt icon"></i>
+<div class="address">
+<h4>Address</h4>
+<p>
+        14 Elizabethan Way, Brampton
+       </p>
+<p>
+        Huntingdon, Cambridgeshire PE28 4SU
+       </p>
+<p></p>
+</div>
+</div>
+<div class="col-lg-3 col-md-6 d-flex">
+<i class="bi bi-telephone icon"></i>
+<div>
+<h4>Contact</h4>
+<p>
+<strong>Phone:</strong> <span><a class="link" href="tel:+447510837225">+44 7510 837225</a></span><br/>
+<strong>Email:</strong> <span><a class="link" href="mailto:contact@dreamycake.co.uk">contact@dreamycake.co.uk</a></span><br/>
+<strong>
+          WhatsApp:
+         </strong>
+<span><a aria-label="Chat on WhatsApp" class="link" href="https://wa.me/447510837225" onclick="if(window.gtag){gtag('event','whatsapp_click',{label:'footer_contact'});}" rel="noopener" target="_blank"><i class="bi bi-whatsapp"></i> Message us</a></span>
+<br/>
+</p>
+</div>
+</div>
+<div class="col-lg-3 col-md-6 d-flex">
+<i class="bi bi-clock icon"></i>
+<div>
+<h4>Opening Hours</h4>
+<p>
+<strong>Mon-Sat:</strong> <span>9AM - 8PM</span><br/>
+<strong>Sunday</strong>: <span>10AM - 5PM</span>
+</p>
+</div>
+</div>
+<div class="col-lg-3 col-md-6">
+<h4>Follow Us</h4>
+<div class="social-links d-flex">
+<!-- <a href="#" class="twitter"><i class="bi bi-twitter-x"></i></a> -->
+<!-- <a href="#" class="facebook"><i class="bi bi-facebook"></i></a> -->
+<a aria-label="Follow Dreamy Cake Bakery on Facebook" class="facebook" href="https://www.facebook.com/DreamyCakeBakery"><i class="bi bi-facebook"></i></a>
+<a aria-label="Follow Dreamy Cake Bakery on Instagram" class="instagram" href="https://www.instagram.com/dreamycake.bakery"><i class="bi bi-instagram"></i></a><!-- <a href="#" class="linkedin"><i class="bi bi-linkedin"></i></a> -->
+</div>
+</div>
+</div>
+</div>
+<div class="container copyright text-center mt-4">
+<p>
+          © <span>Copyright</span>
+<strong class="px-1 sitename">Dreamy Cake Bakery</strong>
+<span>All Rights Reserved</span>
+</p>
+<div class="credits">
+          Designed by <a href="mailto:bogbond@gmail.com">Bond</a>
+</div>
+</div>
+</footer>
+<!-- Scroll Top -->
+<a class="scroll-top d-flex align-items-center justify-content-center" href="#" id="scroll-top" aria-label="Back to top" title="Back to top"><i class="bi bi-arrow-up-short"></i></a>
+<!-- Preloader -->
+<div id="preloader"></div>
+<!-- Vendor JS Files -->
+<!-- Main JS File -->
+<script src="/assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script><script src="/assets/vendor/aos/aos.js"></script><script src="/assets/vendor/typed.js/typed.umd.js"></script><script src="/assets/vendor/imagesloaded/imagesloaded.pkgd.min.js"></script><script src="/assets/vendor/isotope-layout/isotope.pkgd.min.js"></script><script src="/assets/vendor/swiper/swiper-bundle.min.js"></script><script src="/assets/js/main.js"></script><script src="/assets/js/contact-enhanced.js?v=3.27.0"></script> <script src="/assets/js/navfix.js"></script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"LocalBusiness","name":"Dreamy Cake Bakery","image":"https://dreamycake.co.uk/assets/img/og/home-hero-1200x630.jpg","url":"https://dreamycake.co.uk/","telephone":"+447510837225","priceRange":"££","address":{"@type":"PostalAddress","streetAddress":"14 Elizabethan Way, Brampton","addressLocality":"Huntingdon","addressRegion":"Cambridgeshire","postalCode":"PE28 4SU","addressCountry":"GB"},"areaServed":["Huntingdon","Cambridge","Peterborough","Cambridgeshire"],"openingHoursSpecification":[{"@type":"OpeningHoursSpecification","dayOfWeek":["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"],"opens":"09:00","closes":"20:00"},{"@type":"OpeningHoursSpecification","dayOfWeek":["Sunday"],"opens":"10:00","closes":"17:00"}],"sameAs":["https://www.instagram.com/dreamycake.bakery","https://shop.dreamycake.co.uk/","https://ratings.food.gov.uk/business/1856524"],"founder":{"@type":"Person","name":"Margo"},"@id":"https://dreamycake.co.uk/#localbusiness","email":"contact@dreamycake.co.uk","hasMap":"https://maps.app.goo.gl/psW7oL2LAus7vUWy5","legalName":"Dreamy Cake Studio Ltd","geo":{"@type":"GeoCoordinates","latitude":52.3242487,"longitude":-0.2406139}}</script><script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://dreamycake.co.uk/"},{"@type":"ListItem","position":2,"name":"Express Menu","item":"https://dreamycake.co.uk/Express-Menu/"}]}</script>
+<!-- DC:CONSENT_BANNER_START -->
+<style>
+  .dc-consent-banner{
+    position:fixed; left:0; right:0; bottom:0;
+    z-index:2147483647;
+    background: rgba(255,255,255,0.98);
+    border-top: 1px solid rgba(0,0,0,.1);
+    box-shadow: 0 -8px 24px rgba(0,0,0,.08);
+    padding: 16px; display:flex; gap:16px; align-items: flex-start;
+    font-family: system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
+  }
+  .dc-consent-banner__text{ flex:1; font-size:14px; line-height:1.45; color:#222; }
+  .dc-consent-banner__btns{ display:flex; gap:8px; flex-wrap:wrap; }
+  .dc-btn{ border:1px solid #222; padding:8px 12px; border-radius:999px; background:#fff; cursor:pointer; font-size:14px; }
+  .dc-btn--primary{ background:#222; color:#fff; }
+  .dc-consent-manage{
+    left: 12px !important;
+    position:fixed;
+    right:auto !important; bottom: 6px;
+    z-index:2147483647;
+    border:1px solid #222; background:#fff; padding:6px 10px; border-radius:999px; font-size:12px; cursor:pointer; opacity:.85;
+    line-height:1; white-space:nowrap;
+    transition: bottom .2s ease, right .2s ease, left .2s ease, opacity .2s;
+  }
+  /* When we need to lift above another fixed button (e.g., back-to-top) */
+  /* Put it bottom-left on very small screens to avoid crowding */
+  @media (max-width: 480px) {
+    .dc-consent-manage{ left:16px; right:auto; }
+  }
+  .dc-consent-manage:hover{ opacity:1; }
+</style>
+<script>
+(function(){
+  try {
+    // Create "Manage cookies" floating button
+    var manage = document.createElement('button');
+    manage.className = 'dc-consent-manage';
+    manage.type = 'button';
+    manage.textContent = 'Cookies';
+    manage.setAttribute('aria-label','Manage cookies');
+    manage.addEventListener('click', function(){ showBanner(true); });
+
+    // Build banner
+    function showBanner(force) {
+      var saved = null;
+      try { saved = JSON.parse(localStorage.getItem('dc_consent') || '{}'); } catch(e){}
+      if(!force && saved && (saved.choice === 'accept' || saved.choice === 'reject')) return;
+      var wrap = document.createElement('div');
+      wrap.className = 'dc-consent-banner';
+      wrap.setAttribute('role','dialog');
+      wrap.setAttribute('aria-live','polite');
+      wrap.innerHTML = ''
+        + '<div class="dc-consent-banner__text">To keep things simple, we use essential cookies. If you’re happy, we’ll also use analytics to learn what’s working. You can update your choice anytime in “Cookies”.</div>'
+        + '<div class="dc-consent-banner__btns">'
+        +   '<button type="button" class="dc-btn" data-choice="reject">Reject non-essential</button>'
+        +   '<button type="button" class="dc-btn dc-btn--primary" data-choice="accept">Accept all</button>'
+        + '</div>';
+      document.body.appendChild(wrap);
+      wrap.querySelectorAll('button[data-choice]').forEach(function(btn){
+        btn.addEventListener('click', function(){ setChoice(this.getAttribute('data-choice')); });
+      });
+    }
+
+    function setChoice(choice) {
+      try { localStorage.setItem('dc_consent', JSON.stringify({choice: choice})); } catch(e){}
+      window.__dc_consent_choice = choice;
+
+      // Update Consent Mode in real-time
+      if (typeof gtag === 'function') {
+        if(choice === 'accept') {
+          gtag('consent', 'update', {
+            analytics_storage: 'granted',
+            ad_storage: 'granted',
+            ad_user_data: 'granted',
+            ad_personalization: 'granted'
+          });
+          // Load GA once (no duplicates)
+          if (typeof window.dcLoadGAOnce === 'function') {
+            window.dcLoadGAOnce();
+          }
+        } else {
+          gtag('consent', 'update', {
+            analytics_storage: 'denied',
+            ad_storage: 'denied',
+            ad_user_data: 'denied',
+            ad_personalization: 'denied'
+          });
+          // Best-effort cookie cleanup
+          if (typeof window.dcClearGACookies === 'function') {
+            window.dcClearGACookies();
+          }
+        }
+      }
+
+      var b = document.querySelector('.dc-consent-banner'); if(b) b.remove();
+    }
+
+    // Try to avoid overlap with existing fixed "back to top" buttons
+    function avoidOverlap() {
+      try {
+        var candidates = [
+          '.back-to-top', '.scroll-to-top', '.scroll-top', '.to-top', '.btn-to-top',
+          '#backToTop', '#toTop', '#totop', '[data-backtotop]', '[data-scroll-top]'
+        ];
+        var el = null;
+        for (var i=0; i<candidates.length; i++) {
+          var found = document.querySelector(candidates[i]);
+          if(found) { el = found; break; }
+        }
+        // Reset
+        manage.classList.remove('dc-lift');
+        manage.style.right = ''; manage.style.left = ''; manage.style.bottom = '';
+        // On small screens we already push left via CSS, skip overlap logic
+        if (window.matchMedia('(max-width: 480px)').matches) return;
+        if (!el) return;
+        var r = el.getBoundingClientRect();
+        // Heuristic: if the element sits bottom-right within 120px from the viewport edge, lift our button
+        var nearBottom = (window.innerHeight - r.bottom) <= 120;
+        var nearRight  = (window.innerWidth  - r.right)  <= 120;
+        var visible = r.width>0 && r.height>0;
+        if (visible && nearBottom && nearRight) {
+          // // manage.classList.add('dc-lift'); // disabled // disabled
+        }
+      } catch(e){}
+    }
+
+    document.addEventListener('DOMContentLoaded', function(){
+      document.body.appendChild(manage);
+      showBanner(false);
+      avoidOverlap();
+    });
+    window.addEventListener('scroll', avoidOverlap, {passive:true});
+    window.addEventListener('resize', avoidOverlap);
+
+    // Run a few times shortly after load to catch late-mounted widgets
+    setTimeout(avoidOverlap, 300);
+    setTimeout(avoidOverlap, 1000);
+  } catch(e){ console.error('Consent banner error', e); }
+})();
+</script>
+<!-- DC:CONSENT_BANNER_END -->
+
+<script src="/assets/js/ga-funnel.js"></script>
+</body>
+</html>
