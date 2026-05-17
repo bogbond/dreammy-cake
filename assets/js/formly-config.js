@@ -1,10 +1,10 @@
-/* v3.29 Formly relay mode.
+/* v3.30 Formly relay mode.
    Formly accepts a minimal name/email/message form reliably. The visible site forms
    stay unchanged, then this script sends a clean relay request:
-   access_key + name + email + structured message (+ one optional file).
+   access_key + name + email + message (+ one optional file).
 
-   The message uses Unicode hard line separators (U+2028) plus bullet markers because
-   Formly's email template collapses ordinary \n newlines into one paragraph.
+   v3.30 sends the message body as lightweight HTML (<br> + <strong>) because
+   Formly's default email template collapses plain-text newline characters.
 */
 (function(){
   'use strict';
@@ -97,6 +97,15 @@
     return input;
   }
 
+  function escapeHtml(value){
+    return String(value == null ? '' : value)
+      .replace(/&/g, '&amp;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;')
+      .replace(/'/g, '&#39;');
+  }
+
   function collapseWhitespace(value){
     return String(value == null ? '' : value)
       .replace(/\u00a0/g, ' ')
@@ -108,13 +117,12 @@
   function cleanForEmail(value){
     return String(value == null ? '' : value)
       .replace(/\u00a0/g, ' ')
-      .replace(/[<>]/g, function(ch){ return ch === '<' ? '‹' : '›'; })
       .replace(/[\t ]+/g, ' ')
       .replace(/\r\n?/g, '\n')
       .split('\n')
       .map(function(line){ return collapseWhitespace(line); })
       .filter(Boolean)
-      .join(HARD_BREAK + '  ')
+      .join(HARD_BREAK)
       .trim();
   }
 
@@ -401,55 +409,60 @@
   function formLabel(form){
     var dataForm = form.getAttribute('data-form') || '';
     var product = firstValue(form, ['product_name']);
-    if(form.id === 'contactFormEnhanced') return 'Contact form — Home page';
+    if(form.id === 'contactFormEnhanced') return 'Contact form - Home page';
     if(form.id === 'bespokeOrderForm') return 'Bespoke Order form';
-    if(product) return 'Product order form — ' + product;
-    if(form.classList.contains('product-form')) return 'Product order form — ' + humanPageTitle();
-    return dataForm ? ('Website form — ' + dataForm) : ('Website form — ' + humanPageTitle());
+    if(product) return 'Product order form - ' + product;
+    if(form.classList.contains('product-form')) return 'Product order form - ' + humanPageTitle();
+    return dataForm ? ('Website form - ' + dataForm) : ('Website form - ' + humanPageTitle());
   }
 
-  function addMessageLine(lines, text){
-    lines.push(cleanForEmail(text));
+  function htmlValue(value){
+    return String(value == null ? '' : value)
+      .split(HARD_BREAK)
+      .map(function(part){ return escapeHtml(part); })
+      .filter(function(part){ return part !== ''; })
+      .join('<br>  ');
   }
 
-  function addBlankLine(lines){
-    lines.push('');
+  function addHtmlLine(parts, html){
+    parts.push(html + '<br>');
+  }
+
+  function addHtmlBlank(parts){
+    parts.push('<br>');
+  }
+
+  function addHtmlField(parts, label, value){
+    if(!value) return;
+    addHtmlLine(parts, '<strong>' + escapeHtml(label) + ':</strong> ' + htmlValue(value));
   }
 
   function buildMessage(form){
-    var lines = [];
+    var parts = [];
     var rows = collectFields(form);
     var fileInput = findSelectedFileInput(form);
 
-    addMessageLine(lines, 'New Dreamy Cake website submission');
-    addBlankLine(lines);
-    addMessageLine(lines, 'Form: ' + formLabel(form));
-    addMessageLine(lines, 'Page title: ' + humanPageTitle());
-    addMessageLine(lines, 'Page URL: ' + window.location.href);
-    addMessageLine(lines, 'Submitted at: ' + new Date().toISOString());
-    addBlankLine(lines);
-    addMessageLine(lines, 'Submitted details:');
+    addHtmlLine(parts, '<strong>New Dreamy Cake website submission</strong>');
+    addHtmlBlank(parts);
+    addHtmlField(parts, 'Form', formLabel(form));
+    addHtmlField(parts, 'Page title', humanPageTitle());
+    addHtmlField(parts, 'Page URL', window.location.href);
+    addHtmlField(parts, 'Submitted at', new Date().toISOString());
+    addHtmlBlank(parts);
+    addHtmlLine(parts, '<strong>Submitted details</strong>');
 
     rows.forEach(function(row){
       var label = row.label || friendlyLabel(row.name);
       var value = row.value;
-      var isLongText = row.name === 'message' || row.name === 'notes' || row.name === 'description' || /message|notes|idea|brief|details|personalisation|anything_else|address/i.test(row.name);
-      if(isLongText && value.indexOf(HARD_BREAK) !== -1){
-        addMessageLine(lines, '• ' + label + ':');
-        value.split(HARD_BREAK).forEach(function(part){
-          if(part) addMessageLine(lines, '  ' + part);
-        });
-      } else {
-        addMessageLine(lines, '• ' + label + ': ' + value);
-      }
+      addHtmlLine(parts, '&bull; <strong>' + escapeHtml(label) + ':</strong> ' + htmlValue(value));
     });
 
     if(fileInput && fileInput.files && fileInput.files.length){
-      addBlankLine(lines);
-      addMessageLine(lines, 'Attachment selected: ' + fileInput.files[0].name + ' (' + Math.round(fileInput.files[0].size / 1024) + ' KB)');
+      addHtmlBlank(parts);
+      addHtmlField(parts, 'Attachment selected', fileInput.files[0].name + ' (' + Math.round(fileInput.files[0].size / 1024) + ' KB)');
     }
 
-    return lines.join(HARD_BREAK);
+    return parts.join('');
   }
 
   function submitRelayForm(form, fileInput){

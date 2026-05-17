@@ -1,1 +1,1 @@
-/* v3.29 no-op. Legacy artificial upload progress is disabled. */
+/* v3.30 no-op. Legacy artificial upload progress is disabled. */
