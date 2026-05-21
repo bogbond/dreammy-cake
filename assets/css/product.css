@@ -155,7 +155,7 @@
 }
 
 /* Make anchored sections land below fixed header */
-#sizes-guide, #order-desktop, #order-mobile { scroll-margin-top: 96px; }
+#sizes-guide, [data-sizes-guide], #order-desktop, #order-mobile { scroll-margin-top: 96px; }
 
 
 /* Extra space between sizes table and 'Popular flavours' */
@@ -365,172 +365,13 @@ a.trust-item:focus-visible {
 }
 /* === end layout refinement === */
 
-/* === Mobile block rhythm pass for refined custom product pages === */
-@supports selector(main:has(*)){
-  @media (max-width: 991.98px){
-    /* Scope this pass to the four bespoke pages that include the planning block */
-    main.product:has(.product-planning) #order-mobile .order-card{
-      background:linear-gradient(180deg,#fffaf2 0%, #fff2df 100%);
-      border-color:rgba(214,164,75,.24);
-      box-shadow:0 10px 26px rgba(0,0,0,.05);
-    }
 
-    /* Restore a clearer white / cream rhythm between stacked mobile blocks */
-    main.product:has(.product-planning) > section.d-lg-none:has(.sizes-guide-table-wrap),
-    main.product:has(.product-planning) > section.d-lg-none:has(.faq-accordion):not(:has(.row .card.h-100)){
-      background:#fff !important;
-    }
+/* v3.16 removed older conflicting mobile zebra pass. */
 
-    main.product:has(.product-planning) > section.d-lg-none:has(.row .card.h-100),
-    main.product:has(.product-planning) > section.product-planning{
-      background:#fff8ef !important;
-    }
 
-    /* Sizes guide should read as its own white stop between warm sections */
-    main.product:has(.product-planning) > section.d-lg-none:has(.sizes-guide-table-wrap) > .container > *{
-      background:#fff;
-      border:1px solid rgba(0,0,0,.06);
-      border-radius:18px;
-      padding:18px 16px;
-      box-shadow:0 8px 22px rgba(0,0,0,.035);
-    }
-    main.product:has(.product-planning) > section.d-lg-none:has(.sizes-guide-table-wrap) > .container > * > h3.h5{
-      margin:0 0 14px;
-    }
-    main.product:has(.product-planning) > section.d-lg-none:has(.sizes-guide-table-wrap) .sizes-guide-table-wrap{
-      background:#fff;
-      border:1px solid rgba(0,0,0,.08);
-      border-radius:14px;
-      padding:0;
-      box-shadow:none;
-    }
 
-    /* Recipe block stays warm overall, while the cards remain easy to scan */
-    main.product:has(.product-planning) > section.d-lg-none:has(.row .card.h-100) .card{
-      background:#fff;
-      border-color:rgba(0,0,0,.07);
-      box-shadow:none !important;
-    }
-    main.product:has(.product-planning) > section.d-lg-none:has(.row .card.h-100) .alert{
-      background:#fff;
-      border-color:rgba(0,0,0,.08);
-    }
+/* v3.16 removed older conflicting mobile zebra pass. */
 
-    /* Quick questions should feel like a clean white pause between stronger blocks */
-    main.product:has(.product-planning) > section.d-lg-none:has(.faq-accordion):not(:has(.row .card.h-100)) > .container > .mt-3{
-      background:#fff;
-      border:1px solid rgba(0,0,0,.06);
-      border-radius:18px;
-      padding:16px;
-      box-shadow:0 8px 22px rgba(0,0,0,.03);
-    }
-    main.product:has(.product-planning) > section.d-lg-none:has(.faq-accordion):not(:has(.row .card.h-100)) > .container > .mt-3 > .section{
-      padding:0;
-      background:transparent;
-    }
-    main.product:has(.product-planning) > section.d-lg-none:has(.faq-accordion):not(:has(.row .card.h-100)) .mini-faq-mobile{
-      background:transparent;
-    }
-    main.product:has(.product-planning) > section.d-lg-none:has(.faq-accordion):not(:has(.row .card.h-100)) .faq-accordion details{
-      background:#fff;
-    }
-
-    /* When the two desktop columns collapse, keep the planning block readable as warm / white / warm */
-    main.product:has(.product-planning) > section.product-planning .row.g-3 > [class*="col-"]:first-child .planning-card{
-      background:#fff3e0;
-      border-color:rgba(214,164,75,.24);
-      box-shadow:none;
-    }
-    main.product:has(.product-planning) > section.product-planning .row.g-3 > [class*="col-"]:nth-child(2) .planning-card{
-      background:#fff;
-      border-color:rgba(0,0,0,.07);
-      box-shadow:none;
-    }
-    main.product:has(.product-planning) > section.product-planning .planning-note{
-      background:#fff3e0;
-      border-color:rgba(214,164,75,.24);
-    }
-
-    /* Final contact prompt should stay crisp and calm at the end of the page */
-    main.product:has(.product-planning) .product-help .help-band{
-      background:#fff;
-      border-color:rgba(0,0,0,.06);
-    }
-  }
-}
-/* === end mobile block rhythm pass === */
-
-/* === Mobile zebra outer-only pass === */
-@supports selector(main:has(*)){
-  @media (max-width: 991.98px){
-    /* Keep the zebra on outer section backgrounds only; inner cards stay white. */
-    main.product:has(.product-planning) #order-mobile{
-      background:#fff8ef !important;
-    }
-    main.product:has(.product-planning) #order-mobile .order-card{
-      background:#fff !important;
-      border-color:rgba(0,0,0,.07) !important;
-      box-shadow:0 10px 26px rgba(0,0,0,.05) !important;
-    }
-
-    main.product:has(.product-planning) .product-quick-facts .fact-card,
-    main.product:has(.product-planning) .product-planning .planning-card,
-    main.product:has(.product-planning) .product-planning .planning-note,
-    main.product:has(.product-planning) .product-help .help-band,
-    main.product:has(.product-planning) .sizes-guide-table-wrap,
-    main.product:has(.product-planning) > section.d-lg-none:has(.faq-accordion):not(:has(.row .card.h-100)) > .container > .mt-3,
-    main.product:has(.product-planning) > section.d-lg-none:has(.row .card.h-100) .card,
-    main.product:has(.product-planning) > section.d-lg-none:has(.row .card.h-100) .alert{
-      background:#fff !important;
-      border-color:rgba(0,0,0,.07) !important;
-      box-shadow:none !important;
-    }
-
-    main.product:has(.product-planning) .sizes-guide-table-wrap{
-      padding:0 !important;
-    }
-    main.product:has(.product-planning) .sizes-guide-table-wrap .table{
-      --bs-table-bg: transparent;
-      --bs-table-accent-bg: transparent;
-    }
-    main.product:has(.product-planning) > section.d-lg-none:has(.faq-accordion):not(:has(.row .card.h-100)) .faq-accordion details{
-      background:#fff !important;
-    }
-
-    /* Pages with a separate mobile sizes / servings section */
-    main.product:has(.product-planning):has(section.d-lg-none .sizes-guide-table-wrap) > section.d-lg-none:has(.sizes-guide-table-wrap),
-    main.product:has(.product-planning):has(section.d-lg-none .sizes-guide-table-wrap) > section.d-lg-none:has(.faq-accordion):not(:has(.row .card.h-100)),
-    main.product:has(.product-planning):has(section.d-lg-none .sizes-guide-table-wrap) > section.product-help{
-      background:#fff !important;
-    }
-    main.product:has(.product-planning):has(section.d-lg-none .sizes-guide-table-wrap) > section.d-lg-none:has(.row .card.h-100),
-    main.product:has(.product-planning):has(section.d-lg-none .sizes-guide-table-wrap) > section.product-planning,
-    main.product:has(.product-planning):has(section.d-lg-none .sizes-guide-table-wrap) > section.related{
-      background:#fff8ef !important;
-    }
-
-    /* Pages without a separate mobile sizes section */
-    main.product:has(.product-planning):not(:has(section.d-lg-none .sizes-guide-table-wrap)) > section.d-lg-none:has(.row .card.h-100),
-    main.product:has(.product-planning):not(:has(section.d-lg-none .sizes-guide-table-wrap)) > section.product-planning,
-    main.product:has(.product-planning):not(:has(section.d-lg-none .sizes-guide-table-wrap)) > section.related{
-      background:#fff !important;
-    }
-    main.product:has(.product-planning):not(:has(section.d-lg-none .sizes-guide-table-wrap)) > section.d-lg-none:has(.faq-accordion):not(:has(.row .card.h-100)),
-    main.product:has(.product-planning):not(:has(section.d-lg-none .sizes-guide-table-wrap)) > section.product-help{
-      background:#fff8ef !important;
-    }
-
-    /* Keep layout wrappers neutral too. */
-    main.product:has(.product-planning) > section.d-lg-none:has(.sizes-guide-table-wrap) > .container > *,
-    main.product:has(.product-planning) > section.d-lg-none:has(.faq-accordion):not(:has(.row .card.h-100)) > .container > .mt-3{
-      background:#fff !important;
-      border:1px solid rgba(0,0,0,.06);
-      border-radius:18px;
-      box-shadow:0 8px 22px rgba(0,0,0,.03);
-    }
-  }
-}
-/* === end mobile zebra outer-only pass === */
 
 /* === 2026-03-26: Express Menu floating shortcut for regular product pages === */
 .express-shortcut{
@@ -769,3 +610,1040 @@ html.dc-lightbox-open .express-shortcut{
     -webkit-overflow-scrolling:touch;
   }
 }
+
+/* === 2026-05-21 flavour guide and product form refresh === */
+.product-flavour-guide{scroll-margin-top:96px}
+.product-flavour-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px}
+.product-flavour-column{background:#fff;border:1px solid rgba(0,0,0,.07);border-radius:18px;padding:16px;box-shadow:0 8px 22px rgba(0,0,0,.035)}
+.product-flavour-column--premium{border-color:rgba(214,164,75,.24);background:linear-gradient(180deg,#fff 0%,#fffaf2 100%)}
+.product-flavour-column-heading{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;border-bottom:1px solid rgba(0,0,0,.07);padding-bottom:10px;margin-bottom:12px}
+.product-flavour-column-heading span{font-weight:700;color:#222}
+.product-flavour-column-heading small{max-width:180px;text-align:right;color:#6d6258;line-height:1.35}
+.product-flavour-card{padding:11px 0;border-bottom:1px solid rgba(0,0,0,.06)}
+.product-flavour-card:last-child{border-bottom:0;padding-bottom:0}
+.product-flavour-card h3{font-size:1rem;margin:0 0 4px;color:#222}
+.product-flavour-card p{font-size:.94rem;line-height:1.45;margin:0;color:#4a4a4a}
+.product-flavour-note,.flavour-rule-card{background:#fff;border:1px solid rgba(0,0,0,.07);border-radius:14px;padding:12px 14px;font-size:.94rem;line-height:1.45;color:#4a4a4a}
+.cupcake-rules-card{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
+.cupcake-rules-card div{background:#fff;border:1px solid rgba(0,0,0,.07);border-radius:14px;padding:12px;text-align:center}
+.cupcake-rules-card strong,.cupcake-rules-card span{display:block}.cupcake-rules-card span{font-size:.92rem;color:#5d5d5d;margin-top:3px}
+.label-action-row{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:6px}
+.flavour-guide-link{font-size:.88rem;text-decoration:none;color:var(--accent-color);font-weight:600;white-space:nowrap}
+.cupcake-flavour-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin-top:10px}
+.flavour-group{border:1px solid rgba(0,0,0,.07);border-radius:14px;background:#fff;padding:12px;display:grid;gap:8px}
+.flavour-group--premium{background:#fffaf2;border-color:rgba(214,164,75,.24)}
+.flavour-group p{font-weight:700;margin:0 0 2px}.flavour-group label{display:flex;align-items:flex-start;gap:8px;font-size:.95rem;line-height:1.35;margin:0}.flavour-group input{margin-top:.18rem}.flavour-group input:disabled + span{opacity:.55}
+.product-selected-flavour-note:empty{display:none}
+#cake-flavours,#cupcake-flavours{scroll-margin-top:96px}
+@media (max-width: 991.98px){
+  .product-flavour-grid,.cupcake-flavour-grid,.cupcake-rules-card{grid-template-columns:1fr}
+  .product-flavour-column{padding:14px}
+  .product-flavour-column-heading{display:block}.product-flavour-column-heading small{display:block;text-align:left;max-width:none;margin-top:3px}
+  .label-action-row{display:block}.flavour-guide-link{display:inline-flex;margin-top:2px}
+}
+/* === end 2026-05-21 flavour guide and product form refresh === */
+
+
+/* === 2026-05-21 responsive product details layout refinement === */
+.product-details-layout{scroll-margin-top:96px}
+.product-details-grid{display:grid;grid-template-columns:1fr;grid-template-areas:"flavours" "form" "sizes";gap:22px;align-items:start}
+.product-details-flavours{grid-area:flavours}
+.product-details-form-column{grid-area:form;min-width:0}
+.product-details-size-guide{grid-area:sizes;background:#fff;border:1px solid rgba(0,0,0,.07);border-radius:18px;padding:16px;box-shadow:0 8px 22px rgba(0,0,0,.035);min-width:0}
+.product-details-size-guide h3{margin-bottom:.75rem}
+.product-details-layout .product-flavour-guide{scroll-margin-top:0}
+.product-details-layout .product-flavour-grid{grid-template-columns:1fr}
+.product-details-layout .product-flavour-note{box-shadow:0 8px 22px rgba(0,0,0,.025)}
+.product-details-layout .order-card{height:auto}
+.product-mobile-order-slot:empty{display:none}
+@media (min-width: 992px){
+  .product-details-grid{grid-template-columns:minmax(0,1.12fr) minmax(350px,.88fr);grid-template-areas:"flavours form" "sizes form";gap:24px 28px}
+  .product-details-layout--no-size .product-details-grid{grid-template-areas:"flavours form"}
+  .product-details-form-column{align-self:start}
+  .product-details-size-guide{padding:18px}
+  .product-details-layout .product-flavour-column{padding:18px}
+}
+@media (min-width: 1200px){
+  .product-details-grid{grid-template-columns:minmax(0,1.08fr) minmax(390px,.92fr);gap:26px 32px}
+}
+@media (max-width: 991.98px){
+  .product-details-layout{padding-top:2.25rem;padding-bottom:2.25rem}
+  .product-details-size-guide{padding:14px}
+  .product-details-layout .order-card{margin-top:0}
+}
+/* === end 2026-05-21 responsive product details layout refinement === */
+#order-desktop:empty{display:none}
+
+/* === 2026-05-21 final polish: desktop form balance + mobile zebra consistency === */
+@media (min-width: 992px){
+  main.product:has(.product-details-layout) .product-details-grid{
+    align-items:stretch;
+  }
+  main.product:has(.product-details-layout) .product-details-form-column{
+    align-self:stretch !important;
+    display:flex;
+    min-width:0;
+  }
+  main.product:has(.product-details-layout) #order-desktop{
+    display:flex;
+    width:100%;
+  }
+  main.product:has(.product-details-layout) #order-desktop .order-card{
+    width:100%;
+    min-height:100%;
+    display:flex;
+    flex-direction:column;
+    padding:22px 22px 24px;
+  }
+  main.product:has(.product-details-layout) #order-desktop .order-card form{
+    display:flex;
+    flex-direction:column;
+    flex:1 1 auto;
+  }
+  main.product:has(.product-details-layout) #order-desktop .order-card form > .row{
+    flex:1 1 auto;
+    align-content:flex-start;
+  }
+  main.product:has(.product-details-layout) #order-desktop .order-card h3{
+    margin-bottom:1rem;
+  }
+  main.product:has(.product-details-layout) #order-desktop .form-label{
+    margin-bottom:.38rem;
+  }
+  main.product:has(.product-details-layout) #order-desktop .form-text{
+    line-height:1.45;
+    margin-top:.42rem;
+  }
+}
+
+@supports selector(main:has(*)){
+  @media (max-width: 991.98px){
+    main.product:has(.product-details-layout){
+      --dc-zebra-white:#fff;
+      --dc-zebra-cream:#fff8ef;
+      --dc-zebra-cream-border:rgba(214,164,75,.24);
+      --dc-zebra-white-border:rgba(0,0,0,.07);
+    }
+
+    /* One clear mobile rhythm for the custom product pages. */
+    main.product:has(.product-details-layout) > section.product-trust,
+    main.product:has(.product-details-layout) > section.product-trust + section{
+      background:var(--dc-zebra-white) !important;
+    }
+    main.product:has(.product-details-layout) > section.product-details-layout{
+      background:var(--dc-zebra-cream) !important;
+    }
+    main.product:has(.product-details-layout) > section.product-details-layout + section.d-lg-none{
+      background:var(--dc-zebra-white) !important;
+    }
+    main.product:has(.product-details-layout) > section.product-planning{
+      background:var(--dc-zebra-cream) !important;
+    }
+    main.product:has(.product-details-layout) > section.product-planning + section.product-help{
+      background:var(--dc-zebra-white) !important;
+    }
+    main.product:has(.product-details-layout) > section.product-planning + section.product-help + section.related{
+      background:var(--dc-zebra-cream) !important;
+    }
+    main.product:has(.product-details-layout) > section.product-details-layout + section.d-lg-none + section.product-help{
+      background:var(--dc-zebra-cream) !important;
+    }
+    main.product:has(.product-details-layout) > section.product-details-layout + section.d-lg-none + section.product-help + section.related{
+      background:var(--dc-zebra-white) !important;
+    }
+
+    /* If an outer section is cream, its main inner cards should also read cream. */
+    main.product:has(.product-details-layout) > section.product-details-layout :where(
+      .product-flavour-column,
+      .product-flavour-column--premium,
+      .product-details-size-guide,
+      .order-card,
+      .product-flavour-note,
+      .flavour-rule-card,
+      .cupcake-rules-card div,
+      .flavour-group,
+      .flavour-group--premium,
+      .sizes-guide-table-wrap
+    ){
+      background:var(--dc-zebra-cream) !important;
+      border-color:var(--dc-zebra-cream-border) !important;
+      box-shadow:none !important;
+    }
+    main.product:has(.product-details-layout) > section.product-details-layout .sizes-guide-table-wrap .table{
+      --bs-table-bg:transparent;
+      --bs-table-accent-bg:transparent;
+      --bs-table-border-color:rgba(0,0,0,.09);
+    }
+    main.product:has(.product-details-layout) > section.product-details-layout .sizes-guide-table-wrap .table > :not(caption) > * > *{
+      background-color:transparent !important;
+    }
+
+    /* White sections stay fully white inside too. */
+    main.product:has(.product-details-layout) > section.product-trust :where(.trust-item),
+    main.product:has(.product-details-layout) > section.product-trust + section :where(.fact-card,.help-band),
+    main.product:has(.product-details-layout) > section.product-details-layout + section.d-lg-none :where(.mt-3,.mini-faq-mobile,.faq-accordion details){
+      background:var(--dc-zebra-white) !important;
+      border-color:var(--dc-zebra-white-border) !important;
+      box-shadow:none !important;
+    }
+    main.product:has(.product-details-layout) > section.product-details-layout + section.d-lg-none > .container > .mt-3{
+      border:1px solid var(--dc-zebra-white-border) !important;
+      border-radius:18px;
+      padding:16px;
+    }
+    main.product:has(.product-details-layout) > section.product-details-layout + section.d-lg-none > .container > .mt-3 > .section{
+      background:transparent !important;
+      padding:0;
+    }
+
+    /* Cream planning and related stops keep the same tone inside their cards. */
+    main.product:has(.product-details-layout) > section.product-planning :where(.planning-card,.planning-note,.card,.alert),
+    main.product:has(.product-details-layout) > section.product-planning + section.product-help + section.related :where(.card,.p,.p-2){
+      background:var(--dc-zebra-cream) !important;
+      border-color:var(--dc-zebra-cream-border) !important;
+      box-shadow:none !important;
+    }
+    main.product:has(.product-details-layout) > section.product-planning + section.product-help :where(.help-band){
+      background:var(--dc-zebra-white) !important;
+      border-color:var(--dc-zebra-white-border) !important;
+      box-shadow:none !important;
+    }
+
+    /* Pages without a planning section alternate help/related after the FAQ stop. */
+    main.product:has(.product-details-layout) > section.product-details-layout + section.d-lg-none + section.product-help :where(.help-band){
+      background:var(--dc-zebra-cream) !important;
+      border-color:var(--dc-zebra-cream-border) !important;
+      box-shadow:none !important;
+    }
+    main.product:has(.product-details-layout) > section.product-details-layout + section.d-lg-none + section.product-help + section.related :where(.card,.p,.p-2){
+      background:var(--dc-zebra-white) !important;
+      border-color:var(--dc-zebra-white-border) !important;
+      box-shadow:none !important;
+    }
+  }
+}
+/* === end final polish === */
+
+/* === 2026-05-21 v3.16: form breathing room + definitive mobile stripe map === */
+.product .order-card-intro{
+  margin:-.35rem 0 1.15rem;
+  color:#5f5f5f;
+  font-size:.95rem;
+  line-height:1.45;
+}
+.product .order-card-footer-note{
+  margin:1.05rem 0 .35rem;
+  color:#626262;
+  font-size:.92rem;
+  line-height:1.45;
+}
+.product .order-card .order-submit-row{
+  margin-top:.75rem !important;
+}
+@media (min-width: 992px){
+  main.product:has(.product-details-layout) #order-desktop .order-card{
+    padding-top:24px;
+    padding-bottom:28px;
+  }
+  main.product:has(.product-details-layout) #order-desktop .order-card h3{
+    margin-bottom:.8rem;
+  }
+  main.product:has(.product-details-layout) #order-desktop .order-card form > .row{
+    row-gap:1.02rem;
+  }
+  main.product:has(.product-details-layout) #order-desktop .order-card .form-fieldset{
+    padding-top:.1rem;
+  }
+  main.product:has(.product-details-layout) #order-desktop .order-submit-row{
+    margin-top:1.05rem !important;
+  }
+}
+
+@supports selector(main:has(*)){
+  @media (max-width: 991.98px){
+    main.product:has(.product-details-layout){
+      --dc-mobile-white:#fff;
+      --dc-mobile-cream:#fff8ef;
+      --dc-mobile-white-border:rgba(0,0,0,.07);
+      --dc-mobile-cream-border:rgba(214,164,75,.24);
+    }
+
+    /* Read the mobile page as full-width visual stops, not as nested cards. */
+    main.product:has(.product-details-layout) > section.product-trust,
+    main.product:has(.product-details-layout) > section.product-trust + section{
+      background:var(--dc-mobile-white) !important;
+    }
+    main.product:has(.product-details-layout) > section.product-details-layout{
+      background:var(--dc-mobile-cream) !important;
+    }
+    main.product:has(.product-details-layout) > section.product-details-layout + section.d-lg-none{
+      background:var(--dc-mobile-white) !important;
+    }
+    main.product:has(.product-details-layout) > section.product-planning{
+      background:var(--dc-mobile-cream) !important;
+    }
+    main.product:has(.product-details-layout) > section.product-planning + section.product-help{
+      background:var(--dc-mobile-white) !important;
+    }
+    main.product:has(.product-details-layout) > section.product-planning + section.product-help + section.related{
+      background:var(--dc-mobile-cream) !important;
+    }
+    main.product:has(.product-details-layout) > section.product-details-layout + section.d-lg-none + section.product-help{
+      background:var(--dc-mobile-cream) !important;
+    }
+    main.product:has(.product-details-layout) > section.product-details-layout + section.d-lg-none + section.product-help + section.related{
+      background:var(--dc-mobile-white) !important;
+    }
+
+    /* White stops: outer and inner surfaces are white. */
+    main.product:has(.product-details-layout) > section.product-trust :where(.trust-item),
+    main.product:has(.product-details-layout) > section.product-trust + section :where(.fact-card,.help-band,.card,.mt-3),
+    main.product:has(.product-details-layout) > section.product-details-layout + section.d-lg-none :where(.mt-3,.mini-faq-mobile,.faq-accordion details),
+    main.product:has(.product-details-layout) > section.product-planning + section.product-help :where(.help-band),
+    main.product:has(.product-details-layout) > section.product-details-layout + section.d-lg-none + section.product-help + section.related :where(.card,.p,.p-2,.related-thumb){
+      background:var(--dc-mobile-white) !important;
+      border-color:var(--dc-mobile-white-border) !important;
+      box-shadow:none !important;
+    }
+
+    /* Cream stops: outer and inner surfaces are cream. Inputs remain white for usability. */
+    main.product:has(.product-details-layout) > section.product-details-layout :where(
+      .product-flavour-column,
+      .product-flavour-column--premium,
+      .product-details-size-guide,
+      .order-card,
+      .product-flavour-note,
+      .flavour-rule-card,
+      .cupcake-rules-card div,
+      .flavour-group,
+      .flavour-group--premium
+    ),
+    main.product:has(.product-details-layout) > section.product-planning :where(.planning-card,.planning-note,.card,.card-body,.alert),
+    main.product:has(.product-details-layout) > section.product-planning + section.product-help + section.related :where(.card,.p,.p-2,.related-thumb),
+    main.product:has(.product-details-layout) > section.product-details-layout + section.d-lg-none + section.product-help :where(.help-band){
+      background:var(--dc-mobile-cream) !important;
+      border-color:var(--dc-mobile-cream-border) !important;
+      box-shadow:none !important;
+    }
+
+    main.product:has(.product-details-layout) > section.product-details-layout .sizes-guide-table-wrap,
+    main.product:has(.product-details-layout) > section.product-details-layout .sizes-guide-table-wrap .table,
+    main.product:has(.product-details-layout) > section.product-details-layout .sizes-guide-table-wrap .table > :not(caption) > * > *{
+      background:transparent !important;
+      background-color:transparent !important;
+      --bs-table-bg:transparent;
+      --bs-table-accent-bg:transparent;
+      --bs-table-border-color:rgba(0,0,0,.09);
+    }
+
+    main.product:has(.product-details-layout) > section.product-details-layout .order-card :where(.form-control,.form-select,input[type="file"]),
+    main.product:has(.product-details-layout) > section.product-details-layout .order-card textarea,
+    main.product:has(.product-details-layout) > section.product-details-layout .order-card select{
+      background:#fff !important;
+    }
+
+    main.product:has(.product-details-layout) > section.product-details-layout + section.d-lg-none > .container > .mt-3{
+      border:1px solid var(--dc-mobile-white-border) !important;
+      border-radius:18px;
+      padding:16px;
+    }
+    main.product:has(.product-details-layout) > section.product-details-layout + section.d-lg-none > .container > .mt-3 > .section{
+      background:transparent !important;
+      padding:0 !important;
+    }
+
+    /* Prevent accidental old stripe rules from leaving white cards on cream stops. */
+    main.product:has(.product-details-layout) > section.product-planning .shadow-sm,
+    main.product:has(.product-details-layout) > section.product-details-layout .shadow-sm,
+    main.product:has(.product-details-layout) > section.related .shadow-sm{
+      box-shadow:none !important;
+    }
+  }
+}
+/* === end v3.16 polish === */
+
+/* === 2026-05-21 v3.16 specificity lock: mobile surfaces === */
+@supports selector(main:has(*)){
+  @media (max-width: 991.98px){
+    html body main.product:has(.product-details-layout) > section.product-details-layout + section.d-lg-none{
+      background:#fff !important;
+    }
+    html body main.product:has(.product-details-layout):has(.product-planning) > section.product-planning{
+      background:#fff8ef !important;
+    }
+    html body main.product:has(.product-details-layout):has(.product-planning) > section.product-planning + section.product-help{
+      background:#fff !important;
+    }
+    html body main.product:has(.product-details-layout):has(.product-planning) > section.product-planning + section.product-help + section.related{
+      background:#fff8ef !important;
+    }
+    html body main.product:has(.product-details-layout):not(:has(.product-planning)) > section.product-details-layout + section.d-lg-none + section.product-help{
+      background:#fff8ef !important;
+    }
+    html body main.product:has(.product-details-layout):not(:has(.product-planning)) > section.product-details-layout + section.d-lg-none + section.product-help + section.related{
+      background:#fff !important;
+    }
+
+    html body main.product:has(.product-details-layout) > section.product-details-layout #order-mobile .order-card,
+    html body main.product:has(.product-details-layout) > section.product-details-layout #order-mobile .order-card[data-order-card="1"],
+    html body main.product:has(.product-details-layout) > section.product-details-layout #sizes-guide,
+    html body main.product:has(.product-details-layout) > section.product-details-layout .product-flavour-column,
+    html body main.product:has(.product-details-layout) > section.product-details-layout .product-flavour-column--premium,
+    html body main.product:has(.product-details-layout) > section.product-details-layout .flavour-group,
+    html body main.product:has(.product-details-layout) > section.product-details-layout .flavour-group--premium,
+    html body main.product:has(.product-details-layout) > section.product-details-layout .cupcake-rules-card div{
+      background:#fff8ef !important;
+      border-color:rgba(214,164,75,.24) !important;
+      box-shadow:none !important;
+    }
+
+    html body main.product:has(.product-details-layout) > section.product-details-layout + section.d-lg-none > .container > .mt-3,
+    html body main.product:has(.product-details-layout) > section.product-details-layout + section.d-lg-none .mini-faq-mobile,
+    html body main.product:has(.product-details-layout) > section.product-details-layout + section.d-lg-none .faq-accordion details,
+    html body main.product:has(.product-details-layout):has(.product-planning) > section.product-planning + section.product-help .help-band,
+    html body main.product:has(.product-details-layout):not(:has(.product-planning)) > section.product-details-layout + section.d-lg-none + section.product-help + section.related .card,
+    html body main.product:has(.product-details-layout):not(:has(.product-planning)) > section.product-details-layout + section.d-lg-none + section.product-help + section.related .p,
+    html body main.product:has(.product-details-layout):not(:has(.product-planning)) > section.product-details-layout + section.d-lg-none + section.product-help + section.related .p-2{
+      background:#fff !important;
+      border-color:rgba(0,0,0,.07) !important;
+      box-shadow:none !important;
+    }
+
+    html body main.product:has(.product-details-layout):has(.product-planning) > section.product-planning .planning-card,
+    html body main.product:has(.product-details-layout):has(.product-planning) > section.product-planning .planning-note,
+    html body main.product:has(.product-details-layout):has(.product-planning) > section.product-planning .card-body,
+    html body main.product:has(.product-details-layout):has(.product-planning) > section.product-planning .alert,
+    html body main.product:has(.product-details-layout):has(.product-planning) > section.product-planning + section.product-help + section.related .card,
+    html body main.product:has(.product-details-layout):has(.product-planning) > section.product-planning + section.product-help + section.related .p,
+    html body main.product:has(.product-details-layout):has(.product-planning) > section.product-planning + section.product-help + section.related .p-2,
+    html body main.product:has(.product-details-layout):not(:has(.product-planning)) > section.product-details-layout + section.d-lg-none + section.product-help .help-band{
+      background:#fff8ef !important;
+      border-color:rgba(214,164,75,.24) !important;
+      box-shadow:none !important;
+    }
+  }
+}
+/* === end v3.16 specificity lock === */
+
+/* === 2026-05-21 v3.17: logical mobile stripes + tighter desktop product-details rhythm === */
+@media (min-width: 992px){
+  main.product:has(.product-details-layout) .product-details-grid{
+    align-items:stretch;
+    row-gap:12px;
+    column-gap:32px;
+  }
+  main.product:has(.product-details-layout) .product-details-flavours{
+    align-self:start;
+  }
+  main.product:has(.product-details-layout) .product-details-size-guide{
+    align-self:start;
+    margin-top:0 !important;
+  }
+  main.product:has(.product-details-layout) #order-desktop .order-card{
+    min-height:100%;
+    padding-top:28px;
+    padding-bottom:32px;
+  }
+  main.product:has(.product-details-layout) #order-desktop .order-card h3{
+    margin-bottom:.55rem;
+  }
+  main.product:has(.product-details-layout) #order-desktop .order-card-intro{
+    margin-top:.15rem;
+    margin-bottom:1.55rem;
+  }
+  main.product:has(.product-details-layout) #order-desktop .order-card form > .row{
+    row-gap:1.16rem;
+  }
+  main.product:has(.product-details-layout) #order-desktop .order-card-footer-note{
+    margin-top:1.45rem;
+    margin-bottom:.55rem;
+  }
+  main.product:has(.product-details-layout) #order-desktop .order-submit-row{
+    margin-top:1.45rem !important;
+  }
+}
+
+@supports selector(main:has(*)){
+  @media (max-width: 991.98px){
+    html body main.product:has(.product-details-layout){
+      --dc-stripe-white:#fff;
+      --dc-stripe-cream:#fff8ef;
+      --dc-stripe-white-border:rgba(0,0,0,.07);
+      --dc-stripe-cream-border:rgba(214,164,75,.24);
+    }
+
+    /* The product details wrapper contains several visual sections on mobile.
+       Keep one HTML structure, but paint each logical child as its own full-width stripe. */
+    html body main.product:has(.product-details-layout) > section.product-details-layout{
+      background:var(--dc-stripe-white) !important;
+      padding-top:0 !important;
+      padding-bottom:0 !important;
+      overflow:hidden;
+    }
+    html body main.product:has(.product-details-layout) > section.product-details-layout .product-details-grid{
+      gap:0 !important;
+    }
+    html body main.product:has(.product-details-layout) > section.product-details-layout .product-details-flavours,
+    html body main.product:has(.product-details-layout) > section.product-details-layout .product-details-form-column,
+    html body main.product:has(.product-details-layout) > section.product-details-layout .product-details-size-guide{
+      position:relative;
+      clip-path:inset(0 -100vmax);
+      box-shadow:0 0 0 100vmax var(--stripe-bg, #fff);
+      margin:0 !important;
+    }
+    html body main.product:has(.product-details-layout) > section.product-details-layout .product-details-flavours{
+      --stripe-bg:var(--dc-stripe-cream);
+      background:var(--dc-stripe-cream) !important;
+      padding:2.25rem 0 2.05rem;
+    }
+    html body main.product:has(.product-details-layout) > section.product-details-layout .product-details-form-column{
+      --stripe-bg:var(--dc-stripe-white);
+      background:var(--dc-stripe-white) !important;
+      padding:2.25rem 0 2.05rem;
+    }
+    html body main.product:has(.product-details-layout) > section.product-details-layout .product-details-size-guide{
+      --stripe-bg:var(--dc-stripe-white);
+      background:var(--dc-stripe-white) !important;
+      border-color:var(--dc-stripe-white-border) !important;
+      padding:0 0 2.25rem !important;
+      border-radius:0 !important;
+      box-shadow:0 0 0 100vmax var(--dc-stripe-white) !important;
+    }
+    html body main.product:has(.product-details-layout) > section.product-details-layout .product-details-size-guide > h3,
+    html body main.product:has(.product-details-layout) > section.product-details-layout .product-details-size-guide > .sizes-guide-table-wrap{
+      background:var(--dc-stripe-white) !important;
+      color:initial;
+    }
+
+    /* Flavours are the cream visual stop. */
+    html body main.product:has(.product-details-layout) > section.product-details-layout .product-details-flavours :where(
+      .product-flavour-guide,
+      .product-flavour-column,
+      .product-flavour-column--premium,
+      .product-flavour-note,
+      .flavour-rule-card,
+      .cupcake-rules-card div,
+      .flavour-group,
+      .flavour-group--premium
+    ){
+      background:var(--dc-stripe-cream) !important;
+      border-color:var(--dc-stripe-cream-border) !important;
+      box-shadow:none !important;
+    }
+
+    /* The order form and size guide are the following white visual stop. */
+    html body main.product:has(.product-details-layout) > section.product-details-layout .product-details-form-column #order-mobile .order-card,
+    html body main.product:has(.product-details-layout) > section.product-details-layout .product-details-form-column #order-mobile .order-card[data-order-card="1"],
+    html body main.product:has(.product-details-layout) > section.product-details-layout .product-details-size-guide,
+    html body main.product:has(.product-details-layout) > section.product-details-layout .product-details-size-guide :where(.sizes-guide-table-wrap){
+      background:var(--dc-stripe-white) !important;
+      border-color:var(--dc-stripe-white-border) !important;
+      box-shadow:none !important;
+    }
+    html body main.product:has(.product-details-layout) > section.product-details-layout .product-details-form-column #order-mobile .order-card{
+      }
+    html body main.product:has(.product-details-layout) > section.product-details-layout .product-details-form-column #order-mobile .order-card :where(.form-control,.form-select,input[type="file"],textarea,select){
+      background:#fff !important;
+    }
+    html body main.product:has(.product-details-layout) > section.product-details-layout .product-details-size-guide .size-price-guide-table,
+    html body main.product:has(.product-details-layout) > section.product-details-layout .product-details-size-guide .size-price-guide-table > :not(caption) > * > *{
+      background-color:transparent !important;
+      --bs-table-bg:transparent;
+      --bs-table-accent-bg:transparent;
+    }
+
+    /* After the details area, continue the visual zebra by logical content sections. */
+    html body main.product:has(.product-details-layout) > section.product-details-layout + section.d-lg-none{
+      background:var(--dc-stripe-cream) !important;
+    }
+    html body main.product:has(.product-details-layout) > section.product-details-layout + section.d-lg-none > .container > .mt-3,
+    html body main.product:has(.product-details-layout) > section.product-details-layout + section.d-lg-none .mini-faq-mobile,
+    html body main.product:has(.product-details-layout) > section.product-details-layout + section.d-lg-none .faq-accordion details{
+      background:var(--dc-stripe-cream) !important;
+      border-color:var(--dc-stripe-cream-border) !important;
+      box-shadow:none !important;
+    }
+    html body main.product:has(.product-details-layout) > section.product-planning{
+      background:var(--dc-stripe-white) !important;
+    }
+    html body main.product:has(.product-details-layout) > section.product-planning :where(.planning-card,.planning-note,.card,.card-body,.alert){
+      background:var(--dc-stripe-white) !important;
+      border-color:var(--dc-stripe-white-border) !important;
+      box-shadow:none !important;
+    }
+    html body main.product:has(.product-details-layout) > section.product-planning + section.product-help,
+    html body main.product:has(.product-details-layout):not(:has(.product-planning)) > section.product-details-layout + section.d-lg-none + section.product-help{
+      background:var(--dc-stripe-cream) !important;
+    }
+    html body main.product:has(.product-details-layout) > section.product-planning + section.product-help .help-band,
+    html body main.product:has(.product-details-layout):not(:has(.product-planning)) > section.product-details-layout + section.d-lg-none + section.product-help .help-band{
+      background:var(--dc-stripe-cream) !important;
+      border-color:var(--dc-stripe-cream-border) !important;
+      box-shadow:none !important;
+    }
+    html body main.product:has(.product-details-layout) > section.product-planning + section.product-help + section.related,
+    html body main.product:has(.product-details-layout):not(:has(.product-planning)) > section.product-details-layout + section.d-lg-none + section.product-help + section.related{
+      background:var(--dc-stripe-white) !important;
+    }
+    html body main.product:has(.product-details-layout) > section.product-planning + section.product-help + section.related :where(.card,.p,.p-2,.related-thumb),
+    html body main.product:has(.product-details-layout):not(:has(.product-planning)) > section.product-details-layout + section.d-lg-none + section.product-help + section.related :where(.card,.p,.p-2,.related-thumb){
+      background:var(--dc-stripe-white) !important;
+      border-color:var(--dc-stripe-white-border) !important;
+      box-shadow:none !important;
+    }
+  }
+}
+/* === end v3.17 polish === */
+
+/* === 2026-05-21 v3.17 lock: mobile logical section colours after legacy overrides === */
+@supports selector(main:has(*)){
+  @media (max-width: 991.98px){
+    html body main.product:has(.product-details-layout) > section.product-details-layout .product-details-size-guide[data-aos]{
+      opacity:1 !important;
+      transform:none !important;
+    }
+    html body main.product:has(.product-details-layout):has(.product-planning) > section.product-planning{
+      background:var(--dc-stripe-white, #fff) !important;
+    }
+    html body main.product:has(.product-details-layout):has(.product-planning) > section.product-planning :where(.planning-card,.planning-note,.card,.card-body,.alert){
+      background:var(--dc-stripe-white, #fff) !important;
+      border-color:var(--dc-stripe-white-border, rgba(0,0,0,.07)) !important;
+      box-shadow:none !important;
+    }
+    html body main.product:has(.product-details-layout):has(.product-planning) > section.product-planning + section.product-help{
+      background:var(--dc-stripe-cream, #fff8ef) !important;
+    }
+    html body main.product:has(.product-details-layout):has(.product-planning) > section.product-planning + section.product-help .help-band{
+      background:var(--dc-stripe-cream, #fff8ef) !important;
+      border-color:var(--dc-stripe-cream-border, rgba(214,164,75,.24)) !important;
+      box-shadow:none !important;
+    }
+    html body main.product:has(.product-details-layout):has(.product-planning) > section.product-planning + section.product-help + section.related{
+      background:var(--dc-stripe-white, #fff) !important;
+    }
+    html body main.product:has(.product-details-layout):has(.product-planning) > section.product-planning + section.product-help + section.related :where(.card,.p,.p-2,.related-thumb){
+      background:var(--dc-stripe-white, #fff) !important;
+      border-color:var(--dc-stripe-white-border, rgba(0,0,0,.07)) !important;
+      box-shadow:none !important;
+    }
+  }
+}
+/* === end v3.17 lock === */
+
+/* === 2026-05-21 v3.17 final specificity lock for white planning/related card surfaces === */
+@supports selector(main:has(*)){
+  @media (max-width: 991.98px){
+    html body main.product:has(.product-details-layout):has(.product-planning) > section.product-planning .planning-card,
+    html body main.product:has(.product-details-layout):has(.product-planning) > section.product-planning .planning-note,
+    html body main.product:has(.product-details-layout):has(.product-planning) > section.product-planning .card,
+    html body main.product:has(.product-details-layout):has(.product-planning) > section.product-planning .card-body,
+    html body main.product:has(.product-details-layout):has(.product-planning) > section.product-planning .alert,
+    html body main.product:has(.product-details-layout):has(.product-planning) > section.product-planning + section.product-help + section.related .card,
+    html body main.product:has(.product-details-layout):has(.product-planning) > section.product-planning + section.product-help + section.related .card-body,
+    html body main.product:has(.product-details-layout):has(.product-planning) > section.product-planning + section.product-help + section.related .related-thumb,
+    html body main.product:has(.product-details-layout):has(.product-planning) > section.product-planning + section.product-help + section.related .p,
+    html body main.product:has(.product-details-layout):has(.product-planning) > section.product-planning + section.product-help + section.related .p-2{
+      background:#fff !important;
+      border-color:rgba(0,0,0,.07) !important;
+      box-shadow:none !important;
+    }
+  }
+}
+/* === end v3.17 final specificity lock === */
+
+/* === 2026-05-21 v3.17 desktop left-column fix: no artificial gap between flavours and size guide === */
+@media (min-width: 992px){
+  main.product:has(.product-details-left-column) .product-details-grid{
+    grid-template-columns:minmax(0,1.08fr) minmax(390px,.92fr) !important;
+    grid-template-areas:"left form" !important;
+    column-gap:32px !important;
+    row-gap:0 !important;
+    align-items:stretch !important;
+  }
+  main.product:has(.product-details-left-column) .product-details-left-column{
+    grid-area:left;
+    display:flex;
+    flex-direction:column;
+    gap:12px;
+    min-width:0;
+  }
+  main.product:has(.product-details-left-column) .product-details-left-column .product-details-flavours,
+  main.product:has(.product-details-left-column) .product-details-left-column .product-details-size-guide{
+    align-self:stretch;
+  }
+  main.product:has(.product-details-left-column) .product-details-form-column{
+    grid-area:form;
+  }
+}
+@media (max-width: 991.98px){
+  main.product:has(.product-details-left-column) .product-details-left-column{
+    display:contents;
+  }
+}
+/* === end v3.17 desktop left-column fix === */
+
+/* === 2026-05-21 v3.17 AOS guard: size guide must stay aligned with flavours === */
+main.product .product-details-size-guide[data-aos]{
+  opacity:1 !important;
+  transform:none !important;
+}
+/* === end v3.17 AOS guard === */
+
+/* === 2026-05-21 v3.17 final specificity lock for white mobile order/size stop === */
+@supports selector(main:has(*)){
+  @media (max-width: 991.98px){
+    html body main.product:has(.product-details-layout) > section.product-details-layout #sizes-guide.product-details-size-guide,
+    html body main.product:has(.product-details-layout) > section.product-details-layout #sizes-guide.product-details-size-guide .sizes-guide-table-wrap{
+      background:#fff !important;
+      border-color:rgba(0,0,0,.07) !important;
+      box-shadow:none !important;
+    }
+  }
+}
+/* === end v3.17 order/size lock === */
+
+/* === 2026-05-21 v3.18: true logical mobile stripes + balanced desktop form rhythm === */
+@supports selector(main:has(*)){
+  @media (max-width: 991.98px){
+    html body main.product:has(.product-details-layout){
+      --dc-v318-white:#fff;
+      --dc-v318-cream:#fff8ef;
+      --dc-v318-white-border:rgba(0,0,0,.07);
+      --dc-v318-cream-border:rgba(214,164,75,.24);
+    }
+
+    /* The shared details wrapper contains separate visual blocks on mobile.
+       Paint each child as its own full-width stripe instead of colouring the wrapper. */
+    html body main.product:has(.product-details-layout) > section.product-details-layout{
+      background:var(--dc-v318-white) !important;
+      padding-top:0 !important;
+      padding-bottom:0 !important;
+      overflow:hidden !important;
+    }
+    html body main.product:has(.product-details-layout) > section.product-details-layout .container,
+    html body main.product:has(.product-details-layout) > section.product-details-layout .product-details-grid{
+      overflow:visible !important;
+    }
+    html body main.product:has(.product-details-layout) > section.product-details-layout .product-details-grid{
+      gap:0 !important;
+    }
+    html body main.product:has(.product-details-layout) > section.product-details-layout .product-details-flavours,
+    html body main.product:has(.product-details-layout) > section.product-details-layout .product-details-form-column,
+    html body main.product:has(.product-details-layout) > section.product-details-layout .product-details-size-guide{
+      position:relative !important;
+      clip-path:inset(0 -100vmax) !important;
+      margin:0 !important;
+      border-radius:0 !important;
+    }
+
+    /* 1. Flavours: cream */
+    html body main.product:has(.product-details-layout) > section.product-details-layout .product-details-flavours{
+      --stripe-bg:var(--dc-v318-cream);
+      background:var(--dc-v318-cream) !important;
+      box-shadow:0 0 0 100vmax var(--dc-v318-cream) !important;
+      padding:2.25rem 0 2.15rem !important;
+    }
+    html body main.product:has(.product-details-layout) > section.product-details-layout .product-details-flavours :where(
+      .product-flavour-guide,
+      .product-flavour-column,
+      .product-flavour-column--premium,
+      .product-flavour-note,
+      .flavour-rule-card,
+      .cupcake-rules-card div,
+      .flavour-group,
+      .flavour-group--premium
+    ){
+      background:var(--dc-v318-cream) !important;
+      border-color:var(--dc-v318-cream-border) !important;
+      box-shadow:none !important;
+    }
+
+    /* 2. Start an order: white */
+    html body main.product:has(.product-details-layout) > section.product-details-layout .product-details-form-column{
+      --stripe-bg:var(--dc-v318-white);
+      background:var(--dc-v318-white) !important;
+      box-shadow:0 0 0 100vmax var(--dc-v318-white) !important;
+      padding:2.25rem 0 2.15rem !important;
+    }
+    html body main.product:has(.product-details-layout) > section.product-details-layout .product-details-form-column #order-mobile .order-card,
+    html body main.product:has(.product-details-layout) > section.product-details-layout .product-details-form-column #order-mobile .order-card[data-order-card="1"]{
+      background:var(--dc-v318-white) !important;
+      border-color:var(--dc-v318-white-border) !important;
+      box-shadow:none !important;
+    }
+    html body main.product:has(.product-details-layout) > section.product-details-layout .product-details-form-column #order-mobile .order-card :where(.form-control,.form-select,input[type="file"],textarea,select){
+      background:#fff !important;
+    }
+
+    /* 3. Size guide: cream. It is a separate block from the order form. */
+    html body main.product:has(.product-details-layout) > section.product-details-layout #sizes-guide.product-details-size-guide,
+    html body main.product:has(.product-details-layout) > section.product-details-layout .product-details-size-guide{
+      --stripe-bg:var(--dc-v318-cream);
+      background:var(--dc-v318-cream) !important;
+      border-color:var(--dc-v318-cream-border) !important;
+      box-shadow:0 0 0 100vmax var(--dc-v318-cream) !important;
+      padding:2.25rem 0 2.25rem !important;
+    }
+    html body main.product:has(.product-details-layout) > section.product-details-layout #sizes-guide.product-details-size-guide > h3,
+    html body main.product:has(.product-details-layout) > section.product-details-layout #sizes-guide.product-details-size-guide .sizes-guide-table-wrap,
+    html body main.product:has(.product-details-layout) > section.product-details-layout .product-details-size-guide > h3,
+    html body main.product:has(.product-details-layout) > section.product-details-layout .product-details-size-guide .sizes-guide-table-wrap{
+      background:var(--dc-v318-cream) !important;
+      border-color:var(--dc-v318-cream-border) !important;
+      box-shadow:none !important;
+    }
+    html body main.product:has(.product-details-layout) > section.product-details-layout .product-details-size-guide .size-price-guide-table,
+    html body main.product:has(.product-details-layout) > section.product-details-layout .product-details-size-guide .size-price-guide-table > :not(caption) > * > *{
+      background:transparent !important;
+      background-color:transparent !important;
+      --bs-table-bg:transparent;
+      --bs-table-accent-bg:transparent;
+      --bs-table-border-color:rgba(0,0,0,.09);
+    }
+
+    /* Continue the mobile zebra after the details area. */
+    html body main.product:has(.product-details-layout) > section.product-details-layout + section.d-lg-none{
+      background:var(--dc-v318-white) !important;
+    }
+    html body main.product:has(.product-details-layout) > section.product-details-layout + section.d-lg-none > .container > .mt-3,
+    html body main.product:has(.product-details-layout) > section.product-details-layout + section.d-lg-none .section,
+    html body main.product:has(.product-details-layout) > section.product-details-layout + section.d-lg-none .mini-faq-mobile,
+    html body main.product:has(.product-details-layout) > section.product-details-layout + section.d-lg-none .faq-accordion details{
+      background:var(--dc-v318-white) !important;
+      border-color:var(--dc-v318-white-border) !important;
+      box-shadow:none !important;
+    }
+    html body main.product:has(.product-details-layout) > section.product-planning{
+      background:var(--dc-v318-cream) !important;
+    }
+    html body main.product:has(.product-details-layout) > section.product-planning :where(.planning-card,.planning-note,.card,.card-body,.alert){
+      background:var(--dc-v318-cream) !important;
+      border-color:var(--dc-v318-cream-border) !important;
+      box-shadow:none !important;
+    }
+    html body main.product:has(.product-details-layout) > section.product-planning + section.product-help,
+    html body main.product:has(.product-details-layout):not(:has(.product-planning)) > section.product-details-layout + section.d-lg-none + section.product-help{
+      background:var(--dc-v318-white) !important;
+    }
+    html body main.product:has(.product-details-layout) > section.product-planning + section.product-help .help-band,
+    html body main.product:has(.product-details-layout):not(:has(.product-planning)) > section.product-details-layout + section.d-lg-none + section.product-help .help-band{
+      background:var(--dc-v318-white) !important;
+      border-color:var(--dc-v318-white-border) !important;
+      box-shadow:none !important;
+    }
+    html body main.product:has(.product-details-layout) > section.product-planning + section.product-help + section.related,
+    html body main.product:has(.product-details-layout):not(:has(.product-planning)) > section.product-details-layout + section.d-lg-none + section.product-help + section.related{
+      background:var(--dc-v318-cream) !important;
+    }
+    html body main.product:has(.product-details-layout) > section.product-planning + section.product-help + section.related :where(.card,.card-body,.p,.p-2,.related-thumb),
+    html body main.product:has(.product-details-layout):not(:has(.product-planning)) > section.product-details-layout + section.d-lg-none + section.product-help + section.related :where(.card,.card-body,.p,.p-2,.related-thumb){
+      background:var(--dc-v318-cream) !important;
+      border-color:var(--dc-v318-cream-border) !important;
+      box-shadow:none !important;
+    }
+  }
+}
+
+@supports selector(main:has(*)){
+  @media (min-width: 992px){
+    html body main.product:has(.product-details-left-column) .product-details-grid{
+      align-items:start !important;
+      row-gap:0 !important;
+      column-gap:32px !important;
+    }
+    html body main.product:has(.product-details-left-column) .product-details-left-column{
+      display:flex !important;
+      flex-direction:column !important;
+      gap:14px !important;
+      align-self:start !important;
+      min-width:0 !important;
+    }
+    html body main.product:has(.product-details-layout) .product-details-form-column{
+      align-self:start !important;
+      display:block !important;
+      min-width:0 !important;
+    }
+    html body main.product:has(.product-details-layout) #order-desktop{
+      display:block !important;
+      width:100% !important;
+    }
+    html body main.product:has(.product-details-layout) #order-desktop .order-card{
+      width:100% !important;
+      height:auto !important;
+      min-height:0 !important;
+      display:block !important;
+      padding:22px 22px 24px !important;
+    }
+    html body main.product:has(.product-details-layout) #order-desktop .order-card form{
+      display:block !important;
+    }
+    html body main.product:has(.product-details-layout) #order-desktop .order-card form > .row{
+      display:flex !important;
+      flex-wrap:wrap !important;
+      flex:0 1 auto !important;
+      row-gap:.68rem !important;
+      align-content:normal !important;
+    }
+    html body main.product:has(.product-details-layout) #order-desktop .order-card h3{
+      margin-bottom:.45rem !important;
+    }
+    html body main.product:has(.product-details-layout) #order-desktop .order-card-intro{
+      margin-top:0 !important;
+      margin-bottom:1.05rem !important;
+    }
+    html body main.product:has(.product-details-layout) #order-desktop .form-label{
+      margin-bottom:.3rem !important;
+    }
+    html body main.product:has(.product-details-layout) #order-desktop .form-text{
+      line-height:1.35 !important;
+      margin-top:.28rem !important;
+    }
+    html body main.product:has(.product-details-layout) #order-desktop .form-fieldset .d-grid{
+      gap:.28rem !important;
+    }
+    html body main.product:has(.product-details-layout) #order-desktop .form-check{
+      margin-bottom:0 !important;
+      line-height:1.28 !important;
+    }
+    html body main.product:has(.product-details-layout) #order-desktop textarea.form-control{
+      min-height:5.15rem !important;
+    }
+    html body main.product:has(.product-details-layout) #order-desktop .order-card-footer-note{
+      margin-top:.85rem !important;
+      margin-bottom:.25rem !important;
+    }
+    html body main.product:has(.product-details-layout) #order-desktop .order-submit-row{
+      margin-top:.8rem !important;
+    }
+  }
+}
+/* === end v3.18 polish === */
+
+/* === 2026-05-21 v3.18b: desktop form compactness after removing over-stretch === */
+@supports selector(main:has(*)){
+  @media (min-width: 992px){
+    html body main.product:has(.product-details-layout) #order-desktop .form-control,
+    html body main.product:has(.product-details-layout) #order-desktop .form-select{
+      min-height:35px !important;
+      padding-top:.34rem !important;
+      padding-bottom:.34rem !important;
+      font-size:.95rem !important;
+    }
+    html body main.product:has(.product-details-layout) #order-desktop textarea.form-control{
+      min-height:4.35rem !important;
+    }
+    html body main.product:has(.product-details-layout) #order-desktop .form-label,
+    html body main.product:has(.product-details-layout) #order-desktop .form-legend{
+      font-size:.94rem !important;
+    }
+    html body main.product:has(.product-details-layout) #order-desktop .form-check{
+      font-size:.92rem !important;
+      line-height:1.24 !important;
+    }
+    html body main.product:has(.product-details-layout) #order-desktop .form-text,
+    html body main.product:has(.product-details-layout) #order-desktop .small.text-muted{
+      font-size:.85rem !important;
+      line-height:1.28 !important;
+    }
+    html body main.product:has(.product-details-layout) #order-desktop .order-card form > .row{
+      row-gap:.52rem !important;
+    }
+    html body main.product:has(.product-details-layout) .product-details-layout .product-flavour-column,
+    html body main.product:has(.product-details-layout) .product-details-left-column .product-flavour-column{
+      padding:20px !important;
+    }
+    html body main.product:has(.product-details-layout) .product-details-left-column .product-details-size-guide{
+      padding:20px !important;
+    }
+  }
+}
+/* === end v3.18b === */
+
+/* === 2026-05-21 v3.18c: final section colour order and desktop height tuning === */
+@supports selector(main:has(*)){
+  @media (max-width: 991.98px){
+    /* Pages with an additional planning section: flavours cream, form white, size cream, quick questions white, planning cream, questions white, related cream. */
+    html body main.product:has(.product-details-layout):has(.product-planning) > section.product-planning{
+      background:var(--dc-v318-cream, #fff8ef) !important;
+    }
+    html body main.product:has(.product-details-layout):has(.product-planning) > section.product-planning .planning-card,
+    html body main.product:has(.product-details-layout):has(.product-planning) > section.product-planning .planning-note,
+    html body main.product:has(.product-details-layout):has(.product-planning) > section.product-planning .card,
+    html body main.product:has(.product-details-layout):has(.product-planning) > section.product-planning .card-body,
+    html body main.product:has(.product-details-layout):has(.product-planning) > section.product-planning .alert{
+      background:var(--dc-v318-cream, #fff8ef) !important;
+      border-color:var(--dc-v318-cream-border, rgba(214,164,75,.24)) !important;
+      box-shadow:none !important;
+    }
+    html body main.product:has(.product-details-layout):has(.product-planning) > section.product-planning + section.product-help{
+      background:var(--dc-v318-white, #fff) !important;
+    }
+    html body main.product:has(.product-details-layout):has(.product-planning) > section.product-planning + section.product-help .help-band{
+      background:var(--dc-v318-white, #fff) !important;
+      border-color:var(--dc-v318-white-border, rgba(0,0,0,.07)) !important;
+      box-shadow:none !important;
+    }
+    html body main.product:has(.product-details-layout):has(.product-planning) > section.product-planning + section.product-help + section.related{
+      background:var(--dc-v318-cream, #fff8ef) !important;
+    }
+    html body main.product:has(.product-details-layout):has(.product-planning) > section.product-planning + section.product-help + section.related .card,
+    html body main.product:has(.product-details-layout):has(.product-planning) > section.product-planning + section.product-help + section.related .card-body,
+    html body main.product:has(.product-details-layout):has(.product-planning) > section.product-planning + section.product-help + section.related .related-thumb,
+    html body main.product:has(.product-details-layout):has(.product-planning) > section.product-planning + section.product-help + section.related .p,
+    html body main.product:has(.product-details-layout):has(.product-planning) > section.product-planning + section.product-help + section.related .p-2{
+      background:var(--dc-v318-cream, #fff8ef) !important;
+      border-color:var(--dc-v318-cream-border, rgba(214,164,75,.24)) !important;
+      box-shadow:none !important;
+    }
+
+    /* Pages without planning after quick questions: questions cream, related white. */
+    html body main.product:has(.product-details-layout):not(:has(.product-planning)) > section.product-details-layout + section.d-lg-none + section.product-help{
+      background:var(--dc-v318-cream, #fff8ef) !important;
+    }
+    html body main.product:has(.product-details-layout):not(:has(.product-planning)) > section.product-details-layout + section.d-lg-none + section.product-help .help-band{
+      background:var(--dc-v318-cream, #fff8ef) !important;
+      border-color:var(--dc-v318-cream-border, rgba(214,164,75,.24)) !important;
+      box-shadow:none !important;
+    }
+    html body main.product:has(.product-details-layout):not(:has(.product-planning)) > section.product-details-layout + section.d-lg-none + section.product-help + section.related{
+      background:var(--dc-v318-white, #fff) !important;
+    }
+    html body main.product:has(.product-details-layout):not(:has(.product-planning)) > section.product-details-layout + section.d-lg-none + section.product-help + section.related .card,
+    html body main.product:has(.product-details-layout):not(:has(.product-planning)) > section.product-details-layout + section.d-lg-none + section.product-help + section.related .card-body,
+    html body main.product:has(.product-details-layout):not(:has(.product-planning)) > section.product-details-layout + section.d-lg-none + section.product-help + section.related .related-thumb,
+    html body main.product:has(.product-details-layout):not(:has(.product-planning)) > section.product-details-layout + section.d-lg-none + section.product-help + section.related .p,
+    html body main.product:has(.product-details-layout):not(:has(.product-planning)) > section.product-details-layout + section.d-lg-none + section.product-help + section.related .p-2{
+      background:var(--dc-v318-white, #fff) !important;
+      border-color:var(--dc-v318-white-border, rgba(0,0,0,.07)) !important;
+      box-shadow:none !important;
+    }
+  }
+
+  @media (min-width: 992px){
+    html body main.product:has(.product-details-layout) #order-desktop .form-control,
+    html body main.product:has(.product-details-layout) #order-desktop .form-select{
+      min-height:34px !important;
+      padding-top:.32rem !important;
+      padding-bottom:.32rem !important;
+    }
+    html body main.product:has(.product-details-layout) #order-desktop textarea.form-control{
+      min-height:4.1rem !important;
+    }
+    html body main.product:has(.product-details-layout) #order-desktop .order-card form > .row{
+      row-gap:.46rem !important;
+    }
+    html body main.product:has(.product-details-layout) #order-desktop .order-card-intro{
+      margin-bottom:.95rem !important;
+    }
+    html body main.product:has(.product-details-layout) #order-desktop .order-card-footer-note{
+      margin-top:.75rem !important;
+    }
+    html body main.product:has(.product-details-layout) .product-details-left-column .product-flavour-column{
+      padding:22px !important;
+    }
+    html body main.product:has(.product-details-layout) .product-details-left-column .product-details-size-guide{
+      padding:22px !important;
+    }
+  }
+}
+/* === end v3.18c === */

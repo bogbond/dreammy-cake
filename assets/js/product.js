@@ -171,13 +171,23 @@
     }
     bindOnce(document.getElementById('btn-help-sticky'), 'click', goToHelp);
 
-    // Sizes guide scroll fix (account for fixed header)
+    // Sizes guide scroll fix (account for fixed header and responsive layouts)
     (function(){
-      var target = document.getElementById('sizes-guide');
-      if(!target) return;
+      function isVisible(el){
+        if(!el) return false;
+        var style = window.getComputedStyle ? window.getComputedStyle(el) : null;
+        if(style && (style.display === 'none' || style.visibility === 'hidden')) return false;
+        return !!(el.offsetWidth || el.offsetHeight || el.getClientRects().length);
+      }
+      function getSizesGuideTarget(){
+        var guides = Array.prototype.slice.call(document.querySelectorAll('[data-sizes-guide], #sizes-guide'));
+        return guides.find(isVisible) || document.getElementById('sizes-guide') || guides[0];
+      }
 
       document.querySelectorAll('a[href=\"#sizes-guide\"]').forEach(function(link){
         bindOnce(link, 'click', function(ev){
+          var target = getSizesGuideTarget();
+          if(!target) return;
           ev.preventDefault();
           scrollToWithOffset(target, 8);
           highlightTemporarily(target);
@@ -186,7 +196,7 @@
 
       // Also make native anchor jumps nicer if URL has #sizes-guide
       if (location.hash === '#sizes-guide') {
-        setTimeout(function(){ scrollToWithOffset(target, 8); }, 0);
+        setTimeout(function(){ var target = getSizesGuideTarget(); if(target) scrollToWithOffset(target, 8); }, 0);
       }
     })();
   }
@@ -218,78 +228,126 @@
 })();
 
 
-// r55.24: Show Classic Buttercream options when selected
+// Product flavour and cupcake flavour helpers
 (function(){
-  function setEnabled(container, enabled){
-    if(!container) return;
-    var inputs = container.querySelectorAll('input');
-    inputs.forEach(function(inp){
-      inp.disabled = !enabled;
-      if(!enabled){
-        if(inp.type === 'radio' || inp.type === 'checkbox'){ inp.checked = false; }
-        inp.removeAttribute('required');
+  function findForm(node){ return node && node.closest ? node.closest('form') : null; }
+
+  function updateCakeFlavour(select){
+    if(!select) return;
+    var form = findForm(select);
+    if(!form) return;
+    var opt = select.options[select.selectedIndex];
+    var add = opt ? parseFloat(opt.getAttribute('data-price-add') || '0') : 0;
+    if(!Number.isFinite(add)) add = 0;
+
+    var hidden = form.querySelector('input[name="cake_flavour_price_adjustment"]');
+    if(!hidden){
+      hidden = document.createElement('input');
+      hidden.type = 'hidden';
+      hidden.name = 'cake_flavour_price_adjustment';
+      form.appendChild(hidden);
+    }
+    hidden.value = add > 0 ? ('Premium flavour surcharge from +£' + add) : 'No premium flavour surcharge';
+
+    var note = form.querySelector('[data-flavour-selected-note]');
+    if(note){
+      note.textContent = add > 0 ? ('Premium flavour selected: this adds from +£' + add + ' to the cake quote.') : '';
+    }
+  }
+
+  function cupcakeLimit(qty){
+    qty = parseInt(qty, 10);
+    if(!Number.isFinite(qty) || qty <= 6) return 1;
+    if(qty < 24) return 2;
+    return 3;
+  }
+
+  function selectedCupcakeFlavours(form){
+    return Array.prototype.slice.call(form.querySelectorAll('[data-cupcake-flavour]:checked'));
+  }
+
+  function updateCupcakeForm(form, changedInput){
+    if(!form) return;
+    var qty = form.querySelector('#cupcake-qty-range');
+    var boxes = Array.prototype.slice.call(form.querySelectorAll('[data-cupcake-flavour]'));
+    if(!qty || boxes.length === 0) return;
+
+    var qtyNumber = parseInt(qty.value || '6', 10);
+    var limit = cupcakeLimit(qtyNumber);
+    var qtyValue = form.querySelector('#qtyValue');
+    if(qtyValue) qtyValue.textContent = qtyNumber + ' cupcakes';
+    var limitLabel = form.querySelector('[data-cupcake-limit-label]');
+    if(limitLabel) limitLabel.textContent = limit === 1 ? '1 flavour only' : ('up to ' + limit + ' flavours');
+
+    var selected = selectedCupcakeFlavours(form);
+    if(selected.length > limit){
+      if(changedInput && changedInput.checked && changedInput.hasAttribute('data-cupcake-flavour')){
+        changedInput.checked = false;
       } else {
-        // Make Sponge and Buttercream required; Filling optional
-        if (inp.name === 'cake_sponge' || inp.name === 'cake_buttercream'){
-          inp.required = true;
-        }
+        selected.slice(limit).forEach(function(input){ input.checked = false; });
       }
+      selected = selectedCupcakeFlavours(form);
+    }
+
+    boxes.forEach(function(input){
+      input.disabled = !input.checked && selected.length >= limit;
     });
-  }
 
-  function findScope(node){
-    if(!node || !node.closest) return null;
-    return node.closest('#order-desktop') || node.closest('#order-mobile') || node.closest('form');
-  }
+    var feedback = form.querySelector('#cupcakeFlavourFeedback');
+    if(feedback){
+      if(selected.length >= limit){
+        feedback.hidden = false;
+        feedback.textContent = limit === 1 ? 'This box size allows 1 cupcake flavour.' : 'This box size allows up to ' + limit + ' cupcake flavours.';
+      } else {
+        feedback.hidden = true;
+        feedback.textContent = '';
+      }
+    }
 
-  function updateScope(scope){
-    if(!scope) return;
-
-    var container = scope.querySelector('.classic-options');
-    if(!container) return;
-
-    // Determine the selection within the same form/scope
-    var form = container.closest('form') || scope.querySelector('form') || scope;
-    var checked = form ? form.querySelector('input[name="cake_type"]:checked') : null;
-    var isClassic = !!(checked && checked.value === 'Classic Buttercream');
-
-    if(isClassic){
-      container.classList.remove('d-none');
-      setEnabled(container, true);
-    } else {
-      container.classList.add('d-none');
-      setEnabled(container, false);
+    var summary = form.querySelector('[data-cupcake-flavour-summary]');
+    if(summary){
+      var names = selected.map(function(input){ return input.value; });
+      summary.value = names.length ? (qtyNumber + ' cupcakes · ' + names.join(', ')) : '';
     }
   }
 
-  function handleChange(ev){
-    var tgt = ev.target;
-    if(!tgt || tgt.name !== 'cake_type') return;
-    updateScope(findScope(tgt) || document);
-  }
+  function initProductFlavourHelpers(){
+    document.querySelectorAll('.product-flavour-select').forEach(updateCakeFlavour);
+    document.querySelectorAll('form[data-cupcake-order]').forEach(updateCupcakeForm);
 
-  function initClassicOptions(){
-    // Delegate once (some pages include multiple product scripts)
-    if(!window.__dc_classic_options_bound){
-      document.addEventListener('change', handleChange);
-      window.__dc_classic_options_bound = true;
-    }
-
-    // Initialize BOTH desktop and mobile order blocks on load
-    var scopes = Array.prototype.slice.call(document.querySelectorAll('#order-desktop, #order-mobile'));
-    if(scopes.length === 0){
-      // Fallback: initialize around each classic-options block
-      scopes = Array.prototype.slice.call(document.querySelectorAll('.classic-options')).map(function(c){
-        return c.closest('form') || c.parentElement;
-      }).filter(Boolean);
-    }
-    scopes.forEach(updateScope);
+    if(window.__dc_product_flavour_helpers_bound) return;
+    document.addEventListener('change', function(ev){
+      var target = ev.target;
+      if(!target) return;
+      if(target.classList && target.classList.contains('product-flavour-select')) updateCakeFlavour(target);
+      if(target.id === 'cupcake-qty-range' || target.hasAttribute('data-cupcake-flavour')) updateCupcakeForm(findForm(target), target);
+    });
+    document.addEventListener('input', function(ev){
+      var target = ev.target;
+      if(target && target.id === 'cupcake-qty-range') updateCupcakeForm(findForm(target), target);
+    });
+    document.addEventListener('submit', function(ev){
+      var form = ev.target;
+      if(!form || !form.matches || !form.matches('form[data-cupcake-order]')) return;
+      updateCupcakeForm(form);
+      if(selectedCupcakeFlavours(form).length === 0){
+        ev.preventDefault();
+        var feedback = form.querySelector('#cupcakeFlavourFeedback');
+        if(feedback){
+          feedback.hidden = false;
+          feedback.textContent = 'Please choose at least one cupcake flavour.';
+        }
+        var first = form.querySelector('[data-cupcake-flavour]');
+        if(first){ try{ first.focus({preventScroll:false}); }catch(e){ first.focus(); } }
+      }
+    }, true);
+    window.__dc_product_flavour_helpers_bound = true;
   }
 
   if(document.readyState === 'loading'){
-    document.addEventListener('DOMContentLoaded', initClassicOptions);
+    document.addEventListener('DOMContentLoaded', initProductFlavourHelpers);
   } else {
-    initClassicOptions();
+    initProductFlavourHelpers();
   }
 })();
 
