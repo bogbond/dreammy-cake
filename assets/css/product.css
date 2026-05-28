@@ -1647,3 +1647,199 @@ main.product .product-details-size-guide[data-aos]{
   }
 }
 /* === end v3.18c === */
+
+/* === 2026-05-28 mobile flavour zebra refresh for the four main cake pages === */
+@supports selector(main:has(*)){
+  @media (max-width: 991.98px){
+    html body main.product:has(.product-hero:is([style*="themed-cake-main"],[style*="wedding-cake-main"],[style*="celebration-cake-main"],[style*="mini-bento-cake-main"])){
+      --dc-flavour-classic-bg:#fff;
+      --dc-flavour-classic-card:#fffaf4;
+      --dc-flavour-classic-border:rgba(0,0,0,.075);
+      --dc-flavour-premium-bg:#fff6e8;
+      --dc-flavour-premium-card:rgba(255,255,255,.84);
+      --dc-flavour-premium-border:rgba(214,164,75,.34);
+      --dc-flavour-gold:#d6a44b;
+      --dc-flavour-gold-text:#7a5a20;
+      --dc-flavour-copy:#544c45;
+    }
+
+    html body main.product:has(.product-hero:is([style*="themed-cake-main"],[style*="wedding-cake-main"],[style*="celebration-cake-main"],[style*="mini-bento-cake-main"])) > section.product-details-layout .product-details-flavours{
+      --stripe-bg:var(--dc-flavour-classic-bg) !important;
+      background:var(--dc-flavour-classic-bg) !important;
+      box-shadow:0 0 0 100vmax var(--dc-flavour-classic-bg) !important;
+      padding:2.25rem 0 0 !important;
+    }
+
+    html body main.product:has(.product-hero:is([style*="themed-cake-main"],[style*="wedding-cake-main"],[style*="celebration-cake-main"],[style*="mini-bento-cake-main"])) > section.product-details-layout .product-details-flavours .product-flavour-guide{
+      background:transparent !important;
+      border-color:transparent !important;
+      box-shadow:none !important;
+    }
+
+    html body main.product:has(.product-hero:is([style*="themed-cake-main"],[style*="wedding-cake-main"],[style*="celebration-cake-main"],[style*="mini-bento-cake-main"])) > section.product-details-layout .product-details-flavours .product-subtitle{
+      background:var(--dc-flavour-classic-bg) !important;
+      padding-bottom:.25rem !important;
+    }
+
+    html body main.product:has(.product-hero:is([style*="themed-cake-main"],[style*="wedding-cake-main"],[style*="celebration-cake-main"],[style*="mini-bento-cake-main"])) > section.product-details-layout .product-details-flavours .product-flavour-grid{
+      display:grid !important;
+      grid-template-columns:1fr !important;
+      gap:0 !important;
+      margin-top:1rem !important;
+    }
+
+    html body main.product:has(.product-hero:is([style*="themed-cake-main"],[style*="wedding-cake-main"],[style*="celebration-cake-main"],[style*="mini-bento-cake-main"])) > section.product-details-layout .product-details-flavours .product-flavour-column{
+      position:relative !important;
+      clip-path:inset(0 -100vmax) !important;
+      background:var(--dc-flavour-classic-bg) !important;
+      border:0 !important;
+      border-radius:0 !important;
+      box-shadow:0 0 0 100vmax var(--dc-flavour-classic-bg) !important;
+      padding:.15rem 0 1.65rem !important;
+    }
+
+    html body main.product:has(.product-hero:is([style*="themed-cake-main"],[style*="wedding-cake-main"],[style*="celebration-cake-main"],[style*="mini-bento-cake-main"])) > section.product-details-layout .product-details-flavours .product-flavour-column--premium{
+      background:linear-gradient(180deg,#fff9ef 0%,var(--dc-flavour-premium-bg) 100%) !important;
+      border:0 !important;
+      box-shadow:0 0 0 100vmax var(--dc-flavour-premium-bg) !important;
+      padding:1.65rem 0 1.9rem !important;
+    }
+
+    html body main.product:has(.product-hero:is([style*="themed-cake-main"],[style*="wedding-cake-main"],[style*="celebration-cake-main"],[style*="mini-bento-cake-main"])) > section.product-details-layout .product-details-flavours .product-flavour-column--premium::before,
+    html body main.product:has(.product-hero:is([style*="themed-cake-main"],[style*="wedding-cake-main"],[style*="celebration-cake-main"],[style*="mini-bento-cake-main"])) > section.product-details-layout .product-details-flavours .product-flavour-column--premium::after{
+      content:"";
+      position:absolute;
+      left:50%;
+      width:100vw;
+      height:1px;
+      transform:translateX(-50%);
+      background:linear-gradient(90deg,rgba(214,164,75,0),rgba(214,164,75,.42),rgba(214,164,75,0));
+      pointer-events:none;
+    }
+    html body main.product:has(.product-hero:is([style*="themed-cake-main"],[style*="wedding-cake-main"],[style*="celebration-cake-main"],[style*="mini-bento-cake-main"])) > section.product-details-layout .product-details-flavours .product-flavour-column--premium::before{top:0;}
+    html body main.product:has(.product-hero:is([style*="themed-cake-main"],[style*="wedding-cake-main"],[style*="celebration-cake-main"],[style*="mini-bento-cake-main"])) > section.product-details-layout .product-details-flavours .product-flavour-column--premium::after{bottom:0;}
+
+    html body main.product:has(.product-hero:is([style*="themed-cake-main"],[style*="wedding-cake-main"],[style*="celebration-cake-main"],[style*="mini-bento-cake-main"])) > section.product-details-layout .product-details-flavours .product-flavour-column-heading{
+      display:grid !important;
+      gap:.42rem !important;
+      border-bottom:0 !important;
+      padding:0 0 .95rem !important;
+      margin:0 !important;
+    }
+
+    html body main.product:has(.product-hero:is([style*="themed-cake-main"],[style*="wedding-cake-main"],[style*="celebration-cake-main"],[style*="mini-bento-cake-main"])) > section.product-details-layout .product-details-flavours .product-flavour-column-heading span{
+      display:flex !important;
+      align-items:center !important;
+      gap:.5rem !important;
+      font-size:.96rem !important;
+      letter-spacing:.075em !important;
+      line-height:1.2 !important;
+      text-transform:uppercase !important;
+    }
+
+    html body main.product:has(.product-hero:is([style*="themed-cake-main"],[style*="wedding-cake-main"],[style*="celebration-cake-main"],[style*="mini-bento-cake-main"])) > section.product-details-layout .product-details-flavours .product-flavour-column-heading span::before{
+      content:"";
+      width:.48rem;
+      height:.48rem;
+      border-radius:999px;
+      background:rgba(0,0,0,.22);
+      flex:0 0 auto;
+    }
+
+    html body main.product:has(.product-hero:is([style*="themed-cake-main"],[style*="wedding-cake-main"],[style*="celebration-cake-main"],[style*="mini-bento-cake-main"])) > section.product-details-layout .product-details-flavours .product-flavour-column--premium .product-flavour-column-heading span{
+      color:var(--dc-flavour-gold-text) !important;
+    }
+    html body main.product:has(.product-hero:is([style*="themed-cake-main"],[style*="wedding-cake-main"],[style*="celebration-cake-main"],[style*="mini-bento-cake-main"])) > section.product-details-layout .product-details-flavours .product-flavour-column--premium .product-flavour-column-heading span::before{
+      background:linear-gradient(135deg,#f7d992 0%,var(--dc-flavour-gold) 58%,#b97823 100%);
+      box-shadow:0 0 0 4px rgba(214,164,75,.16);
+    }
+
+    html body main.product:has(.product-hero:is([style*="themed-cake-main"],[style*="wedding-cake-main"],[style*="celebration-cake-main"],[style*="mini-bento-cake-main"])) > section.product-details-layout .product-details-flavours .product-flavour-column-heading small{
+      width:max-content !important;
+      max-width:100% !important;
+      justify-self:start !important;
+      text-align:left !important;
+      border:1px solid var(--dc-flavour-classic-border) !important;
+      border-radius:999px !important;
+      background:rgba(255,250,244,.9) !important;
+      color:#655c55 !important;
+      padding:.32rem .68rem !important;
+      font-size:.78rem !important;
+      line-height:1.25 !important;
+      margin:0 !important;
+    }
+
+    html body main.product:has(.product-hero:is([style*="themed-cake-main"],[style*="wedding-cake-main"],[style*="celebration-cake-main"],[style*="mini-bento-cake-main"])) > section.product-details-layout .product-details-flavours .product-flavour-column--premium .product-flavour-column-heading small{
+      background:rgba(214,164,75,.13) !important;
+      border-color:rgba(214,164,75,.32) !important;
+      color:var(--dc-flavour-gold-text) !important;
+    }
+
+    html body main.product:has(.product-hero:is([style*="themed-cake-main"],[style*="wedding-cake-main"],[style*="celebration-cake-main"],[style*="mini-bento-cake-main"])) > section.product-details-layout .product-details-flavours .product-flavour-card{
+      position:relative !important;
+      background:var(--dc-flavour-classic-card) !important;
+      border:1px solid var(--dc-flavour-classic-border) !important;
+      border-radius:16px !important;
+      box-shadow:0 8px 20px rgba(80,58,43,.045) !important;
+      margin:0 0 .72rem !important;
+      padding:.78rem .86rem .82rem !important;
+    }
+
+    html body main.product:has(.product-hero:is([style*="themed-cake-main"],[style*="wedding-cake-main"],[style*="celebration-cake-main"],[style*="mini-bento-cake-main"])) > section.product-details-layout .product-details-flavours .product-flavour-card:last-child{
+      margin-bottom:0 !important;
+      padding-bottom:.82rem !important;
+    }
+
+    html body main.product:has(.product-hero:is([style*="themed-cake-main"],[style*="wedding-cake-main"],[style*="celebration-cake-main"],[style*="mini-bento-cake-main"])) > section.product-details-layout .product-details-flavours .product-flavour-card h3{
+      display:flex !important;
+      align-items:center !important;
+      gap:.5rem !important;
+      color:#26211d !important;
+      font-size:.98rem !important;
+      line-height:1.24 !important;
+      margin:0 0 .35rem !important;
+    }
+
+    html body main.product:has(.product-hero:is([style*="themed-cake-main"],[style*="wedding-cake-main"],[style*="celebration-cake-main"],[style*="mini-bento-cake-main"])) > section.product-details-layout .product-details-flavours .product-flavour-card h3::before{
+      content:"";
+      width:.42rem;
+      height:.42rem;
+      border-radius:999px;
+      background:rgba(0,0,0,.2);
+      flex:0 0 auto;
+    }
+
+    html body main.product:has(.product-hero:is([style*="themed-cake-main"],[style*="wedding-cake-main"],[style*="celebration-cake-main"],[style*="mini-bento-cake-main"])) > section.product-details-layout .product-details-flavours .product-flavour-card p{
+      color:var(--dc-flavour-copy) !important;
+      font-size:.91rem !important;
+      line-height:1.45 !important;
+      margin:0 !important;
+    }
+
+    html body main.product:has(.product-hero:is([style*="themed-cake-main"],[style*="wedding-cake-main"],[style*="celebration-cake-main"],[style*="mini-bento-cake-main"])) > section.product-details-layout .product-details-flavours .product-flavour-column--premium .product-flavour-card{
+      background:var(--dc-flavour-premium-card) !important;
+      border-color:var(--dc-flavour-premium-border) !important;
+      box-shadow:0 10px 24px rgba(154,105,41,.085) !important;
+    }
+
+    html body main.product:has(.product-hero:is([style*="themed-cake-main"],[style*="wedding-cake-main"],[style*="celebration-cake-main"],[style*="mini-bento-cake-main"])) > section.product-details-layout .product-details-flavours .product-flavour-column--premium .product-flavour-card::before{
+      content:"";
+      position:absolute;
+      top:.72rem;
+      bottom:.72rem;
+      left:0;
+      width:3px;
+      border-radius:999px;
+      background:linear-gradient(180deg,rgba(214,164,75,.2),rgba(214,164,75,.72),rgba(214,164,75,.2));
+    }
+
+    html body main.product:has(.product-hero:is([style*="themed-cake-main"],[style*="wedding-cake-main"],[style*="celebration-cake-main"],[style*="mini-bento-cake-main"])) > section.product-details-layout .product-details-flavours .product-flavour-column--premium .product-flavour-card h3{
+      color:#2c241c !important;
+    }
+    html body main.product:has(.product-hero:is([style*="themed-cake-main"],[style*="wedding-cake-main"],[style*="celebration-cake-main"],[style*="mini-bento-cake-main"])) > section.product-details-layout .product-details-flavours .product-flavour-column--premium .product-flavour-card h3::before{
+      background:linear-gradient(135deg,#f8dc96 0%,var(--dc-flavour-gold) 60%,#b97823 100%);
+      box-shadow:0 0 0 4px rgba(214,164,75,.12);
+    }
+  }
+}
+/* === end mobile flavour zebra refresh === */
