@@ -20,7 +20,7 @@
       "hero-note": "<strong>From £25</strong> — available to order year-round; featured seasonally around Valentine’s Day.",
       "status-heading": "Valentine’s collection is available to order year-round 💌",
       "intro-1": "Valentine’s bento cakes and cupcakes can be requested year-round, with seasonal promo slots highlighted closer to Valentine’s Day.",
-      "intro-2": "Send an enquiry with your date, servings, style ideas and delivery details — I’ll confirm availability, price and the best options for your occasion.",
+      "intro-2": "Send an enquiry with your date, quantity, flavour choice and delivery details — I’ll confirm availability, total price and payment details.",
       "order-title": "Send an enquiry",
       "submit-label": "Send an enquiry",
       "sticky-label": "Send an enquiry",
@@ -46,7 +46,7 @@
       "hero-note": "Collection in Brampton + local delivery around Huntingdon &amp; nearby areas.",
       "status-heading": "Mother’s Day collection is available to order year-round ✨",
       "intro-1": "Mother’s Day cupcakes, bento cakes and sweet treats can be requested year-round, with seasonal promo slots highlighted closer to Mother’s Day.",
-      "intro-2": "Send an enquiry with your date, servings, style ideas and delivery details — I’ll confirm availability, price and the best options for your occasion.",
+      "intro-2": "Send an enquiry with your date, quantity, flavour choice and delivery details — I’ll confirm availability, total price and payment details.",
       "order-title": "Send an enquiry",
       "submit-label": "Send an enquiry",
       "sticky-label": "Send an enquiry",
@@ -72,7 +72,7 @@
       "hero-note": "Collection in Brampton + local delivery around Huntingdon &amp; nearby areas.",
       "status-heading": "Easter collection is available to order year-round 🌷",
       "intro-1": "Easter Paska, spring cakes and cupcakes can be requested year-round, with seasonal promo slots highlighted closer to Easter.",
-      "intro-2": "Send an enquiry with your date, servings, style ideas and delivery details — I’ll confirm availability, price and the best options for your occasion.",
+      "intro-2": "Send an enquiry with your date, quantity, flavour choice and delivery details — I’ll confirm availability, total price and payment details.",
       "order-title": "Send an enquiry",
       "submit-label": "Send an enquiry",
       "sticky-label": "Send an enquiry",
@@ -82,28 +82,28 @@
   },
   "fathers-day": {
     "active": {
-      "hero-highlights": "Limited slots • Bold, modern designs • Optional edible photo",
-      "hero-note": "Collection in Brampton + local delivery around Huntingdon &amp; nearby areas.",
+      "hero-highlights": "Cupcake boxes £18 • Brownie boxes £25 • Optional card",
+      "hero-note": "Pre-order for 20/21 June morning collection in Brampton, or local delivery in Brampton, Huntingdon &amp; Godmanchester.",
       "status-heading": "Father’s Day pre-orders are open 👔",
-      "intro-1": "A gift box made to order — clean, modern and seriously tasty.",
-      "intro-2": "Choose bento cake, cupcakes or fondant cookies, add a message (or an edible photo), and I’ll confirm your slot.",
-      "order-title": "Join the Pre-Order List",
-      "submit-label": "Join the Pre-Order List",
-      "sticky-label": "Join the Pre-Order List",
+      "intro-1": "A gift-ready Father’s Day collection with cupcake boxes, a Best Dad Ever brownie option, and soft blue details made for a thoughtful celebration.",
+      "intro-2": "Choose a cupcake box, brownie, or both, add an optional greeting card, then I’ll confirm your slot and payment details by email.",
+      "order-title": "Pre-order Father’s Day treats",
+      "submit-label": "Pre-order Father’s Day treats",
+      "sticky-label": "Pre-order Father’s Day treats",
       "faq-cutoff-question": "When do Father’s Day pre-orders close?",
-      "faq-cutoff-answer": "Slots are limited and close once dates are full. Please pre-order early to avoid missing out."
+      "faq-cutoff-answer": "Slots are limited and close once the available 20 and 21 June collection or delivery times are full. Your slot is secured only after I confirm availability and full payment is received."
     },
     "inactive": {
-      "hero-highlights": "Bold modern designs • Optional edible photo • Gift-ready finish",
-      "hero-note": "Collection in Brampton + local delivery around Huntingdon &amp; nearby areas.",
-      "status-heading": "Father’s Day collection is available to order year-round 👔",
-      "intro-1": "Father’s Day bento cakes, cupcakes and fondant cookies can be requested year-round, with seasonal promo slots highlighted closer to Father’s Day.",
-      "intro-2": "Send an enquiry with your date, servings, style ideas and delivery details — I’ll confirm availability, price and the best options for your occasion.",
-      "order-title": "Send an enquiry",
-      "submit-label": "Send an enquiry",
-      "sticky-label": "Send an enquiry",
-      "faq-cutoff-question": "Can I order the Father’s Day collection outside the seasonal promo window?",
-      "faq-cutoff-answer": "Yes — these designs can be requested year-round. The collection is promoted more actively from {openDate}, but early enquiries are welcome any time."
+      "hero-highlights": "Cupcake boxes • Best Dad Ever brownie • Optional greeting card",
+      "hero-note": "Collection or local delivery can be arranged when seasonal Father’s Day boxes are available.",
+      "status-heading": "Father’s Day boxes can be requested by enquiry 👔",
+      "intro-1": "Father’s Day cupcake boxes and Best Dad Ever brownies can be requested around the seasonal window, with custom dad-themed treats available by enquiry outside the promo period.",
+      "intro-2": "Send an enquiry with your date, quantity, flavour choice and delivery details — I’ll confirm availability, total price and payment details.",
+      "order-title": "Send a Father’s Day enquiry",
+      "submit-label": "Send a Father’s Day enquiry",
+      "sticky-label": "Send a Father’s Day enquiry",
+      "faq-cutoff-question": "Can I order Father’s Day boxes outside the seasonal promo window?",
+      "faq-cutoff-answer": "These Father’s Day boxes are seasonal, but custom dad-themed treats can be requested by enquiry. The collection is promoted more actively from {openDate}."
     }
   },
   "halloween": {
@@ -124,7 +124,7 @@
       "hero-note": "Collection in Brampton + local delivery around Huntingdon &amp; nearby areas.",
       "status-heading": "Halloween collection is available to order year-round 🎃",
       "intro-1": "Halloween bento cakes, cupcakes and fondant cookies can be requested year-round, with seasonal promo slots highlighted closer to Halloween.",
-      "intro-2": "Send an enquiry with your date, servings, style ideas and delivery details — I’ll confirm availability, price and the best options for your occasion.",
+      "intro-2": "Send an enquiry with your date, quantity, flavour choice and delivery details — I’ll confirm availability, total price and payment details.",
       "order-title": "Send an enquiry",
       "submit-label": "Send an enquiry",
       "sticky-label": "Send an enquiry",
@@ -150,7 +150,7 @@
       "hero-note": "Collection in Brampton + local delivery around Huntingdon &amp; nearby areas.",
       "status-heading": "Christmas collection is available to order year-round ✨",
       "intro-1": "Christmas bento cakes, cupcakes and fondant cookies can be requested year-round, with seasonal promo slots highlighted closer to Christmas.",
-      "intro-2": "Send an enquiry with your date, servings, style ideas and delivery details — I’ll confirm availability, price and the best options for your occasion.",
+      "intro-2": "Send an enquiry with your date, quantity, flavour choice and delivery details — I’ll confirm availability, total price and payment details.",
       "order-title": "Send an enquiry",
       "submit-label": "Send an enquiry",
       "sticky-label": "Send an enquiry",
@@ -159,7 +159,7 @@
     }
   }
 };
-  var FALLBACK_SEASONS = [{"id":"christmas","enabled":true,"name":"Christmas Collection","href":"/Products/christmas-collection/","orderHref":"/Products/christmas-collection/#order","dateFrom":"11-10","dateTo":"01-01","popup":{"enabled":true,"id":"christmas-collection","headline":"Christmas","title":"Christmas Collection","subtitle":"Limited slots • Festive designs • Optional edible photo","ctaLabel":"View the collection","href":"/Products/christmas-collection/","image":"assets/img/promo/christmas-sale.webp","imageAlt":"Christmas Collection promo"}},{"id":"valentines","enabled":true,"name":"Valentine’s Collection","href":"/Products/valentines-collection/","orderHref":"/Products/valentines-collection/#order","dateFrom":"01-02","dateTo":"02-14","popup":{"enabled":true,"id":"valentines-collection","headline":"Hot offer","title":"Valentine’s Collection","subtitle":"Limited slots • Two signature designs • Optional edible photo.","image":"assets/img/promo/Elegant-Valentine's-Day-Sale.webp","imageAlt":"Valentine’s bento cake and cupcakes","href":"/Products/valentines-collection/","ctaLabel":"More details","dismissLabel":"Not now","cooldownHours":24,"triggerDelayMs":6000}},{"id":"mothers-day","enabled":true,"name":"Mother’s Day Collection","href":"/Products/mothers-day-collection/","orderHref":"/Products/mothers-day-collection/#order","dateFrom":"02-15","dateTo":{"rule":"motheringSunday"},"popup":{"enabled":true,"id":"mothers-day-collection","headline":"Mother’s Day","title":"Mother’s Day Collection","subtitle":"Pre-orders now open • Gift cupcakes & sweet treats","ctaLabel":"View the collection","href":"/Products/mothers-day-collection/","image":"assets/img/promo/mothers-day-collection-gift-cupcakes-preview.webp","imageAlt":"Mother’s Day collection preview with pastel gift cupcakes"}},{"id":"easter","enabled":true,"name":"Easter Collection","href":"/Products/easter-collection/","orderHref":"/Products/easter-collection/#order","dateFrom":{"rule":"motheringSunday","offsetDays":1},"dateTo":{"rule":"easterSunday","offsetDays":1},"popup":{"enabled":true,"id":"easter-collection","headline":"Easter","title":"Easter Collection","subtitle":"Traditional Easter Paska • Spring cupcakes • Limited pre-orders","ctaLabel":"View the collection","href":"/Products/easter-collection/","image":"assets/img/promo/easter-paska-traditional-ukrainian-easter-bread-preview.webp","imageAlt":"Easter collection preview featuring traditional Easter Paska"}},{"id":"fathers-day","enabled":true,"name":"Father’s Day Collection","href":"/Products/fathers-day-collection/","orderHref":"/Products/fathers-day-collection/#order","dateFrom":"05-01","dateTo":{"rule":"fathersDay"},"popup":{"enabled":true,"id":"fathers-day-collection","headline":"Father’s Day","title":"Father’s Day Collection","subtitle":"Limited slots • Bold, modern designs • Optional edible photo","ctaLabel":"View the collection","href":"/Products/fathers-day-collection/","image":"assets/img/promo/fathers-day-sale.webp","imageAlt":"Father’s Day Collection promo"}},{"id":"halloween","enabled":true,"name":"Halloween Collection","href":"/Products/halloween-collection/","orderHref":"/Products/halloween-collection/#order","dateFrom":"09-16","dateTo":"10-31","popup":{"enabled":true,"id":"halloween-collection","headline":"Halloween","title":"Halloween Collection","subtitle":"Limited slots • Spooky-cute designs • Optional edible photo","ctaLabel":"View the collection","href":"/Products/halloween-collection/","image":"assets/img/promo/halloween-sale.webp","imageAlt":"Halloween Collection promo"}}];
+  var FALLBACK_SEASONS = [{"id":"christmas","enabled":true,"name":"Christmas Collection","href":"/Products/christmas-collection/","orderHref":"/Products/christmas-collection/#order","dateFrom":"11-10","dateTo":"01-01","popup":{"enabled":true,"id":"christmas-collection","headline":"Christmas","title":"Christmas Collection","subtitle":"Limited slots • Festive designs • Optional edible photo","ctaLabel":"View the collection","href":"/Products/christmas-collection/","image":"assets/img/promo/christmas-sale.webp","imageAlt":"Christmas Collection promo"}},{"id":"valentines","enabled":true,"name":"Valentine’s Collection","href":"/Products/valentines-collection/","orderHref":"/Products/valentines-collection/#order","dateFrom":"01-02","dateTo":"02-14","popup":{"enabled":true,"id":"valentines-collection","headline":"Hot offer","title":"Valentine’s Collection","subtitle":"Limited slots • Two signature designs • Optional edible photo.","image":"assets/img/promo/Elegant-Valentine's-Day-Sale.webp","imageAlt":"Valentine’s bento cake and cupcakes","href":"/Products/valentines-collection/","ctaLabel":"More details","dismissLabel":"Not now","cooldownHours":24,"triggerDelayMs":6000}},{"id":"mothers-day","enabled":true,"name":"Mother’s Day Collection","href":"/Products/mothers-day-collection/","orderHref":"/Products/mothers-day-collection/#order","dateFrom":"02-15","dateTo":{"rule":"motheringSunday"},"popup":{"enabled":true,"id":"mothers-day-collection","headline":"Mother’s Day","title":"Mother’s Day Collection","subtitle":"Pre-orders now open • Gift cupcakes & sweet treats","ctaLabel":"View the collection","href":"/Products/mothers-day-collection/","image":"assets/img/promo/mothers-day-collection-gift-cupcakes-preview.webp","imageAlt":"Mother’s Day collection preview with pastel gift cupcakes"}},{"id":"easter","enabled":true,"name":"Easter Collection","href":"/Products/easter-collection/","orderHref":"/Products/easter-collection/#order","dateFrom":{"rule":"motheringSunday","offsetDays":1},"dateTo":{"rule":"easterSunday","offsetDays":1},"popup":{"enabled":true,"id":"easter-collection","headline":"Easter","title":"Easter Collection","subtitle":"Traditional Easter Paska • Spring cupcakes • Limited pre-orders","ctaLabel":"View the collection","href":"/Products/easter-collection/","image":"assets/img/promo/easter-paska-traditional-ukrainian-easter-bread-preview.webp","imageAlt":"Easter collection preview featuring traditional Easter Paska"}},{"id":"fathers-day","enabled":true,"name":"Father’s Day Collection","href":"/Products/fathers-day-collection/","orderHref":"/Products/fathers-day-collection/#order","dateFrom":"05-01","dateTo":{"rule":"fathersDay"},"popup":{"enabled":true,"id":"fathers-day-collection","headline":"Father’s Day","title":"Father’s Day Collection","subtitle":"Cupcake boxes £18 • Best Dad Ever brownies £25 • 20/21 June slots","ctaLabel":"View the collection","href":"/Products/fathers-day-collection/","image":"assets/img/promo/fathers-day-cupcake-brownie-gift-box-banner.webp","imageAlt":"Father’s Day cupcake and brownie gift boxes"}},{"id":"halloween","enabled":true,"name":"Halloween Collection","href":"/Products/halloween-collection/","orderHref":"/Products/halloween-collection/#order","dateFrom":"09-16","dateTo":"10-31","popup":{"enabled":true,"id":"halloween-collection","headline":"Halloween","title":"Halloween Collection","subtitle":"Limited slots • Spooky-cute designs • Optional edible photo","ctaLabel":"View the collection","href":"/Products/halloween-collection/","image":"assets/img/promo/halloween-sale.webp","imageAlt":"Halloween Collection promo"}}];
 
   var CONFIG_URL = (function(){
     try {

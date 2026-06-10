@@ -1843,3 +1843,44 @@ main.product .product-details-size-guide[data-aos]{
   }
 }
 /* === end mobile flavour zebra refresh === */
+
+
+/* === 2026-06-10 Father’s Day order form button alignment fix === */
+main.product[data-season-page="fathers-day"] .fathers-day-order-actions .privacy-note{
+  margin:0 0 .95rem;
+  max-width:100%;
+  text-align:left;
+}
+main.product[data-season-page="fathers-day"] .fathers-day-submit-row{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:1rem;
+  flex-wrap:wrap;
+  max-width:100%;
+}
+main.product[data-season-page="fathers-day"] .fathers-day-estimate{
+  flex:1 1 260px;
+  min-width:220px;
+  max-width:100%;
+}
+main.product[data-season-page="fathers-day"] .fathers-day-submit-btn{
+  flex:0 1 auto;
+  min-width:min(100%, 270px);
+  max-width:100%;
+  white-space:normal;
+  text-align:center;
+}
+@media (max-width:575.98px){
+  main.product[data-season-page="fathers-day"] .fathers-day-submit-row{
+    align-items:stretch;
+  }
+  main.product[data-season-page="fathers-day"] .fathers-day-estimate{
+    flex-basis:100%;
+    min-width:0;
+  }
+  main.product[data-season-page="fathers-day"] .fathers-day-submit-btn{
+    width:100%;
+  }
+}
+/* === end Father’s Day order form button alignment fix === */
