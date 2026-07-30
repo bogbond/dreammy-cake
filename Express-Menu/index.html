@@ -189,37 +189,25 @@
   }
 }
 </style>
-<link href="https://dreamycake.co.uk/Express-Menu/" rel="canonical"/></head>
+<link href="https://dreamycake.co.uk/Express-Menu/" rel="canonical"/><link href="/assets/css/button-palette-v07.css" rel="stylesheet"/>
+</head>
 <body class="express-menu-page">
 <header class="header d-flex align-items-center fixed-top" id="header">
 <div class="container-fluid container-xl position-relative d-flex align-items-center justify-content-between">
-<a class="logo d-flex align-items-center" href="/">
-<!-- Uncomment the line below if you also wish to use an image logo -->
-<!-- <img src="/assets/img/logo.png" alt="Dreamy Cake Bakery" width="32" height="32" decoding="async" fetchpriority="high"> -->
+<a class="logo d-flex align-items-center" href="/" aria-label="Dreamy Cake Bakery home">
 <p class="sitename">Dreamy Cake Bakery</p>
 </a>
-<nav class="navmenu" id="navmenu">
+<nav class="navmenu" id="navmenu" aria-label="Primary navigation">
 <ul>
 <li><a href="/">Home</a></li>
-<li><a href="/#pricing">Cake Menu</a></li>
+<li><a class="active" href="/#pricing">Cake Menu</a></li>
 <li><a href="/#portfolio">Portfolio</a></li>
-<li><a href="/#contact">Contact</a></li><li><a href="/About/">About</a></li>
-<li class="dropdown">
-<button aria-controls="order-submenu" aria-expanded="false" aria-label="Toggle order submenu" class="nav-toggle" type="button"><span>Order</span> <i aria-hidden="true" class="bi bi-chevron-down chev"></i></button>
-<ul id="order-submenu"><li><a class="nav-bespoke-order" href="/Bespoke-Order/"><span>Bespoke Order</span><span class="nav-bespoke-order__arrow" aria-hidden="true">&rarr;</span></a></li><li><a href="/Products/celebration-cake/#order">Order Celebration Cake</a></li><li><a href="/Products/themed-cake/#order">Order Themed Cake</a></li><li><a href="/Products/mini-bento-cake/#order">Order Mini / Bento Cake</a></li><li><a href="/Products/wedding-cake/#order">Order Wedding Cakes</a></li><li><a href="/Products/cupcakes/#order">Order Cupcakes</a></li><li><a href="/Products/postage-cookie/#order">Order Postage Cookie</a></li></ul>
-</li>
-<!-- <li><a href="/#how-it-works">Services</a></li> -->
-<li class="dropdown">
-<button aria-controls="info-submenu" aria-expanded="false" aria-label="Toggle info submenu" class="nav-toggle" type="button"><span>Info</span> <i aria-hidden="true" class="bi bi-chevron-down chev"></i></button>
-<ul id="info-submenu">
-<li><a href="/Delivery/">Delivery</a></li>
-<li><a href="/Allergens/">Allergens</a></li>
-<li><a href="/How-it-works/">How it works</a></li>
-<li><a href="/QA/">Q&amp;A</a></li>
+<li><a href="/#contact">Contact</a></li>
+<li><a href="/About/">About</a></li>
+<li><a href="/Corporate-Cakes/">Corporate Cakes</a></li>
+<li><a class="nav-primary-cta" href="/Bespoke-Order/">Bespoke Order</a></li>
 </ul>
-</li>
-<li><a href="https://shop.dreamycake.co.uk">Shop</a></li></ul>
-<i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
+<i class="mobile-nav-toggle d-xl-none bi bi-list" aria-label="Open navigation menu" role="button" tabindex="0"></i>
 </nav>
 </div>
 </header>
@@ -392,66 +380,77 @@
 
 </main>
 <footer class="footer dark-background" id="footer">
-<div class="container">
-<div class="row gy-3">
-<div class="col-lg-3 col-md-6 d-flex">
-<i class="bi bi-geo-alt icon"></i>
-<div class="address">
-<h4>Address</h4>
-<p>
-        14 Elizabethan Way, Brampton
-       </p>
-<p>
-        Huntingdon, Cambridgeshire PE28 4SU
-       </p>
-<p></p>
+<div class="container dc-footer-main">
+<section class="dc-footer-brand" aria-labelledby="footer-brand-title">
+<h3 id="footer-brand-title">Dreamy Cake Bakery</h3>
+<p>Premium bespoke cakes and desserts for birthdays, weddings and meaningful celebrations, handmade in Brampton and delivered across Cambridgeshire.</p>
+<div class="social-links d-flex" aria-label="Social and messaging links">
+<a aria-label="Follow Dreamy Cake Bakery on Facebook" class="facebook" href="https://www.facebook.com/DreamyCakeBakery" rel="noopener" target="_blank"><i class="bi bi-facebook"></i></a>
+<a aria-label="Follow Dreamy Cake Bakery on Instagram" class="instagram" href="https://www.instagram.com/dreamycake.bakery" rel="noopener" target="_blank"><i class="bi bi-instagram"></i></a>
+<a aria-label="Message Dreamy Cake Bakery on WhatsApp" class="whatsapp" href="https://wa.me/447510837225" onclick="if(window.gtag){gtag('event','whatsapp_click',{label:'footer_social'});}" rel="noopener" target="_blank"><i class="bi bi-whatsapp"></i></a>
 </div>
+<nav class="dc-footer-related-links" aria-label="Related sites">
+<span class="dc-footer-related-links__title">Related sites</span>
+<ul>
+<li><a href="https://shop.dreamycake.co.uk/" rel="noopener" target="_blank">Dreamy Cake Shop <i aria-hidden="true" class="bi bi-box-arrow-up-right"></i></a></li>
+<li><a href="https://bondarlabs.co.uk/" rel="noopener" target="_blank">Bondar Labs <i aria-hidden="true" class="bi bi-box-arrow-up-right"></i></a></li>
+</ul>
+</nav>
+</section>
+<nav class="dc-footer-section" aria-labelledby="footer-explore-title">
+<h4 id="footer-explore-title">Explore</h4>
+<ul>
+<li><a href="/">Home</a></li>
+<li><a href="/#pricing">Cake Menu</a></li>
+<li><a href="/#portfolio">Portfolio</a></li>
+<li><a href="/About/">About</a></li>
+<li><a href="/#contact">Contact</a></li>
+</ul>
+</nav>
+<nav class="dc-footer-section dc-footer-orders" aria-labelledby="footer-orders-title">
+<h4 id="footer-orders-title">Orders &amp; Collections</h4>
+<ul class="dc-footer-primary-links">
+<li><a class="dc-footer-emphasis" href="/Bespoke-Order/">Bespoke Order</a></li>
+<li><a href="/Corporate-Cakes/">Corporate Cakes</a></li>
+<li><a href="/Express-Menu/">Express Menu</a></li>
+</ul>
+<details class="dc-footer-seasonal">
+<summary>Seasonal Collections <i aria-hidden="true" class="bi bi-chevron-down"></i></summary>
+<ul>
+<li><a href="/Products/valentines-collection/">Valentine’s Collection</a></li>
+<li><a href="/Products/mothers-day-collection/">Mother’s Day Collection</a></li>
+<li><a href="/Products/easter-collection/">Easter Collection</a></li>
+<li><a href="/Products/fathers-day-collection/">Father’s Day Collection</a></li>
+<li><a href="/Products/halloween-collection/">Halloween Collection</a></li>
+<li><a href="/Products/christmas-collection/">Christmas Collection</a></li>
+</ul>
+</details>
+</nav>
+<nav class="dc-footer-section" aria-labelledby="footer-help-title">
+<h4 id="footer-help-title">Help &amp; Information</h4>
+<ul>
+<li><a href="/Delivery/">Delivery</a></li>
+<li><a href="/Allergens/">Allergens</a></li>
+<li><a href="/How-it-works/">How it works</a></li>
+<li><a href="/QA/">Questions &amp; Answers</a></li>
+<li class="dc-footer-policy-start"><a href="/Terms-and-Conditions/">Terms &amp; Conditions</a></li>
+<li><a href="/Privacy-Policy/">Privacy Policy</a></li>
+</ul>
+</nav>
+<section class="dc-footer-section dc-footer-contact" aria-labelledby="footer-contact-title">
+<h4 id="footer-contact-title">Contact</h4>
+<ul>
+<li><i aria-hidden="true" class="bi bi-geo-alt"></i><span>14 Elizabethan Way, Brampton<br/>Huntingdon, Cambridgeshire PE28 4SU</span></li>
+<li><i aria-hidden="true" class="bi bi-telephone"></i><a href="tel:+447510837225">+44 7510 837225</a></li>
+<li><i aria-hidden="true" class="bi bi-whatsapp"></i><a href="https://wa.me/447510837225" onclick="if(window.gtag){gtag('event','whatsapp_click',{label:'footer_contact'});}" rel="noopener" target="_blank">Message on WhatsApp</a></li>
+<li><i aria-hidden="true" class="bi bi-envelope"></i><a href="mailto:contact@dreamycake.co.uk">contact@dreamycake.co.uk</a></li>
+<li><i aria-hidden="true" class="bi bi-clock"></i><span>Mon–Sat: 9am–8pm<br/>Sunday: 10am–5pm</span></li>
+</ul>
+</section>
 </div>
-<div class="col-lg-3 col-md-6 d-flex">
-<i class="bi bi-telephone icon"></i>
-<div>
-<h4>Contact</h4>
-<p>
-<strong>Phone:</strong> <span><a class="link" href="tel:+447510837225">+44 7510 837225</a></span><br/>
-<strong>Email:</strong> <span><a class="link" href="mailto:contact@dreamycake.co.uk">contact@dreamycake.co.uk</a></span><br/>
-<strong>
-          WhatsApp:
-         </strong>
-<span><a aria-label="Chat on WhatsApp" class="link" href="https://wa.me/447510837225" onclick="if(window.gtag){gtag('event','whatsapp_click',{label:'footer_contact'});}" rel="noopener" target="_blank"><i class="bi bi-whatsapp"></i> Message us</a></span>
-<br/>
-</p>
-</div>
-</div>
-<div class="col-lg-3 col-md-6 d-flex">
-<i class="bi bi-clock icon"></i>
-<div>
-<h4>Opening Hours</h4>
-<p>
-<strong>Mon-Sat:</strong> <span>9AM - 8PM</span><br/>
-<strong>Sunday</strong>: <span>10AM - 5PM</span>
-</p>
-</div>
-</div>
-<div class="col-lg-3 col-md-6">
-<h4>Follow Us</h4>
-<div class="social-links d-flex">
-<!-- <a href="#" class="twitter"><i class="bi bi-twitter-x"></i></a> -->
-<!-- <a href="#" class="facebook"><i class="bi bi-facebook"></i></a> -->
-<a aria-label="Follow Dreamy Cake Bakery on Facebook" class="facebook" href="https://www.facebook.com/DreamyCakeBakery"><i class="bi bi-facebook"></i></a>
-<a aria-label="Follow Dreamy Cake Bakery on Instagram" class="instagram" href="https://www.instagram.com/dreamycake.bakery"><i class="bi bi-instagram"></i></a><!-- <a href="#" class="linkedin"><i class="bi bi-linkedin"></i></a> -->
-</div>
-</div>
-</div>
-</div>
-<div class="container copyright text-center mt-4">
-<p>
-          © <span>Copyright</span>
-<strong class="px-1 sitename">Dreamy Cake Bakery</strong>
-<span>All Rights Reserved</span>
-</p>
-<div class="credits">
-          Designed by <a href="mailto:bogbond@gmail.com">Bond</a>
-</div>
+<div class="container dc-footer-bottom">
+<p>© 2026 <strong>Dreamy Cake Bakery</strong>. All rights reserved.</p>
+<div class="credits">Designed by <a href="mailto:bogbond@gmail.com" onclick="if(window.gtag){gtag('event','designer_email_click',{label:'contact'});}">Bond</a></div>
 </div>
 </footer>
 <!-- Scroll Top -->

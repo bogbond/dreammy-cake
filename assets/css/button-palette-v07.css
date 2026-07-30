@@ -1,0 +1,124 @@
+/* Dreamy Cake update 07
+   Test palette for action buttons only.
+   Decorative accents, navigation states, social buttons and WhatsApp styling
+   intentionally continue to use their existing colours. */
+
+:root {
+  --dc-action-gold: #efc86c;
+  --dc-action-gold-hover: #e3b652;
+  --dc-action-gold-soft: rgba(239, 200, 108, 0.18);
+  --dc-action-ink: #30271f;
+  --dc-action-outline-ink: #7b571b;
+  --dc-action-shadow: rgba(137, 96, 28, 0.18);
+}
+
+/* Filled gold actions */
+#hero .cta-btn,
+.btn.btn-primary,
+.btn.btn-accent,
+#portfolio .btn-load-more,
+.btn-load-more,
+#pricing .price-card .btn-accent,
+.contact .my-email-form button[type="submit"],
+.cta-card.cta-primary,
+.btn.primary,
+.dc-corporate-btn--primary,
+.express-shortcut__cta {
+  background: var(--dc-action-gold) !important;
+  background-image: none !important;
+  border-color: var(--dc-action-gold) !important;
+  color: var(--dc-action-ink) !important;
+  box-shadow: 0 8px 22px var(--dc-action-shadow) !important;
+}
+
+#hero .cta-btn:hover,
+#hero .cta-btn:focus-visible,
+.btn.btn-primary:hover,
+.btn.btn-primary:focus-visible,
+.btn.btn-accent:hover,
+.btn.btn-accent:focus-visible,
+#portfolio .btn-load-more:hover,
+#portfolio .btn-load-more:focus-visible,
+.btn-load-more:hover,
+.btn-load-more:focus-visible,
+#pricing .price-card .btn-accent:hover,
+#pricing .price-card .btn-accent:focus-visible,
+.contact .my-email-form button[type="submit"]:hover,
+.contact .my-email-form button[type="submit"]:focus-visible,
+.cta-card.cta-primary:hover,
+.cta-card.cta-primary:focus-visible,
+.btn.primary:hover,
+.btn.primary:focus-visible,
+.dc-corporate-btn--primary:hover,
+.dc-corporate-btn--primary:focus-visible,
+.express-shortcut__cta:hover,
+.express-shortcut__cta:focus-visible {
+  background: var(--dc-action-gold-hover) !important;
+  background-image: none !important;
+  border-color: var(--dc-action-gold-hover) !important;
+  color: var(--dc-action-ink) !important;
+  box-shadow: 0 10px 26px rgba(137, 96, 28, 0.24) !important;
+}
+
+/* Gold outline actions */
+#hero .cta-btn2,
+.btn.btn-outline:not(.btn-whatsapp),
+.btn.btn-outline-primary,
+#portfolio .cta-after .btn-outline,
+.cta-card.cta-secondary,
+.cta .btn:not(.primary) {
+  background: transparent !important;
+  background-image: none !important;
+  border-color: var(--dc-action-gold) !important;
+  color: var(--dc-action-outline-ink) !important;
+}
+
+#hero .cta-btn2:hover,
+#hero .cta-btn2:focus-visible,
+.btn.btn-outline:not(.btn-whatsapp):hover,
+.btn.btn-outline:not(.btn-whatsapp):focus-visible,
+.btn.btn-outline-primary:hover,
+.btn.btn-outline-primary:focus-visible,
+#portfolio .cta-after .btn-outline:hover,
+#portfolio .cta-after .btn-outline:focus-visible,
+.cta-card.cta-secondary:hover,
+.cta-card.cta-secondary:focus-visible,
+.cta .btn:not(.primary):hover,
+.cta .btn:not(.primary):focus-visible {
+  background: var(--dc-action-gold-soft) !important;
+  border-color: var(--dc-action-gold-hover) !important;
+  color: #5b4118 !important;
+}
+
+/* Preserve explicit WhatsApp identity when it also carries .btn-outline. */
+.btn.btn-outline.btn-whatsapp,
+.btn.btn-outline.btn-whatsapp:hover,
+.btn.btn-outline.btn-whatsapp:focus-visible {
+  border-color: #25d366 !important;
+  color: #1f9d53 !important;
+}
+.btn.btn-outline.btn-whatsapp:hover,
+.btn.btn-outline.btn-whatsapp:focus-visible {
+  background: rgba(37, 211, 102, 0.10) !important;
+}
+
+/* Keep disabled buttons recognisable while using the test palette. */
+.btn.btn-primary:disabled,
+.btn.btn-primary.disabled,
+.btn.btn-accent:disabled,
+.btn-load-more:disabled,
+#portfolio .btn-load-more[disabled] {
+  background: var(--dc-action-gold) !important;
+  border-color: var(--dc-action-gold) !important;
+  color: var(--dc-action-ink) !important;
+  opacity: 0.58;
+  box-shadow: none !important;
+}
+
+/* Main homepage Hero: keep the gold outline, but use white label text
+   for stronger contrast against the dark photographic background. */
+#hero .cta-btn2,
+#hero .cta-btn2:hover,
+#hero .cta-btn2:focus-visible {
+  color: #ffffff !important;
+}

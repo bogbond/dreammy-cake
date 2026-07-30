@@ -1,0 +1,105 @@
+
+.corporate-cakes-page{ background:#fbf8f4; }
+.dc-corporate-hero{
+  position:relative;
+  overflow:hidden;
+  min-height:520px;
+  display:flex;
+  align-items:center;
+  padding:150px 0 90px;
+  color:#fff;
+  background:
+    radial-gradient(circle at 82% 20%, rgba(227,188,111,.22), transparent 34%),
+    radial-gradient(circle at 15% 80%, rgba(226,184,199,.18), transparent 38%),
+    linear-gradient(135deg,#28211e 0%,#3b302a 55%,#201d1d 100%);
+}
+.dc-corporate-hero::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  opacity:.34;
+  background-image:linear-gradient(rgba(255,255,255,.035) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.035) 1px,transparent 1px);
+  background-size:44px 44px;
+  mask-image:linear-gradient(to bottom,black,transparent 82%);
+}
+.dc-corporate-hero .container{ position:relative; z-index:1; }
+.dc-corporate-hero__content{ max-width:820px; margin:auto; text-align:center; }
+.dc-corporate-eyebrow,
+.dc-corporate-kicker{
+  display:inline-block;
+  color:#d7a94e;
+  font-size:.78rem;
+  font-weight:800;
+  letter-spacing:.13em;
+  text-transform:uppercase;
+}
+.dc-corporate-hero h1{
+  margin:16px 0 18px;
+  color:#fff;
+  font-size:clamp(2.65rem,6vw,5.3rem);
+  font-weight:800;
+  letter-spacing:-.035em;
+}
+.dc-corporate-hero p{
+  max-width:760px;
+  margin:0 auto;
+  color:rgba(255,255,255,.82);
+  font-size:clamp(1.03rem,1.7vw,1.3rem);
+  line-height:1.7;
+}
+.dc-corporate-actions{ display:flex; flex-wrap:wrap; justify-content:center; gap:12px; margin-top:32px; }
+.dc-corporate-btn{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  min-height:50px;
+  padding:12px 22px;
+  border:1px solid transparent;
+  border-radius:999px;
+  font-weight:800;
+  transition:transform .2s ease,background .2s ease,border-color .2s ease;
+}
+.dc-corporate-btn:hover{ transform:translateY(-2px); }
+.dc-corporate-btn--primary{ color:#2b251f; background:#e9c46f; }
+.dc-corporate-btn--primary:hover{ color:#2b251f; background:#f0d58e; }
+.dc-corporate-btn--secondary{ color:#fff; border-color:rgba(255,255,255,.26); background:rgba(255,255,255,.06); }
+.dc-corporate-btn--secondary:hover{ color:#fff; border-color:rgba(255,255,255,.46); background:rgba(255,255,255,.11); }
+.dc-corporate-preview{ padding:82px 0; }
+.dc-corporate-intro{ max-width:760px; margin:0 auto 42px; text-align:center; }
+.dc-corporate-intro h2{ margin:12px 0 16px; color:#352d28; font-size:clamp(2rem,4vw,3.25rem); font-weight:800; }
+.dc-corporate-intro p:last-child{ color:#6f655f; font-size:1.03rem; line-height:1.75; }
+.dc-corporate-grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:22px; }
+.dc-corporate-grid article{
+  padding:30px;
+  border:1px solid rgba(77,59,48,.10);
+  border-radius:22px;
+  background:#fff;
+  box-shadow:0 18px 44px rgba(54,38,28,.07);
+}
+.dc-corporate-grid i{ display:inline-grid; place-items:center; width:48px; height:48px; border-radius:14px; color:#9c6f22; background:#f7ead0; font-size:1.25rem; }
+.dc-corporate-grid h3{ margin:20px 0 10px; color:#3a302a; font-size:1.18rem; font-weight:800; }
+.dc-corporate-grid p{ margin:0; color:#746a63; line-height:1.65; }
+.dc-corporate-contact{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:24px;
+  margin-top:28px;
+  padding:25px 28px;
+  border-radius:18px;
+  color:#fff;
+  background:linear-gradient(135deg,#4a382e,#302824);
+}
+.dc-corporate-contact span,.dc-corporate-contact strong{ display:block; }
+.dc-corporate-contact span{ color:#e8c778; font-size:.78rem; font-weight:800; letter-spacing:.08em; text-transform:uppercase; }
+.dc-corporate-contact strong{ margin-top:5px; font-size:1rem; }
+.dc-corporate-contact a{ flex:0 0 auto; color:#2b251f; padding:11px 17px; border-radius:999px; background:#e9c46f; font-weight:800; }
+.dc-corporate-contact a:hover{ color:#2b251f; background:#f0d58e; }
+@media(max-width:767.98px){
+  .dc-corporate-hero{ min-height:470px; padding:125px 0 70px; }
+  .dc-corporate-actions{ flex-direction:column; align-items:stretch; }
+  .dc-corporate-grid{ grid-template-columns:1fr; }
+  .dc-corporate-preview{ padding:58px 0; }
+  .dc-corporate-contact{ align-items:flex-start; flex-direction:column; }
+  .dc-corporate-contact a{ width:100%; text-align:center; }
+}
