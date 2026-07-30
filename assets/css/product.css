@@ -1,11 +1,11 @@
 
 /* --- Product Page Styles (shared) --- */
-.page-title.product-hero{position:relative; overflow:hidden; padding:72px 0 40px; background:linear-gradient(180deg, rgba(0,0,0,.45) 0%, rgba(0,0,0,.65) 100%), var(--hero-img) center/cover no-repeat}
+.page-title.product-hero{position:relative; overflow:hidden; padding:44px 0; background:linear-gradient(180deg, rgba(0,0,0,.45) 0%, rgba(0,0,0,.65) 100%), var(--hero-img) center/cover no-repeat}
 .page-title.product-hero h1{color:#fff;margin:0 0 .25rem;font-size:clamp(1.5rem,3.4vw,2.2rem)}
 .page-title.product-hero p{color:rgba(255,255,255,.97);margin:0}
 .page-title.product-hero::before{content:"";position:absolute;inset:0;background:linear-gradient(180deg, rgba(0,0,0,.55) 0%, rgba(0,0,0,.72) 100%) ;pointer-events:none}
 .page-title.product-hero>.container{position:relative; z-index:1}
-@media (min-width: 992px){ .page-title.product-hero{padding:100px 0 48px} }
+@media (min-width: 992px){ .page-title.product-hero{padding:62px 0} }
 
 .product .chipbar{display:flex;flex-wrap:wrap;gap:.5rem;margin-top:34px}
 .product .chip{display:inline-flex;align-items:center;gap:.35rem;padding:.45rem .75rem;border:1px solid #e8e8e8;border-radius:999px;background:#fff;color:#111;text-decoration:none;font-size:.95rem}
@@ -1884,3 +1884,16 @@ main.product[data-season-page="fathers-day"] .fathers-day-submit-btn{
   }
 }
 /* === end Father’s Day order form button alignment fix === */
+
+/* Product Hero: compensate for the fixed header overlay.
+   The hero remains compact, while its text is visually centred in the
+   portion of the banner that is actually visible below the header. */
+.page-title.product-hero > .container{
+  transform: translateY(21px);
+}
+
+@media (min-width: 1200px){
+  .page-title.product-hero > .container{
+    transform: translateY(35.5px);
+  }
+}
