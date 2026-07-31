@@ -11,6 +11,24 @@
   const STATE_KEY = "dc_promo_state_v1";
   const LAUNCHER_ID = "dc-promo-launcher";
 
+  // Capture the script URL while this file is executing. document.currentScript
+  // becomes null later inside async/DOMContentLoaded callbacks, which previously
+  // made nested pages resolve the config as e.g. /Bespoke-Order/assets/data/....
+  const SCRIPT_URL = (function () {
+    try {
+      const current = document.currentScript;
+      if (current && current.src) return current.src;
+
+      // Defensive fallback for unusual loaders or cached executions.
+      const scripts = document.getElementsByTagName("script");
+      for (let i = scripts.length - 1; i >= 0; i -= 1) {
+        const src = scripts[i].src || "";
+        if (/\/promo-popup\.js(?:[?#].*)?$/.test(src)) return src;
+      }
+    } catch (e) {}
+    return "";
+  })();
+
   // Fallback config (used if JSON cannot be fetched, e.g. when opening the site directly via file://)
   const FALLBACK_CONFIG = {
     // Default: disabled (we only show when an active seasonal promo is found)
@@ -181,14 +199,20 @@
 
 
   function resolveConfigUrl() {
-    // Resolve relative to this script (works with http(s) and file://)
-    const cs = document.currentScript;
-    if (cs && cs.src) {
+    // Resolve relative to the captured script URL so this works from every
+    // nested page as well as the homepage.
+    if (SCRIPT_URL) {
       try {
-        return new URL("../data/promo.json", cs.src).toString();
+        return new URL("../data/promo.json", SCRIPT_URL).toString();
       } catch (e) {}
     }
-    return "assets/data/promo.json";
+
+    // Production fallback for the custom-domain GitHub Pages deployment.
+    try {
+      return new URL("/assets/data/promo.json", window.location.origin).toString();
+    } catch (e) {
+      return "/assets/data/promo.json";
+    }
   }
 
   async function loadConfig() {

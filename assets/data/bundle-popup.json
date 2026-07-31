@@ -1,0 +1,24 @@
+{
+  "enabled": true,
+  "id": "cake-cupcakes-bundle-v1",
+  "delaySeconds": 25,
+  "dismissCooldownDays": 7,
+  "ctaCooldownDays": 14,
+  "headline": "Complete your celebration",
+  "title": "Cake + matching cupcakes",
+  "badge": "20% off cupcakes",
+  "description": "Add matching cupcakes to your bespoke cake request and save 20% on the cupcake portion.",
+  "ctaLabel": "Start your bespoke order",
+  "dismissLabel": "Not now",
+  "href": "/Bespoke-Order/#bespoke-form",
+  "cakeImage": "/assets/img/items/themed-cake-main-rose-bouquet-gift-box-cake.webp",
+  "cakeImageAlt": "Bespoke birthday cake decorated with red roses",
+  "cupcakeImage": "/assets/img/items/cupcakes-main.webp",
+  "cupcakeImageAlt": "Matching personalised cupcakes",
+  "finePrint": "Final pricing depends on design, quantity and delivery.",
+  "excludedPaths": [
+    "/Bespoke-Order/",
+    "/Thank-You/",
+    "/404.html"
+  ]
+}

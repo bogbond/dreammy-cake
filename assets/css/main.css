@@ -4031,3 +4031,429 @@ body.home-hero-active #header .logo .sitename{
   color:inherit !important;
   background:transparent !important;
 }
+
+/* ========================================================================== 
+   Evergreen cake + cupcakes offer — compact version
+   ========================================================================== */
+.dc-bundle-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 2147483644;
+  display: grid;
+  place-items: center;
+  padding: 20px;
+  background: rgba(24, 15, 17, 0.58);
+  -webkit-backdrop-filter: blur(7px);
+  backdrop-filter: blur(7px);
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 220ms ease, visibility 220ms ease;
+}
+
+.dc-bundle-overlay.is-visible {
+  opacity: 1;
+  visibility: visible;
+}
+
+.dc-bundle-modal {
+  position: relative;
+  display: grid;
+  grid-template-columns: 270px minmax(0, 1fr);
+  width: min(760px, 100%);
+  overflow: hidden;
+  border: 1px solid rgba(239, 200, 108, 0.72);
+  border-radius: 24px;
+  background: #fffaf3;
+  box-shadow: 0 28px 84px rgba(19, 8, 12, 0.4);
+  outline: none;
+  transform: translateY(14px) scale(0.985);
+  transition: transform 240ms ease;
+}
+
+.dc-bundle-overlay.is-visible .dc-bundle-modal {
+  transform: translateY(0) scale(1);
+}
+
+.dc-bundle-close {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  z-index: 4;
+  display: grid;
+  place-items: center;
+  width: 38px;
+  height: 38px;
+  padding: 0;
+  border: 1px solid rgba(255, 255, 255, 0.72);
+  border-radius: 50%;
+  background: rgba(49, 28, 30, 0.84);
+  color: #fff;
+  font-size: 26px;
+  line-height: 1;
+  cursor: pointer;
+  box-shadow: 0 7px 20px rgba(20, 8, 10, 0.22);
+  transition: transform 150ms ease, background 150ms ease;
+}
+
+.dc-bundle-close:hover {
+  transform: scale(1.05);
+  background: #332024;
+}
+
+.dc-bundle-close:focus-visible,
+.dc-bundle-cta:focus-visible,
+.dc-bundle-dismiss:focus-visible {
+  outline: 3px solid rgba(239, 200, 108, 0.78);
+  outline-offset: 3px;
+}
+
+.dc-bundle-visual {
+  position: relative;
+  min-height: 410px;
+  overflow: hidden;
+  background: #68404a;
+}
+
+.dc-bundle-cake {
+  width: 100%;
+  height: 100%;
+  min-height: 410px;
+  display: block;
+  object-fit: cover;
+  object-position: 48% 57%;
+  filter: saturate(0.94) contrast(1.02);
+}
+
+.dc-bundle-cupcake-frame {
+  position: absolute;
+  left: 16px;
+  right: 16px;
+  bottom: 16px;
+  z-index: 2;
+  height: 102px;
+  padding: 5px;
+  overflow: hidden;
+  border-radius: 17px;
+  background: rgba(255, 250, 243, 0.94);
+  box-shadow: 0 14px 32px rgba(28, 11, 16, 0.32);
+}
+
+.dc-bundle-cupcakes {
+  width: 100%;
+  height: 100%;
+  display: block;
+  border-radius: 13px;
+  object-fit: cover;
+  object-position: 50% 48%;
+}
+
+.dc-bundle-content {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  min-width: 0;
+  padding: 40px 42px 34px;
+  background:
+    radial-gradient(circle at 100% 0%, rgba(239, 200, 108, 0.16), transparent 34%),
+    linear-gradient(145deg, #fffdf9 0%, #fff8ed 100%);
+}
+
+.dc-bundle-kicker {
+  margin: 0 0 9px;
+  color: #a27222;
+  font-family: var(--nav-font);
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.17em;
+  text-transform: uppercase;
+}
+
+.dc-bundle-title {
+  max-width: 390px;
+  margin: 0;
+  color: #362227;
+  font-family: var(--heading-font);
+  font-size: clamp(34px, 4vw, 43px);
+  font-weight: 750;
+  line-height: 1.04;
+}
+
+.dc-bundle-offer-badge {
+  align-self: flex-start;
+  margin: 16px 0 0;
+  padding: 7px 12px;
+  border: 1px solid rgba(170, 116, 28, 0.26);
+  border-radius: 999px;
+  background: rgba(239, 200, 108, 0.22);
+  color: #754807;
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 0.045em;
+  text-transform: uppercase;
+}
+
+.dc-bundle-description {
+  max-width: 430px;
+  margin: 16px 0 0;
+  color: #66565a;
+  font-size: 15.5px;
+  line-height: 1.52;
+}
+
+.dc-bundle-cta {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  width: 100%;
+  min-height: 50px;
+  margin-top: 22px;
+  padding: 12px 20px;
+  border: 1px solid #e2ad40;
+  border-radius: 999px;
+  background: linear-gradient(135deg, #f6d47c 0%, #efc86c 50%, #e6b44c 100%);
+  color: #2f251b;
+  font-family: var(--nav-font);
+  font-size: 14px;
+  font-weight: 800;
+  text-decoration: none;
+  box-shadow: 0 10px 26px rgba(169, 111, 20, 0.19);
+  transition: transform 150ms ease, box-shadow 150ms ease, filter 150ms ease;
+}
+
+.dc-bundle-cta:hover {
+  color: #2f251b;
+  filter: brightness(1.02);
+  transform: translateY(-2px);
+  box-shadow: 0 14px 30px rgba(169, 111, 20, 0.25);
+}
+
+.dc-bundle-dismiss {
+  align-self: center;
+  margin-top: 10px;
+  padding: 4px 7px;
+  border: 0;
+  background: transparent;
+  color: #74666a;
+  font-size: 12px;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  cursor: pointer;
+}
+
+.dc-bundle-dismiss:hover {
+  color: #3b292e;
+}
+
+.dc-bundle-fine-print {
+  margin: 13px 0 0;
+  color: #8a7a7e;
+  font-size: 10.5px;
+  line-height: 1.4;
+  text-align: center;
+}
+
+body.dc-bundle-open {
+  overflow: hidden;
+}
+
+body.dc-bundle-open .dc-consent-banner,
+body.dc-bundle-open .dc-consent-manage {
+  display: none !important;
+}
+
+@media (max-width: 820px) {
+  .dc-bundle-overlay {
+    place-items: center;
+    padding: 10px 10px calc(10px + env(safe-area-inset-bottom, 0px));
+    background: rgba(24, 15, 17, 0.52);
+  }
+
+  .dc-bundle-modal {
+    display: block;
+    width: min(430px, 100%);
+    max-height: none;
+    overflow: hidden;
+    border-radius: 22px;
+    transform: translateY(22px);
+  }
+
+  .dc-bundle-overlay.is-visible .dc-bundle-modal {
+    transform: translateY(0);
+  }
+
+  .dc-bundle-close {
+    top: 9px;
+    right: 9px;
+    width: 35px;
+    height: 35px;
+    font-size: 24px;
+  }
+
+  .dc-bundle-visual {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    height: 118px;
+    min-height: 118px;
+  }
+
+  .dc-bundle-cake {
+    width: 100%;
+    height: 118px;
+    min-height: 118px;
+    object-position: 50% 57%;
+  }
+
+  .dc-bundle-cupcake-frame {
+    position: static;
+    width: auto;
+    height: 118px;
+    padding: 0;
+    border-radius: 0;
+    background: transparent;
+    box-shadow: none;
+  }
+
+  .dc-bundle-cupcakes {
+    border-radius: 0;
+    object-position: 50% 48%;
+  }
+
+  .dc-bundle-content {
+    padding: 20px 20px 16px;
+    text-align: center;
+  }
+
+  .dc-bundle-kicker {
+    margin-bottom: 7px;
+    font-size: 9.5px;
+    letter-spacing: 0.16em;
+  }
+
+  .dc-bundle-title {
+    max-width: none;
+    font-size: clamp(25px, 7.2vw, 31px);
+    line-height: 1.06;
+  }
+
+  .dc-bundle-offer-badge {
+    align-self: center;
+    margin-top: 11px;
+    padding: 6px 10px;
+    font-size: 11px;
+  }
+
+  .dc-bundle-description {
+    max-width: 360px;
+    margin: 11px auto 0;
+    font-size: 13.5px;
+    line-height: 1.42;
+  }
+
+  .dc-bundle-cta {
+    min-height: 47px;
+    margin-top: 16px;
+    padding: 11px 15px;
+    font-size: 13.5px;
+  }
+
+  .dc-bundle-dismiss {
+    margin-top: 7px;
+    font-size: 11.5px;
+  }
+
+  .dc-bundle-fine-print {
+    margin-top: 8px;
+    font-size: 9.5px;
+    line-height: 1.3;
+  }
+}
+
+@media (max-width: 360px) {
+  .dc-bundle-overlay {
+    padding-inline: 6px;
+  }
+
+  .dc-bundle-modal {
+    border-radius: 19px;
+  }
+
+  .dc-bundle-visual,
+  .dc-bundle-cake,
+  .dc-bundle-cupcake-frame {
+    height: 96px;
+    min-height: 96px;
+  }
+
+  .dc-bundle-content {
+    padding: 17px 16px 13px;
+  }
+
+  .dc-bundle-kicker {
+    display: none;
+  }
+
+  .dc-bundle-title {
+    font-size: 24px;
+  }
+
+  .dc-bundle-description {
+    font-size: 12.8px;
+  }
+
+  .dc-bundle-cta {
+    min-height: 44px;
+    margin-top: 13px;
+    font-size: 12.8px;
+  }
+
+  .dc-bundle-fine-print {
+    display: none;
+  }
+}
+
+@media (max-height: 600px) and (max-width: 820px) {
+  .dc-bundle-visual,
+  .dc-bundle-cake,
+  .dc-bundle-cupcake-frame {
+    height: 88px;
+    min-height: 88px;
+  }
+
+  .dc-bundle-content {
+    padding-top: 15px;
+    padding-bottom: 12px;
+  }
+
+  .dc-bundle-kicker,
+  .dc-bundle-fine-print {
+    display: none;
+  }
+
+  .dc-bundle-title {
+    font-size: 23px;
+  }
+
+  .dc-bundle-description {
+    margin-top: 9px;
+    font-size: 12.5px;
+  }
+
+  .dc-bundle-offer-badge {
+    margin-top: 9px;
+  }
+
+  .dc-bundle-cta {
+    margin-top: 12px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .dc-bundle-overlay,
+  .dc-bundle-modal,
+  .dc-bundle-close,
+  .dc-bundle-cta {
+    transition: none !important;
+  }
+}

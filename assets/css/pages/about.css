@@ -3,9 +3,12 @@
 .about-page .page-title.about-hero {
   background: linear-gradient(180deg, rgba(0,0,0,.56), rgba(0,0,0,.28)), url('/assets/img/about.webp') center/cover no-repeat;
   padding: 62px 0 50px;
-  text-align: left;
+  text-align: center;
 }
-.about-page .page-title.about-hero .container { max-width: 980px; }
+.about-page .page-title.about-hero .container {
+  max-width: 980px;
+  text-align: center;
+}
 .about-page .page-title.about-hero h1 {
   color: #fff;
   margin-bottom: .35rem;
@@ -510,4 +513,17 @@
 .about-page button.review-source:focus-visible {
   outline: 2px solid var(--accent-color);
   outline-offset: 3px;
+}
+
+/* About Hero: compensate for the fixed header overlay.
+   Keep the banner dimensions unchanged while centring the copy in the
+   portion that remains visible below the navigation bar. */
+.about-page .page-title.about-hero > .container {
+  transform: translateY(21px);
+}
+
+@media (min-width: 1200px) {
+  .about-page .page-title.about-hero > .container {
+    transform: translateY(35.5px);
+  }
 }

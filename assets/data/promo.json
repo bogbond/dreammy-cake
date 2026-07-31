@@ -28,7 +28,7 @@
         "subtitle": "Limited slots • Festive designs • Optional edible photo",
         "ctaLabel": "View the collection",
         "href": "/Products/christmas-collection/",
-        "image": "assets/img/promo/christmas-sale.webp",
+        "image": "/assets/img/promo/christmas-sale.webp",
         "imageAlt": "Christmas Collection promo"
       }
     },
@@ -46,7 +46,7 @@
         "headline": "Hot offer",
         "title": "Valentine’s Collection",
         "subtitle": "Limited slots • Two signature designs • Optional edible photo.",
-        "image": "assets/img/promo/Elegant-Valentine's-Day-Sale.webp",
+        "image": "/assets/img/promo/Elegant-Valentine's-Day-Sale.webp",
         "imageAlt": "Valentine’s bento cake and cupcakes",
         "href": "/Products/valentines-collection/",
         "ctaLabel": "More details",
@@ -73,7 +73,7 @@
         "subtitle": "Pre-orders now open • Gift cupcakes & sweet treats",
         "ctaLabel": "View the collection",
         "href": "/Products/mothers-day-collection/",
-        "image": "assets/img/promo/mothers-day-collection-gift-cupcakes-preview.webp",
+        "image": "/assets/img/promo/mothers-day-collection-gift-cupcakes-preview.webp",
         "imageAlt": "Mother’s Day collection preview with pastel gift cupcakes"
       }
     },
@@ -99,7 +99,7 @@
         "subtitle": "Traditional Easter Paska • Spring cupcakes • Limited pre-orders",
         "ctaLabel": "View the collection",
         "href": "/Products/easter-collection/",
-        "image": "assets/img/promo/easter-paska-traditional-ukrainian-easter-bread-preview.webp",
+        "image": "/assets/img/promo/easter-paska-traditional-ukrainian-easter-bread-preview.webp",
         "imageAlt": "Easter collection preview featuring traditional Easter Paska"
       }
     },
@@ -121,7 +121,7 @@
         "subtitle": "Cupcake boxes £18 • Best Dad Ever brownies £25 • 20/21 June slots",
         "ctaLabel": "View the collection",
         "href": "/Products/fathers-day-collection/",
-        "image": "assets/img/promo/fathers-day-cupcake-brownie-gift-box-banner.webp",
+        "image": "/assets/img/promo/fathers-day-cupcake-brownie-gift-box-banner.webp",
         "imageAlt": "Father’s Day cupcake and brownie gift boxes"
       }
     },
@@ -141,7 +141,7 @@
         "subtitle": "Limited slots • Spooky-cute designs • Optional edible photo",
         "ctaLabel": "View the collection",
         "href": "/Products/halloween-collection/",
-        "image": "assets/img/promo/halloween-sale.webp",
+        "image": "/assets/img/promo/halloween-sale.webp",
         "imageAlt": "Halloween Collection promo"
       }
     }
