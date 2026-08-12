@@ -1,22 +1,139 @@
 <?xml version='1.0' encoding='utf-8'?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
   <url>
     <loc>https://dreamycake.co.uk/Products/celebration-cake/</loc>
-    <lastmod>2026-07-30</lastmod>
+    <lastmod>2026-08-12</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://dreamycake.co.uk/assets/img/items/celebration-cake-main-blue-bear-cloud-birthday-cake.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://dreamycake.co.uk/assets/img/items/celebration-cake-30th-anniversary-fresh-roses.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://dreamycake.co.uk/assets/img/items/celebration-cake-sophie-21-peach-tropical-leaves.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://dreamycake.co.uk/assets/img/items/celebration-cake-autumn-palette-gold-foliage.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://dreamycake.co.uk/assets/img/items/celebration-cake-that-girl-since-91-black-bows.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://dreamycake.co.uk/assets/img/items/celebration-cake-burgundy-twenty-seven-vintage-piping.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://dreamycake.co.uk/assets/img/items/celebration-cake-ice-cream-sundae-birthday.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://dreamycake.co.uk/assets/img/items/celebration-cake-pink-heart-eighteen-disco-balls.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://dreamycake.co.uk/assets/img/items/celebration-cake-blue-train-cloud-birthday.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://dreamycake.co.uk/assets/img/items/celebration-cake-blue-baby-teddy-balloons.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://dreamycake.co.uk/assets/img/items/celebration-cake-yellow-heart-birthday-gift-box.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://dreamycake.co.uk/assets/img/items/celebration-cake-33rd-birthday-fresh-flower-sheet-cake.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://dreamycake.co.uk/assets/img/items/celebration-cake-blue-ombre-christening-cross-cupcakes.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://dreamycake.co.uk/assets/img/items/celebration-cake-red-heart-twenty-five-ribbon-bows.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://dreamycake.co.uk/assets/img/items/celebration-cake-pink-giraffe-vintage-piping.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://dreamycake.co.uk/assets/img/items/celebration-cake-navy-gold-music-cake-mac.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://dreamycake.co.uk/assets/img/items/celebration-cake-william-first-holy-communion-sheet-cake.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://dreamycake.co.uk/assets/img/items/celebration-cake-green-ombre-oliver-30th-birthday.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://dreamycake.co.uk/assets/img/items/celebration-cake-purple-berries-gold-leaf.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://dreamycake.co.uk/assets/img/items/celebration-cake-pink-ombre-birthday-mummy-white-roses.webp</image:loc>
+    </image:image>
   </url>
   <url>
     <loc>https://dreamycake.co.uk/Products/cupcakes/</loc>
-    <lastmod>2026-07-30</lastmod>
+    <lastmod>2026-08-12</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://dreamycake.co.uk/assets/img/items/cupcakes-main.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://dreamycake.co.uk/assets/img/items/cupcakes-oh-baby-pastel-baby-shower.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://dreamycake.co.uk/assets/img/items/cupcakes-kpop-demon-hunters-party-box.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://dreamycake.co.uk/assets/img/items/cupcakes-blue-yellow-classic-buttercream-box.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://dreamycake.co.uk/assets/img/items/cupcakes-pink-strawberry-birthday-box.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://dreamycake.co.uk/assets/img/items/cupcakes-future-mrs-hen-party-bridal-box.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://dreamycake.co.uk/assets/img/items/cupcakes-red-cream-buttercream-swirls.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://dreamycake.co.uk/assets/img/items/cupcakes-pink-birthday-bows-cherries.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://dreamycake.co.uk/assets/img/items/cupcakes-purple-yellow-floral-box.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://dreamycake.co.uk/assets/img/items/cupcakes-05.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://dreamycake.co.uk/assets/img/items/medical-themed-cupcakes-bento-cake-gift-set.webp</image:loc>
+    </image:image>
   </url>
   <url>
     <loc>https://dreamycake.co.uk/Products/mini-bento-cake/</loc>
-    <lastmod>2026-07-30</lastmod>
+    <lastmod>2026-08-12</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://dreamycake.co.uk/assets/img/items/mini-bento-cake-happy-birthday-mum-chocolate-bows.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://dreamycake.co.uk/assets/img/items/medical-themed-cupcakes-bento-cake-gift-set.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://dreamycake.co.uk/assets/img/items/mini-bento-cake-02-white-pink-heart-vintage-cake.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://dreamycake.co.uk/assets/img/items/mini-bento-cake-burgundy-heart-chapter-21-ribbons.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://dreamycake.co.uk/assets/img/items/celebration-cake-05-bee-theme-daisy-birthday-cake.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://dreamycake.co.uk/assets/img/items/themed-cake-04-red-bow-gift-cake-with-chocolates.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://dreamycake.co.uk/assets/img/items/mini-bento-cake-04-blue-edible-photo-bento-cake.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://dreamycake.co.uk/assets/img/items/mini-bento-cake-happy-birthday-mum-gift-box.webp</image:loc>
+    </image:image>
   </url>
   <url>
     <loc>https://dreamycake.co.uk/Products/postage-cookie/</loc>
@@ -26,9 +143,69 @@
   </url>
   <url>
     <loc>https://dreamycake.co.uk/Products/themed-cake/</loc>
-    <lastmod>2026-07-30</lastmod>
+    <lastmod>2026-08-12</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://dreamycake.co.uk/assets/img/items/themed-cake-racing-cars-route-66-birthday.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://dreamycake.co.uk/assets/img/items/themed-cake-gaming-controller-birthday.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://dreamycake.co.uk/assets/img/items/themed-cake-cocomelon-rainbow-birthday.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://dreamycake.co.uk/assets/img/items/themed-cake-piano-music-60th-birthday.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://dreamycake.co.uk/assets/img/items/themed-cake-frozen-elsa-olaf-birthday.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://dreamycake.co.uk/assets/img/items/themed-cake-cowboy-first-rodeo.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://dreamycake.co.uk/assets/img/items/themed-cake-retro-colourful-vintage-piping.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://dreamycake.co.uk/assets/img/items/themed-cake-law-graduation-scales-books.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://dreamycake.co.uk/assets/img/items/themed-cake-star-wars-galaxy-birthday.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://dreamycake.co.uk/assets/img/items/themed-cake-architectural-photo-60th-birthday.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://dreamycake.co.uk/assets/img/items/themed-cake-hatsune-miku-anime-heart.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://dreamycake.co.uk/assets/img/items/themed-cake-first-birthday-teddy-balloons.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://dreamycake.co.uk/assets/img/items/themed-cake-pink-strawberry-tenth-birthday.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://dreamycake.co.uk/assets/img/items/themed-cake-sage-green-cats-vintage-piping.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://dreamycake.co.uk/assets/img/items/themed-cake-oversized-mint-green-bow.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://dreamycake.co.uk/assets/img/items/themed-cake-lightning-bolts-rock-texture.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://dreamycake.co.uk/assets/img/items/themed-cake-two-tier-mermaid-under-the-sea.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://dreamycake.co.uk/assets/img/items/themed-cake-hungry-caterpillar-first-birthday.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://dreamycake.co.uk/assets/img/items/themed-cake-childrens-mini-cake-trio.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://dreamycake.co.uk/assets/img/items/themed-cake-main-rose-bouquet-gift-box-cake.webp</image:loc>
+    </image:image>
   </url>
   <url>
     <loc>https://dreamycake.co.uk/Products/valentines-collection/</loc>
@@ -92,8 +269,38 @@
   </url>
   <url>
     <loc>https://dreamycake.co.uk/Products/wedding-cake/</loc>
-    <lastmod>2026-07-30</lastmod>
+    <lastmod>2026-08-12</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://dreamycake.co.uk/assets/img/items/wedding-cake-white-roses-gold-initials-venue.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://dreamycake.co.uk/assets/img/items/wedding-cake-main-mr-and-mrs-black-bow-tiered-cake.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://dreamycake.co.uk/assets/img/items/wedding-cake-white-roses-gold-initials-studio.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://dreamycake.co.uk/assets/img/items/wedding-cake-01-ivory-lace-texture-tiered-cake.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://dreamycake.co.uk/assets/img/items/wedding-cake-heart-mr-and-mrs-lambeth-piping.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://dreamycake.co.uk/assets/img/items/wedding-cake-02-forever-grape-tiered-wedding-cake.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://dreamycake.co.uk/assets/img/items/wedding-cake-vintage-heart-cherries-close-up.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://dreamycake.co.uk/assets/img/items/wedding-cake-cream-heart-mr-and-mrs-lettering.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://dreamycake.co.uk/assets/img/items/wedding-cake-white-roses-venue-wide-view.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://dreamycake.co.uk/assets/img/items/wedding-cake-04-chocolate-just-married-cake.webp</image:loc>
+    </image:image>
   </url>
 </urlset>

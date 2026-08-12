@@ -181,7 +181,7 @@
   let glightbox = null;
 const _glSel = '.glightbox';
 if (document.querySelector(_glSel)) {
-  glightbox = window.GLightbox && GLightbox({ selector: _glSel });
+  glightbox = window.GLightbox && GLightbox({ selector: _glSel, loop: true });
 }
 
   if (glightbox) glightbox.on('open', () => {
