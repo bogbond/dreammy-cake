@@ -39,6 +39,17 @@
     customer_name: 'Full name',
     email: 'Email address',
     phone: 'Phone number',
+    company: 'Company / organisation',
+    inquiry_type: 'Enquiry type',
+    event_type: 'Event type',
+    venue_postcode: 'Venue postcode',
+    services: 'Requested services',
+    quantities: 'Products and approximate quantities',
+    budget_range: 'Indicative budget',
+    branding_requirements: 'Branding and design direction',
+    dietary_requirements: 'Dietary requirements and allergens',
+    delivery_setup_requirements: 'Delivery and setup requirements',
+    privacy_acknowledged: 'Privacy notice acknowledged',
     instagram_handle: 'Instagram handle',
     event_date: 'Event date',
     preferred_time: 'Preferred time / delivery window',
@@ -420,6 +431,7 @@
     var product = firstValue(form, ['product_name']);
     if(form.id === 'contactFormEnhanced') return 'Contact form - Home page';
     if(form.id === 'bespokeOrderForm') return 'Bespoke Order form';
+    if(form.id === 'corporateEnquiryForm') return 'Corporate Cakes enquiry form';
     if(product) return 'Product order form - ' + product;
     if(form.classList.contains('product-form')) return 'Product order form - ' + humanPageTitle();
     return dataForm ? ('Website form - ' + dataForm) : ('Website form - ' + humanPageTitle());

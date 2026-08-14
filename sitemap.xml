@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='utf-8'?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
   <url>
     <loc>https://dreamycake.co.uk/</loc>
     <lastmod>2026-08-12</lastmod>
@@ -7,12 +7,12 @@
   </url>
   <url>
     <loc>https://dreamycake.co.uk/QA/</loc>
-    <lastmod>2026-07-30</lastmod>
+    <lastmod>2026-08-13</lastmod>
     <priority>0.80</priority>
   </url>
   <url>
     <loc>https://dreamycake.co.uk/About/</loc>
-    <lastmod>2026-07-30</lastmod>
+    <lastmod>2026-08-13</lastmod>
     <priority>0.80</priority>
   </url>
   <url>
@@ -49,9 +49,16 @@
   </url>
   <url>
     <loc>https://dreamycake.co.uk/Corporate-Cakes/</loc>
-    <lastmod>2026-07-30</lastmod>
+    <lastmod>2026-08-14</lastmod>
     <changefreq>monthly</changefreq>
-    <priority>0.80</priority>
+    <priority>0.90</priority>
+    <image:image><image:loc>https://dreamycake.co.uk/assets/img/corporate/gearset-100m-arr-corporate-cake-hero.webp</image:loc><image:title>Close-up of a Gearset corporate cake for a 100 million dollar ARR milestone</image:title></image:image>
+    <image:image><image:loc>https://dreamycake.co.uk/assets/img/corporate/gearset-corporate-cake-100m-arr.webp</image:loc><image:title>Gearset branded corporate milestone cake</image:title></image:image>
+    <image:image><image:loc>https://dreamycake.co.uk/assets/img/corporate/gearset-branded-cupcakes-100m-arr.webp</image:loc><image:title>Gearset branded cupcakes for a Cambridge company event</image:title></image:image>
+    <image:image><image:loc>https://dreamycake.co.uk/assets/img/corporate/spire-cambridge-lea-hospital-da-vinci-milestone-cake.webp</image:loc><image:title>Spire Cambridge Lea Hospital da Vinci procedures milestone cake</image:title></image:image>
+    <image:image><image:loc>https://dreamycake.co.uk/assets/img/corporate/give-your-best-cambridge-launch-cake.webp</image:loc><image:title>Give Your Best Cambridge launch cake</image:title></image:image>
+    <image:image><image:loc>https://dreamycake.co.uk/assets/img/corporate/astrazeneca-team-branded-cupcakes-cambridge.webp</image:loc><image:title>Branded cupcakes for an AstraZeneca team in Cambridge</image:title></image:image>
+    <image:image><image:loc>https://dreamycake.co.uk/assets/img/corporate/marharyta-margo-makus-give-your-best-cambridge-launch.webp</image:loc><image:title>Marharyta Margo Makus at the Give Your Best Cambridge launch</image:title></image:image>
   </url>
   <url>
     <loc>https://dreamycake.co.uk/Bespoke-Order/</loc>
