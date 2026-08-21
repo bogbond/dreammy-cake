@@ -1,7 +1,12 @@
-/* v3.30 Formly relay mode.
-   Formly accepts a minimal name/email/message form reliably. The visible site forms
-   stay unchanged, then this script sends a clean relay request:
+/* v4.00 dual form provider mode.
+   Change only assets/data/form-provider.txt:
+   0 = FormSubmit, 1 = Formly.
+
+   Formly keeps the proven minimal relay request:
    access_key + name + email + message (+ one optional file).
+
+   FormSubmit receives each visible field separately with a friendly label.
+   Its endpoint must be activated for the intended recipient before mode 0 is enabled.
 
    v3.30 sends the message body as lightweight HTML (<br> + <strong>) because
    Formly's default email template collapses plain-text newline characters.
@@ -11,6 +16,10 @@
 
   var FORMLY_ENDPOINT = 'https://formly.email/submit';
   var ACCESS_KEY = '8c20c8e2b11242a586b585700f820946';
+  var FORMSUBMIT_ENDPOINT = 'https://formsubmit.co/quote@dreamycake.co.uk';
+  var PROVIDER_CONFIG_URL = '/assets/data/form-provider.txt';
+  var PROVIDER_FORMSUBMIT = 0;
+  var PROVIDER_FORMLY = 1;
   var MAX_BYTES = Math.floor(9.5 * 1024 * 1024);
   var MAX_LABEL = '10 MB';
   var HARD_BREAK = '\u2028';
@@ -22,8 +31,33 @@
     redirect: true,
     honeypot: true,
     website: true,
-    request_summary: true
+    request_summary: true,
+    _honey: true
   };
+
+  function loadProviderMode(){
+    var url = PROVIDER_CONFIG_URL + '?ts=' + Date.now();
+    return fetch(url, { cache: 'no-store', credentials: 'same-origin' })
+      .then(function(response){
+        if(!response.ok) throw new Error('Provider config returned HTTP ' + response.status);
+        return response.text();
+      })
+      .then(function(text){
+        var value = String(text || '')
+          .split(/\r?\n/)
+          .map(function(line){ return line.replace(/#.*$/, '').trim(); })
+          .filter(Boolean)
+          .join('');
+        if(value !== '0' && value !== '1') throw new Error('Provider config must contain only 0 or 1');
+        return Number(value);
+      })
+      .catch(function(error){
+        console.warn('Dreamy Cake form provider config unavailable; keeping Formly.', error);
+        return PROVIDER_FORMLY;
+      });
+  }
+
+  var providerModePromise = loadProviderMode();
 
   var FRIENDLY_LABELS = {
     product_name: 'Product name',
@@ -115,6 +149,43 @@
     input.value = value == null ? '' : String(value);
     form.appendChild(input);
     return input;
+  }
+
+  function showProviderError(form, message){
+    var alertBox = form && form.querySelector && form.querySelector('#contactAlert, [data-form-provider-error]');
+    if(!alertBox && form){
+      alertBox = document.createElement('div');
+      alertBox.setAttribute('data-form-provider-error', 'true');
+      alertBox.setAttribute('role', 'alert');
+      alertBox.className = 'alert alert-danger mt-3';
+      form.appendChild(alertBox);
+    }
+    if(alertBox){
+      alertBox.textContent = message;
+      alertBox.classList.remove('d-none');
+    }
+  }
+
+  function ensureHoneypot(form){
+    if(!form || form.querySelector('input[name="_honey"]')) return;
+    var wrap = document.createElement('div');
+    wrap.setAttribute('aria-hidden', 'true');
+    wrap.style.position = 'absolute';
+    wrap.style.left = '-10000px';
+    wrap.style.width = '1px';
+    wrap.style.height = '1px';
+    wrap.style.overflow = 'hidden';
+
+    var label = document.createElement('label');
+    label.textContent = 'Leave this field empty';
+    var input = document.createElement('input');
+    input.type = 'text';
+    input.name = '_honey';
+    input.tabIndex = -1;
+    input.autocomplete = 'off';
+    label.appendChild(input);
+    wrap.appendChild(label);
+    form.appendChild(wrap);
   }
 
   function escapeHtml(value){
@@ -511,6 +582,51 @@
     relay.submit();
   }
 
+  function formSubmitSubject(form){
+    return '[DC-WEB] ' + formLabel(form);
+  }
+
+  function submitFormSubmitRelay(form, fileInput){
+    if(!FORMSUBMIT_ENDPOINT || !/^https:\/\/formsubmit\.co\//i.test(FORMSUBMIT_ENDPOINT)){
+      showProviderError(form, 'FormSubmit is not activated yet. Please use email or WhatsApp while we finish the setup.');
+      return;
+    }
+
+    var relay = document.createElement('form');
+    relay.action = FORMSUBMIT_ENDPOINT;
+    relay.method = 'POST';
+    relay.enctype = 'multipart/form-data';
+    relay.style.display = 'none';
+    relay.acceptCharset = 'UTF-8';
+
+    addHidden(relay, '_subject', formSubmitSubject(form));
+    addHidden(relay, '_template', 'table');
+    addHidden(relay, '_captcha', 'false');
+    addHidden(relay, '_next', 'https://dreamycake.co.uk/Thank-You/');
+    addHidden(relay, '_honey', firstValue(form, ['_honey']));
+    addHidden(relay, '_replyto', firstValue(form, ['email']));
+    addHidden(relay, 'Submission ID', 'DC-' + Date.now().toString(36).toUpperCase());
+    addHidden(relay, 'Form', formLabel(form));
+    addHidden(relay, 'Page title', humanPageTitle());
+    addHidden(relay, 'Page URL', window.location.href);
+    addHidden(relay, 'Submitted at', new Date().toISOString());
+
+    collectFields(form).forEach(function(row){
+      addHidden(relay, row.label || friendlyLabel(row.name), row.value);
+    });
+
+    if(fileInput && fileInput.files && fileInput.files.length){
+      try {
+        fileInput.setAttribute('data-original-name', fileInput.name || '');
+        fileInput.name = 'attachment';
+        relay.appendChild(fileInput);
+      } catch(err) {}
+    }
+
+    document.body.appendChild(relay);
+    relay.submit();
+  }
+
   document.addEventListener('submit', function(e){
     var form = e.target;
     if(!isFormlyForm(form)) return;
@@ -525,6 +641,24 @@
     }
 
     e.preventDefault();
-    submitRelayForm(form, fileInput);
+    providerModePromise.then(function(providerMode){
+      if(providerMode === PROVIDER_FORMSUBMIT){
+        submitFormSubmitRelay(form, fileInput);
+        return;
+      }
+      submitRelayForm(form, fileInput);
+    }).catch(function(error){
+      console.error('Dreamy Cake form submission failed before sending.', error);
+      showProviderError(form, 'The form could not be prepared. Please contact us by email or WhatsApp.');
+    });
   }, false);
+
+  function boot(){
+    Array.prototype.forEach.call(document.forms || [], function(form){
+      if(isFormlyForm(form)) ensureHoneypot(form);
+    });
+  }
+
+  if(document.readyState === 'loading') document.addEventListener('DOMContentLoaded', boot);
+  else boot();
 })();
