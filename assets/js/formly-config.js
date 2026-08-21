@@ -1,4 +1,4 @@
-/* v4.00 dual form provider mode.
+/* v4.10 dual form provider mode.
    Change only assets/data/form-provider.txt:
    0 = FormSubmit, 1 = Formly.
 
@@ -8,7 +8,7 @@
    FormSubmit receives each visible field separately with a friendly label.
    Its endpoint must be activated for the intended recipient before mode 0 is enabled.
 
-   v3.30 sends the message body as lightweight HTML (<br> + <strong>) because
+   v4.10 sends the Formly message body as lightweight HTML (<br> + <strong>) because
    Formly's default email template collapses plain-text newline characters.
 */
 (function(){
@@ -22,6 +22,7 @@
   var PROVIDER_FORMLY = 1;
   var MAX_BYTES = Math.floor(9.5 * 1024 * 1024);
   var MAX_LABEL = '10 MB';
+  var SUBMIT_TIMEOUT_MS = 90000;
   var HARD_BREAK = '\u2028';
   var allowedExtensions = ['jpg','jpeg','png','webp','gif','bmp','heic','heif','pdf','tif','tiff'];
   var allowedMimeTypes = ['image/jpeg','image/png','image/webp','image/gif','image/bmp','image/heic','image/heif','application/pdf','image/tiff'];
@@ -164,6 +165,102 @@
       alertBox.textContent = message;
       alertBox.classList.remove('d-none');
     }
+  }
+
+  function formatFileSize(bytes){
+    bytes = Number(bytes) || 0;
+    if(bytes >= 1024 * 1024){
+      var mb = bytes / (1024 * 1024);
+      return (Math.abs(mb - Math.round(mb)) < 0.05 ? Math.round(mb) : mb.toFixed(1)) + ' MB';
+    }
+    return Math.max(1, Math.round(bytes / 1024)) + ' KB';
+  }
+
+  function clearProviderError(form){
+    var alertBox = form && form.querySelector && form.querySelector('#contactAlert, [data-form-provider-error]');
+    if(!alertBox) return;
+    alertBox.textContent = '';
+    alertBox.classList.add('d-none');
+  }
+
+  function submissionButtons(form){
+    return form ? form.querySelectorAll('button[type="submit"], input[type="submit"]') : [];
+  }
+
+  function setSubmittingState(form, fileInput){
+    if(!form || form.getAttribute('data-form-submitting') === 'true') return false;
+    form.setAttribute('data-form-submitting', 'true');
+    form.setAttribute('aria-busy', 'true');
+    clearProviderError(form);
+
+    var hasFile = !!(fileInput && fileInput.files && fileInput.files.length);
+    var buttonText = hasFile ? 'Uploading attachment…' : 'Sending…';
+    Array.prototype.forEach.call(submissionButtons(form), function(button){
+      button.setAttribute('data-form-submit-was-disabled', button.disabled ? 'true' : 'false');
+      if(button.tagName && button.tagName.toLowerCase() === 'input'){
+        button.setAttribute('data-form-submit-original-value', button.value || '');
+        button.value = buttonText;
+      } else {
+        button.setAttribute('data-form-submit-original-html', button.innerHTML);
+        button.textContent = buttonText;
+        var spinner = document.createElement('span');
+        spinner.className = 'spinner-border spinner-border-sm ms-2';
+        spinner.setAttribute('aria-hidden', 'true');
+        button.appendChild(spinner);
+      }
+      button.disabled = true;
+      button.setAttribute('aria-disabled', 'true');
+    });
+
+    var status = form.querySelector('[data-form-submit-status]');
+    if(!status){
+      status = document.createElement('div');
+      status.setAttribute('data-form-submit-status', 'true');
+      status.setAttribute('role', 'status');
+      status.setAttribute('aria-live', 'polite');
+      status.className = 'form-text mt-3';
+      form.appendChild(status);
+    }
+    if(hasFile){
+      var file = fileInput.files[0];
+      status.textContent = 'Uploading ' + file.name + ' (' + formatFileSize(file.size) + '). Please keep this page open.';
+    } else {
+      status.textContent = 'Sending your request. Please keep this page open.';
+    }
+
+    if(form._dreamySubmitTimer) window.clearTimeout(form._dreamySubmitTimer);
+    form._dreamySubmitTimer = window.setTimeout(function(){
+      clearSubmittingState(form);
+      showProviderError(form, 'The request is taking longer than expected. Please check your connection and try again once.');
+    }, SUBMIT_TIMEOUT_MS);
+    return true;
+  }
+
+  function clearSubmittingState(form){
+    if(!form) return;
+    if(form._dreamySubmitTimer){
+      window.clearTimeout(form._dreamySubmitTimer);
+      form._dreamySubmitTimer = null;
+    }
+    form.removeAttribute('data-form-submitting');
+    form.removeAttribute('aria-busy');
+    Array.prototype.forEach.call(submissionButtons(form), function(button){
+      var wasDisabled = button.getAttribute('data-form-submit-was-disabled') === 'true';
+      if(button.tagName && button.tagName.toLowerCase() === 'input'){
+        var originalValue = button.getAttribute('data-form-submit-original-value');
+        if(originalValue != null) button.value = originalValue;
+        button.removeAttribute('data-form-submit-original-value');
+      } else {
+        var originalHtml = button.getAttribute('data-form-submit-original-html');
+        if(originalHtml != null) button.innerHTML = originalHtml;
+        button.removeAttribute('data-form-submit-original-html');
+      }
+      button.disabled = wasDisabled;
+      button.removeAttribute('data-form-submit-was-disabled');
+      button.removeAttribute('aria-disabled');
+    });
+    var status = form.querySelector('[data-form-submit-status]');
+    if(status) status.remove();
   }
 
   function ensureHoneypot(form){
@@ -508,6 +605,27 @@
     return dataForm ? ('Website form - ' + dataForm) : ('Website form - ' + humanPageTitle());
   }
 
+  function subjectPart(value){
+    return collapseWhitespace(String(value || '').split(HARD_BREAK).join(' ')).slice(0, 80);
+  }
+
+  function enquirySubjectBase(form){
+    var product = subjectPart(firstValue(form, ['product_name']));
+    if(form.id === 'contactFormEnhanced') return 'Contact enquiry';
+    if(form.id === 'bespokeOrderForm') return 'Bespoke cake enquiry';
+    if(form.id === 'corporateEnquiryForm') return 'Corporate cakes enquiry';
+    if(product) return product + ' enquiry';
+    if(form.classList.contains('product-form')) return subjectPart(humanPageTitle()) + ' enquiry';
+    return 'Website enquiry';
+  }
+
+  function formSubmitFieldName(label){
+    return collapseWhitespace(label || 'Field')
+      .replace(/&/g, ' and ')
+      .replace(/[^A-Za-z0-9]+/g, '-')
+      .replace(/^-+|-+$/g, '') || 'Field';
+  }
+
   function htmlValue(value){
     return String(value == null ? '' : value)
       .split(HARD_BREAK)
@@ -575,7 +693,9 @@
         fileInput.setAttribute('data-original-name', fileInput.name || '');
         fileInput.name = 'file';
         relay.appendChild(fileInput);
-      } catch(err) {}
+      } catch(err) {
+        throw new Error('The selected attachment could not be prepared for Formly.');
+      }
     }
 
     document.body.appendChild(relay);
@@ -583,11 +703,17 @@
   }
 
   function formSubmitSubject(form){
-    return '[DC-WEB] ' + formLabel(form);
+    var identity = form.id === 'corporateEnquiryForm'
+      ? firstValue(form, ['company', 'name', 'full_name', 'customer_name'])
+      : firstValue(form, ['name', 'full_name', 'customer_name']);
+    var subject = enquirySubjectBase(form);
+    if(identity) subject += ' — ' + subjectPart(identity);
+    return subject.slice(0, 150);
   }
 
   function submitFormSubmitRelay(form, fileInput){
     if(!FORMSUBMIT_ENDPOINT || !/^https:\/\/formsubmit\.co\//i.test(FORMSUBMIT_ENDPOINT)){
+      clearSubmittingState(form);
       showProviderError(form, 'FormSubmit is not activated yet. Please use email or WhatsApp while we finish the setup.');
       return;
     }
@@ -605,23 +731,27 @@
     addHidden(relay, '_next', 'https://dreamycake.co.uk/Thank-You/');
     addHidden(relay, '_honey', firstValue(form, ['_honey']));
     addHidden(relay, '_replyto', firstValue(form, ['email']));
-    addHidden(relay, 'Submission ID', 'DC-' + Date.now().toString(36).toUpperCase());
-    addHidden(relay, 'Form', formLabel(form));
-    addHidden(relay, 'Page title', humanPageTitle());
-    addHidden(relay, 'Page URL', window.location.href);
-    addHidden(relay, 'Submitted at', new Date().toISOString());
-
     collectFields(form).forEach(function(row){
-      addHidden(relay, row.label || friendlyLabel(row.name), row.value);
+      addHidden(relay, formSubmitFieldName(row.label || friendlyLabel(row.name)), row.value);
     });
 
     if(fileInput && fileInput.files && fileInput.files.length){
+      addHidden(relay, 'Attachment-Name', fileInput.files[0].name);
+      addHidden(relay, 'Attachment-Size', formatFileSize(fileInput.files[0].size));
       try {
         fileInput.setAttribute('data-original-name', fileInput.name || '');
         fileInput.name = 'attachment';
         relay.appendChild(fileInput);
-      } catch(err) {}
+      } catch(err) {
+        throw new Error('The selected attachment could not be prepared for FormSubmit.');
+      }
     }
+
+    addHidden(relay, 'Submission-ID', 'DC-' + Date.now().toString(36).toUpperCase());
+    addHidden(relay, 'Form', formLabel(form));
+    addHidden(relay, 'Page-Title', humanPageTitle());
+    addHidden(relay, 'Page-URL', window.location.href);
+    addHidden(relay, 'Submitted-At', new Date().toISOString());
 
     document.body.appendChild(relay);
     relay.submit();
@@ -632,6 +762,10 @@
     if(!isFormlyForm(form)) return;
     if(form.hasAttribute('data-formly-native')) return;
     if(e.defaultPrevented) return;
+    if(form.getAttribute('data-form-submitting') === 'true'){
+      e.preventDefault();
+      return;
+    }
 
     var fileInput = findSelectedFileInput(form);
     if(!validateFileInput(fileInput)){
@@ -641,6 +775,7 @@
     }
 
     e.preventDefault();
+    if(!setSubmittingState(form, fileInput)) return;
     providerModePromise.then(function(providerMode){
       if(providerMode === PROVIDER_FORMSUBMIT){
         submitFormSubmitRelay(form, fileInput);
@@ -649,6 +784,7 @@
       submitRelayForm(form, fileInput);
     }).catch(function(error){
       console.error('Dreamy Cake form submission failed before sending.', error);
+      clearSubmittingState(form);
       showProviderError(form, 'The form could not be prepared. Please contact us by email or WhatsApp.');
     });
   }, false);
