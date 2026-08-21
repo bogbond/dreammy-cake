@@ -16,7 +16,7 @@
 
   var FORMLY_ENDPOINT = 'https://formly.email/submit';
   var ACCESS_KEY = '8c20c8e2b11242a586b585700f820946';
-  var FORMSUBMIT_ENDPOINT = 'https://formsubmit.co/quote@dreamycake.co.uk';
+  var FORMSUBMIT_ENDPOINT = 'https://formsubmit.co/quotes@dreamycake.co.uk';
   var PROVIDER_CONFIG_URL = '/assets/data/form-provider.txt';
   var PROVIDER_FORMSUBMIT = 0;
   var PROVIDER_FORMLY = 1;
